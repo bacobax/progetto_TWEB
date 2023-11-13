@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+const app = require('../app');
+
+const debug = require('debug')('expressbackend:server');
+
+const { createServer } = require('http');
+
+const dotenv = require('dotenv');
+
+const { init } = require('../utils/socket.io');
+
+const { Server } = require('socket.io');
+
+const asyncListen = require('../utils/asyncListen');
+
+dotenv.config({ path: './config.env' });
+/**
+ * Get port from environment and store in Express.
+ */
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
+const uri = process.env.URI.replace('<password>', process.env.ADMINPSW).replace(
+  '<dbname>',
+  process.env.DBNAME
+);
+
+mongoose.set('strictQuery', false);
+
+console.log({ uri });
+mongoose
+  .connect(uri)
+  .then(() => {
+    console.log('Connected to mongodb');
+
+    const server = createServer(app);
+
+    const io = new Server(server, {
+      cors: {
+        origin: '*',
+      },
+    });
+
+    init(io);
+
+    return asyncListen(server, port);
+  })
+  .then(() => {
+    console.log(`listening on http://${host}:${port}`);
+  })
+  .catch((err) => {
+    return console.error('Errore nella listen: ', err);
+  });
