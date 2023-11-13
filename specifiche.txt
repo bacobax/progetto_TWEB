@@ -1,0 +1,37 @@
+
+SPECIFICHE IUM 2023/2024, PROF. SSAGENA
+For the exam, you must deliver the project as soon as possible by sharing a folder on your Google Drive with me (specify my username: cristina.gena@unito.it). You will discuss the project orally as a group, all together.
+
+The project consists of two parts: you need to create a prototype and then conduct a usability test on it.
+
+PROTOTYPE
+You are required to create a prototype of a website with a focus on football, specifically statistics on football players and football teams (you can also add other information such as the history of football, team news, transfer market, etc.). You can focus on Italy, Europe, the world, etc., while trying to align with the visualizations you would create in Python. The prototype should not be designed solely to meet the exam requirements (or just Python specifications), but you should think as if this were a real project. Your potential users could be football enthusiasts, kids looking for information on fantasy football teams, fans of a particular team, journalists, etc. There are many websites you can look at for inspiration (all of which can be improved from a UX perspective).
+
+Create at least 3 Personas for the prototype (which you will later deliver along with the material) to guide you in your UX and interaction design choices. You need to prototype the entire site, so imagine all the menu options and search mechanisms (both functionalities should be present). Then, you should go into depth in one or more sections and demonstrate the prototype for each individual page of the path: e.g., Italy > Italian teams > Toro > Toro goalkeeper (the player's page with statistics and visualizations, images, videos, CV, interesting facts, characteristics, etc.).
+
+The prototype can be made in the way you prefer: HTML/CSS, using a CMS, with Figma, or other rapid prototyping tools. Indicatively, the prototype should contain at least 5 pages (home, search page, results page, examples of a team list page, player details page):
+
+At least 4/5 pages if the group consists of one person.
+At least 6/7 pages if the group consists of two people.
+At least 8/9 pages if the group consists of three people.
+At least 10/12 pages if the group consists of four people.
+One page of the prototype (e.g., user registration) should be in HTML and CSS, must be accessible, and validated. You can use accessible Bootstrap if you wish: [link to Bootstrap Italia].
+
+USABILITY TEST
+Conduct a usability test using the Krug method, involving 2, 4, 6, 8 subjects depending on the size of your group (1, 2, 3, 4 people).
+
+Submit a report on the usability test, specifying:
+
+The socio-demographic characteristics of the subjects involved (who must remain anonymous).
+The tasks you assigned.
+Qualitative and quantitative performance (e.g., number of errors, time taken, number of help requests - look closely at usability metrics - for each user during task execution).
+Results of any questionnaires or interviews.
+Problems that emerged during the test and how you intend to redesign based on the test results.
+SUBMISSION
+For the exam, you must submit the prototype along with:
+
+Personas' profiles with User Journeys.
+A description of the usability test and the results of the usability test (as mentioned above).
+A web page that complies with accessibility standards, made with HTML and CSS, including a registration form (you can also include another page) following accessibility guidelines provided in the course. Or, include a folder with the validations you have performed (HTML, CSS, accessibility) using these validators: [list of validator links].
+NB: In the case of the form, data should not be inserted into a database. Therefore, use different fields such as name, surname, email, date of birth, address, etc., and ensure that the form does not send data but rather directs the user to a static page, thanking them.
+If you are in a group, you must discuss everything together.
