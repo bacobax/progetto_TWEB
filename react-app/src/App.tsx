@@ -10,52 +10,13 @@ import DropdownButton from "./components/UI/DropdownButton";
 import { FaBeer } from "react-icons/fa";
 import { AiOutlineHome } from "react-icons/ai";
 import PALETTE from "./constants/colorPalette";
+import SearchBar from "./components/searchbar/SearchBar";
 function App() {
   const { closeModal, isModalOpen, openModal } = useModal(true);
   return (
     <>
-      <Navbar onSearch={(query) => console.log(query)} />
       <main className={styles.app + " bg-color"}>
-        <h1 className="txt-primary">Hello World</h1>
-        <Button
-          onClick={openModal}
-          txtColor={PALETTE.TXT.PRIMARY}
-          accent={PALETTE.ACCENT.PRIMARY}
-        >
-          Open Modal
-        </Button>
-        <DropdownButton
-          buttonText="bottome dropdown"
-          onSelect={() => {
-            console.log("ciao");
-          }}
-          accent={PALETTE.ACCENT.PRIMARY}
-          txtColor={PALETTE.TXT.PRIMARY}
-          options={[
-            {
-              label: "Option 1",
-              icon: <FaBeer />,
-            },
-            {
-              label: "Option 2",
-              icon: <AiOutlineHome />,
-            },
-          ]}
-          key={2}
-        />
-        <Modal
-          onClose={closeModal}
-          title="Modal title"
-          className="bg-neutral"
-          opened={isModalOpen}
-        >
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptatibus expedita laborum magnam sit voluptatum est illo velit
-            amet dolore quis, unde molestiae! Est, accusantium veritatis
-            inventore a hic ipsum unde.
-          </p>
-        </Modal>
+        <SearchBar onSearch={ (query) => alert(query)}/>
       </main>
     </>
   );
