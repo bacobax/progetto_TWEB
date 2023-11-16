@@ -1,3 +1,14 @@
+/**
+ * @class APIFeatures
+ * @description This class is used to filter, sort, limit and paginate the query
+ * @param {Object} query - The query object
+ * @param {Object} queryString - The query string object
+ * @returns {Object} query - The query object
+ * @example
+ * const features = new APIFeatures(Character.find(), req.query).filter().sort().limitFields().paginate();
+ * const characters = await features.query;
+ *
+ */
 class APIFeatures {
   constructor(query, queryString) {
     console.log('constructor');

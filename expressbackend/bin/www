@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 
-const { init } = require('../utils/socket.io');
+const { init } = require('../utils/socket/socket.io');
 
 const { Server } = require('socket.io');
 
