@@ -86,16 +86,11 @@ exports.getOne = (
       },
     });
   });
-/*get all the documents filtered with req.query
-  sort=<val0>,<val1>,...,<valn> sort the documents by val0, then val1,..., then valn
-  <field>=<val> filter the document by {field:val}
-  fields:<field0>,...,<fieldn> retrieve only field0, ... , fieldn
-*/
+
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     // To allow for nested GET reviews on tour (hack)
     let filter = {};
-    console.log('START');
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
       .sort()
@@ -103,7 +98,6 @@ exports.getAll = (Model) =>
     
 
     const doc = await features.query;
-    console.log('END');
 
     // SEND RESPONSE
     res.status(200).json({

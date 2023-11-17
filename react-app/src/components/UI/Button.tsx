@@ -2,26 +2,23 @@ import React from "react";
 import styles from "./Button.module.css";
 import { Color } from "../../constants/colorPalette";
 
-interface ButtonProps {
-  onClick: () => void;
-  disabled?: boolean;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
+
   children: React.ReactNode;
-  accent: Color;
-  txtColor: Color;
+    className?: string;
+
 }
 
 const Button: React.FC<ButtonProps> = ({
-  onClick,
-  disabled = false,
+
+
   children,
-  accent,
-  txtColor,
+  className, ...otherProps
 }) => {
   return (
     <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`${styles.button} ${accent.DARK.CLASS_NAME} ${txtColor.DARK.CLASS_NAME}`}
+        {...otherProps}
+      className={`${styles.button} ${className}`}
     >
       {children}
     </button>

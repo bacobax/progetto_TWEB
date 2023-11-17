@@ -1,0 +1,21 @@
+.inputgroup {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+
+.inputgroup input{
+    all: unset;
+    border-bottom: 1px solid white;
+    width: 100%;
+}
+
+.inputgroup input:focus{
+    border-bottom: 1px solid #68C682;
+}
+
+.inputgroup label{
+    font-weight: bold;
+}
+

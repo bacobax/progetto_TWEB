@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import styles from "./Navbar.module.css";
 import SearchBar from "../searchbar/SearchBar";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -13,12 +13,13 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
     const [showSidebar, setShowSidebar] = useState(false);
 
   const {isPhone} = useWindowSize();
-    const handleBurgerClick = () => {
+    const handleBurgerClick = useCallback(() => {
         setShowSidebar(prevState => !prevState);
-    }
-    const handleCloseSidebar = () => {
+    },[]);
+
+    const handleCloseSidebar = useCallback(() => {
         setShowSidebar(false);
-    }
+    },[]);
 
   return (
       <>

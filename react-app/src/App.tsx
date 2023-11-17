@@ -1,16 +1,9 @@
 
-import styles from "./App.module.css";
-
-
-import Navbar from "./components/navbar/Navbar";
+import AuthPage from "./pages/auth/AuthPage";
 function App() {
   return (
     <>
-
-        <Navbar onSearch={(t)=>{alert(t)}}/>
-      <main className={styles.app + " bg-color"}>
-
-      </main>
+    <AuthPage />
     </>
   );
 }

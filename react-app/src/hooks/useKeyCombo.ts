@@ -1,56 +1,49 @@
-import { useState, useEffect } from "react";
-import { isMacOs } from "../utils/functions";
+import { useState, useEffect, useCallback } from 'react';
+import { isMacOs } from '../utils/functions';
 
 interface KeyListeners {
     [key: string]: (e: KeyboardEvent) => void;
 }
 
-const isAlphanumeric = (key: string) => {
-    const alphanumeric = "abcdefghijklmnopqrstuvwxyz1234567890";
-    return alphanumeric.includes(key);
-};
+const isAlphanumeric = (key: string) => /[a-z0-9]/i.test(key);
 
 export const useKeyCombo = (keycombos: KeyListeners) => {
     const [auxPressed, setAuxPressed] = useState(false);
 
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = useCallback(
+        (e: KeyboardEvent) => {
             const key = e.key;
 
-            if (isMacOs() && key === "Meta") {
+            if ((isMacOs() && key === 'Meta') || (!isMacOs() && key === 'Control')) {
+                e.preventDefault(); // Prevent browser shortcuts
                 setAuxPressed(true);
-                return;
-            }
-            if (!isMacOs() && key === "Control") {
-                setAuxPressed(true);
-                return;
-            }
-            if (isAlphanumeric(key) && auxPressed && keycombos.hasOwnProperty(key)) {
+            } else if (isAlphanumeric(key) && auxPressed && keycombos[key]) {
                 keycombos[key](e);
-                return;
             }
-        };
+        },
+        [auxPressed, keycombos]
+    );
 
-        const handleKeyUp = (e: KeyboardEvent) => {
+    const handleKeyUp = useCallback(
+        (e: KeyboardEvent) => {
             const key = e.key;
-            if (isMacOs() && key === "Meta") {
-                setAuxPressed(false);
-                return;
-            }
-            if (!isMacOs() && key === "Control") {
-                setAuxPressed(false);
-                return;
-            }
-        };
 
-        window.addEventListener("keydown", handleKeyDown);
-        window.addEventListener("keyup", handleKeyUp);
+            if ((isMacOs() && key === 'Meta') || (!isMacOs() && key === 'Control')) {
+                key === 'Meta' ? setAuxPressed(false) : setAuxPressed(false);
+            }
+        },
+        []
+    );
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
 
         return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-            window.removeEventListener("keyup", handleKeyUp);
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
         };
-    }, [auxPressed, keycombos]);
+    }, [handleKeyDown, handleKeyUp]);
 
     return;
 };

@@ -33,8 +33,6 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
   return (
     <div className={styles["dropdown"]}>
       <Button
-        accent={accent}
-        txtColor={txtColor}
         onClick={() => setIsOpen(!isOpen)}
       >
         {buttonText}

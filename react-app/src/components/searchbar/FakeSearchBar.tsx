@@ -1,6 +1,7 @@
 import styles from "./FakeSearchBar.module.css";
 import {CiSearch} from "react-icons/ci";
 import {isMacOs} from "../../utils/functions";
+import React from "react";
 interface FakeSearchBarProps{
     onClick: () => void;
 }

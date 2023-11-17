@@ -1,17 +1,17 @@
 import Modal from "../UI/Modal";
 import useModal from "../../hooks/useModal";
 import styles from "./SearchBar.module.css";
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useCallback, useEffect, useState} from "react";
 import {useKeyCombo} from "../../hooks/useKeyCombo";
 import FakeSearchBar from "./FakeSearchBar";
-
+import React from "react";
 interface SearchBarProps{
     onSearch: (term: string) => void;
 
 }
 
 
-const SeearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
+const SearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
 
     const { closeModal, isModalOpen, openModal } = useModal(true);
 
@@ -40,14 +40,14 @@ const SeearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
 
 
 
-    const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    const handleSearch = useCallback((e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSearch(searchTerm);
-    }
+    },[onSearch, searchTerm]);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
-    }
+    },[]);
 
 
     return (
@@ -65,4 +65,4 @@ const SeearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
 
 }
 
-export default SeearchBar;
+export default SearchBar;
