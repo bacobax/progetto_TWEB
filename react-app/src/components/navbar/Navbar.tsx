@@ -1,35 +1,38 @@
 import React, { useState } from "react";
 import styles from "./Navbar.module.css";
+import SearchBar from "../searchbar/SearchBar";
+import { RxHamburgerMenu } from "react-icons/rx";
+import useWindowSize from "../../hooks/useWindowSize";
+import Sidebar from "./Sidebar";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+    const [showSidebar, setShowSidebar] = useState(false);
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSearch(searchQuery);
-  };
+  const {isPhone} = useWindowSize();
+    const handleBurgerClick = () => {
+        setShowSidebar(prevState => !prevState);
+    }
+    const handleCloseSidebar = () => {
+        setShowSidebar(false);
+    }
 
   return (
-    <nav className={styles.navbar}>
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-      <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(event) => setSearchQuery(event.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-    </nav>
+      <>
+        <nav className={styles.navbar}>
+          {!isPhone ? <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul> : <RxHamburgerMenu className={styles.burgericon} onClick={handleBurgerClick}/>}
+          <SearchBar onSearch={onSearch}/>
+        </nav>
+        {(isPhone && showSidebar) && <Sidebar onClose={handleCloseSidebar}/>}
+      </>
+
   );
 };
 

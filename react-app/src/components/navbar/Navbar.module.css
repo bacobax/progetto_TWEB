@@ -5,6 +5,7 @@
   border-bottom-right-radius: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   /* bottom-sticky navbar styling */
   position: fixed;
   top: 0;
@@ -26,26 +27,7 @@
   cursor: pointer;
 }
 
-.navbar form {
-  display: flex;
-  justify-content: center;
-
-  align-items: center;
-}
-
-.navbar form input {
-  margin-right: 10px;
-  border-radius: 5px;
-  border: none;
-  padding: 5px;
-  height: 1.5rem;
-}
-
-.navbar form button {
-  border-radius: 5px;
-  border: none;
-  padding: 5px;
-  background-color: #007aff;
-  color: #ffffff;
-  min-height: 34px;
+.burgericon{
+  font-size: 2rem;
+  cursor: pointer;
 }
