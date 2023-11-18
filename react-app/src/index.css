@@ -1,0 +1,165 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #050517;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.bg-color {
+  background-color: #e1e1e1;
+}
+/* Text Palette */
+.text-primary-dark {
+  color: #39434d;
+}
+.text-primary-dark:hover {
+  color: #29323a;
+}
+.text-primary-dark:active {
+  color: #1a1f23;
+}
+
+.text-primary-light {
+  color: #ffffff;
+}
+.text-primary-light:hover {
+  color: #f2f2f2;
+}
+.text-primary-light:active {
+  color: #e5e5e5;
+}
+
+.text-secondary-dark {
+  color: #2e6c80;
+}
+.text-secondary-dark:hover {
+  color: #1f5066;
+}
+.text-secondary-dark:active {
+  color: #10434c;
+}
+
+.text-secondary-light {
+  color: #bbdefb;
+}
+.text-secondary-light:hover {
+  color: #9ac2e0;
+}
+.text-secondary-light:active {
+  color: #7995c6;
+}
+
+.text-tertiary-dark {
+  color: #e53935;
+}
+.text-tertiary-dark:hover {
+  color: #c62828;
+}
+.text-tertiary-dark:active {
+  color: #b71c1c;
+}
+
+.text-tertiary-light {
+  color: #ffcdd2;
+}
+.text-tertiary-light:hover {
+  color: #ef9a9a;
+}
+.text-tertiary-light:active {
+  color: #e57373;
+}
+
+/* Accent Palette */
+.accent-primary-dark {
+  background-color: #ffa500;
+}
+.accent-primary-dark:hover {
+  background-color: #ff8200;
+}
+.accent-primary-dark:active {
+  background-color: #ff6100;
+}
+
+.accent-primary-light {
+  background-color: #ffd180;
+}
+.accent-primary-light:hover {
+  background-color: #ffb94d;
+}
+.accent-primary-light:active {
+  background-color: #ffa333;
+}
+
+.accent-secondary-dark {
+  background-color: #008000;
+}
+.accent-secondary-dark:hover {
+  background-color: #006600;
+}
+.accent-secondary-dark:active {
+  background-color: #005200;
+}
+
+.accent-secondary-light {
+  background-color: #a8d5ba;
+}
+.accent-secondary-light:hover {
+  background-color: #87c89f;
+}
+.accent-secondary-light:active {
+  background-color: #66bb85;
+}
+
+.accent-tertiary-dark {
+  background-color: #ff0000;
+}
+.accent-tertiary-dark:hover {
+  background-color: #cc0000;
+}
+.accent-tertiary-dark:active {
+  background-color: #990000;
+}
+
+.accent-tertiary-light {
+  background-color: #ffa3a3;
+}
+.accent-tertiary-light:hover {
+  background-color: #ff8a8a;
+}
+.accent-tertiary-light:active {
+  background-color: #ff7070;
+}
+
+/* Background Palette */
+.background-primary-dark {
+  background-color: #1e1e1e;
+}
+.background-primary-dark:hover {
+  background-color: #111111;
+}
+.background-primary-dark:active {
+  background-color: #040404;
+}
+
+.background-primary-light {
+  background-color: #ffffff;
+}
+.background-primary-light:hover {
+  background-color: #f2f2f2;
+}
+.background-primary-light:active {
+  background-color: #e5e5e5;
+}
+
+button {
+  cursor: pointer;
+}

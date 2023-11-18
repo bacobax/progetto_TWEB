@@ -1,0 +1,32 @@
+.navbar {
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* bottom-sticky navbar styling */
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  left: 0;
+  right: 0;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+.navbar ul li {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.burgericon{
+  font-size: 2rem;
+  cursor: pointer;
+}

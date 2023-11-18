@@ -1,0 +1,29 @@
+.searchbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    background-color: #4b4b4b;
+    color: #fff;
+    padding: 12px 9px;
+    border-radius: 8px;
+    gap: 10px;
+    cursor: pointer;
+
+}
+
+.searchbar .placeholder{
+    color: rgba(164, 164, 164, 0.65);
+}
+.searchbar .keys{
+    color: black;
+}
+
+.searchbar .search-icon{
+    font-size: 25px;
+    color: #fff;
+}
+
+.searchbar *{
+    cursor: pointer;
+}

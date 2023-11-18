@@ -1,0 +1,1 @@
+export const WINDOWPHONESIZE = 600;
