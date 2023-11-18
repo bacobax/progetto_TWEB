@@ -10,6 +10,7 @@
 
 }
 
+
 .container{
     width: 50%;
     height: 100%;
@@ -63,4 +64,9 @@
 .switch-form-btn:hover{
     background-color: #68C682;
     color: #242424;
+}
+@media screen and (max-width: 800px){
+    .container{
+        width: 100%;
+    }
 }

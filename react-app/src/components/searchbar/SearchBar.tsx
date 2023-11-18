@@ -10,7 +10,6 @@ interface SearchBarProps{
 
 }
 
-
 const SearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
 
     const { closeModal, isModalOpen, openModal } = useModal(true);
@@ -36,6 +35,7 @@ const SearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
             clearTimeout(id);
         }
     },[searchTerm, onSearch]);
+
 
 
 

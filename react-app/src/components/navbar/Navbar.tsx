@@ -4,12 +4,15 @@ import SearchBar from "../searchbar/SearchBar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import useWindowSize from "../../hooks/useWindowSize";
 import Sidebar from "./Sidebar";
+import {Elements} from "./types";
+import {Link} from "react-router-dom";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
+  elements: Elements;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
+const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
     const [showSidebar, setShowSidebar] = useState(false);
 
   const {isPhone} = useWindowSize();
@@ -25,9 +28,16 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
       <>
         <nav className={styles.navbar}>
           {!isPhone ? <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
+              {
+                    elements.map((element, index) => (
+                        <li key={index}>
+                            <Link className={styles.link} to={element.path}>
+                                <label>{element.name}</label>
+                                {element.icon}
+                            </Link>
+                        </li>
+                    ))
+              }
           </ul> : <RxHamburgerMenu className={styles.burgericon} onClick={handleBurgerClick}/>}
           <SearchBar onSearch={onSearch}/>
         </nav>

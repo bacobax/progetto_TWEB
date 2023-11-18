@@ -28,11 +28,13 @@ const SmartForm: React.FC<DualFormProps> = () => {
 
 
     return (
-        <div className={`${styles.container} ${isSignin ? styles.row : styles["row-reverse"]}`} >
-            <div className={styles.image} />
-
-            <Form isLogin={isSignin} onSwitch={toggleForm} loginState={initialSignInState} signupState={initialSignUpState} onSubmit={onSubmitHandler}/>
-
+        <div className={`${styles.container} ${styles.row}`}>
+            <div className={styles.image} style={{
+                transform : `translateX(${isSignin ? "0" : "+100%"})`
+            }}/>
+            <Form style={{
+                transform : `translateX(${isSignin ? "0" : "-100%"})`
+            }} isLogin={isSignin} onSwitch={toggleForm} loginState={initialSignInState} signupState={initialSignUpState} onSubmit={onSubmitHandler}/>
         </div>
     );
 }

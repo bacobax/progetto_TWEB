@@ -19,14 +19,48 @@
   display: flex;
   justify-content: space-around;
   flex-grow: 1;
+  align-items: center;
 }
 
 .navbar ul li {
   color: #ffffff;
   cursor: pointer;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  gap: 10px;
+  transition-duration: 300ms;
+}
+
+.link{
+  width: 100%;
+  height: 100%;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  gap: 10px;
+  transition-duration: 200ms;
+  cursor: pointer;
+
+}
+
+.link label{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+.navbar ul li a{
+  text-decoration: none;
+  color: #ffffff;
 }
 
 .burgericon{
   font-size: 2rem;
   cursor: pointer;
+}
+
+.icon{
+  font-size: 1.2rem;
+  transition-duration: 200ms;
 }

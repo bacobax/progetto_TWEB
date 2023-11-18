@@ -14,11 +14,12 @@ interface FormProps {
     loginState: State;
     signupState: State;
     onSubmit: (state: State) => void;
+    style?: React.CSSProperties;
 }
 
 
 
-const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, onSubmit}) => {
+const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, onSubmit, style}) => {
     const {reset:resetSignUp, formState:formStateSignUp, handleInputChange: handleInputChangeSignUp, isValid: isValidSignUp} = useForm(signupState);
     const {reset: resetSignIn, formState: formStateSignIn,handleInputChange: handleInputChangeSignIn, isValid: isValidSignIn} = useForm(loginState);
     const reset = isLogin ? resetSignIn : resetSignUp;
@@ -55,7 +56,7 @@ const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, 
 
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} style={style}>
             <h1>SignIn</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 {
