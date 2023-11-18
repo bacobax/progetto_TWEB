@@ -17,5 +17,17 @@
 
 .inputgroup label{
     font-weight: bold;
+    /*set capital letters for the first letter*/
+    text-transform: capitalize;
+
 }
 
+.error input:focus{
+    border-bottom: 1px solid red;
+}
+
+.error p{
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}

@@ -1,4 +1,4 @@
-import DualForm from "../../components/form/DualForm";
+import SmartForm from "../../components/form/SmartForm";
 
 const AuthPage = () => {
     return (
@@ -9,7 +9,7 @@ const AuthPage = () => {
             height: "100vh",
             width: "100vw",
         }}>
-            <DualForm />
+            <SmartForm />
         </main>
     )
 }
