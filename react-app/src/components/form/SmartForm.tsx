@@ -26,6 +26,7 @@ const SmartForm: React.FC<DualFormProps> = () => {
         }
     },[isSignin]);
 
+
     return (
         <div className={`${styles.container} ${isSignin ? styles.row : styles["row-reverse"]}`} >
             <div className={styles.image} />
