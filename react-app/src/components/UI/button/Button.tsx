@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Button.module.css";
-import { Color } from "../../constants/colorPalette";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
 

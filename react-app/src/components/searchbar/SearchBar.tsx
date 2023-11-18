@@ -1,4 +1,4 @@
-import Modal from "../UI/Modal";
+import Modal from "../UI/modal/Modal";
 import useModal from "../../hooks/useModal";
 import styles from "./SearchBar.module.css";
 import {ChangeEvent, FormEvent, useCallback, useEffect, useState} from "react";

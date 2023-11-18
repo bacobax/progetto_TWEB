@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
-import Card from "./Card";
+import Card from "../Card";
 
 interface ModalProps {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./DropdownButton.module.css";
 import Button from "./Button";
-import { Color } from "../../constants/colorPalette";
+import { Color } from "../../../constants/colorPalette";
 
 interface Option {
   label: string;

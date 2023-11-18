@@ -21,7 +21,9 @@
     color: #d5d5d5;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease-in-out;
+
+    transition-duration: 300ms;
+    
 }
 
 .container h1{

@@ -1,12 +1,12 @@
-import styles from "./SingleForm.module.css";
+import styles from "./Form.module.css";
 
 
-import React, {ChangeEvent, useMemo} from "react";
+import React, {ChangeEvent, useCallback, useMemo} from "react";
 import InputGroup from "../UI/Input/InputGroup";
-import Button from "../UI/Button";
+import Button from "../UI/button/Button";
 
 import {useForm} from "../../hooks/useForm";
-import {State} from "../../reducers/formReducer";
+import {State} from "../../hooks/formReducer";
 
 interface FormProps {
     onSwitch: () => void;
@@ -26,13 +26,13 @@ const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, 
     const handleInputChange = isLogin ? handleInputChangeSignIn : handleInputChangeSignUp;
     const isValid = isLogin ? isValidSignIn : isValidSignUp;
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         console.log({formState});
         reset();
         onSubmit(formState);
-    }
+    },[formState, onSubmit, reset]);
 
     const inputs = useMemo(() => {
         return  Object.keys(formState).map((key) => {

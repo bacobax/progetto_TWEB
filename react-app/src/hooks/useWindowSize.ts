@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {WINDOWPHONESIZE} from "../constants/windowSize";
 
 const useWindowSize = () => {
@@ -8,19 +8,18 @@ const useWindowSize = () => {
     });
 
     const isPhone = windowSize.width < WINDOWPHONESIZE;
-
+    const handleResize =useCallback (() => {
+        setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+        });
+    }, []);
 
     useEffect(() => {
-        const handleResize = () => {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
-        };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [ handleResize]);
 
     return {...windowSize, isPhone};
 }
