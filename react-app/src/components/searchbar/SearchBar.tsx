@@ -12,7 +12,7 @@ interface SearchBarProps{
 
 const SearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
 
-    const { closeModal, isModalOpen, openModal } = useModal(true);
+    const { closeModal, isModalOpen, openModal } = useModal(false);
 
     const [searchTerm, setSearchTerm] = useState("");
 

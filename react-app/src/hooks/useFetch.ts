@@ -10,18 +10,20 @@ export interface Params{
     method?: string;
     body?: string;
     headers?: HeadersInit;
+    token?: string;
 
 }
-
-interface ReturnType<T>{
+type FetchData = <T>(params: Params, callback?: (data: T) => void) => void
+interface ReturnType{
     loading: boolean;
     error: Error;
-    fetchData: (params: Params, callback?: (data: T) => void) => void;
+    fetchData: FetchData;
+    setError: (error: Error) => void;
 }
 
 type Error = string | null
 
-type FetchData<T> = (params: Params, callback?: (data: T) => void) => void
+
 
 /**
  * @description useFetch hook to generalize fetch requests
@@ -35,7 +37,7 @@ type FetchData<T> = (params: Params, callback?: (data: T) => void) => void
  *
  *
  */
-const useFetch = <T>( ):ReturnType<T> => {
+const useFetch = ( ):ReturnType => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<Error>(null);
     /**
@@ -49,28 +51,28 @@ const useFetch = <T>( ):ReturnType<T> => {
      *    console.log(data)
      *    });
      */
-    const fetchData: FetchData<T> = useCallback( async (params, callback ) => {
+    const fetchData: FetchData = useCallback( async (params, callback ) => {
         setLoading(true);
+        const headers = params.token ? {...params.headers, "Authorization": `Bearer ${params.token}` , "Content-Type": "application/json"} : {...params.headers, "Content-Type": "application/json"};
         try {
             const res = await fetch(params.url, {
                 method: params.method || "GET",
                 body: params.body,
-                headers: params.headers
+                headers: headers
             });
-            if (!res.ok) {
-                throw new Error(res.statusText);
-            }
+
             const data = await res.json();
             if(callback) callback(data);
 
         } catch (err : any){
+            console.log({err})
             setError(err.message || "Something went wrong");
         } finally {
             setLoading(false);
         }
     }, []);
 
-    return {loading, error, fetchData};
+    return {loading, error, fetchData, setError};
 
 }
 

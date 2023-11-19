@@ -1,39 +1,56 @@
 const passwordRegexValidation = (value: string):boolean => {
     return value.length >= 6 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$/) !== null
 }
+
+const dummyPassworValidation = (value: string):boolean => {
+    return value.length >= 6
+}
 export const initialSignInState = {
-    username: {
+    email: {
         value: "",
         error: false,
         errorText: "username must be at least 6 characters long",
         validate: (value: string) => {
-            return value.length >= 6;
+            return value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null;
+
         },
     },
     password: {
+        type: "password",
         value: "",
         error: false,
         errorText: "password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character",
-        validate: passwordRegexValidation
+        validate: dummyPassworValidation
     }
 }
 export const initialSignUpState = {
-    username: {
+    name: {
         value: "",
         error: false,
         errorText: "username must be at least 6 characters long",
         validate: (value: string) => {
-            return value.length >= 6;
+            return value.length >= 0;
+        }
+    },
+    surname: {
+        value: "",
+        error: false,
+        errorText: "username must be at least 6 characters long",
+        validate: (value: string) => {
+            return value.length >= 0;
         },
+
     },
     password: {
         value: "",
+        type: "password",
         error: false,
         errorText: "password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character",
         validate: passwordRegexValidation
     },
     confirmPassword: {
         value: "",
+        type: "password",
         error: false,
         errorText: "password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number and one special character",
         validate: passwordRegexValidation
@@ -45,5 +62,6 @@ export const initialSignUpState = {
         validate: (value: string) => {
             return value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null;
         }
-    }
+    },
+
 }

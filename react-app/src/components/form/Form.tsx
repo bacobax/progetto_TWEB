@@ -66,7 +66,7 @@ const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, 
                     <Button className={styles['submit-btn']} type="submit" disabled={!isValid}>
                         Submit
                     </Button>
-                    <Button className={styles['switch-form-btn']} onClick={onSwitch}>
+                    <Button className={styles['switch-form-btn']} type="button" onClick={onSwitch}>
                         {isLogin ?  "Sign-Up" : "Sign-In"}
                     </Button>
                 </div>

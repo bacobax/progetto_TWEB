@@ -15,4 +15,10 @@
 .auth button{
     background-color: #68C682;
     color: black;
+    border-radius: 10px;
+}
+
+.auth button:hover{
+    background-color: #8effaa;
+    color: black;
 }

@@ -27,6 +27,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  console.log({body: req.body});
   const { email, password } = req.body;
   console.log({ email, password });
   if (!email || !password) {
