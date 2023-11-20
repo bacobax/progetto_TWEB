@@ -2,12 +2,7 @@
 import {Route, Routes} from "react-router-dom";
 import {lazy, Suspense} from "react";
 
-
-
-
-import Navbar from "./components/navbar/Navbar";
 import Loading from "./components/animations/Loading";
-import {navbarElements} from "./constants/navbarElements";
 
 const AuthPage = lazy(() => import("./pages/auth/AuthPage"));
 const HomePage = lazy(() => import("./pages/home/HomePage"));
@@ -15,19 +10,15 @@ const HomePage = lazy(() => import("./pages/home/HomePage"));
 function App() {
 
 
-
-
   return (
     <>
         <Suspense fallback={<Loading />}>
             <Routes>
-                <Route path={"auth"} element={<AuthPage />} />
+                <Route path={"auth"} element={<AuthPage />}/>
                 <Route path={"/"} element={<HomePage />} />
                 <Route path={"*"} element={<h1 style={{color:"white"}}>Not Found</h1>} />
             </Routes>
         </Suspense>
-
-
     </>
   );
 }

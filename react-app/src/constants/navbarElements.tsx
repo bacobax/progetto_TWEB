@@ -21,4 +21,7 @@ export const navbarElements: Elements = [
         name: "News",
         path: "/news",
         icon: <FaRegNewspaper  className={styles.icon}/>
-    }];
+    },
+
+
+    ];

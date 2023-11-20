@@ -51,4 +51,12 @@ export const logout = () => {
 }
 
 
-export const getToken = () => localStorage.getItem("token");
+export const getToken = () => {
+
+    //verify if token is valid and not expired
+
+    const token = localStorage.getItem("token");
+
+    if(token === null || token.trim().length <= 0) return null;
+
+};

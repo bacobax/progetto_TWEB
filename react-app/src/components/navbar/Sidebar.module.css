@@ -34,4 +34,32 @@
     font-size: 1.5rem;
     cursor: pointer;
     color: #e3e3e3;
+    padding: 10px;
+    border-radius: 10px;
+    width: 70%;
+    display: flex;
+    justify-content: center;
 }
+
+.sidebar ul li:hover,
+.sidebar ul li.active{
+    background-color: #424242;
+}
+
+.sidebar ul label{
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #e3e3e3;
+}
+
+.sidebar ul li a {
+    color: #e3e3e3;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+
+}
+

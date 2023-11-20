@@ -5,11 +5,11 @@ import {initialSignInState, initialSignUpState} from "./defaultStates";
 import Form from "./Form";
 import {State} from "../../hooks/formReducer";
 import useWindowSize from "../../hooks/useWindowSize";
-import useFetch from "../../hooks/useFetch";
 import {useAuth} from "../../hooks/useAuth";
 import Loading from "../animations/Loading";
 import Modal from "../UI/modal/Modal";
 import useModal from "../../hooks/useModal";
+import {redirect} from "react-router-dom";
 
 interface DualFormProps {
 
@@ -35,11 +35,21 @@ const SmartForm: React.FC<DualFormProps> = () => {
         if(isSignin) {
 
             const {email,password} = state;
-           login(email.value, password.value);
+           login({email:email.value, password:password.value, redirectPath: "/"});
+
+
+
 
         } else {
             const {name,surname, password, confirmPassword, email} = state;
-            signup(name.value, surname.value, password.value, confirmPassword.value, email.value);
+            signup({
+                name: name.value,
+                surname: surname.value,
+                password: password.value,
+                confirmPassword: confirmPassword.value,
+                email: email.value,
+                redirectPath: "/"
+            });
 
         }
     },[isSignin,login,signup]);
