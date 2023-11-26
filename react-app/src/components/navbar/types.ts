@@ -1,10 +1,11 @@
 import React from "react";
 
-interface NavbarElement {
+export interface NavbarElement {
     name: string;
     path: string;
     icon: React.ReactNode;
     onClick?: () => void;
+    routerLink: boolean;
 }
 
 export type Elements = NavbarElement[];

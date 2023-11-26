@@ -6,7 +6,7 @@ import InputGroup from "../UI/Input/InputGroup";
 import Button from "../UI/button/Button";
 
 import {useForm} from "../../hooks/useForm";
-import {State} from "../../hooks/formReducer";
+import {State} from "../../reducers/formReducer";
 
 interface FormProps {
     onSwitch: () => void;

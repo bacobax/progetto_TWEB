@@ -20,7 +20,7 @@ export const AuthContextProvider: React.FC<Props> = ({children}) => {
         storageLogin(token, email, password);
     },[]);
 
-    const logout =useCallback (() => {
+    const logout = useCallback(() => {
         setLoggedIn(false);
         storageLogout();
     },[]);

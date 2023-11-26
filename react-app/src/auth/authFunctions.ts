@@ -1,4 +1,4 @@
-import { BASE_URL } from "../constants/backendStuff";
+import { BASE_URL } from "../constants/constants";
 
 //jwt authentication handling
 

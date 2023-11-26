@@ -17,13 +17,10 @@ const Sidebar: React.FC<SidebarProps> = ({onClose, elements}) => {
         to: { transform: 'translateX(0%)' },
     });
 
-
-
-
     return (
         <animated.aside className={styles.sidebar} style={props}>
             <AiOutlineClose onClick={onClose} className={styles.closeIcon}/>
-            <ElementList elements={elements} sidebar/>
+            <ElementList elements={elements} onSelected={onClose} sidebar/>
         </animated.aside>
     )
 }

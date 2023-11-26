@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import {WINDOWPHONESIZE} from "../constants/windowSize";
+import {WINDOWPHONESIZE} from "../constants/constants";
 
 const useWindowSize = () => {
     const [windowSize, setWindowSize] = useState({

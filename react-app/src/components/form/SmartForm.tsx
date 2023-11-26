@@ -3,7 +3,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {initialSignInState, initialSignUpState} from "./defaultStates";
 
 import Form from "./Form";
-import {State} from "../../hooks/formReducer";
+import {State} from "../../reducers/formReducer";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useAuth} from "../../hooks/useAuth";
 import Loading from "../animations/Loading";
@@ -33,12 +33,8 @@ const SmartForm: React.FC<DualFormProps> = () => {
 
     const onSubmitHandler = useCallback ((state: State) => {
         if(isSignin) {
-
             const {email,password} = state;
            login({email:email.value, password:password.value, redirectPath: "/"});
-
-
-
 
         } else {
             const {name,surname, password, confirmPassword, email} = state;

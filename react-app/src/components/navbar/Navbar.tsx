@@ -5,11 +5,10 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import useWindowSize from "../../hooks/useWindowSize";
 import Sidebar from "./Sidebar";
 import {Elements} from "./types";
-import {Link} from "react-router-dom";
 import {AuthContext} from "../../store/AuthContext";
-import { IoIosLogOut, IoIosLogIn } from "react-icons/io";
 import {useAuth} from "../../hooks/useAuth";
 import ElementList from "./ElementList";
+import {loginElement, logoutElement} from "../../constants/navbarElements";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
@@ -17,11 +16,9 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
-    const [showSidebar, setShowSidebar] = useState(false);
-
-    const {loggedIn} = useContext(AuthContext);
-
-    const {logout} = useAuth();
+  const [showSidebar, setShowSidebar] = useState(false);
+  const {loggedIn} = useContext(AuthContext);
+  const {logout} = useAuth();
   const {isPhone} = useWindowSize();
     const handleBurgerClick = useCallback(() => {
         setShowSidebar(prevState => !prevState);
@@ -31,19 +28,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
         setShowSidebar(false);
     },[]);
 
-    const elementsFinal: Elements= loggedIn ? [...elements , {
-        name: "Logout",
-        path: "/",
-        icon: <IoIosLogOut className={styles.icon}/>,
-        onClick: () => {
-            console.log("logout")
-            logout();
-        }
-    }] : [...elements , {
-        name: "Login",
-        path: "/auth",
-        icon: <IoIosLogIn className={styles.icon}/>,
-    }];
+    const elementsFinal: Elements= loggedIn ? [...elements , logoutElement] : [...elements , loginElement];
 
 
 

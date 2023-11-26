@@ -1,14 +1,9 @@
 //useForm hook
 import { useReducer,useCallback } from "react";
-import {State, Target, reducer} from "./formReducer";
+import {State, Target, reducer} from "../reducers/formReducer";
 
-/**
- * @description useForm hook to generalize state handling for forms
- * @return {Object} formState, handleInputChange, reset, isValid
- * @example const {formState, handleInputChange, reset, isValid} = useForm({email: {value: "", error: false, errorText: "Email is required", validate: (value) => value !== ""}});
- * @param initialState
- */
-export const useForm = (initialState:State = {}) => {
+
+export const useForm = (initialState:State) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const keys = Object.keys(state);
@@ -36,6 +31,8 @@ export const useForm = (initialState:State = {}) => {
             }
         })
     }, []);
+
+
 
     return {formState: state, handleInputChange, reset, isValid};
 }

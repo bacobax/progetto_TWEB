@@ -9,9 +9,9 @@
     -webkit-background-clip: text;
     background-image: linear-gradient(
         245deg,
-        rgba(153,169,255,1) 20%,
-        rgba(252,255,0,1) 48%,
-        rgba(178,101,255,1) 75%
+        rgb(0, 250, 175) 20%,
+        rgb(94, 158, 192) 48%,
+        rgb(18, 251, 255) 75%
     );
     background-size: 140%;
     animation: bg-animation 3s linear infinite;

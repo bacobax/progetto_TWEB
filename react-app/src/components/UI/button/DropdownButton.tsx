@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./DropdownButton.module.css";
 import Button from "./Button";
-import { Color } from "../../../constants/colorPalette";
+
 
 interface Option {
   label: string;
@@ -12,16 +12,14 @@ interface DropdownButtonProps {
   buttonText: string;
   options: Option[];
   onSelect: (selectedOption: string) => void;
-  accent: Color;
-  txtColor: Color;
+
 }
 
 const DropdownButton: React.FC<DropdownButtonProps> = ({
   buttonText,
   options,
   onSelect,
-  accent,
-  txtColor,
+ 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 

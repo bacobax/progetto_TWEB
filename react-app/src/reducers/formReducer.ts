@@ -11,7 +11,7 @@ export interface Target{
     value: string,
 }
 interface Action{
-    type: "SET_FORM_VALUE" | "RESET_FORM",
+    type: "SET_FORM_VALUE" | "RESET_FORM" | "SET_FORM_STATE",
     payload?: {
         target: Target
     }
@@ -43,5 +43,6 @@ export const reducer = (state:State, action:Action) => {
             }
         }, {});
     }
+
     return {...state};
 }

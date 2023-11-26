@@ -5,8 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #050517;
+
   min-height: 100vh;
+
+  background-image: url("/Users/francescobassignana/Downloads/sun-tornado%20(1).svg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 code {

@@ -1,13 +1,3 @@
-.home{
-    min-width: 100vw;
-    min-height: 100vh;
-    background-color: #242424;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .animatedFotball{
     height: 60%;
 }
