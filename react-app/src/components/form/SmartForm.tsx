@@ -57,9 +57,12 @@ const SmartForm: React.FC<DualFormProps> = () => {
                 transform : (width > 800) ?`translateX(${isSignin ? "0" : "+100%"})` : "",
                 borderRadius : isSignin ? "10px 0px 0px 10px" : "0px 10px 10px 0px"
             }}/>
-            <Form style={{
-                transform : (width > 800) ? `translateX(${isSignin ? "0" : "-100%"})` : ""
-            }} isLogin={isSignin} onSwitch={toggleForm} loginState={initialSignInState} signupState={initialSignUpState} onSubmit={onSubmitHandler}/>
+            <Form style={{transform : (width > 800) ? `translateX(${isSignin ? "0" : "-100%"})` : ""}}
+                  isLogin={isSignin}
+                  onSwitch={toggleForm}
+                  loginState={initialSignInState}
+                  signupState={initialSignUpState} onSubmit={onSubmitHandler}
+            />
             {loading && <Loading />}
             {error && <Modal onClose={()=>{
                 setError(null);

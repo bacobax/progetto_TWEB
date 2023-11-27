@@ -57,7 +57,7 @@ const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, 
 
     return (
         <div className={styles.container} style={style}>
-            <h1>SignIn</h1>
+            <h1>{isLogin ? "Sign In" : "Sign Up"}</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                 {
                    inputs

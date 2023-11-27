@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./PlayerCard.module.css";
 import FlipCard from "./UI/FlipCard";
+import Button from "./UI/button/Button";
 interface PlayerCardProps {
   name: string;
   image: string;
   description: string;
   className?: string;
+  id: number | string;
 }
 
 const PlayerCard: React.FC<PlayerCardProps> = ({
@@ -13,7 +15,8 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   image,
   description,
   className,
-  ...restProps
+    id,
+
 }) => {
 
     const front = (
@@ -22,18 +25,19 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                borderRadius: "10px"
             }} loading="lazy"/>
             <div className={styles.overlay}>
-                <h1>{name}</h1>
+                <h2>{name}</h2>
             </div>
         </div>
     )
 
     const back = (
         <div className={styles.back}>
-            <p style={{
-                margin: 0
-            }}>{description}</p>
+            <h3>Description</h3>
+            <p className={styles.description}>{description}</p>
+            <Button className={styles.moreButton}>More</Button>
         </div>
     )
 

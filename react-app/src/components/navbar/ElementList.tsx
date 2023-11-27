@@ -19,9 +19,7 @@ const ElementList: React.FC<ElementListProps> = ({elements, sidebar, onSelected}
         <ul>
             {
                 elements.map((element, index) => {
-                    console.log({element});
                     if (element.onClick !== undefined) {
-                        console.log("element.onClick")
                         return (
                             <li key={index} onClick={()=>{
                                 if (element.onClick !== undefined) element.onClick()
@@ -46,7 +44,7 @@ const ElementList: React.FC<ElementListProps> = ({elements, sidebar, onSelected}
                             </li>
                         ) : (
                             <li key={index} onClick={onSelected ? onSelected : ()=>{}}>
-                                <Link className={styles.link} to={element.path} smooth={true} duration={300} activeClass={styles.active} spy={true} onClick={onSelected ? onSelected : ()=>{}}>
+                                <Link className={styles.link} to={element.path} smooth={true} duration={300} activeClass={styles.active} spy={true} onClick={onSelected ? onSelected : ()=>{}} offset={-100}>
                                     <label>{element.name}</label>
                                     {element.icon}
                                 </Link>
