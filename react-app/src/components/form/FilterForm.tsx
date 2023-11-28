@@ -38,12 +38,19 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
 
     const applyNameFilter = useCallback (() => {
         const name = formState.name.value;
+        if(name.length===0){
+            return;
+        }
         onAddNameFilter(name)
     }, [formState.name.value, onAddNameFilter])
 
     const applyScoreFilter = useCallback (() => {
+        if(formState.scoreMin.value.length===0 || formState.scoreMax.value.length===0){
+            return;
+        }
         const scoreMin = +formState.scoreMin.value;
         const scoreMax = +formState.scoreMax.value;
+
         onAddScorefilter(scoreMin, scoreMax)
     },[formState.scoreMin.value, formState.scoreMax.value, onAddScorefilter])
 
@@ -60,6 +67,7 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
                     })
                 },
 
+
             }}/>
             <IconButton Icon={IoIosAddCircleOutline} onClick={applyNameFilter}/>
 
@@ -74,6 +82,7 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
                         inputName: "scoreMin",
                     })
                 },
+                min: 0
             }}/>
 
             <InputGroup name={"To"} error={[formState.scoreMax.error, formState.scoreMax.errorText]} inputProps={{
@@ -86,13 +95,17 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
                         inputName: "scoreMax",
                     })
                 },
+                min:0
             }}/>
             <IconButton Icon={IoIosAddCircleOutline} onClick={applyScoreFilter}/>
-            {
+            <div className={styles.filters}>
+                {
                     filterNames.map((filterName)=>(
-                <Filter name={filterName} onClose={()=>{onRemoveFilter(filterName)}}/>
-            ))
-            }
+                        <Filter name={filterName} onClose={()=>{onRemoveFilter(filterName)}}/>
+                    ))
+                }
+            </div>
+
             <hr />
             <div className={styles.filterControl}>
                 <Button className={styles.btnApply} onClick={handleApplyFilters}>Apply Filters</Button>

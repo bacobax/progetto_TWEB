@@ -58,3 +58,16 @@
     padding: 10vh;
 }
 
+@media screen and (max-width: 600px){
+    .container header{
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .container header .filterButton{
+        width: 8rem;
+        height: 2rem;
+    }
+    .container main{
+        padding: 5vh;
+    }
+}
