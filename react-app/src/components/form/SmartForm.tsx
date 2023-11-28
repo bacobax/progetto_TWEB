@@ -1,15 +1,14 @@
 import styles from './SmartForm.module.css';
 import React, {useCallback, useEffect, useState} from "react";
-import {initialSignInState, initialSignUpState} from "./defaultStates";
+import {initialSignInState , initialSignUpState} from "../../constants/constants";
 
-import Form from "./Form";
+import AuthForm from "./AuthForm";
 import {State} from "../../reducers/formReducer";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useAuth} from "../../hooks/useAuth";
 import Loading from "../animations/Loading";
 import Modal from "../UI/modal/Modal";
 import useModal from "../../hooks/useModal";
-import {redirect} from "react-router-dom";
 
 interface DualFormProps {
 
@@ -57,11 +56,11 @@ const SmartForm: React.FC<DualFormProps> = () => {
                 transform : (width > 800) ?`translateX(${isSignin ? "0" : "+100%"})` : "",
                 borderRadius : isSignin ? "10px 0px 0px 10px" : "0px 10px 10px 0px"
             }}/>
-            <Form style={{transform : (width > 800) ? `translateX(${isSignin ? "0" : "-100%"})` : ""}}
-                  isLogin={isSignin}
-                  onSwitch={toggleForm}
-                  loginState={initialSignInState}
-                  signupState={initialSignUpState} onSubmit={onSubmitHandler}
+            <AuthForm style={{transform : (width > 800) ? `translateX(${isSignin ? "0" : "-100%"})` : ""}}
+                      isLogin={isSignin}
+                      onSwitch={toggleForm}
+                      loginState={initialSignInState}
+                      signupState={initialSignUpState} onSubmit={onSubmitHandler}
             />
             {loading && <Loading />}
             {error && <Modal onClose={()=>{

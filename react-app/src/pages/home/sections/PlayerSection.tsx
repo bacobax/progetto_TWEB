@@ -12,7 +12,6 @@ interface PlayerSectionProps {
     name: string;
 }
 
-const SLICE_SIZE = 3;
 
 const DUMMY_PLAYERS: Player[] = [
     {
@@ -22,6 +21,7 @@ const DUMMY_PLAYERS: Player[] = [
         country: "Argentina",
         age: 33,
         id: 0,
+        generalScore: 10
     },
     {
         name: "Messi1",
@@ -30,6 +30,7 @@ const DUMMY_PLAYERS: Player[] = [
         country: "Argentina",
         age: 33,
         id: 1,
+        generalScore: 9
     },
     {
         name: "Messi2",
@@ -38,6 +39,7 @@ const DUMMY_PLAYERS: Player[] = [
         country: "Argentina",
         age: 33,
         id: 2,
+        generalScore: 8
 
     },
     {
@@ -47,6 +49,7 @@ const DUMMY_PLAYERS: Player[] = [
         country: "Argentina",
         age: 33,
         id: 3,
+        generalScore: 7
     },
     {
         name: "Messi4",
@@ -55,6 +58,7 @@ const DUMMY_PLAYERS: Player[] = [
         country: "Argentina",
         age: 33,
         id: 4,
+        generalScore: 6
     },
     {
         name: "Messi5",
@@ -63,6 +67,7 @@ const DUMMY_PLAYERS: Player[] = [
         country: "Argentina",
         age: 33,
         id: 5,
+        generalScore: 5
     }
 ]
 
@@ -71,12 +76,14 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
     const {current, next, prev} = useSlice(DUMMY_PLAYERS, width < 768 ? 2: 4);
 
 
+
+
     return (
         <Section name={name} className={styles.container}>
             <h1>Players</h1>
             <div className={styles.cardGallery}>
                 {
-                    current.map((player, index) => (
+                    current.map((player) => (
                         <PlayerCard key={player.id} name={player.name} image={player.image} description={player.description} id={player.id}/>
                         )
                     )
@@ -87,6 +94,7 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
                 <Button onClick={prev}>Prev</Button>
                 <Button onClick={next}>Next</Button>
             </div>
+
 
         </Section>
     );

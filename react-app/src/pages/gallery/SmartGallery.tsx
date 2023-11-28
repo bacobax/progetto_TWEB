@@ -1,23 +1,72 @@
-import React from "react";
+import React, {useCallback, useState} from "react";
 import styles from "./SmartGallery.module.css";
 import Button from "../../components/UI/button/Button";
+import useFilter from "../../hooks/useFilter";
+import {Player} from "../../constants/types";
+import PlayerCard from "../../components/PlayerCard";
+
+import FilterForm from "../../components/form/FilterForm";
 
 
-interface SmartGalleryProps<T> {
-    children: (el: T) => React.ReactNode;
-    elements: T[];
+interface SmartGalleryProps {
+
+    elements: Player[];
 
 }
 // notice the trailing comma after <T
-const SmartGallery = <T,>({ children, elements }: SmartGalleryProps<T>) => {
+const SmartGallery:React.FC<SmartGalleryProps> = ({elements }) => {
+
+    const [showForm, setShowForm] = useState(false)
+
+
+
+    const {filteredData, removeFilter, clearFilters, addFilter , filterNames} = useFilter(elements);
+
+    const handleShowForm = useCallback (() => {
+        setShowForm((prevState) => !prevState)
+    }, [])
+
+    const handleApplyFilters = useCallback(({name, scoreMin, scoreMax}: {name: string, scoreMin: number, scoreMax:number})=>{
+        if(name.length!==0){
+            addFilter(`${name}` , (p: Player) => {
+                return p.name.toLowerCase()===(name.toLowerCase())
+            })
+        }
+
+        addFilter(`from ${scoreMin} to ${scoreMax}` , (p)=>(p.generalScore>=scoreMin && p.generalScore<=scoreMax))
+    }, [addFilter]);
+
+    const handleAddNameFilter = useCallback ((name: string) => {
+        addFilter(`${name}` , (p: Player) => {
+            return p.name.toLowerCase().includes(name.toLowerCase())
+        })
+    }, [addFilter])
+
+    const handleAddScoreFilter = useCallback ((scoreMin: number, scoreMax: number) => {
+        addFilter(`from ${scoreMin} to ${scoreMax}` , (p)=>(p.generalScore>=scoreMin && p.generalScore<=scoreMax))
+    } , [addFilter]);
+
+
+
     return (
         <div className={styles.container}>
             <header>
                 <h1>Gallery</h1>
-                <Button className={styles.filterButton}>Filter</Button>
+                <Button className={styles.filterButton} onClick={handleShowForm}>Filter</Button>
             </header>
+            {showForm &&
+                <FilterForm
+                onRemoveFilter={removeFilter}
+                onApplyFilters={handleApplyFilters}
+                onClearFilters={clearFilters}
+                filterNames={filterNames}
+                onAddNameFilter={handleAddNameFilter}
+                onAddScorefilter={handleAddScoreFilter}
+                />}
             <main>
-                {elements.map(children)}
+                {filteredData.map( (player) => (
+                    <PlayerCard description={player.description} id={player.id} name={player.name} image={player.image}/>
+                ))}
             </main>
 
         </div>

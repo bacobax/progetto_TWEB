@@ -5,4 +5,6 @@ export interface Player{
     description: string;
     image: string;
     id: number | string;
+    generalScore: number
 }
+

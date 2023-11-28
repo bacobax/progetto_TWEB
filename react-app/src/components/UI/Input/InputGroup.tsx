@@ -7,7 +7,7 @@ interface InputGroupProps {
     name: string;
     inputProps: React.InputHTMLAttributes<HTMLInputElement>;
     className?: string;
-    validation?: [(value: string) => boolean, string];
+
     error?: [boolean, string];
 }
 

@@ -1,0 +1,46 @@
+.filterForm{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.filterForm .filterControl{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.filterForm .filterControl .btnApply,
+.filterForm .filterControl .btnClear{
+    border-radius: 8px;
+}
+
+.filterForm .filterControl .btnApply{
+    background-color: #4aad76;
+    color: white;
+}
+
+.filterForm .filterControl .btnClear{
+    background-color: #c06055;
+    color: white;
+}
+
+.filterForm .filterControl .btnApply:hover{
+    background-color: transparent;
+    color: #4aad76;
+    border: 1px solid #4aad76;
+
+}
+
+.filterForm .filterControl .btnClear:hover{
+    background-color: transparent;
+    color: #c06055;
+    border: 1px solid #c06055;
+}
+
+.filterForm hr{
+    width: 100%;
+    border: 1px solid rgba(210, 210, 210, 0.46);
+
+}

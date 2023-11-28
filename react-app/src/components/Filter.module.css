@@ -1,0 +1,28 @@
+.container{
+
+    background: rgba(255, 255, 255, 0.25);
+
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(11px);
+
+    padding: 10px;
+    border-radius: 10px;
+    width: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: red;
+    cursor: pointer;
+}
+
+.icon:hover{
+    transform: scale(1.2);
+}

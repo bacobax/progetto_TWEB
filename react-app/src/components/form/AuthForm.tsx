@@ -1,4 +1,4 @@
-import styles from "./Form.module.css";
+import styles from "./AuthForm.module.css";
 
 
 import React, {ChangeEvent, useCallback, useMemo} from "react";
@@ -19,7 +19,7 @@ interface FormProps {
 
 
 
-const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, onSubmit, style}) => {
+const AuthForm: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, onSubmit, style}) => {
     const {reset:resetSignUp, formState:formStateSignUp, handleInputChange: handleInputChangeSignUp, isValid: isValidSignUp} = useForm(signupState);
     const {reset: resetSignIn, formState: formStateSignIn,handleInputChange: handleInputChangeSignIn, isValid: isValidSignIn} = useForm(loginState);
     const reset = isLogin ? resetSignIn : resetSignUp;
@@ -76,4 +76,4 @@ const Form: React.FC<FormProps> = ({onSwitch, isLogin, loginState, signupState, 
     )
 }
 
-export default Form;
+export default AuthForm;
