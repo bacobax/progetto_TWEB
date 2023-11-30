@@ -3,7 +3,8 @@
     font-weight: 900;
     letter-spacing: 0;
     text-align: center;
-    color: transparent;
+    color: var(--corvette);/*
+
     background-clip: text;
     -webkit-text-fill-color:transparent;
     -webkit-background-clip: text;
@@ -14,7 +15,7 @@
         rgb(18, 251, 255) 75%
     );
     background-size: 140%;
-    animation: bg-animation 3s linear infinite;
+    animation: bg-animation 3s linear infinite;*/
 }
 
 .header {
@@ -27,7 +28,7 @@
     align-items: center;
 
 }
-
+/*
 
 @keyframes bg-animation {
     0%{
@@ -40,7 +41,7 @@
         background-position: 0% 0%;
     }
 
-}
+}*7
 
 /*with screen below 600px*/
 @media screen and (max-width: 600px){

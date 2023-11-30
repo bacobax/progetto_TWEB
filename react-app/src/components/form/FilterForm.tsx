@@ -7,6 +7,7 @@ import IconButton from "../UI/button/IconButton";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
 import {filterFormState} from "../../constants/constants";
+import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 
 
 interface FilterFormProps{
@@ -55,64 +56,67 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
     },[formState.scoreMin.value, formState.scoreMax.value, onAddScorefilter])
 
     return (
-        <form className={styles.filterForm} onSubmit={e=>e.preventDefault()}>
-            <InputGroup name={"name"} error={[formState.name.error, formState.name.errorText]} inputProps={{
-                type: "text",
-                placeholder: "Name",
-                value: formState.name.value,
-                onChange: (event) => {
-                    handleInputChange({
-                        value: event.target.value,
-                        inputName: "name",
-                    })
-                },
+        <NeuromorphismDiv clickable={false}>
+            <form className={styles.filterForm} onSubmit={e=>e.preventDefault()}>
+                <InputGroup name={"name"} error={[formState.name.error, formState.name.errorText]} inputProps={{
+                    type: "text",
+                    placeholder: "Name",
+                    value: formState.name.value,
+                    onChange: (event) => {
+                        handleInputChange({
+                            value: event.target.value,
+                            inputName: "name",
+                        })
+                    },
 
 
-            }}/>
-            <IconButton Icon={IoIosAddCircleOutline} onClick={applyNameFilter}/>
+                }}/>
+                <IconButton className={styles.addFilter} Icon={IoIosAddCircleOutline} onClick={applyNameFilter}/>
 
-            <hr />
-            <InputGroup name={"From"} error={[formState.scoreMin.error, formState.scoreMin.errorText]} inputProps={{
-                type: "number",
-                placeholder: "Score",
-                value: formState.scoreMin.value,
-                onChange: (event) => {
-                    handleInputChange({
-                        value: event.target.value,
-                        inputName: "scoreMin",
-                    })
-                },
-                min: 0
-            }}/>
+                <hr />
+                <InputGroup name={"From"} error={[formState.scoreMin.error, formState.scoreMin.errorText]} inputProps={{
+                    type: "number",
+                    placeholder: "Score",
+                    value: formState.scoreMin.value,
+                    onChange: (event) => {
+                        handleInputChange({
+                            value: event.target.value,
+                            inputName: "scoreMin",
+                        })
+                    },
+                    min: 0
+                }}/>
 
-            <InputGroup name={"To"} error={[formState.scoreMax.error, formState.scoreMax.errorText]} inputProps={{
-                type: "number",
-                placeholder: "Score",
-                value: formState.scoreMax.value,
-                onChange: (event) => {
-                    handleInputChange({
-                        value: event.target.value,
-                        inputName: "scoreMax",
-                    })
-                },
-                min:0
-            }}/>
-            <IconButton Icon={IoIosAddCircleOutline} onClick={applyScoreFilter}/>
-            <div className={styles.filters}>
-                {
-                    filterNames.map((filterName)=>(
-                        <Filter name={filterName} onClose={()=>{onRemoveFilter(filterName)}}/>
-                    ))
-                }
-            </div>
+                <InputGroup name={"To"} error={[formState.scoreMax.error, formState.scoreMax.errorText]} inputProps={{
+                    type: "number",
+                    placeholder: "Score",
+                    value: formState.scoreMax.value,
+                    onChange: (event) => {
+                        handleInputChange({
+                            value: event.target.value,
+                            inputName: "scoreMax",
+                        })
+                    },
+                    min:0
+                }}/>
+                <IconButton className={styles.addFilter} Icon={IoIosAddCircleOutline} onClick={applyScoreFilter}/>
+                <div className={styles.filters}>
+                    {
+                        filterNames.map((filterName)=>(
+                            <Filter name={filterName} onClose={()=>{onRemoveFilter(filterName)}}/>
+                        ))
+                    }
+                </div>
 
-            <hr />
-            <div className={styles.filterControl}>
-                <Button className={styles.btnApply} onClick={handleApplyFilters}>Apply Filters</Button>
-                <Button className={styles.btnClear} onClick={handleClearFilters}>Clear Filters</Button>
-            </div>
+                <hr />
+                <div className={styles.filterControl}>
+                    <Button className={styles.btnApply} onClick={handleApplyFilters}>Apply Filters</Button>
+                    <Button className={styles.btnClear} onClick={handleClearFilters}>Clear Filters</Button>
+                </div>
 
-        </form>
+            </form>
+        </NeuromorphismDiv>
+
     )
 }
 

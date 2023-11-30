@@ -8,9 +8,9 @@ interface IconButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
     text?: string;
 }
 
-const IconButton: React.FC<IconButtonProps> = ({Icon,text, ...props}) => {
+const IconButton: React.FC<IconButtonProps> = ({Icon,text,className, ...props}) => {
     return (
-        <Button className={styles.iconButton} {...props}>
+        <Button className={styles.iconButton + " " + className} {...props}>
 
             <>
                 <Icon className={styles.icon}/>

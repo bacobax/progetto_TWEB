@@ -1,7 +1,5 @@
 import React from "react";
-import {Player} from "../../constants/types";
 import SmartGallery from "./SmartGallery";
-import MessiImage from "../../assets/messi.jpg"
 import {DUMMY_GALLERY_PLAEYERS} from "../../constants/constants";
 
 

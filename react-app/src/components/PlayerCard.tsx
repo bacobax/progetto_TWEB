@@ -2,12 +2,11 @@ import React from "react";
 import styles from "./PlayerCard.module.css";
 import FlipCard from "./UI/FlipCard";
 import Button from "./UI/button/Button";
-interface PlayerCardProps {
-  name: string;
-  image: string;
-  description: string;
+import NeuromorphismDiv from "./UI/NeuromorphismDiv";
+import {Player} from "../constants/types";
+import {stat} from "fs";
+interface PlayerCardProps extends Player{
   className?: string;
-  id: number | string;
 }
 
 const PlayerCard: React.FC<PlayerCardProps> = ({
@@ -16,33 +15,37 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   description,
   className,
     id,
+    generalScore,
+    statistics
 
 }) => {
 
-    const front = (
-        <div className={styles.front}>
-            <img src={image} alt={"profile"} style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                borderRadius: "10px"
-            }} loading="lazy"/>
-            <div className={styles.overlay}>
-                <h2>{name}</h2>
-            </div>
-        </div>
-    )
 
-    const back = (
-        <div className={styles.back}>
-            <h3>Description</h3>
-            <p className={styles.description}>{description}</p>
-            <Button className={styles.moreButton}>More</Button>
-        </div>
-    )
 
   return (
-    <FlipCard front={front} back={back} className={styles.card}/>
+
+        <div className={styles.backdrop}>
+            <div className={styles.content}>
+              <header>
+
+                <img alt={name} src={image}/>
+                <div className={styles.imgBackdrop}>
+                  <div className={styles.scoreSection}>
+                    <h2>{generalScore}</h2>
+                  </div>
+                </div>
+
+              </header>
+              <main>
+                  <h3>{name}</h3>
+
+              </main>
+
+
+            </div>
+        </div>
+
+
   );
 };
 

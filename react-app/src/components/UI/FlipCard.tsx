@@ -17,6 +17,8 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back, className, ...restProp
               <div className={styles["flip-card-back"]}>
                   {back}
               </div>
+
+
           </div>
       </div>
   );

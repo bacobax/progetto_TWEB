@@ -6,12 +6,16 @@ import {DUMMY_HOME_PLAYERS} from "../../../constants/constants";
 import {useSlice} from "../../../hooks/useSlice";
 import useWindowSize from "../../../hooks/useWindowSize";
 import Button from "../../../components/UI/button/Button";
+import {useNavigate} from "react-router-dom";
+import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
+import IconButton from "../../../components/UI/button/IconButton";
 interface PlayerSectionProps {
     name: string;
 }
 
 
 const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
+    const navigate = useNavigate();
     const {width} = useWindowSize();
     const {current, next, prev} = useSlice(DUMMY_HOME_PLAYERS, width < 768 ? 2: 4);
 
@@ -24,16 +28,18 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
             <div className={styles.cardGallery}>
                 {
                     current.map((player) => (
-                        <PlayerCard key={player.id} name={player.name} image={player.image} description={player.description} id={player.id}/>
+                        <PlayerCard key={player.id} {...player}/>
                         )
                     )
                 }
             </div>
 
             <div className={styles.buttons}>
-                <Button onClick={prev}>Prev</Button>
-                <Button onClick={next}>Next</Button>
+                <IconButton Icon={GrCaretPrevious} className={styles.next} onClick={prev} text={"Prev"} />
+                <IconButton Icon={GrCaretNext} className={styles.prev} onClick={next} text={"Next"} />
+
             </div>
+            <Button className={styles.moreButton} onClick={()=>{navigate("/gallery")}}>More</Button>
 
 
         </Section>

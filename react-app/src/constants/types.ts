@@ -6,5 +6,10 @@ export interface Player{
     image: string;
     id: number | string;
     generalScore: number
+    statistics: Statistic
 }
 
+
+type Statistic = {
+    [key: string]: number
+}

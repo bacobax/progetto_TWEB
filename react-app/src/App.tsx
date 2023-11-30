@@ -13,8 +13,10 @@ function App() {
 
   return (
     <>
+
         <Suspense fallback={<Loading />}>
             <Routes>
+
                 <Route path={"auth"} element={<AuthPage />}/>
                 <Route path={"gallery"} element={<Gallery />} />
                 <Route path={"/"} element={<HomePage />} />

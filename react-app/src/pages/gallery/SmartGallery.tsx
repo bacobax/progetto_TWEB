@@ -1,11 +1,12 @@
 import React, {useCallback, useState} from "react";
 import styles from "./SmartGallery.module.css";
-import Button from "../../components/UI/button/Button";
 import useFilter from "../../hooks/useFilter";
 import {Player} from "../../constants/types";
 import PlayerCard from "../../components/PlayerCard";
 
 import FilterForm from "../../components/form/FilterForm";
+import IconButton from "../../components/UI/button/IconButton";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
 
 interface SmartGalleryProps {
@@ -52,7 +53,8 @@ const SmartGallery:React.FC<SmartGalleryProps> = ({elements }) => {
         <div className={styles.container}>
             <header>
                 <h1>Gallery</h1>
-                <Button className={styles.filterButton} onClick={handleShowForm}>Filter</Button>
+                <IconButton Icon={showForm ? FaAngleUp : FaAngleDown} className={styles.filterButton} onClick={handleShowForm} text={"FILTER"}/>
+
             </header>
             {showForm &&
                 <FilterForm
@@ -65,7 +67,7 @@ const SmartGallery:React.FC<SmartGalleryProps> = ({elements }) => {
                 />}
             <main>
                 {filteredData.map( (player) => (
-                    <PlayerCard description={player.description} id={player.id} name={player.name} image={player.image}/>
+                    <PlayerCard {...player}/>
                 ))}
             </main>
 

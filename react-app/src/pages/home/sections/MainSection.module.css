@@ -3,12 +3,12 @@
 }
 
 .auth button{
-    background-color: #68C682;
+    background-color: var(--gorse);
     color: black;
     border-radius: 10px;
 }
 
 .auth button:hover{
-    background-color: #8effaa;
+    background-color: #ffffb0;
     color: black;
 }

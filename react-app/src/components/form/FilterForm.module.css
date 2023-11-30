@@ -7,11 +7,12 @@
     padding: 3rem;
     border-radius: 10px;
 
+/*
     background: rgba(124, 124, 124, 0.25);
 
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(11px);
+    -webkit-backdrop-filter: blur(11px);*/
 
 }
 
@@ -28,19 +29,20 @@
 }
 
 .filterForm .filterControl .btnApply{
-    background-color: #4aad76;
-    color: white;
+    background-color: var(--corvette);
+    color: var(--jacarta);
 }
 
 .filterForm .filterControl .btnClear{
-    background-color: #c06055;
+    border:1px solid  #c2485e;
+    background-color: transparent;
     color: white;
 }
 
 .filterForm .filterControl .btnApply:hover{
     background-color: transparent;
-    color: #4aad76;
-    border: 1px solid #4aad76;
+    color: var(--corvette);
+    border: 1px solid var(--corvette);
 
 }
 
@@ -64,3 +66,4 @@
 
     width: 100%;
 }
+

@@ -1,0 +1,13 @@
+.container{
+    border-radius: 46px;
+    background: linear-gradient(145deg, #333142, #2b2938);
+    box-shadow:  30px 30px 60px #272532,
+    -30px -30px 60px #39374a;
+}
+
+.container.clickable:hover,
+.container.clickable:focus{
+
+    box-shadow: -8px -8px 12px 0px rgba(76, 73, 96, 0.7) inset, 8px 8px 12px 0px rgba(43, 41, 56, 0.63) inset;
+}
+
