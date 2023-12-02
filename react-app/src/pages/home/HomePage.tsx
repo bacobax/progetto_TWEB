@@ -5,13 +5,11 @@ import PlayerSection from "./sections/PlayerSection";
 import TeamSection from "./sections/TeamSection";
 import {HOME_SECTIONS} from "../../constants/constants";
 import MainSection from "./sections/MainSection";
-import CircleBackground from "../../components/UI/animated/CircleBackground";
 
 function HomePage() {
 
     return (
         <>
-
             <Navbar onSearch={(t)=>{alert(t)}} elements={navbarElements}/>
             <MainSection name={HOME_SECTIONS.HOME.name} />
             <PlayerSection name={HOME_SECTIONS.PLAYERS.name}/>

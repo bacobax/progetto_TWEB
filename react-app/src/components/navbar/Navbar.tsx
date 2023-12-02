@@ -9,6 +9,7 @@ import {AuthContext} from "../../store/AuthContext";
 import {useAuth} from "../../hooks/useAuth";
 import ElementList from "./ElementList";
 import {loginElement, logoutElement} from "../../constants/navbarElements";
+import {AnimatePresence} from "framer-motion";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
@@ -35,10 +36,15 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
   return (
       <>
         <nav className={styles.navbar}>
+
           {!isPhone ? <ElementList sidebar={false} elements={elementsFinal} /> : <RxHamburgerMenu className={styles.burgericon} onClick={handleBurgerClick}/>}
           <SearchBar onSearch={onSearch}/>
         </nav>
-        {(isPhone && showSidebar) && <Sidebar onClose={handleCloseSidebar} elements={elementsFinal}/>}
+        <AnimatePresence>
+            {(isPhone && showSidebar) && <Sidebar onClose={handleCloseSidebar} elements={elementsFinal}/>}
+        </AnimatePresence>
+
+
       </>
 
   );

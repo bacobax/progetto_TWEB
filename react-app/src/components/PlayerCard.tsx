@@ -1,10 +1,7 @@
 import React from "react";
 import styles from "./PlayerCard.module.css";
-import FlipCard from "./UI/FlipCard";
-import Button from "./UI/button/Button";
-import NeuromorphismDiv from "./UI/NeuromorphismDiv";
 import {Player} from "../constants/types";
-import {stat} from "fs";
+import {motion} from "framer-motion";
 interface PlayerCardProps extends Player{
   className?: string;
 }
@@ -24,8 +21,17 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 
   return (
 
-        <div className={styles.backdrop}>
-            <div className={styles.content}>
+        <div className={styles.backdrop}
+
+          >
+            <motion.div className={styles.content} whileHover={{
+              scale: 1.2,
+              backgroundColor: "var(--corvette)",
+
+            }}
+            onHoverStart={() => {}}
+            onHoverEnd={() => {}}
+            >
               <header>
 
                 <img alt={name} src={image}/>
@@ -42,7 +48,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
               </main>
 
 
-            </div>
+            </motion.div>
         </div>
 
 

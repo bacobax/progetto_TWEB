@@ -9,11 +9,12 @@ import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
 import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
 import IconButton from "../../../components/UI/button/IconButton";
+import {motion} from "framer-motion";
 interface PlayerSectionProps {
     name: string;
 }
 
-
+const AnimatedButton = motion(Button)
 const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
     const navigate = useNavigate();
     const {width} = useWindowSize();
@@ -39,7 +40,13 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
                 <IconButton Icon={GrCaretNext} className={styles.prev} onClick={next} text={"Next"} />
 
             </div>
-            <Button className={styles.moreButton} onClick={()=>{navigate("/gallery")}}>More</Button>
+            <AnimatedButton
+                whileHover={{
+                    scale:1.2,
+                }}
+                onHoverStart={() => {}}
+                onHoverEnd={() => {}}
+                className={styles.moreButton} onClick={()=>{navigate("/gallery")}}>More</AnimatedButton>
 
 
         </Section>

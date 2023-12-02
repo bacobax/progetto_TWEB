@@ -3,12 +3,8 @@
 }
 
 .auth button{
-    background-color: var(--gorse);
+    background-color: #ffffb0;
     color: black;
     border-radius: 10px;
 }
 
-.auth button:hover{
-    background-color: #ffffb0;
-    color: black;
-}

@@ -10,9 +10,7 @@
 
 }
 
-.content *{
-    transition-duration: 500ms;
-}
+
 
 .content {
 
@@ -35,17 +33,12 @@
     background-color: var(--gorse);
     position: absolute;
     cursor: pointer;
-    transition-duration: 0.5s;
 
     display: flex;
     flex-direction: column;
 
 }
 
-.content:hover{
-    transform: translateY(-40px) scale(1.1);
-
-}
 
 
 .content header{
@@ -64,7 +57,6 @@
     height: 100%;
     object-fit: cover;
     position: relative;
-    transition-duration: 500ms;
 }
 
 .content header .imgBackdrop{
@@ -109,7 +101,6 @@
     width: 100%;
     height: 25%;
     padding: 0;
-    transition-duration: 500ms;
 }
 
 .content main h3{
@@ -128,11 +119,11 @@
 .content:hover .imgBackdrop{
     transform: scale(1.1);
 }
-
+/*
 .content:hover{
     background-color: var(--corvette);
-
-}
+    transform: translateY(-40px) scale(1.1);
+}*/
 
 .content:hover main h3{
     color:black

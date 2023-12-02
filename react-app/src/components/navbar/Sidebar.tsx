@@ -1,7 +1,7 @@
 import styles from "./Sidebar.module.css";
 import React from 'react'
 import { AiOutlineClose } from "react-icons/ai";
-import {animated, useSpring} from "@react-spring/web";
+import {motion} from "framer-motion";
 import {Elements} from "./types";
 
 import ElementList from "./ElementList";
@@ -12,16 +12,31 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({onClose, elements}) => {
 
-    const props = useSpring({
-        from: { transform: 'translateX(-100%)' },
-        to: { transform: 'translateX(0%)' },
-    });
 
     return (
-        <animated.aside className={styles.sidebar} style={props}>
-            <AiOutlineClose onClick={onClose} className={styles.closeIcon}/>
-            <ElementList elements={elements} onSelected={onClose} sidebar/>
-        </animated.aside>
+            <motion.aside className={styles.sidebar}
+                          initial={{
+                              x: "-100%",
+                              opacity: 0
+                          }}
+                          animate={{
+                              x: "0",
+                              opacity: 1
+                          }}
+                          exit={{
+                              x: "-100%"
+                          }}
+                          transition={{
+                              duration: 0.2,
+                              bounce: 0.2
+                          }}
+            >
+
+                <AiOutlineClose onClick={onClose} className={styles.closeIcon}/>
+                <ElementList elements={elements} onSelected={onClose} sidebar/>
+            </motion.aside>
+
+
     )
 }
 

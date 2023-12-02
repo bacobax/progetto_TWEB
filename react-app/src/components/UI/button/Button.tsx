@@ -1,4 +1,4 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import styles from "./Button.module.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
@@ -8,20 +8,22 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
 
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button =forwardRef<HTMLButtonElement, ButtonProps> (({
 
 
   children,
   className, ...otherProps
-}) => {
+},ref) => {
+
   return (
-    <button
+
+    <button ref={ref}
         {...otherProps}
       className={`${styles.button} ${className}`}
     >
       {children}
     </button>
   );
-};
+});
 
 export default Button;
