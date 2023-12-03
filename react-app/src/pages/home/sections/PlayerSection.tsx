@@ -2,19 +2,17 @@ import React from 'react'
 import Section from "../../../components/containers/Section";
 import styles from "./PlayerSection.module.css";
 import PlayerCard from "../../../components/PlayerCard";
-import {DUMMY_HOME_PLAYERS} from "../../../constants/constants";
+import {animatedButtonProps, DUMMY_HOME_PLAYERS} from "../../../constants/constants";
 import {useSlice} from "../../../hooks/useSlice";
 import useWindowSize from "../../../hooks/useWindowSize";
 import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
 import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
 import IconButton from "../../../components/UI/button/IconButton";
-import {motion} from "framer-motion";
 interface PlayerSectionProps {
     name: string;
 }
 
-const AnimatedButton = motion(Button)
 const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
     const navigate = useNavigate();
     const {width} = useWindowSize();
@@ -36,17 +34,12 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
             </div>
 
             <div className={styles.buttons}>
-                <IconButton Icon={GrCaretPrevious} className={styles.next} onClick={prev} text={"Prev"} />
-                <IconButton Icon={GrCaretNext} className={styles.prev} onClick={next} text={"Next"} />
+                <IconButton {...animatedButtonProps} Icon={GrCaretPrevious} className={styles.next} onClick={prev} text={"Prev"} />
+                <IconButton {...animatedButtonProps} Icon={GrCaretNext} className={styles.prev} onClick={next} text={"Next"} />
 
             </div>
-            <AnimatedButton
-                whileHover={{
-                    scale:1.2,
-                }}
-                onHoverStart={() => {}}
-                onHoverEnd={() => {}}
-                className={styles.moreButton} onClick={()=>{navigate("/gallery")}}>More</AnimatedButton>
+            <Button {...animatedButtonProps}
+                className={styles.moreButton} onClick={()=>{navigate("/gallery")}}>More</Button>
 
 
         </Section>

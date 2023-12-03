@@ -7,13 +7,16 @@ import PlayerCard from "../../components/PlayerCard";
 import FilterForm from "../../components/form/FilterForm";
 import IconButton from "../../components/UI/button/IconButton";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-
+import {animatedButtonProps} from "../../constants/constants";
 
 interface SmartGalleryProps {
 
     elements: Player[];
 
 }
+
+
+
 // notice the trailing comma after <T
 const SmartGallery:React.FC<SmartGalleryProps> = ({elements }) => {
 
@@ -53,7 +56,7 @@ const SmartGallery:React.FC<SmartGalleryProps> = ({elements }) => {
         <div className={styles.container}>
             <header>
                 <h1>Gallery</h1>
-                <IconButton Icon={showForm ? FaAngleUp : FaAngleDown} className={styles.filterButton} onClick={handleShowForm} text={"FILTER"}/>
+                <IconButton {...animatedButtonProps} Icon={showForm ? FaAngleUp : FaAngleDown} className={styles.filterButton} onClick={handleShowForm} text={"FILTER"}/>
 
             </header>
             {showForm &&

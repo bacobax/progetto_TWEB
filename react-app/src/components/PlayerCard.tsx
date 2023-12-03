@@ -24,23 +24,41 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         <div className={styles.backdrop}
 
           >
-            <motion.div className={styles.content} whileHover={{
-              scale: 1.2,
-              backgroundColor: "var(--corvette)",
+            <motion.div className={styles.content}
+            variants={{
+              hover:{
+                scale: 1.2,
+                backgroundColor: "var(--corvette)",
 
+              }}}
+            whileHover="hover"
+
+            transition={{
+                type: "spring",
+                duration: 0.1
             }}
-            onHoverStart={() => {}}
-            onHoverEnd={() => {}}
             >
               <header>
 
-                <img alt={name} src={image}/>
-                <div className={styles.imgBackdrop}>
+                <motion.img alt={name} src={image}
+                  variants={{
+                    hover:{
+                      filter: "grayscale(100%)",
+                      scale: 1.1,
+                  }}}
+
+                />
+                <motion.div className={styles.imgBackdrop}
+                variants={{
+                    hover:{
+                        scale: 1.1,
+                    }
+                }}
+                >
                   <div className={styles.scoreSection}>
                     <h2>{generalScore}</h2>
                   </div>
-                </div>
-
+                </motion.div>
               </header>
               <main>
                   <h3>{name}</h3>

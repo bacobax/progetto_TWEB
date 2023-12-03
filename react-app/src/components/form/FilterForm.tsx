@@ -6,7 +6,7 @@ import {useForm} from "../../hooks/useForm";
 import IconButton from "../UI/button/IconButton";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
-import {filterFormState} from "../../constants/constants";
+import {animatedButtonProps, filterFormState} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 
 
@@ -71,7 +71,7 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
 
 
                 }}/>
-                <IconButton className={styles.addFilter} Icon={IoIosAddCircleOutline} onClick={applyNameFilter}/>
+                <IconButton {...animatedButtonProps} className={styles.addFilter} Icon={IoIosAddCircleOutline} onClick={applyNameFilter}/>
 
                 <hr />
                 <InputGroup name={"From"} error={[formState.scoreMin.error, formState.scoreMin.errorText]} inputProps={{
@@ -87,7 +87,7 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
                     min: 0
                 }}/>
 
-                <InputGroup name={"To"} error={[formState.scoreMax.error, formState.scoreMax.errorText]} inputProps={{
+                <InputGroup  name={"To"} error={[formState.scoreMax.error, formState.scoreMax.errorText]} inputProps={{
                     type: "number",
                     placeholder: "Score",
                     value: formState.scoreMax.value,
@@ -99,7 +99,7 @@ const FilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, 
                     },
                     min:0
                 }}/>
-                <IconButton className={styles.addFilter} Icon={IoIosAddCircleOutline} onClick={applyScoreFilter}/>
+                <IconButton {...animatedButtonProps} className={styles.addFilter} Icon={IoIosAddCircleOutline} onClick={applyScoreFilter}/>
                 <div className={styles.filters}>
                     {
                         filterNames.map((filterName)=>(
