@@ -28,6 +28,11 @@ PostgreSQL, a robust relational database system, is designated for managing data
 3. **Structured Entities with Relationships:**
    - PostgreSQL accommodates tables like `competitions`, `games`, `players`, `player_valuations`, and `game_lineups` due to their structured nature and interdependencies. Utilizing PostgreSQL ensures strong data integrity and supports complex relational queries involving these entities.
 
+## Assumptions on the Datasets
+
+1. **Similar Attributes in `games` and `club_games`:** There appears to be some overlap in attributes between the `games` and `club_games` tables, possibly indicating a duplication of certain details for performance optimization or query simplification purposes.
+2. **Domestic Competition ID per Club:** The `domestic_competition_id` for each club is assumed to refer to the latest competition in which the club participated. This assumption facilitates quick reference to the most recent domestic competition involvement for each club. Meaning that if one club played the same competition in two different moment in history, only the last one's reference will be stored
+
 ## Justification
 
 The decision to split the databases is based on distinct features and optimal functionalities offered by MongoDB and PostgreSQL:
