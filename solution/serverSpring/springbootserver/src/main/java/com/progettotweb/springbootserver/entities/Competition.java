@@ -5,16 +5,19 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "competitions")
 public class Competition {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "competition_id")
     private Long competitionId;
 
     @Column(name = "competition_code")
     private String competitionCode;
 
-    @Column(name = "name")
-    private String name;
 
+    @Column(name = "name")
+
+    private String name;
 
     @Column(name = "sub_type")
     private String subType;
@@ -23,12 +26,12 @@ public class Competition {
     private String type;
 
     @Column(name = "country_id")
-    private Long countryId;
+    private String countryId;
 
-    @Column(name = "country_name")
+    @Column(name = "country_name" , nullable = true)
     private String countryName;
 
-    @Column(name = "domestic_league_code")
+    @Column(name = "domestic_league_code" , nullable = true)
     private String domesticLeagueCode;
 
     @Column(name = "confederation")
@@ -38,19 +41,6 @@ public class Competition {
     private String url;
 
     public Competition() {
-    }
-
-    public Competition(Long competitionId, String competitionCode, String name, String subType, String type, Long countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
-        this.competitionId = competitionId;
-        this.competitionCode = competitionCode;
-        this.name = name;
-        this.subType = subType;
-        this.type = type;
-        this.countryId = countryId;
-        this.countryName = countryName;
-        this.domesticLeagueCode = domesticLeagueCode;
-        this.confederation = confederation;
-        this.url = url;
     }
 
     public Long getCompetitionId() {
@@ -93,11 +83,11 @@ public class Competition {
         this.type = type;
     }
 
-    public Long getCountryId() {
+    public String getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(Long countryId) {
+    public void setCountryId(String countryId) {
         this.countryId = countryId;
     }
 
@@ -130,6 +120,19 @@ public class Competition {
     }
 
     public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Competition(Long competitionId, String competitionCode, String name, String subType, String type, String countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
+        this.competitionId = competitionId;
+        this.competitionCode = competitionCode;
+        this.name = name;
+        this.subType = subType;
+        this.type = type;
+        this.countryId = countryId;
+        this.countryName = countryName;
+        this.domesticLeagueCode = domesticLeagueCode;
+        this.confederation = confederation;
         this.url = url;
     }
 }

@@ -10,51 +10,52 @@ import jakarta.persistence.*;
 // stadium_seats,net_transfer_record,
 // coach_name,last_season,url)
 
+
+
 @Entity
 @Table(name = "clubs")
 public class Club {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "club_id")
     private Long clubId;
 
     @Column(name = "club_code")
     private String clubCode;
 
+
     @Column(name = "name")
     private String name;
 
-    @Column(name = "domestic_competition_id")
-    private Long domesticCompetitionId;
-
-    @Column(name = "total_market_value")
-    private Long totalMarketValue;
+    @Column(name = "total_market_value" , nullable = true)
+    private String totalMarketValue;
 
     @Column(name = "squad_size")
-    private Long squadSize;
+    private String squadSize;
 
-    @Column(name = "average_age")
-    private Double averageAge;
+    @Column(name = "average_age" , nullable = true)
+    private String averageAge;
 
     @Column(name = "foreigners_number")
-    private Long foreignersNumber;
+    private String foreignersNumber;
 
-    @Column(name = "foreigners_percentage")
-    private Double foreignersPercentage;
+    @Column(name = "foreigners_percentage" , nullable = true)
+    private String foreignersPercentage;
 
     @Column(name = "national_team_players")
-    private Long nationalTeamPlayers;
+    private String nationalTeamPlayers;
 
     @Column(name = "stadium_name")
     private String stadiumName;
 
     @Column(name = "stadium_seats")
-    private Long stadiumSeats;
-
+    private String stadiumSeats;
 
     @Column(name = "net_transfer_record")
-    private Long netTransferRecord;
+    private String netTransferRecord;
 
-    @Column(name = "coach_name")
+    @Column(name = "coach_name" , nullable = true)
     private String coachName;
 
     @Column(name = "last_season")
@@ -63,14 +64,14 @@ public class Club {
     @Column(name = "url")
     private String url;
 
-    public Club() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "domestic_competition_id", referencedColumnName = "competition_id")
+    private Competition domesticCompetition;
 
-    public Club(Long clubId, String clubCode, String name, Long domesticCompetitionId, Long totalMarketValue, Long squadSize, Double averageAge, Long foreignersNumber, Double foreignersPercentage, Long nationalTeamPlayers, String stadiumName, Long stadiumSeats, Long netTransferRecord, String coachName, String lastSeason, String url) {
+    public Club(Long clubId, String clubCode, String name, String totalMarketValue, String squadSize, String averageAge, String foreignersNumber, String foreignersPercentage, String nationalTeamPlayers, String stadiumName, String stadiumSeats, String netTransferRecord, String coachName, String lastSeason, String url, Competition domesticCompetition) {
         this.clubId = clubId;
         this.clubCode = clubCode;
         this.name = name;
-        this.domesticCompetitionId = domesticCompetitionId;
         this.totalMarketValue = totalMarketValue;
         this.squadSize = squadSize;
         this.averageAge = averageAge;
@@ -83,6 +84,11 @@ public class Club {
         this.coachName = coachName;
         this.lastSeason = lastSeason;
         this.url = url;
+        this.domesticCompetition = domesticCompetition;
+    }
+
+    public Club() {
+
     }
 
     public Long getClubId() {
@@ -109,59 +115,51 @@ public class Club {
         this.name = name;
     }
 
-    public Long getDomesticCompetitionId() {
-        return domesticCompetitionId;
-    }
-
-    public void setDomesticCompetitionId(Long domesticCompetitionId) {
-        this.domesticCompetitionId = domesticCompetitionId;
-    }
-
-    public Long getTotalMarketValue() {
+    public String getTotalMarketValue() {
         return totalMarketValue;
     }
 
-    public void setTotalMarketValue(Long totalMarketValue) {
+    public void setTotalMarketValue(String totalMarketValue) {
         this.totalMarketValue = totalMarketValue;
     }
 
-    public Long getSquadSize() {
+    public String getSquadSize() {
         return squadSize;
     }
 
-    public void setSquadSize(Long squadSize) {
+    public void setSquadSize(String squadSize) {
         this.squadSize = squadSize;
     }
 
-    public Double getAverageAge() {
+    public String getAverageAge() {
         return averageAge;
     }
 
-    public void setAverageAge(Double averageAge) {
+    public void setAverageAge(String averageAge) {
         this.averageAge = averageAge;
     }
 
-    public Long getForeignersNumber() {
+    public String getForeignersNumber() {
         return foreignersNumber;
     }
 
-    public void setForeignersNumber(Long foreignersNumber) {
+    public void setForeignersNumber(String foreignersNumber) {
         this.foreignersNumber = foreignersNumber;
     }
 
-    public Double getForeignersPercentage() {
+    public String getForeignersPercentage() {
         return foreignersPercentage;
     }
 
-    public void setForeignersPercentage(Double foreignersPercentage) {
+    public void setForeignersPercentage(String foreignersPercentage) {
         this.foreignersPercentage = foreignersPercentage;
     }
 
-    public Long getNationalTeamPlayers() {
+    public String getNationalTeamPlayers() {
         return nationalTeamPlayers;
     }
 
-    public void setNationalTeamPlayers(Long nationalTeamPlayers) {
+    public void setNationalTeamPlayers(String nationalTeamPlayers) {
         this.nationalTeamPlayers = nationalTeamPlayers;
     }
 
@@ -173,19 +171,19 @@ public class Club {
         this.stadiumName = stadiumName;
     }
 
-    public Long getStadiumSeats() {
+    public String getStadiumSeats() {
         return stadiumSeats;
     }
 
-    public void setStadiumSeats(Long stadiumSeats) {
+    public void setStadiumSeats(String stadiumSeats) {
         this.stadiumSeats = stadiumSeats;
     }
 
-    public Long getNetTransferRecord() {
+    public String getNetTransferRecord() {
         return netTransferRecord;
     }
 
-    public void setNetTransferRecord(Long netTransferRecord) {
+    public void setNetTransferRecord(String netTransferRecord) {
         this.netTransferRecord = netTransferRecord;
     }
 
@@ -213,5 +211,11 @@ public class Club {
         this.url = url;
     }
 
+    public Competition getDomesticCompetition() {
+        return domesticCompetition;
+    }
 
+    public void setDomesticCompetition(Competition domesticCompetition) {
+        this.domesticCompetition = domesticCompetition;
+    }
 }

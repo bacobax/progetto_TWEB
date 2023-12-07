@@ -1,76 +1,74 @@
 package com.progettotweb.springbootserver.entities;
 
 import jakarta.persistence.*;
-//players(player_id,first_name,last_name,
-// name,last_season,current_club_id,
-// player_code,country_of_birth,
-// city_of_birth,country_of_citizenship,
-// date_of_birth,sub_position,position,
-// foot,height_in_cm,market_value_in_eur,
-// highest_market_value_in_eur,
-// contract_expiration_date,agent_name,
-// image_url,url,
-// current_club_domestic_competition_id,
-// current_club_name)
+
+/**
+ * players(player_id,first_name,last_name,last_season,current_club_id,
+ * player_code,country_of_birth,city_of_birth,country_of_citizenship,
+ * date_of_birth,sub_position,position,foot,height_in_cm,market_value_in_eur,
+ * highest_market_value_in_eur,contract_expiration_date,agent_name,image_url,url
+ * )
+ */
+
+
 @Entity
 @Table(name = "players")
 public class Player {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "player_id")
     private Long playerId;
 
-    @Column(name = "first_name")
+
+    @Column(name = "first_name", nullable = true)
     private String firstName;
+
 
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "last_season")
     private String lastSeason;
-
-    @Column(name = "current_club_id")
-    private Long currentClubId;
 
     @Column(name = "player_code")
     private String playerCode;
 
-    @Column(name = "country_of_birth")
+    @Column(name = "country_of_birth", nullable = true)
+
     private String countryOfBirth;
 
-    @Column(name = "city_of_birth")
+    @Column(name = "city_of_birth" , nullable = true)
     private String cityOfBirth;
 
-    @Column(name = "country_of_citizenship")
+    @Column(name = "country_of_citizenship" , nullable = true)
     private String countryOfCitizenship;
 
-    @Column(name = "date_of_birth")
+    @Column(name = "date_of_birth" , nullable = true)
     private String dateOfBirth;
 
-    @Column(name = "sub_position")
+    @Column(name = "sub_position" , nullable = true)
     private String subPosition;
 
     @Column(name = "position")
     private String position;
 
-    @Column(name = "foot")
+    @Column(name = "foot" , nullable = true)
     private String foot;
 
-    @Column(name = "height_in_cm")
-    private Long heightInCm;
+    @Column(name = "height_in_cm" , nullable = true)
+    private String heightInCm;
 
-    @Column(name = "market_value_in_eur")
-    private Long marketValueInEur;
+    @Column(name = "market_value_in_eur" , nullable = true)
+    private String marketValueInEur;
 
-    @Column(name = "highest_market_value_in_eur")
-    private Long highestMarketValueInEur;
+    @Column(name = "highest_market_value_in_eur" , nullable = true)
+    private String highestMarketValueInEur;
 
-    @Column(name = "contract_expiration_date")
+    @Column(name = "contract_expiration_date" , nullable = true)
     private String contractExpirationDate;
 
-    @Column(name = "agent_name")
+    @Column(name = "agent_name" , nullable = true)
     private String agentName;
 
     @Column(name = "image_url")
@@ -79,22 +77,17 @@ public class Player {
     @Column(name = "url")
     private String url;
 
-    @Column(name = "current_club_domestic_competition_id")
-    private Long currentClubDomesticCompetitionId;
 
-    @Column(name = "current_club_name")
-    private String currentClubName;
+    @ManyToOne
+    @JoinColumn(name = "current_club_id", referencedColumnName = "club_id")
+    private Club currentClub;
 
-    public Player() {
-    }
 
-    public Player(Long playerId, String firstName, String lastName, String name, String lastSeason, Long currentClubId, String playerCode, String countryOfBirth, String cityOfBirth, String countryOfCitizenship, String dateOfBirth, String subPosition, String position, String foot, Long heightInCm, Long marketValueInEur, Long highestMarketValueInEur, String contractExpirationDate, String agentName, String imageUrl, String url, Long currentClubDomesticCompetitionId, String currentClubName) {
+    public Player(Long playerId, String firstName, String lastName, String lastSeason, String playerCode, String countryOfBirth, String cityOfBirth, String countryOfCitizenship, String dateOfBirth, String subPosition, String position, String foot, String heightInCm, String marketValueInEur, String highestMarketValueInEur, String contractExpirationDate, String agentName, String imageUrl, String url, Club currentClub, Competition currentClubDomesticCompetition) {
         this.playerId = playerId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.name = name;
         this.lastSeason = lastSeason;
-        this.currentClubId = currentClubId;
         this.playerCode = playerCode;
         this.countryOfBirth = countryOfBirth;
         this.cityOfBirth = cityOfBirth;
@@ -110,8 +103,11 @@ public class Player {
         this.agentName = agentName;
         this.imageUrl = imageUrl;
         this.url = url;
-        this.currentClubDomesticCompetitionId = currentClubDomesticCompetitionId;
-        this.currentClubName = currentClubName;
+        this.currentClub = currentClub;
+    }
+
+    public Player() {
+
     }
 
     public Long getPlayerId() {
@@ -138,28 +134,12 @@ public class Player {
         this.lastName = lastName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLastSeason() {
         return lastSeason;
     }
 
     public void setLastSeason(String lastSeason) {
         this.lastSeason = lastSeason;
-    }
-
-    public Long getCurrentClubId() {
-        return currentClubId;
-    }
-
-    public void setCurrentClubId(Long currentClubId) {
-        this.currentClubId = currentClubId;
     }
 
     public String getPlayerCode() {
@@ -226,27 +206,27 @@ public class Player {
         this.foot = foot;
     }
 
-    public Long getHeightInCm() {
+    public String getHeightInCm() {
         return heightInCm;
     }
 
-    public void setHeightInCm(Long heightInCm) {
+    public void setHeightInCm(String heightInCm) {
         this.heightInCm = heightInCm;
     }
 
-    public Long getMarketValueInEur() {
+    public String getMarketValueInEur() {
         return marketValueInEur;
     }
 
-    public void setMarketValueInEur(Long marketValueInEur) {
+    public void setMarketValueInEur(String marketValueInEur) {
         this.marketValueInEur = marketValueInEur;
     }
 
-    public Long getHighestMarketValueInEur() {
+    public String getHighestMarketValueInEur() {
         return highestMarketValueInEur;
     }
 
-    public void setHighestMarketValueInEur(Long highestMarketValueInEur) {
+    public void setHighestMarketValueInEur(String highestMarketValueInEur) {
         this.highestMarketValueInEur = highestMarketValueInEur;
     }
 
@@ -282,19 +262,12 @@ public class Player {
         this.url = url;
     }
 
-    public Long getCurrentClubDomesticCompetitionId() {
-        return currentClubDomesticCompetitionId;
+    public Club getCurrentClub() {
+        return currentClub;
     }
 
-    public void setCurrentClubDomesticCompetitionId(Long currentClubDomesticCompetitionId) {
-        this.currentClubDomesticCompetitionId = currentClubDomesticCompetitionId;
+    public void setCurrentClub(Club currentClub) {
+        this.currentClub = currentClub;
     }
 
-    public String getCurrentClubName() {
-        return currentClubName;
-    }
-
-    public void setCurrentClubName(String currentClubName) {
-        this.currentClubName = currentClubName;
-    }
 }

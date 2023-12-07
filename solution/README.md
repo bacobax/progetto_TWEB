@@ -8,37 +8,23 @@ The goal of this document is to outline the strategic allocation of data across 
 
 ## Database Splitting Strategy
 
-### MongoDB Allocation
+### PostgreSQL (RDBMS) for Stable Structured Data:
 
-MongoDB, a document-based NoSQL database, is allocated for storing data entities exhibiting the following characteristics:
+- **Tables Stored:** Clubs, Competitions, Players
+- **Reasoning:** These tables contain relatively stable, structured data with consistent schemas. PostgreSQL's relational model and SQL capabilities are well-suited for maintaining data integrity and executing complex queries efficiently. The data change rate is lower, leading to more static schemas.
 
-1. **Dynamic Player Statistics (Appearances):**
-   - MongoDB is chosen for the `appearances` collection due to its flexibility in handling dynamic updates to player statistics during matches or across different seasons. The schema-less nature of MongoDB allows for seamless modifications and additions to player statistics.
-2. **Match-Specific Information (Club Games):**
-   - The `club_games` collection, housing match-specific details, benefits from MongoDB's document-oriented structure. This facilitates efficient storage and retrieval of diverse match-related data.
+### MongoDB (NoSQL) for Dynamic, Changing Data:
 
-### PostgreSQL Allocation
+- **Collections Stored:** Apparences, Game Events, Game Lineups, Player Valuations, Games
+- **Rationale:** These collections house data with varying structures or frequent changes in schema. MongoDB's document-oriented nature and flexibility in handling unstructured or semi-structured data make it ideal for accommodating dynamic data structures, where change rates are higher and schemas might evolve over time.
 
-PostgreSQL, a robust relational database system, is designated for managing data entities with structured relationships and complex querying requirements:
+### Decision Justification Based on Change Rate:
 
-1. **Structured Club Information (Clubs):**
-   - The `clubs` table is stored in PostgreSQL due to its well-defined, structured nature. PostgreSQL's relational model ensures efficient storage and querying capabilities for club-related attributes and relationships.
-2. **Event Tracking and Relationships (Game Events):**
-   - The `game_events` table is housed in PostgreSQL to leverage its relational capabilities, especially in managing various event types tied to clubs and players. This allows for complex queries and analyses involving multiple entities.
-3. **Structured Entities with Relationships:**
-   - PostgreSQL accommodates tables like `competitions`, `games`, `players`, `player_valuations`, and `game_lineups` due to their structured nature and interdependencies. Utilizing PostgreSQL ensures strong data integrity and supports complex relational queries involving these entities.
-
-## Assumptions on the Datasets
-
-1. **Similar Attributes in `games` and `club_games`:** There appears to be some overlap in attributes between the `games` and `club_games` tables, possibly indicating a duplication of certain details for performance optimization or query simplification purposes.
-2. **Domestic Competition ID per Club:** The `domestic_competition_id` for each club is assumed to refer to the latest competition in which the club participated. This assumption facilitates quick reference to the most recent domestic competition involvement for each club. Meaning that if one club played the same competition in two different moment in history, only the last one's reference will be stored
-
-## Justification
-
-The decision to split the databases is based on distinct features and optimal functionalities offered by MongoDB and PostgreSQL:
-
-- **MongoDB Advantages:** Ideal for handling dynamic, evolving data structures, scalability, and flexibility for frequent updates.
-- **PostgreSQL Advantages:** Robust support for structured, relational data, complex queries, and transactional operations ensuring data integrity and ACID compliance.
+- **Data Volatility:** PostgreSQL is chosen for relatively stable data with lower change rates, ensuring consistency and reliability in a more static schema environment.
+  
+- **Schema Evolution:** MongoDB's flexibility suits the dynamic nature of data, where schemas might evolve frequently or have diverse structures due to higher change rates.
+  
+- **Adaptability to Change:** MongoDB's document-based storage easily adapts to evolving schema, allowing for seamless updates without compromising data integrity.
 
 ## Conclusion
 
