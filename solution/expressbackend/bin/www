@@ -17,7 +17,8 @@ const { init } = require('../utils/socket/socket.io');
 const { Server } = require('socket.io');
 
 const asyncListen = require('../utils/asyncListen');
-
+const Game = require('../models/game');
+const GameEvent = require('../models/gameEvent');
 dotenv.config({ path: './config.env' });
 /**
  * Get port from environment and store in Express.
@@ -48,6 +49,11 @@ mongoose
   })
   .then(() => {
     console.log(`listening on http://${host}:${port}`);
+    const query = Game.find({});
+    return query.limit(5);
+  })
+  .then((res) => {
+    console.log(res);
   })
   .catch((err) => {
     return console.error('Errore nella listen: ', err);

@@ -4,45 +4,44 @@
  */
 
 const mongoose = require('mongoose');
-const createModel = require('./createModel');
 
-module.exports = createModel(() => {
-  const gameEventSchema = mongoose.Schema({
-    date: {
-      type: Date,
-      required: true,
-    },
-    game_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Game',
-      required: true,
-    },
-    minute: {
-      type: Number,
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-      enum: ['Cards', 'Goals', 'Substitutions', 'Shootout'],
-    },
-    club_id: {
-      type: Number,
-      required: true,
-    },
-    player_id: {
-      type: Number,
-      required: true,
-    },
-    description: String,
-    player_in_id: {
-      type: Number,
-      default: -1,
-    },
-    player_assist_id: {
-      type: Number,
-      default: -1,
-    },
-  });
-  return gameEventSchema;
-}, 'GameEvent');
+const gameEventSchema = mongoose.Schema({
+  date: {
+    type: Date,
+    required: true,
+  },
+  game_id: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Game',
+    required: true,
+  },
+  minute: {
+    type: Number,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+    enum: ['Cards', 'Goals', 'Substitutions', 'Shootout'],
+  },
+  club_id: {
+    type: Number,
+    required: true,
+  },
+  player_id: {
+    type: Number,
+    required: true,
+  },
+  description: String,
+  player_in_id: {
+    type: Number,
+    default: -1,
+  },
+  player_assist_id: {
+    type: Number,
+    default: -1,
+  },
+});
+const GameEvent = mongoose.model('GameEvent', gameEventSchema);
+
+module.exports = GameEvent;

@@ -7,60 +7,65 @@
  */
 
 const mongoose = require('mongoose');
-const createModel = require('./createModel');
 
-module.exports = createModel(() => {
-  const appearanceSchema = mongoose.Schema({
-    game_id: {
-      type: mongoose.Mongoose.Schema.Types.ObjectId,
-      ref: 'Game',
-      required: true,
-    },
-    player_id: {
-      type: Number,
-      required: true,
-    },
-    player_club_id: {
-      type: Number,
-      required: true,
-    },
-    player_current_club_id: {
-      type: Number,
-      required: true,
-    },
-    date: {
-      type: Date,
-      required: true,
-    },
-    player_name: {
-      type: String,
-      required: true,
-    },
-    competition_id: {
-      type: Number,
-      required: true,
-    },
-    yellow_cards: {
-      type: Number,
-      required: true,
-    },
-    red_cards: {
-      type: Number,
-      required: true,
-    },
-    goals: {
-      type: Number,
-      required: true,
-    },
-    assists: {
-      type: Number,
-      required: true,
-    },
-    minutes_played: {
-      type: Number,
-      required: true,
-    },
-  });
+const appearanceSchema = mongoose.Schema({
+  game_id: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Game',
+    required: true,
+  },
+  player_id: {
+    type: Number,
+    required: true,
+  },
+  player_club_id: {
+    type: Number,
+    required: true,
+  },
+  player_current_club_id: {
+    type: Number,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  player_name: {
+    type: String,
+    required: true,
+  },
+  competition_id: {
+    type: String,
+    required: true,
+  },
+  yellow_cards: {
+    type: Number,
+    required: true,
+  },
+  red_cards: {
+    type: Number,
+    required: true,
+  },
+  goals: {
+    type: Number,
+    required: true,
+  },
+  assists: {
+    type: Number,
+    required: true,
+  },
+  minutes_played: {
+    type: Number,
+    required: true,
+  },
+});
 
-  return appearanceSchema;
-}, 'Appearance');
+// appearanceSchema.pre(/insertMany/, function (next, docs) {
+//   docs.forEach((doc) => {
+//     doc.game_id = mongoose.Types.ObjectId(doc.game_id);
+//   });
+//   next();
+// });
+
+const Appearance = mongoose.model('Appearance', appearanceSchema);
+module.exports = Appearance;
