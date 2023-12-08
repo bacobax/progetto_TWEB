@@ -35,7 +35,6 @@ public class Player {
     private String playerCode;
 
     @Column(name = "country_of_birth", nullable = true)
-
     private String countryOfBirth;
 
     @Column(name = "city_of_birth" , nullable = true)
