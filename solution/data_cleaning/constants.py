@@ -1,3 +1,4 @@
+from typing import Any, List, Union
 import json
 import time
 import pandas as pd
@@ -38,8 +39,7 @@ def dropping_useless_ids(column_to_drop, df):
     Returns:
         pandas.DataFrame: The modified DataFrame.
     """
-    if column_to_drop is not None:
-        return df.drop(column_to_drop, axis=1)
+    
     return df
 
 def csv_to_json():
@@ -63,7 +63,9 @@ def csv_to_json():
     """
     for d in datasets:
         df = read_csv(d["name"])
-        dropping_useless_ids(d["drop_id"],df)
+        if d["drop_id"] is not None:
+            df = df.drop(d["drop_id"], axis=1)
+            
         df.to_json(JSON_DATA_FOLDER + d["name"].replace(".csv", ".json"), orient="records")
 
 
@@ -85,6 +87,22 @@ def map_id_games():
     with open(JSON_DATA_FOLDER + "games_id_mapping.json", "w") as file:
         json.dump(games_id_dict, file)
 
+
+def map_id_players():
+    """
+    Maps the player IDs in the 'new_players.csv' file to new IDs generated using ObjectId.
+    Saves the mapping dictionary in a JSON file.
+    """
+    players = read_csv("new_players.csv")
+
+    players_id = [str(pippo) for pippo in list(np.unique(players["player_id"].values))]
+    new_ids = [str(ObjectId()) for _ in range(len(players_id))]  # Generate new IDs
+
+    players_id_dict = dict(zip(players_id, new_ids))
+
+    # Save the dictionary in .json file
+    with open(JSON_DATA_FOLDER + "players_id_mapping.json", "w") as file:
+        json.dump(players_id_dict, file)
 
 
 def get_dict_from_json(file_name):
@@ -118,3 +136,31 @@ def get_dict_from_json(file_name):
                 
 
 
+def clean_foreign_keys(dataset_p_k: pd.DataFrame, p_k: str, dataset_f_k: pd.DataFrame, f_k: str) -> pd.DataFrame:
+    """
+    Removes rows from a dataset that have foreign keys that do not exist in the corresponding primary key dataset.
+
+    Args:
+        dataset_p_k (pd.DataFrame): The dataset containing the primary key column.
+        p_k (str): The name of the primary key column in `dataset_p_k`.
+        dataset_f_k (pd.DataFrame): The dataset containing the foreign key column.
+        f_k (str): The name of the foreign key column in `dataset_f_k`.
+
+    Returns:
+        pd.DataFrame: The filtered dataset that only contains rows with valid foreign keys.
+    """
+    # Create a set of unique values from the primary key column in `dataset_p_k`
+    p_keys = set(dataset_p_k[p_k])
+
+    # Create a set of unique values from the foreign key column in `dataset_f_k`
+    f_keys = set(dataset_f_k[f_k])
+
+    # Find the foreign keys that do not have a corresponding value in the primary key set
+    invalid_f_keys = f_keys - p_keys
+
+    print(f"Ci sono chiavi invalide: {len(invalid_f_keys)}")
+
+    # Filter out the rows in `dataset_f_k` that have invalid foreign keys
+    new_dataset_f_k = dataset_f_k[~dataset_f_k[f_k].isin(invalid_f_keys)]
+
+    return new_dataset_f_k

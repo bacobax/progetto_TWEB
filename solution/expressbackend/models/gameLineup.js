@@ -27,7 +27,8 @@ const gameLineupSchema = mongoose.Schema({
     required: true,
   },
   player_id: {
-    type: Number,
+    type: mongoose.Types.ObjectId,
+    ref: 'Player',
     required: true,
   },
   player_name: {

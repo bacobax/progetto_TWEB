@@ -15,7 +15,12 @@ const appearanceSchema = mongoose.Schema({
     required: true,
   },
   player_id: {
-    type: Number,
+    type: mongoose.Types.ObjectId,
+    ref: 'Player',
+    required: true,
+  },
+  player_name: {
+    type: String,
     required: true,
   },
   player_club_id: {
@@ -28,10 +33,6 @@ const appearanceSchema = mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true,
-  },
-  player_name: {
-    type: String,
     required: true,
   },
   competition_id: {

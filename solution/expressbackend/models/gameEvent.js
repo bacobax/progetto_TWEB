@@ -29,17 +29,20 @@ const gameEventSchema = mongoose.Schema({
     required: true,
   },
   player_id: {
-    type: Number,
+    type: mongoose.Types.ObjectId,
+    ref: 'Player',
     required: true,
   },
   description: String,
   player_in_id: {
-    type: Number,
-    default: -1,
+    type: mongoose.Types.ObjectId,
+    ref: 'Player',
+    required: false,
   },
   player_assist_id: {
-    type: Number,
-    default: -1,
+    type: mongoose.Types.ObjectId,
+    ref: 'Player',
+    required: false,
   },
 });
 const GameEvent = mongoose.model('GameEvent', gameEventSchema);

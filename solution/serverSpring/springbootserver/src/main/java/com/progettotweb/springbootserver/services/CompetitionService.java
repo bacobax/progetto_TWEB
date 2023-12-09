@@ -33,6 +33,7 @@ public class CompetitionService {
         competitionRepository.deleteById(id);
     }
     public List<Competition> findByQueryParams(String sortby, String fields, int limit){
-        return competitionRepository.findByQueryParams(sortby, fields, limit);
+        List<String> fieldsList = List.of(fields.split(","));
+        return competitionRepository.findByQueryParams(sortby, fieldsList, limit);
     }
 }

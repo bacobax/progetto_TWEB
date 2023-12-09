@@ -11,7 +11,8 @@ const { getDateWeek } = require('../utils/constants');
 const playerValuationSchema = mongoose.Schema(
   {
     player_id: {
-      type: Number,
+      type: mongoose.Types.ObjectId,
+      ref: 'Player',
       required: true,
     },
     last_season: {

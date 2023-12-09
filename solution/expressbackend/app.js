@@ -3,8 +3,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const AppError = require('./utils/appError');
-const indexRouter = require('./routes/index');
+
 const usersRouter = require('./routes/user');
+
+const gameLineupRouter = require('./routes/gameLineup');
+const gameEventRouter = require('./routes/gameEvent');
+const gameRouter = require('./routes/game');
+const appearenceRouter = require('./routes/appearence');
+const playerValuationRouter = require('./routes/playerValuation');
+
+
 const globalErrorHandler = require('./controllers/special/errorController');
 const cors = require('cors');
 const app = express();
@@ -16,8 +24,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/gameLineup', gameLineupRouter);
+app.use('/api/gameEvent', gameEventRouter);
+app.use('/api/game', gameRouter);
+app.use('/api/appearence', appearenceRouter);
+app.use('/api/playerValuation', playerValuationRouter);
+
 
 app.use(function (req, res, next) {
   const err = new AppError(

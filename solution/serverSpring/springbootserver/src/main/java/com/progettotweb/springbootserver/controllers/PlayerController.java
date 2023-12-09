@@ -20,13 +20,16 @@ public class PlayerController {
 
     @GetMapping("/players")
     public List<Player> getEntities(
-            @RequestParam(required = false) String sortBy,
-            @RequestParam(required = false) String fields,
-            @RequestParam(defaultValue = "100") int limit
+
+            @RequestParam(defaultValue = "100") int pagenumber,
+            @RequestParam(defaultValue = "100") int pagesize
+
     ) {
 
-        List<Player> entities = playerService.findByQueryParams(sortBy, fields, limit);
+        List<Player> entities = playerService.getAllPlayers(pagenumber,pagesize);
 
         return entities;
     }
+
+
 }

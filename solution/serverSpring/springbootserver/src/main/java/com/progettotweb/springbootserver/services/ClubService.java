@@ -34,7 +34,8 @@ public class ClubService {
         clubRepository.deleteById(id);
     }
     public List<Club> findByQueryParams(String sortby, String fields, int limit){
-        return clubRepository.findByQueryParams(sortby, fields, limit);
+        List<String> fieldsList = List.of(fields.split(","));
+        return clubRepository.findByQueryParams(sortby, fieldsList, limit);
     }
 
 

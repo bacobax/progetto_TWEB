@@ -16,11 +16,6 @@ const {
 
 const gameSchema = mongoose.Schema(
   {
-    game_id: {
-      type: mongoose.Types.ObjectId,
-      unique: true,
-      required: [true, 'Game id is required'],
-    },
     competition_id: {
       type: String,
       required: true,
