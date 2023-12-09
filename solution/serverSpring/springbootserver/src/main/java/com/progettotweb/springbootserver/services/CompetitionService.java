@@ -19,7 +19,7 @@ public class CompetitionService {
         return competitionRepository.findAll();
     }
 
-    public Competition getCompetitionById(Long id) {
+    public Competition getCompetitionById(String id) {
         return competitionRepository.findById(id).orElse(null);
     }
 
@@ -28,7 +28,7 @@ public class CompetitionService {
         return competitionRepository.save(competition);
     }
 
-    public void deleteCompetitionById(Long id) {
+    public void deleteCompetitionById(String id) {
         competitionRepository.deleteById(id);
     }
 }

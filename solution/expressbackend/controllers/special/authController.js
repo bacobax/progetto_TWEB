@@ -1,11 +1,11 @@
-const User = require('../models/user');
+const User = require('../../models/user');
 const crypto = require('crypto');
-const catchAsync = require('../utils/catchAsync');
+const catchAsync = require('../../utils/catchAsync');
 const jwt = require('jsonwebtoken');
-const AppError = require('../utils/appError');
+const AppError = require('../../utils/appError');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
-const sendEmail = require('../utils/email');
+const sendEmail = require('../../utils/email');
 
 const signToken = (id) =>
   jwt.sign({ id: id }, process.env.JWT_SECRET, {

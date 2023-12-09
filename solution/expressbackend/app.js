@@ -4,8 +4,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const AppError = require('./utils/appError');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const globalErrorHandler = require('./controllers/errorController');
+const usersRouter = require('./routes/user');
+const globalErrorHandler = require('./controllers/special/errorController');
 const cors = require('cors');
 const app = express();
 

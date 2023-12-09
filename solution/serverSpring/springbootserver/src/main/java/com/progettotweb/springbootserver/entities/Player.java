@@ -10,6 +10,13 @@ import jakarta.persistence.*;
  * )
  */
 
+/**
+ * players(player_id,first_name,last_name,last_season,current_club_id,
+ * player_code,country_of_birth,city_of_birth,country_of_citizenship,
+ * date_of_birth,sub_position,position,foot,height_in_cm,market_value_in_eur,
+ * highest_market_value_in_eur,contract_expiration_date,agent_name,image_url,url
+ * )
+ */
 
 @Entity
 @Table(name = "players")

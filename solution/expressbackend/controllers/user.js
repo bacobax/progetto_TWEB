@@ -1,8 +1,8 @@
 const User = require('../models/user');
 const catchAsync = require('../utils/catchAsync');
-const factory = require('./handlerFactory');
+const {createOne,  getOne} = require('./special/handlerFactory');
 
-exports.createUser = factory.createOne(User);
+exports.createUser = createOne(User);
 exports.getAllUser = catchAsync(async (req, res) => {
   const users = await User.find();
 
@@ -12,4 +12,4 @@ exports.getAllUser = catchAsync(async (req, res) => {
     data: users,
   });
 });
-exports.getOneUser = factory.getOne(User);
+exports.getOneUser = getOne(User);

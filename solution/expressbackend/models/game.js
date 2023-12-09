@@ -9,7 +9,10 @@
 
 const mongoose = require('mongoose');
 
-const { COMPETITION_TYPES } = require('../utils/constants');
+const {
+  COMPETITION_TYPES,
+  aggregateValidation,
+} = require('../utils/constants');
 
 const gameSchema = mongoose.Schema(
   {
@@ -103,14 +106,7 @@ const gameSchema = mongoose.Schema(
     aggregate: {
       type: String,
       required: [true, 'Aggregate is required'],
-      validate: (val) => {
-        /**
-         * val has to have a <number>:<number> format
-         * e.g. 2:1
-         */
-        const regex = /^\d+:\d+$/;
-        return regex.test(val);
-      },
+      validate: aggregateValidation,
     },
     competition_type: {
       type: String,
@@ -130,15 +126,6 @@ gameSchema.virtual('events', {
   ref: 'GameEvent',
   foreignField: 'game_id',
   localField: '_id',
-});
-
-gameSchema.pre('insertMany', function (next, docs) {
-  // Iterate through each document being inserted
-  for (const doc of docs) {
-    // Assuming game_id exists on each document, convert it to _id
-    doc._id = new mongoose.Types.ObjectId(doc.game_id);
-  }
-  next();
 });
 
 gameSchema.pre(/find/, function (next) {

@@ -1,6 +1,9 @@
 package com.progettotweb.springbootserver.entities;
 
 import jakarta.persistence.*;
+
+import java.util.UUID;
+
 //competitions(competition_id,competition_code,name,sub_type,type,
 // country_id,country_name,domestic_league_code,confederation,url)
 @Entity
@@ -8,9 +11,8 @@ import jakarta.persistence.*;
 public class Competition {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "competition_id")
-    private Long competitionId;
+    private String competitionId;
 
     @Column(name = "competition_code")
     private String competitionCode;
@@ -42,13 +44,14 @@ public class Competition {
     private String url;
 
     public Competition() {
+        this.competitionId = UUID.randomUUID().toString();
     }
 
-    public Long getCompetitionId() {
+    public String getCompetitionId() {
         return competitionId;
     }
 
-    public void setCompetitionId(Long competitionId) {
+    public void setCompetitionId(String competitionId) {
         this.competitionId = competitionId;
     }
 
@@ -124,7 +127,7 @@ public class Competition {
         this.url = url;
     }
 
-    public Competition(Long competitionId, String competitionCode, String name, String subType, String type, String countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
+    public Competition(String competitionId, String competitionCode, String name, String subType, String type, String countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
         this.competitionId = competitionId;
         this.competitionCode = competitionCode;
         this.name = name;
