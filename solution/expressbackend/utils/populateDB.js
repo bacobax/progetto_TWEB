@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const fs = require('fs');
 
-const Game = require('../models/game');
-const Appearance = require('../models/appearence');
-const GameEvent = require('../models/gameEvent');
-const PlayerValuation = require('../models/playerValuation');
-const GameLineup = require('../models/gameLineup');
+// const Game = require('../models/game');
+// const Appearance = require('../models/appearence');
+// const GameEvent = require('../models/gameEvent');
+// const PlayerValuation = require('../models/playerValuation');
+// const GameLineup = require('../models/gameLineup');
 
 const paths = [
   '../../../datasets/json/new_games.json',
