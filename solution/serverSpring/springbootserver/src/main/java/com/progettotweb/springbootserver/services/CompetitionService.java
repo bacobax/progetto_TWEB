@@ -1,5 +1,6 @@
 package com.progettotweb.springbootserver.services;
 
+import com.progettotweb.springbootserver.entities.Club;
 import com.progettotweb.springbootserver.entities.Competition;
 import com.progettotweb.springbootserver.repositories.CompetitionRepository;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,8 @@ public class CompetitionService {
 
     public void deleteCompetitionById(String id) {
         competitionRepository.deleteById(id);
+    }
+    public List<Competition> findByQueryParams(String sortby, String fields, int limit){
+        return competitionRepository.findByQueryParams(sortby, fields, limit);
     }
 }

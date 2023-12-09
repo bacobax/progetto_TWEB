@@ -1,6 +1,7 @@
 package com.progettotweb.springbootserver.services;
 
 import com.progettotweb.springbootserver.entities.Club;
+import com.progettotweb.springbootserver.entities.Player;
 import com.progettotweb.springbootserver.repositories.ClubRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +33,9 @@ public class ClubService {
     public void deleteClubById(Long id) {
         clubRepository.deleteById(id);
     }
-
-
-
-
-
+    public List<Club> findByQueryParams(String sortby, String fields, int limit){
+        return clubRepository.findByQueryParams(sortby, fields, limit);
+    }
 
 
 

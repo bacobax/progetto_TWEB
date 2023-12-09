@@ -30,4 +30,8 @@ public class PlayerService {
         playerRepository.deleteById(id);
     }
 
+    public List<Player> findByQueryParams(String sortby, String fields, int limit){
+        return playerRepository.findByQueryParams(sortby, fields, limit);
+    }
+
 }
