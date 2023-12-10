@@ -11,7 +11,7 @@ import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 
 
 interface FilterFormProps{
-    onApplyFilters: (filters: { name:string, scoreMin: number, scoreMax: number })=>void;
+    onApplyFilters: (filters: { name:string, valueMin: number, valueMax: number })=>void;
     onClearFilters: ()=>void;
     onRemoveFilter: (filterName: string)=>void;
     filterNames: string[];
@@ -66,8 +66,8 @@ const FilterForm: React.FC<FilterFormProps> = ({
     const handleApplyFilters = useCallback(() => {
         onApplyFilters({
             name: name.value,
-            scoreMin: Number(scoreMin.value),
-            scoreMax: Number(scoreMax.value)
+            valueMin: Number(scoreMin.value),
+            valueMax: Number(scoreMax.value)
         });
     }, [name.value, scoreMin.value, scoreMax.value, onApplyFilters]);
   const handleFormSubmit = (e: React.FormEvent) => {

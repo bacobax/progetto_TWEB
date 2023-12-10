@@ -13,6 +13,8 @@ export interface Params{
     token?: string;
 
 }
+
+
 type FetchData = <T>(params: Params, callback?: (data: T) => void) => void
 interface ReturnType{
     loading: boolean;

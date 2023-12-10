@@ -8,7 +8,7 @@
 
 const mongoose = require('mongoose');
 
-const appearanceSchema = mongoose.Schema({
+const appearanceSchema = new mongoose.Schema({
   game_id: {
     type: mongoose.Types.ObjectId,
     ref: 'Game',

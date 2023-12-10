@@ -5,7 +5,7 @@
 
 const mongoose = require('mongoose');
 
-const gameEventSchema = mongoose.Schema({
+const gameEventSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true,

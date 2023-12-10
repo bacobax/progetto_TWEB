@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const { getDateWeek } = require('../utils/constants');
 
-const playerValuationSchema = mongoose.Schema(
+const playerValuationSchema =new mongoose.Schema(
   {
     player_id: {
       type: mongoose.Types.ObjectId,

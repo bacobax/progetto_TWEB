@@ -14,7 +14,7 @@ const {
   aggregateValidation,
 } = require('../utils/constants');
 
-const gameSchema = mongoose.Schema(
+const gameSchema =new mongoose.Schema(
   {
     competition_id: {
       type: String,

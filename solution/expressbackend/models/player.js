@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const {POSITIONS} = require("../utils/constants");
 
-const playerSchema = mongoose.Schema({
+const playerSchema = new mongoose.Schema({
   first_name: { type: String },
   last_name: { type: String },
   last_season: { type: String, required: true },
@@ -10,7 +11,7 @@ const playerSchema = mongoose.Schema({
   country_of_citizenship: { type: String },
   date_of_birth: { type: String },
   sub_position: { type: String },
-  position: { type: String, required: true },
+  position: { type: String, required: true, enum: POSITIONS },
   foot: { type: String },
   height_in_cm: { type: String },
   market_value_in_eur: { type: String },

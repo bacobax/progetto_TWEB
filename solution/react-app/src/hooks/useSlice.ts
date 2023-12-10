@@ -4,12 +4,15 @@ interface ReturnType<T> {
     current: T[];
     next: () => void;
     prev: () => void;
+    currentIdx: number;
 }
 export const useSlice = <T>(array: T[], size: number): ReturnType<T> => {
     const [index, setIndex] = useState(0);
     const matrix = sliceArray(array, size);
 
-    const current = matrix[index];
+
+
+    const current = matrix[index%matrix.length];
 
     const next = useCallback(() => {
         setIndex((prev) => (prev + 1) % matrix.length);
@@ -30,6 +33,7 @@ export const useSlice = <T>(array: T[], size: number): ReturnType<T> => {
         current,
         next,
         prev,
+        currentIdx: index
 
     }
 
