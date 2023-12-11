@@ -1,5 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import { motion } from 'framer-motion';
+import {effect, signal} from "@preact/signals-react";
+
+const DURATION = 2;
+const x = signal(0);
+const y = signal(0);
+const duration = signal(DURATION);
 
 const getRandomCoordsInScrollScreen = () => {
     const x = Math.random() * window.innerWidth;
@@ -7,45 +13,36 @@ const getRandomCoordsInScrollScreen = () => {
 
     return { x, y };
 };
-
-const DURATION = 2;
 const VELOCITY = 100;
 
+const setNewDestination  =() => {
+    const { x: newX, y: newY } = getRandomCoordsInScrollScreen();
+
+    const deltax = Math.abs(newX - x.value);
+    const deltay = Math.abs(newY - y.value);
+
+    const distance = Math.sqrt(deltax * deltax + deltay * deltay);
+
+
+    duration.value = distance / VELOCITY;
+
+    x.value = newX;
+    y.value = newY;
+    console.log('New coords:', newX, newY);
+}
+
+effect(() =>{
+    setTimeout(() => {
+        setNewDestination();
+    }, duration.value * 1000);
+})
 const CircleBackground : React.FC<{className:string}>= ({className}) => {
-    const [x, setX] = useState(0);
-    const [y, setY] = useState(0);
-    const [duration, setDuration] = useState(DURATION);
-
-    const setNewDestination  =useCallback (() => {
-        const { x: newX, y: newY } = getRandomCoordsInScrollScreen();
-
-        const deltax = Math.abs(newX - x);
-        const deltay = Math.abs(newY - y);
-
-        const distance = Math.sqrt(deltax * deltax + deltay * deltay);
-
-        const newDuration = distance / VELOCITY;
-
-        setDuration(newDuration);
-
-        setX(newX);
-        setY(newY);
-        console.log('New coords:', newX, newY);
-    }, [x, y]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setNewDestination();
-        }, duration * 1000);
-
-        return () => clearInterval(interval);
-    }, [setNewDestination, duration]);
 
     return (
         <motion.div
             animate={{
-                x,
-                y
+                x: x.value,
+                y: y.value
             }}
             transition={{
                 duration: duration,

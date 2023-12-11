@@ -3,13 +3,13 @@ import React, {useCallback, useEffect, useState} from "react";
 import {initialSignInState , initialSignUpState} from "../../constants/constants";
 import AuthForm from "./AuthForm";
 import {State} from "../../reducers/formReducer";
-import useWindowSize from "../../hooks/useWindowSize";
 import {useAuth} from "../../hooks/useAuth";
 import Loading from "../animations/Loading";
 import Modal from "../UI/modal/Modal";
 import useModal from "../../hooks/useModal";
 import { motion} from "framer-motion";
 
+import signalWindowSize from "../../hooks/signalWindowSize";
 
 interface DualFormProps {
 
@@ -24,7 +24,7 @@ const transitionForm=  {
 }
 const SmartForm: React.FC<DualFormProps> = () => {
     const [isSignin, setIsSignin] = useState(true)
-    const {width} = useWindowSize();
+    const width = signalWindowSize.value.width
     const {openModal, isModalOpen, closeModal} = useModal(false);
     const {loading,login,error,signup, setError} = useAuth()
 

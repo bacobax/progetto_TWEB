@@ -4,13 +4,15 @@ import styles from "./PlayerSection.module.css";
 import PlayerCard from "../../../components/PlayerCard";
 import {animatedButtonProps, URL_SHORT_PLAYERS} from "../../../constants/constants";
 import {useSlice} from "../../../hooks/useSlice";
-import useWindowSize from "../../../hooks/useWindowSize";
 import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
 import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
 import IconButton from "../../../components/UI/button/IconButton";
 import useFetch from "../../../hooks/useFetch";
 import {ShortPlayer} from "../../../constants/types";
+
+import signalWindowSize from "../../../hooks/signalWindowSize";
+
 interface PlayerSectionProps {
     name: string;
 }
@@ -26,7 +28,9 @@ interface PlayerSectionProps {
  */
 const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
     const navigate = useNavigate();
-    const {width} = useWindowSize();
+
+    const width = signalWindowSize.value.width;
+
     const [players, setPlayers] = useState<ShortPlayer[]>([]);
     const {current, next, prev , currentIdx} = useSlice(players, width < 768 ? 2: 4);
 

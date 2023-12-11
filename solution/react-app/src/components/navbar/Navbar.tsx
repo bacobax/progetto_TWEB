@@ -2,7 +2,6 @@ import React, { useState, useCallback, useContext } from "react";
 import styles from "./Navbar.module.css";
 import SearchBar from "../searchbar/SearchBar";
 import { RxHamburgerMenu } from "react-icons/rx";
-import useWindowSize from "../../hooks/useWindowSize";
 import Sidebar from "./Sidebar";
 import {Elements} from "./types";
 import {AuthContext} from "../../store/AuthContext";
@@ -11,27 +10,28 @@ import ElementList from "./ElementList";
 import {loginElement, logoutElement} from "../../constants/navbarElements";
 import {AnimatePresence} from "framer-motion";
 
+import {signal} from "@preact/signals-react";
+import signalWindowSize from "../../hooks/signalWindowSize";
+
+const showSidebar = signal(false);
+const handleBurgerClick = () => {
+    showSidebar.value = !showSidebar.value;
+}
+const handleCloseSidebar = () => {
+    showSidebar.value = false;
+}
 interface NavbarProps {
   onSearch: (query: string) => void;
   elements: Elements;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  //const [showSidebar, setShowSidebar] = useState(false);
   const {loggedIn} = useContext(AuthContext);
   const {logout} = useAuth();
-  const {isPhone} = useWindowSize();
-    const handleBurgerClick = useCallback(() => {
-        setShowSidebar(prevState => !prevState);
-    },[]);
+  const isPhone = signalWindowSize.value.isPhone;
 
-    const handleCloseSidebar = useCallback(() => {
-        setShowSidebar(false);
-    },[]);
-
-    const elementsFinal: Elements= loggedIn ? [...elements , logoutElement] : [...elements , loginElement];
-
-
+  const elementsFinal: Elements= loggedIn ? [...elements , logoutElement] : [...elements , loginElement];
 
   return (
       <>
@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
           <SearchBar onSearch={onSearch}/>
         </nav>
         <AnimatePresence>
-            {(isPhone && showSidebar) && <Sidebar onClose={handleCloseSidebar} elements={elementsFinal}/>}
+            {(isPhone && showSidebar.value) && <Sidebar onClose={handleCloseSidebar} elements={elementsFinal}/>}
         </AnimatePresence>
 
 
