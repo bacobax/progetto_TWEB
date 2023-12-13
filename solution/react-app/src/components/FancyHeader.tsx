@@ -9,6 +9,7 @@ const FancyHeader: React.FC<FancyHeaderProps> = ({title}) => {
         <h1>{title}</h1>
         </header>
     );
+
 }
 
 export default FancyHeader;

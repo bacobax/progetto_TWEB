@@ -1,26 +1,29 @@
 package com.progettotweb.springbootserver.services;
 
 import com.progettotweb.springbootserver.entities.Club;
+import com.progettotweb.springbootserver.repositories.ClubPageableRepository;
 import com.progettotweb.springbootserver.repositories.ClubRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClubService {
 
     private final ClubRepository clubRepository;
+    private final ClubPageableRepository clubPageableRepository;
 
-    public ClubService(ClubRepository clubRepository) {
+    public ClubService(ClubRepository clubRepository, ClubPageableRepository clubPageableRepository) {
         this.clubRepository = clubRepository;
+        this.clubPageableRepository = clubPageableRepository;
     }
 
-    public List<Club> getAllClubs() {
-        return clubRepository.findAll();
-    }
 
-    public Club getClubById(Long id) {
-        return clubRepository.findById(id).orElse(null);
+    public Optional<Club> getClubById(Long id) {
+        return clubRepository.findById(id);
     }
 
 
@@ -32,9 +35,9 @@ public class ClubService {
     public void deleteClubById(Long id) {
         clubRepository.deleteById(id);
     }
-    public List<Club> findByQueryParams(String sortby, String fields, int limit){
-        List<String> fieldsList = List.of(fields.split(","));
-        return clubRepository.findByQueryParams(sortby, fieldsList, limit);
+    public List<Club> findAll(int page, int pagesize){
+        Pageable paging = PageRequest.of(page, pagesize);
+        return clubRepository.findAll(paging).getContent();
     }
 
 

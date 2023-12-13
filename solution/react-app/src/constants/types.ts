@@ -1,16 +1,7 @@
 
 
 
-export interface ShortPlayer{
 
-    _id: string;
-    first_name?: string;
-    last_name?: string;
-
-    image_url: string;
-    market_value_in_eur?: number
-    highest_market_value_in_eur?: number
-}
 export type Position ='Missing'| 'Midfield'| 'Attack'| 'Defender' | 'Goalkeeper';
 
 export type SubPosition =
@@ -46,6 +37,17 @@ export type LineupPosition =
     'Second Striker'|
     'Left Midfield'|
     'Sweeper'
+
+export interface ShortPlayer{
+
+    _id: string;
+    first_name?: string;
+    last_name?: string;
+
+    image_url: string;
+    market_value_in_eur?: number
+    highest_market_value_in_eur?: number
+}
 export interface Player extends ShortPlayer{
     last_season: string;
     player_code: string;
@@ -60,6 +62,78 @@ export interface Player extends ShortPlayer{
     current_club?: string;
     url?: string;
 
+}
+
+/**
+ * club response json
+ * {
+ *         "clubId": 3690,
+ *         "clubCode": "ska-khabarovsk",
+ *         "name": "SKA Khabarovsk",
+ *         "totalMarketValue": null,
+ *         "squadSize": "27",
+ *         "averageAge": "25.7",
+ *         "foreignersNumber": "4",
+ *         "foreignersPercentage": "14.8",
+ *         "nationalTeamPlayers": "0",
+ *         "stadiumName": "Lenin Stadion",
+ *         "stadiumSeats": "15200",
+ *         "netTransferRecord": "€-93k",
+ *         "coachName": null,
+ *         "lastSeason": "2017",
+ *         "url": "https://www.transfermarkt.co.uk/ska-khabarovsk/startseite/verein/3690",
+ *         "domesticCompetition": {
+ *             "competitionId": "RU1",
+ *             "competitionCode": "premier-liga",
+ *             "name": "premier-liga",
+ *             "subType": "first_tier",
+ *             "type": "domestic_league",
+ *             "countryId": "141",
+ *             "countryName": "Russia",
+ *             "domesticLeagueCode": "RU1",
+ *             "confederation": "europa",
+ *             "url": "https://www.transfermarkt.co.uk/premier-liga/startseite/wettbewerb/RU1"
+ *         }
+ *     },
+ */
+
+export interface Competition{
+    competitionId: string;
+    competitionCode: string;
+    name: string;
+    subType: string;
+    type: string;
+    countryId: string;
+    countryName: string;
+    domesticLeagueCode: string;
+    confederation: string;
+    url: string;
+}
+
+export interface ShortClub{
+    clubId: number;
+    name: string;
+    squadSize: string;
+    stadiumName: string;
+    url: string;
+    lastSeason: string;
+    domesticCompetition: {
+        competitionId: string;
+        name: string;
+    }
+}
+
+export interface Club extends ShortClub{
+    clubCode: string;
+    totalMarketValue: number;
+    averageAge: string;
+    foreignersNumber: string;
+    foreignersPercentage: string;
+    nationalTeamPlayers: string;
+    stadiumSeats: string;
+    netTransferRecord: string;
+    coachName: string;
+    domesticCompetition: Competition;
 }
 
 

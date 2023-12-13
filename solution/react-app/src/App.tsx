@@ -7,6 +7,8 @@ import Gallery from "./pages/gallery/Gallery";
 import Background from "./components/Background";
 import {ROUTES} from "./constants/constants";
 import {useAuth} from "./hooks/useAuth";
+import PlayerSmartGallery from "./pages/gallery/PlayerSmartGallery";
+import {TeamSmartGallery} from "./pages/gallery/TeamSmartGallery";
 
 const AuthPage = lazy(() => import("./pages/auth/AuthPage"));
 const HomePage = lazy(() => import("./pages/home/HomePage"));
@@ -22,7 +24,10 @@ function App() {
 
             <Routes>
                 <Route path={ROUTES.AUTH} element={<AuthPage />}/>
-                <Route path={ROUTES.GALLERY} element={<Gallery />} />
+                <Route path={ROUTES.GALLERY} element={<Gallery />}>
+                    <Route path="players" element={<PlayerSmartGallery />} />
+                    <Route path="clubs" element={<TeamSmartGallery />} />
+                </Route>
                 <Route path={ROUTES.HOME} element={<HomePage />} />
                 <Route path={ROUTES.DEFAULT} element={<h1 style={{color:"white"}}>Not Found</h1>} />
             </Routes>

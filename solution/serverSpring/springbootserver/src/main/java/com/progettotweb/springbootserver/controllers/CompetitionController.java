@@ -27,8 +27,33 @@ public class CompetitionController {
             @RequestParam(defaultValue = "100") int limit
     ) {
 
-        List<Competition> entities = competitionService.findByQueryParams(sortBy, fields, limit);
+        List<Competition> entities = competitionService.getAllCompetitions();
 
         return entities;
     }
+
+
+    @GetMapping("/competitions/:id")
+    public Competition getCompetitionById(
+            @RequestParam(required = true) String id
+    ) {
+
+        Competition competition = competitionService.getCompetitionById(id);
+
+
+        return competition;
+    }
+
+    // route /competitions/:id/clubs
+    /*@GetMapping("/competitions/:id/clubs")
+    public List<Competition> getClubsByCompetitionId(
+            @RequestParam(required = true) String id
+    ) {
+
+        Competition competition = competitionService.getCompetitionById(id);
+
+
+        return competition.getClubs();
+    }*/
+
 }

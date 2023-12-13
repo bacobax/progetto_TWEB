@@ -10,19 +10,19 @@ export const WINDOWPHONESIZE = 600;
 
 export const HOME_SECTIONS = {
   HOME: {
-    name: "home",
+    name: "Tome",
     linkLabel: "Home",
   },
   PLAYERS: {
-    name: "players",
+    name: "Tlayers",
     linkLabel: "Players",
   },
   TEAMS: {
-    name: "teams",
+    name: "Teams",
     linkLabel: "Teams",
   },
   MATCHES: {
-    name: "matches",
+    name: "Matches",
     linkLabel: "Matches",
   },
 };
@@ -67,7 +67,7 @@ export const numberFormatWithCommas = (n: string): string => {
 /**
  * FORM STATES
  */
-export const filterFormState = {
+export const playerfilterFormState = {
   name: {
     value: "",
     error: false,
@@ -92,6 +92,22 @@ export const filterFormState = {
     errorText: "Score must be a number",
     validate: (value: string) => !isNaN(Number(value)),
   },
+};
+
+export const teamfilterFormState = {
+  name: {
+    value: "",
+    error: false,
+    errorText: "Name must be at least 3 characters long",
+    validate: (_: string) => true,
+  },
+  competitionName: {
+    value: "",
+    error: false,
+    errorText: "Competition name must be at least 3 characters long",
+    validate: (_: string) => true,
+  },
+
 };
 
 const passwordRegexValidation = (value: string): boolean => {
@@ -191,4 +207,5 @@ export const animatedButtonProps = {
  * Fetch DATA
  */
 
-export const URL_SHORT_PLAYERS = `http://localhost:8000/api/player?limit=20&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`;
+export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => `http://localhost:8000/api/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`;
+export const URL_SHORT_TEAMS = "http://localhost:8081/clubs";

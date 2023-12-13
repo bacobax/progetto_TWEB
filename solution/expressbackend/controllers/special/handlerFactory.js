@@ -73,7 +73,7 @@ exports.getOne = (
 ) =>
   catchAsync(async (req, res, next) => {
     let query = Model.findById(req.params.id);
-    const doc = await query;
+        const doc = await query;
 
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
@@ -81,9 +81,7 @@ exports.getOne = (
 
     res.status(200).json({
       status: 'success',
-      data: {
-        data: doc,
-      },
+      data: doc
     });
   });
 

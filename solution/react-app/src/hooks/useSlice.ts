@@ -1,10 +1,13 @@
-import {useCallback, useState} from "react";
+import React, {useCallback, useState} from "react";
 import {sliceArray} from "../constants/constants";
 interface ReturnType<T> {
     current: T[];
     next: () => void;
     prev: () => void;
     currentIdx: number;
+    matrixLength: number;
+    setIndex: React.Dispatch<React.SetStateAction<number>>;
+    index: number
 }
 export const useSlice = <T>(array: T[], size: number): ReturnType<T> => {
     const [index, setIndex] = useState(0);
@@ -29,11 +32,16 @@ export const useSlice = <T>(array: T[], size: number): ReturnType<T> => {
     },[matrix.length]);
 
 
+
+
     return {
         current,
         next,
         prev,
-        currentIdx: index
+        currentIdx: index,
+        matrixLength: matrix.length,
+        setIndex,
+        index
 
     }
 

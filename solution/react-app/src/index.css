@@ -1,3 +1,5 @@
+@tailwind components;
+@tailwind utilities;
 
 :root{
   --jacarta: #302e3e;
@@ -27,8 +29,9 @@ body {
   background-image: url("/Users/francescobassignana/Downloads/aaabstract.png");
   background-size: cover;
   background-repeat: no-repeat;*/
-  background-color: black;
+  background-color: rgb(0, 0, 0);
   width: 100%;
+  z-index: -200;
 }
 
 

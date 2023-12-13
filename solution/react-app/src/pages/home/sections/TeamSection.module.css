@@ -1,0 +1,27 @@
+.teamsection{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.gallery{
+    width: 100%;
+    display: flex;
+
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 30px;
+    box-sizing: border-box;
+    padding: 7rem 3rem;
+
+}
+
+.pagination ul{
+    padding: 0;
+}
+
+.teamsection > h1 {
+    color: var(--corvette);
+    font-size: 4rem;
+}

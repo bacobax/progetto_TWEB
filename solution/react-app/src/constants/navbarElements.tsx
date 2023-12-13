@@ -24,7 +24,7 @@ export const navbarElements: Elements = [
         routerLink: false
     },
     {
-        name: s.PLAYERS.linkLabel,
+        name: s.TEAMS.linkLabel,
         path: s.TEAMS.name,
         icon: <FaRegNewspaper  className={styles.icon}/>,
         routerLink: false

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useContext } from "react";
 import styles from "./Navbar.module.css";
 import SearchBar from "../searchbar/SearchBar";
 import { RxHamburgerMenu } from "react-icons/rx";

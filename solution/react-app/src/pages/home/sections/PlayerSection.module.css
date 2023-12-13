@@ -1,5 +1,7 @@
 .container{
-    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
 }
 
 .container > h1 {
@@ -16,11 +18,11 @@
     flex-wrap: nowrap;
     gap: 80px;
     width: 100%;
-    overflow: scroll;
+    /*overflow: scroll;*/
 
     box-sizing: border-box;
 
-    padding: 7rem;
+    padding: 7rem 2rem 7rem 2rem;
 
 
 }
@@ -68,4 +70,7 @@
 
 .moreButton:hover{
     background-color: #b7805b;
+}
+.pagination ul{
+    padding:0;
 }

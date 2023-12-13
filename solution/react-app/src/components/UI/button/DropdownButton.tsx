@@ -1,61 +1,30 @@
-import React, { useState } from "react";
-import styles from "./DropdownButton.module.css";
-import Button from "./Button";
-
-
-interface Option {
-  label: string;
-  icon: React.ReactNode;
-}
+import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@nextui-org/react";
+import {FC} from "react";
 
 interface DropdownButtonProps {
-  buttonText: string;
-  options: Option[];
-  onSelect: (selectedOption: string) => void;
-
+    onAction : ((key:string|number) => void) | undefined;
 }
 
-const DropdownButton: React.FC<DropdownButtonProps> = ({
-  buttonText,
-  options,
-  onSelect,
- 
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
+const DropdownButton:FC<DropdownButtonProps> = ({onAction}) => {
 
-  const handleOptionClick = (option: string) => {
-    onSelect(option);
-    setIsOpen(false);
-  };
+    return (
 
-  return (
-    <div className={styles["dropdown"]}>
-      <Button
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {buttonText}
-      </Button>
-      {isOpen && (
-        <ul
-          className={styles["dropdown__options"]}
-          style={{
-            display: isOpen ? "block" : "none",
-          }}
-        >
-          {options.map(({ label, icon }) => (
-            <li
-              key={label}
-              className={styles["dropdown__option"]}
-              onClick={() => handleOptionClick(label)}
+        <Dropdown backdrop="blur">
+        <DropdownTrigger>
+            <Button
+                variant="bordered"
             >
-              <label>{label}</label>
-              {icon}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-};
-
+                Open Menu
+            </Button>
+        </DropdownTrigger>
+        <DropdownMenu variant="faded" aria-label="Static Actions" onAction={onAction}>
+            <DropdownItem key="new">New file</DropdownItem>
+            <DropdownItem key="copy">Copy link</DropdownItem>
+            <DropdownItem key="edit">Edit file</DropdownItem>
+            <DropdownItem key="delete" className="text-danger" color="danger">
+                Delete file
+            </DropdownItem>
+        </DropdownMenu>
+    </Dropdown>)
+}
 export default DropdownButton;

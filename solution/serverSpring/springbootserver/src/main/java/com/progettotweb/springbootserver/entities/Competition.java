@@ -2,6 +2,8 @@ package com.progettotweb.springbootserver.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 //competitions(competition_id,competition_code,name,sub_type,type,
@@ -42,6 +44,10 @@ public class Competition {
 
     @Column(name = "url")
     private String url;
+
+
+
+
 
     public Competition() {
         this.competitionId = UUID.randomUUID().toString();
@@ -139,4 +145,6 @@ public class Competition {
         this.confederation = confederation;
         this.url = url;
     }
+
+
 }

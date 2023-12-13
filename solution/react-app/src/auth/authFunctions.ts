@@ -2,8 +2,8 @@ import { BASE_URL } from "../constants/constants";
 
 //jwt authentication handling
 
-export const SIGNUP_URL = `${BASE_URL}/users/signup`;
-export const LOGIN_URL = `${BASE_URL}/users/login`;
+export const SIGNUP_URL = `${BASE_URL}/api/users/signup`;
+export const LOGIN_URL = `${BASE_URL}/api/users/login`;
 
 export type Status = "success" | "fail" | "error";
 export interface SignUpData {

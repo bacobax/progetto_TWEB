@@ -21,7 +21,53 @@ const playerSchema = new mongoose.Schema({
   image_url: { type: String, required: true },
   url: { type: String, required: true },
   current_club: { type: mongoose.Schema.Types.ObjectId, ref: 'Club' },
+},{
+  toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+
 });
 
+playerSchema.virtual('gameEvents', {
+  ref: 'GameEvent',
+  foreignField: 'player_id',
+  localField: '_id',
+});
+
+playerSchema.virtual('valuations', {
+    ref: 'PlayerValuation',
+    foreignField: 'player_id',
+    localField: '_id',
+    options:{
+        sort: {date: -1}
+    }
+    });
+playerSchema.virtual('lineups', {
+    ref: 'GameLineup',
+    foreignField: 'player_id',
+    localField: '_id',
+    });
+
+playerSchema.virtual('appearances', {
+    ref: 'Appearance',
+    foreignField: 'player_id',
+    localField: '_id',
+    });
+/*
+playerSchema.pre(/^findOne/, function(next) {
+  console.log("MIDDLEWARE");
+  this.populate({path: "gameEvents"});
+  this.populate({path:"valuations"});
+  this.populate({path: "lineups"});
+  this.populate({path: "appearances"});
+  next();
+} , function(err, docs) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    console.log(docs);
+});*/
+
 const Player = mongoose.model('Player', playerSchema);
+
 module.exports = Player;

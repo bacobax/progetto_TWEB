@@ -60,7 +60,14 @@
     gap: 3rem;
 
 }
+.navigation{
+    height: 2rem;
+    background-color: rgba(59, 59, 59, 0.56);
+    min-width: 300px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
+}
 @media screen and (max-width: 600px){
     .container header{
         flex-direction: column;

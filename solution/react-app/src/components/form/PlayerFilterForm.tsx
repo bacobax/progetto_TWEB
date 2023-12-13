@@ -1,12 +1,12 @@
 import React, {useCallback} from "react";
-import styles from "./FilterForm.module.css";
+import styles from "./PlayerFilterForm.module.css";
 import InputGroup from "../UI/Input/InputGroup";
 import Button from "../UI/button/Button";
 import {useForm} from "../../hooks/useForm";
 import IconButton from "../UI/button/IconButton";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
-import {animatedButtonProps, filterFormState} from "../../constants/constants";
+import {animatedButtonProps, playerfilterFormState} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 
 
@@ -19,7 +19,7 @@ interface FilterFormProps{
     onAddScorefilter: (scoreMin: number, scoreMax: number)=>void;
 }
 
-const FilterForm: React.FC<FilterFormProps> = ({
+const PlayerFilterForm: React.FC<FilterFormProps> = ({
   onApplyFilters,
   onClearFilters,
   filterNames,
@@ -27,7 +27,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
   onAddNameFilter,
   onAddScorefilter
 }) => {
-  const { formState, reset, handleInputChange } = useForm(filterFormState);
+  const { formState, reset, handleInputChange } = useForm(playerfilterFormState);
   const { name, scoreMin, scoreMax } = formState;
 
 
@@ -39,7 +39,7 @@ const FilterForm: React.FC<FilterFormProps> = ({
 
   const applyNameFilter = useCallback(() => {
     const name = formState.name.value;
-    if (name.length === 0) {
+    if (name.trim().length === 0) {
       return;
     }
     onAddNameFilter(name);
@@ -47,8 +47,8 @@ const FilterForm: React.FC<FilterFormProps> = ({
 
   const applyScoreFilter = useCallback(() => {
     if (
-      formState.scoreMin.value.length === 0 ||
-      formState.scoreMax.value.length === 0
+      formState.scoreMin.value.trim().length === 0 ||
+      formState.scoreMax.value.trim().length === 0
     ) {
       return;
     }
@@ -156,4 +156,4 @@ const FilterForm: React.FC<FilterFormProps> = ({
   );
 };
 
-export default  FilterForm;
+export default  PlayerFilterForm;
