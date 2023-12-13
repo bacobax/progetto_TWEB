@@ -1,19 +1,18 @@
-import {useSignal} from "@preact/signals-react";
 import {Club, ShortClub} from "../constants/types";
-import useSignalFetch from "./signalFetch";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {URL_SHORT_TEAMS} from "../constants/constants";
+import useFetch from "./useFetch";
 
 
 const useLoadTeams = () => {
-    const clubs = useSignal<ShortClub[]>([]);
+    const [clubs,setClubs] = useState<ShortClub[]>([]);
 
-    const { loading, fetchData, error} = useSignalFetch();
+    const { loading, fetchData, error} = useFetch();
 
     useEffect(() => {
         fetchData<Club[]>({url: URL_SHORT_TEAMS, method: "GET"}, (data) => {
             console.log({data})
-            clubs.value = data.map((club) => {
+            setClubs(data.map((club) => {
                 const {clubId, url, name, squadSize, stadiumName, lastSeason,domesticCompetition,...others}=club;
                 const {name: competitionName,competitionId} =domesticCompetition;
                 return {
@@ -28,9 +27,9 @@ const useLoadTeams = () => {
                         name:competitionName
                     },
                 }
-            });
+            }));
         });
-    }, []);
+    }, [ fetchData]);
 
     return {clubs, loading, error};
 }

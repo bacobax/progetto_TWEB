@@ -29,7 +29,7 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
     const navigate = useNavigate();
     const width = signalWindowSize.value.width;
     const {players, error, loading} = useLoadPlayers();
-    const {current , currentIdx, setIndex, matrixLength, index} = useSlice(players.value, width < 768 ? 2: 4);
+    const {current , currentIdx, setIndex, matrixLength, index} = useSlice(players, width < 768 ? 2: 4);
 
 
 
@@ -38,16 +38,16 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
             <h1>Players</h1>
             <ScrollShadow orientation={"horizontal"} className={styles.cardGallery}>
                 {
-                    !loading.value && !error.value && current.map((player) => (
+                    !loading && !error && current.map((player) => (
                         <PlayerCard key={player._id} {...player}/>
                         )
                     )
                 }
                 {
-                    loading.value && <p>Loading...</p>
+                    loading && <p>Loading...</p>
                 }
                 {
-                    error.value && <p>{error}</p>
+                    error && <p>{error}</p>
                 }
             </ScrollShadow>
 

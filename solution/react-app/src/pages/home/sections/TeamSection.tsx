@@ -1,10 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import Section from "../../../components/containers/Section";
 import TeamCard from "../../../components/TeamCard";
-import useSignalFetch from "../../../hooks/signalFetch";
-import {URL_SHORT_TEAMS} from "../../../constants/constants";
-import {Club, ShortClub} from "../../../constants/types";
-import {useSignal} from "@preact/signals-react";
+
 import signalWindowSize from "../../../hooks/signalWindowSize";
 import styles from "./TeamSection.module.css";
 import {useSlice} from "../../../hooks/useSlice";
@@ -20,17 +17,17 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
 
     const {clubs, loading, error} = useLoadTeams()
 
-    const { current, setIndex, matrixLength } = useSlice(clubs.value, signalWindowSize.value.isPhone ? 2: 3);
+    const { current, setIndex, matrixLength } = useSlice(clubs, signalWindowSize.value.isPhone ? 2: 3);
 
     return (
         <Section name={name} className={styles.teamsection}>
             <h1>{name} Section</h1>
             <div className={styles.gallery}>
                 {
-                    loading.value && <p>Loading...</p>
+                    loading && <p>Loading...</p>
                 }
                 {
-                    error.value && <p>{error.value}</p>
+                    error && <p>{error}</p>
                 }
                 {
                     current.map((club) => (

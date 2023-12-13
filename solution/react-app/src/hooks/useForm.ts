@@ -1,4 +1,3 @@
-//useForm hook
 import { useReducer,useCallback } from "react";
 import {State, Target, reducer} from "../reducers/formReducer";
 
@@ -35,4 +34,4 @@ export const useForm = (initialState:State) => {
 
 
     return {formState: state, handleInputChange, reset, isValid};
-}
+};

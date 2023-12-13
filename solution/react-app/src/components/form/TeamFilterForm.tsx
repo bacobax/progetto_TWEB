@@ -7,8 +7,8 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
 import {animatedButtonProps, teamfilterFormState} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
-import {ShortClub} from "../../constants/types";
 import InputGroup from "../UI/Input/InputGroup";
+import { useSignal} from "@preact/signals-react";
 
 interface FilterFormProps{
     onApplyFilters: (filters: { name:string,competitionName:string })=>void;
@@ -22,16 +22,15 @@ interface FilterFormProps{
 
 
 
-const PlayerFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, filterNames, onRemoveFilter, addCompetitionFilter, addNameFilter}) => {
-    const { formState, reset, handleInputChange } = useForm(teamfilterFormState);
-    const { name, competitionName } = formState;
+const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, filterNames, onRemoveFilter, addCompetitionFilter, addNameFilter}) => {
 
 
-
-    const handleClearFilters = useCallback(() => {
+    const formState =  useSignal({name: "", competitionName: ""});
+    const handleClearFilters = () => {
         onClearFilters();
-        reset();
-    }, [onClearFilters, reset]);
+        formState.value.name = "";
+        formState.value.competitionName = "";
+    }
 
 
     const renderFilters = () => {
@@ -43,24 +42,24 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFil
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onApplyFilters({
-            name: name.value,
-            competitionName: competitionName.value
+            name: formState.value.name,
+            competitionName: formState.value.competitionName
         })
     };
 
     const addNameFilterHandler = useCallback(() => {
-        if(name.value.length===0){
+        if(formState.value.name.length===0){
             return;
         }
-        addNameFilter(name.value);
-    },[addNameFilter, name.value]);
+        addNameFilter(formState.value.name);
+    },[formState,addNameFilter]);
 
     const addCompetitionFilterHandler = useCallback(() => {
-        if(competitionName.value.length===0){
+        if(formState.value.competitionName.length===0){
             return;
         }
-        addCompetitionFilter(competitionName.value);
-    },[addCompetitionFilter, competitionName.value]);
+        addCompetitionFilter(formState.value.competitionName);
+    },[formState,addCompetitionFilter ]);
 
     return (
         <NeuromorphismDiv clickable={false}>
@@ -68,12 +67,12 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFil
 
                 <InputGroup name="Name" inputProps={{
                     type: "text",
-                    value:name.value,
+                    value:formState.value.name,
                     onChange: (e)=>{
-                        handleInputChange({
-                            value: e.target.value,
-                            inputName: "name"
-                        })
+                        formState.value= {
+                            ...formState.value,
+                            name: e.target.value
+                        }
                     },
                     className:styles.input
                     }}
@@ -89,12 +88,12 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFil
                 <hr />
                 <InputGroup name="Competition" inputProps={{
                     type: "text",
-                    value:competitionName.value,
+                    value:formState.value.competitionName,
                     onChange: (e)=>{
-                        handleInputChange({
-                            value: e.target.value,
-                            inputName: "competitionName"
-                        })
+                        formState.value = {
+                            ...formState.value,
+                            competitionName: e.target.value
+                        }
                     },
                     className:styles.input
 
@@ -124,4 +123,4 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFil
     );
 };
 
-export default  PlayerFilterForm;
+export default  TeamFilterForm;

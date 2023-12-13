@@ -11,7 +11,6 @@ import {animatedButtonProps} from "../../constants/constants";
 import useLoadPlayers from "../../hooks/useLoadPlayers";
 import {BreadcrumbItem, Breadcrumbs, Card, Skeleton} from "@nextui-org/react";
 import Modal from "../../components/UI/modal/Modal";
-import {useSignal} from "@preact/signals-react";
 
 interface SmartGalleryProps {
 
@@ -24,14 +23,14 @@ interface SmartGalleryProps {
 
 const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
 
-    const showForm = useSignal(false)
+    const [showForm,setShowForm] = useState(false)
 
     const {players, loading, error} = useLoadPlayers();
 
-    const {filteredData, removeFilter, clearFilters, addFilter , filterNames} = useFilter(players.value);
+    const {filteredData, removeFilter, clearFilters, addFilter , filterNames} = useFilter(players);
 
     const handleShowForm =  () => {
-        showForm.value = !showForm.value;
+        setShowForm(prev => !prev)
     }
 
     const addNameFilter = useCallback((name: string) => {
@@ -91,11 +90,11 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
             </Breadcrumbs>
             <header>
                 <h1> PLayer Gallery </h1>
-                <IconButton {...animatedButtonProps} Icon={showForm ? FaAngleUp : FaAngleDown} className={styles.filterButton} onClick={handleShowForm} text={"FILTER"}/>
+                <IconButton  Icon={showForm ? FaAngleUp : FaAngleDown} className={styles.filterButton} onClick={handleShowForm} text={"FILTER"}/>
 
             </header>
 
-            {showForm.value &&
+            {showForm &&
                 <PlayerFilterForm
                 onRemoveFilter={removeFilter}
                 onApplyFilters={handleApplyFilters}
@@ -105,7 +104,7 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
                 onAddScorefilter={handleAddScoreFilter}
                 />}
             <main>
-                {!loading.value ? filteredData.map( (player) => (
+                {!loading ? filteredData.map( (player) => (
                     <PlayerCard key={player._id} {...player}/>
                 )) : Array.from({length: 10}).map((_, idx) => (
                     <Card className="w-[200px] space-y-5 p-4" radius="lg" key={idx}>
@@ -126,10 +125,11 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
                     </Card>
                 ))
                 }
+                {!loading && !error && filteredData.length === 0 && <p>No players found</p>}
             </main>
             <Modal onClose={()=>{
 
-            }} title={"Error pop-up"} opened={!!error.value}>
+            }} title={"Error pop-up"} opened={!!error}>
                 {error}
             </Modal>
         </div>

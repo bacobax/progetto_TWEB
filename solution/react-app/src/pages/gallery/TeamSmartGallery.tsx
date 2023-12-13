@@ -17,7 +17,7 @@ export const TeamSmartGallery:FC = () => {
 
     const { clubs, loading, error} = useLoadTeams();
 
-    const {filteredData, removeFilter, clearFilters, addFilter , filterNames} = useFilter(clubs.value);
+    const {filteredData, removeFilter, clearFilters, addFilter , filterNames} = useFilter(clubs);
 
     const handleShowForm =  () => {
         showForm.value = !showForm.value;
@@ -80,7 +80,7 @@ export const TeamSmartGallery:FC = () => {
                     addCompetitionFilter={handleAddCompetitionFilter}
                 />}
             <main>
-                {!loading.value ? filteredData.map( (club) => (
+                {!loading ? filteredData.map( (club) => (
                     <TeamCard key={club.clubId} {...club}/>
                 )) : Array.from({length: 10}).map((_, idx) => (
                     <Card className="w-[200px] space-y-5 p-4" radius="lg" key={idx}>
@@ -104,7 +104,7 @@ export const TeamSmartGallery:FC = () => {
             </main>
             <Modal onClose={()=>{
 
-            }} title={"Error pop-up"} opened={!!error.value}>
+            }} title={"Error pop-up"} opened={!!error}>
                 {error}
             </Modal>
         </div>

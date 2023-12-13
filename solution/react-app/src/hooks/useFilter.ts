@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useReducer} from 'react';
+import {useCallback, useMemo, useReducer, useState} from 'react';
 
 type FilterFunction<T> = (data: T) => boolean;
 
@@ -39,36 +39,38 @@ const reducer = <T>(state: StateType<T>, action: Action<T>): StateType<T> => {
 };
 
 const useFilter = <T>(initialData: T[]) => {
-    const initialState: StateType<T> = {
-        data: initialData,
-        filters: [],
-    };
-
-    const [state, dispatch] = useReducer(reducer as (state: StateType<T>, action: Action<T>) => StateType<T>, initialState);
 
 
-    const { data, filters } = state;
+    const [filters, setFilters] = useState<Filter<T>[]>([]);
+
+
+
 
 
 
     const addFilter = useCallback((key: string, filter: FilterFunction<T>) => {
-            dispatch({ type: 'ADD_FILTER', payload: { key, filter } });
+            setFilters((prev) => {
+                if (prev.find((filter) => filter.key === key)) {
+                    return prev;
+                }
+                return [...prev, { key, filter }];
+            });
         },[]
     );
 
     const removeFilter = useCallback ((key: string) => {
-        dispatch({ type: 'REMOVE_FILTER', payload: key });
+        setFilters((prev) => prev.filter((filter) => filter.key !== key));
     },[]);
 
     const clearFilters = useCallback (() => {
-        dispatch({ type: 'CLEAR_FILTERS' });
+        setFilters([]);
     },[]);
 
     const filteredData = useMemo(()=>
          filters.reduce((filteredData, filter) => {
             return filteredData.filter(filter.filter);
-        }, data)
-    , [filters, data])
+        }, initialData)
+    , [filters, initialData])
 
 
     const filterNames = useMemo(() => filters.map((filter) => filter.key), [filters]);
