@@ -5,8 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import {BrowserRouter} from "react-router-dom";
 import {AuthContextProvider} from "./store/AuthContext";
-import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./dev";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -16,11 +14,7 @@ root.render(
 
         <BrowserRouter>
             <AuthContextProvider>
-                <DevSupport ComponentPreviews={ComponentPreviews}
-                            useInitialHook={useInitial}
-                >
                     <App/>
-                </DevSupport>
             </AuthContextProvider>
 
         </BrowserRouter>

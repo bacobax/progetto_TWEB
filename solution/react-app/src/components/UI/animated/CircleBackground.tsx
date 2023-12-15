@@ -1,62 +1,55 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import {effect, signal} from "@preact/signals-react";
 
 const DURATION = 2;
-const x = signal(0);
-const y = signal(0);
-const duration = signal(DURATION);
+const VELOCITY = 100;
 
 const getRandomCoordsInScrollScreen = () => {
     const x = Math.random() * window.innerWidth;
-    const y = Math.random() * (window.innerHeight);
-
+    const y = Math.random() * window.innerHeight;
     return { x, y };
 };
-const VELOCITY = 100;
 
-const setNewDestination  =() => {
-    const { x: newX, y: newY } = getRandomCoordsInScrollScreen();
+const CircleBackground: React.FC<{ className: string }> = ({ className }) => {
+    const [coords, setCoords] = useState({ x: 0, y: 0 });
+    const [duration, setDuration] = useState(DURATION);
 
-    const deltax = Math.abs(newX - x.value);
-    const deltay = Math.abs(newY - y.value);
+    const setNewDestination = useCallback(() => {
+        const { x: newX, y: newY } = getRandomCoordsInScrollScreen();
+        const deltaX = Math.abs(newX - coords.x);
+        const deltaY = Math.abs(newY - coords.y);
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        setDuration(distance / VELOCITY);
+        setCoords({ x: newX, y: newY });
+        console.log('New coords:', newX, newY);
+    }, [coords.x, coords.y]);
 
-    const distance = Math.sqrt(deltax * deltax + deltay * deltay);
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setNewDestination();
+        }, duration * 1000);
 
-
-    duration.value = distance / VELOCITY;
-
-    x.value = newX;
-    y.value = newY;
-    console.log('New coords:', newX, newY);
-}
-
-effect(() =>{
-    setTimeout(() => {
-        setNewDestination();
-    }, duration.value * 1000);
-})
-const CircleBackground : React.FC<{className:string}>= ({className}) => {
+        return () => clearTimeout(timeoutId); // Cleanup timeout
+    }, [setNewDestination, duration]);
 
     return (
         <motion.div
             animate={{
-                x: x.value,
-                y: y.value
+                x: coords.x,
+                y: coords.y,
             }}
             transition={{
                 duration: duration,
             }}
             style={{
+                position: 'absolute',
                 top: 0,
                 left: 0,
                 width: '300px',
                 height: '300px',
-                //football ball style with green linear gradient background
-                borderRadius: '50%'
+                borderRadius: '50%',
             }}
             className={className}
-
         />
     );
 };

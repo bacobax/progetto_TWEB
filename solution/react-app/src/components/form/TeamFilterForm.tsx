@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useState} from "react";
 import styles from "./TeamFilterForm.module.css";
 import Button from "../UI/button/Button";
 import {useForm} from "../../hooks/useForm";
@@ -8,7 +8,6 @@ import Filter from "../Filter";
 import {animatedButtonProps, teamfilterFormState} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 import InputGroup from "../UI/Input/InputGroup";
-import { useSignal} from "@preact/signals-react";
 
 interface FilterFormProps{
     onApplyFilters: (filters: { name:string,competitionName:string })=>void;
@@ -25,11 +24,10 @@ interface FilterFormProps{
 const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, filterNames, onRemoveFilter, addCompetitionFilter, addNameFilter}) => {
 
 
-    const formState =  useSignal({name: "", competitionName: ""});
+    const [formState,setFormState] =  useState({name: "", competitionName: ""});
     const handleClearFilters = () => {
         onClearFilters();
-        formState.value.name = "";
-        formState.value.competitionName = "";
+        setFormState({name: "", competitionName: ""});
     }
 
 
@@ -42,23 +40,23 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilte
     const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onApplyFilters({
-            name: formState.value.name,
-            competitionName: formState.value.competitionName
+            name: formState.name,
+            competitionName: formState.competitionName
         })
     };
 
     const addNameFilterHandler = useCallback(() => {
-        if(formState.value.name.length===0){
+        if(formState.name.length===0){
             return;
         }
-        addNameFilter(formState.value.name);
+        addNameFilter(formState.name);
     },[formState,addNameFilter]);
 
     const addCompetitionFilterHandler = useCallback(() => {
-        if(formState.value.competitionName.length===0){
+        if(formState.competitionName.length===0){
             return;
         }
-        addCompetitionFilter(formState.value.competitionName);
+        addCompetitionFilter(formState.competitionName);
     },[formState,addCompetitionFilter ]);
 
     return (
@@ -67,12 +65,14 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilte
 
                 <InputGroup name="Name" inputProps={{
                     type: "text",
-                    value:formState.value.name,
+                    value:formState.name,
                     onChange: (e)=>{
-                        formState.value= {
-                            ...formState.value,
-                            name: e.target.value
-                        }
+                        setFormState(prev => {
+                            return {
+                                ...prev,
+                                name: e.target.value
+                            }
+                        })
                     },
                     className:styles.input
                     }}
@@ -88,12 +88,12 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilte
                 <hr />
                 <InputGroup name="Competition" inputProps={{
                     type: "text",
-                    value:formState.value.competitionName,
+                    value:formState.competitionName,
                     onChange: (e)=>{
-                        formState.value = {
-                            ...formState.value,
+                        setFormState(prev => ({
+                            ...prev,
                             competitionName: e.target.value
-                        }
+                        }))
                     },
                     className:styles.input
 

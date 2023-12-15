@@ -4,16 +4,18 @@ import {URL_SHORT_PLAYERS} from "../constants/constants";
 import useFetch from "./useFetch";
 
 
-const useLoadPlayers = () => {
-    const {loading, error, fetchData, setError} = useFetch();
+const useLoadPlayers = (pageSize: number) => {
+
     const [players, setPlayers] = useState<ShortPlayer[]>([]);
     const [pageNumber , setPageNumber] = useState(1);
+    const {loading, error, fetchData, setError} = useFetch();
+
 
 
     const addMorePlayers = () => {
 
         fetchData<{ data: ShortPlayer[], status: string, message?: string }>({
-            url: URL_SHORT_PLAYERS(pageNumber + 1,20),
+            url: URL_SHORT_PLAYERS(pageNumber + 1,pageSize),
             method: "GET"
         },(data) => {
             if (data.status !== "success") {
@@ -33,7 +35,7 @@ const useLoadPlayers = () => {
 
     useEffect(() => {
         fetchData<{ data: ShortPlayer[], status: string, message?: string }>({
-            url: URL_SHORT_PLAYERS(1,20),
+            url: URL_SHORT_PLAYERS(1, pageSize),
             method: "GET"
         }, (data) => {
             if (data.status !== "success") {
@@ -47,7 +49,7 @@ const useLoadPlayers = () => {
             setPlayers(data.data);
 
         });
-    }, [fetchData, setError]);
+    }, [fetchData, setError, pageSize]);
 
     return {loading, error, players, addMorePlayers};
 };

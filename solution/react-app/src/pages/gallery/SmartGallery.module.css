@@ -7,7 +7,8 @@
     align-items: center;
     justify-content: center;
     color: white;
-    gap: 10vh
+    gap: 10vh;
+    padding-bottom: 10vh;
 }
 .container > header{
     width: 100%;
@@ -68,6 +69,23 @@
     -webkit-backdrop-filter: blur(10px);
 
 }
+
+.addMoreButton{
+    background-color: #934493;
+    border-radius: 10px;
+    color: white;
+    transition-duration: 200ms;
+}
+
+.addMoreButton:hover{
+    background-color: #6c396c;
+    color: white;
+    transform:scale(1.1)
+}
+
+
+
+
 @media screen and (max-width: 600px){
     .container header{
         flex-direction: column;

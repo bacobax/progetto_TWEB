@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import styles from "./SmartGallery.module.css";
 import useFilter from "../../hooks/useFilter";
 import {ShortPlayer} from "../../constants/types";
@@ -7,10 +7,11 @@ import PlayerCard from "../../components/PlayerCard";
 import PlayerFilterForm from "../../components/form/PlayerFilterForm";
 import IconButton from "../../components/UI/button/IconButton";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import {animatedButtonProps} from "../../constants/constants";
-import useLoadPlayers from "../../hooks/useLoadPlayers";
 import {BreadcrumbItem, Breadcrumbs, Card, Skeleton} from "@nextui-org/react";
 import Modal from "../../components/UI/modal/Modal";
+import {animatedButtonProps, URL_SHORT_PLAYERS} from "../../constants/constants";
+import useLoadPlayers from "../../hooks/useLoadPlayers";
+import Button from "../../components/UI/button/Button";
 
 interface SmartGalleryProps {
 
@@ -19,22 +20,22 @@ interface SmartGalleryProps {
 }
 
 
-
-
 const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
 
-    const [showForm,setShowForm] = useState(false)
+    const [showForm,setShowForm] = useState<boolean>(false)
+    const {players, addMorePlayers, loading, error} = useLoadPlayers(5);
+    const {filteredData, removeFilter, resetFilters: clearFilters, addFilter , filterNames} = useFilter(players);
 
-    const {players, loading, error} = useLoadPlayers();
 
-    const {filteredData, removeFilter, clearFilters, addFilter , filterNames} = useFilter(players);
 
-    const handleShowForm =  () => {
+
+
+    const handleShowForm =  useCallback(() => {
         setShowForm(prev => !prev)
-    }
+    },[])
 
     const addNameFilter = useCallback((name: string) => {
-        addFilter(`${name}`, (p: ShortPlayer) => {
+        addFilter({key: `${name}`, filter: (p: ShortPlayer) => {
             if (p.first_name && p.last_name === undefined) {
                 return p.first_name.toLowerCase().includes(name.toLowerCase())
             }
@@ -45,36 +46,42 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
                 return p.first_name.toLowerCase().includes(name.toLowerCase()) || p.last_name.toLowerCase().includes(name.toLowerCase())
             }
             return false;
-        })
+        }
+    })
+        console.log("finish addNameFilter")
     }, [addFilter]);
 
 
     const addMarketValueFilter =useCallback ((valueMin: number, valueMax: number) => {
-        addFilter(`from ${valueMin} to ${valueMax}`, (p) => {
+        addFilter({key:`from ${valueMin} to ${valueMax}`, filter: (p) => {
             if (!p.market_value_in_eur) return false;
-            return p.market_value_in_eur >= valueMin && p.market_value_in_eur <= valueMax;
+                return p.market_value_in_eur >= valueMin && p.market_value_in_eur <= valueMax;
+            }
         })
     }, [addFilter])
 
-    const handleApplyFilters = useCallback(({name, valueMin, valueMax}: {name: string, valueMin: number, valueMax:number})=>{
+    const handleApplyFilters = ({name, valueMin, valueMax}: {name: string, valueMin: number, valueMax:number})=>{
         if(name.length!==0){
             addNameFilter(name);
         }
 
         addMarketValueFilter(valueMin, valueMax);
-    }, [addNameFilter, addMarketValueFilter ]);
+    }
 
 
 
-    const handleAddNameFilter = useCallback ((name: string) => {
+    const handleAddNameFilter = (name: string) => {
+
         addNameFilter(name);
-    }, [addNameFilter,])
+
+    }
 
     const handleAddScoreFilter = useCallback ((valueMin: number, valueMax: number) => {
         addMarketValueFilter(valueMin, valueMax);
     } , [addMarketValueFilter]);
 
 
+    console.log({filteredData,filterNames})
 
 
     return (
@@ -96,17 +103,19 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
 
             {showForm &&
                 <PlayerFilterForm
-                onRemoveFilter={removeFilter}
-                onApplyFilters={handleApplyFilters}
-                onClearFilters={clearFilters}
-                filterNames={filterNames}
-                onAddNameFilter={handleAddNameFilter}
-                onAddScorefilter={handleAddScoreFilter}
-                />}
+                    onRemoveFilter={removeFilter}
+                    onApplyFilters={handleApplyFilters}
+                    onClearFilters={clearFilters}
+                    filterNames={filterNames}
+                    onAddNameFilter={handleAddNameFilter}
+                    onAddScorefilter={handleAddScoreFilter}
+                />
+            }
             <main>
-                {!loading ? filteredData.map( (player) => (
-                    <PlayerCard key={player._id} {...player}/>
-                )) : Array.from({length: 10}).map((_, idx) => (
+                {!loading ? filteredData.map( (player) => {
+
+                    return <PlayerCard key={player._id} {...player}/>
+                }) : Array.from({length: 10}).map((_, idx) => (
                     <Card className="w-[200px] space-y-5 p-4" radius="lg" key={idx}>
                         <Skeleton className="rounded-lg">
                             <div className="h-24 rounded-lg bg-default-300"></div>
@@ -126,7 +135,10 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
                 ))
                 }
                 {!loading && !error && filteredData.length === 0 && <p>No players found</p>}
+
             </main>
+            <Button onClick={addMorePlayers} className={styles.addMoreButton}>Add more</Button>
+
             <Modal onClose={()=>{
 
             }} title={"Error pop-up"} opened={!!error}>

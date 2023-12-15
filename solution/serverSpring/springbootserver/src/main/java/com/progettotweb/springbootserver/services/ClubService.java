@@ -37,7 +37,7 @@ public class ClubService {
     }
     public List<Club> findAll(int page, int pagesize){
         Pageable paging = PageRequest.of(page, pagesize);
-        return clubRepository.findAll(paging).getContent();
+        return clubPageableRepository.findAll(paging).getContent();
     }
 
 

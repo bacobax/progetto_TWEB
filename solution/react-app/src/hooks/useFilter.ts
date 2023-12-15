@@ -1,81 +1,62 @@
-import {useCallback, useMemo, useReducer, useState} from 'react';
+import {useState, useMemo, useCallback} from 'react';
 
-type FilterFunction<T> = (data: T) => boolean;
+type Filter<T> = (item: T) => boolean;
 
-type Filter<T> = {
+interface FilterConfig<T> {
     key: string;
-    filter: FilterFunction<T>;
-};
+    filter: Filter<T>;
+}
 
-type StateType<T> = {
-    data: T[];
-    filters: Filter<T>[];
-};
+interface UseFilterResult<T> {
+    filteredData: T[];
+    filterNames: string[];
+    addFilter: (config: FilterConfig<T>) => void;
+    applyFilters: () => void;
+    resetFilters: () => void;
+    removeFilter: (key: string) => void;
+}
 
-type Action<T> =
-    | { type: 'ADD_FILTER'; payload: Filter<T> }
-    | { type: 'REMOVE_FILTER'; payload: string }
-    | { type: 'CLEAR_FILTERS' };
+function useFilter<T>(data: T[]): UseFilterResult<T> {
+    const [filters, setFilters] = useState<FilterConfig<T>[]>([]);
 
-const reducer = <T>(state: StateType<T>, action: Action<T>): StateType<T> => {
-    switch (action.type) {
-        case 'ADD_FILTER':
-            if(!state.filters.find((filter) => filter.key === action.payload.key)) {
-                return { ...state, filters: [...state.filters, action.payload] };
-            }else{
-                return state;
-            }
+    const applyFilters =() => {
+        // Applying all filters to the data
 
-        case 'REMOVE_FILTER':
-            return {
-                ...state,
-                filters: state.filters.filter((filter) => filter.key !== action.payload),
-            };
-        case 'CLEAR_FILTERS':
-            return { ...state, filters: [] };
-        default:
-            return state;
+        return filters.reduce((filtered: T[], currentFilter) => {
+            return filtered.filter(currentFilter.filter);
+        }, data);
+
     }
-};
 
-const useFilter = <T>(initialData: T[]) => {
+    const setFilter = (config: FilterConfig<T>) => {
 
+        setFilters(prev => {
+            const filteredFilters = prev.filter(filter => filter.key !== config.key);
+            return [...filteredFilters, config];
+        })
+        console.log("finish setFilter");
 
-    const [filters, setFilters] = useState<Filter<T>[]>([]);
+    }
 
+    const removeFilter = (key: string) => {
+        setFilters((prevFilters) => prevFilters.filter((filter) => filter.key !== key));
+    };
 
-
-
-
-
-    const addFilter = useCallback((key: string, filter: FilterFunction<T>) => {
-            setFilters((prev) => {
-                if (prev.find((filter) => filter.key === key)) {
-                    return prev;
-                }
-                return [...prev, { key, filter }];
-            });
-        },[]
-    );
-
-    const removeFilter = useCallback ((key: string) => {
-        setFilters((prev) => prev.filter((filter) => filter.key !== key));
-    },[]);
-
-    const clearFilters = useCallback (() => {
+    const resetFilters = () => {
         setFilters([]);
-    },[]);
+    };
 
-    const filteredData = useMemo(()=>
-         filters.reduce((filteredData, filter) => {
-            return filteredData.filter(filter.filter);
-        }, initialData)
-    , [filters, initialData])
+    const filterNames = filters.map((filter) => filter.key);
 
 
-    const filterNames = useMemo(() => filters.map((filter) => filter.key), [filters]);
-
-    return { filteredData, addFilter, removeFilter, clearFilters, filterNames };
-};
+    return {
+        filteredData: applyFilters(),
+        filterNames,
+        addFilter: setFilter,
+        applyFilters,
+        resetFilters,
+        removeFilter,
+    };
+}
 
 export default useFilter;

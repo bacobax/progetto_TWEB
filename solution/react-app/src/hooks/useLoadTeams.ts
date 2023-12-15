@@ -1,37 +1,51 @@
-import {Club, ShortClub} from "../constants/types";
+import {Club, ShortClub, ShortPlayer} from "../constants/types";
 import {useEffect, useState} from "react";
-import {URL_SHORT_TEAMS} from "../constants/constants";
+import {URL_SHORT_PLAYERS, URL_SHORT_TEAMS} from "../constants/constants";
 import useFetch from "./useFetch";
 
-
-const useLoadTeams = () => {
+const getshortclubFromClub = (club:Club):ShortClub => {
+    const {clubId, url, name, squadSize, stadiumName, lastSeason,domesticCompetition,...others}=club;
+    const {name: competitionName,competitionId} =domesticCompetition;
+    return {
+        clubId,
+        url,
+        name,
+        squadSize,
+        stadiumName,
+        lastSeason,
+        domesticCompetition:{
+            competitionId,
+            name:competitionName
+        },
+    }
+}
+const useLoadTeams = (pageSize: number) => {
     const [clubs,setClubs] = useState<ShortClub[]>([]);
+    const [pageNumber , setPageNumber] = useState(1);
+    const { loading, fetchData, error, setError} = useFetch();
+    const addMoreTeams = () => {
 
-    const { loading, fetchData, error} = useFetch();
+        fetchData<Club[]>({
+            url: URL_SHORT_TEAMS(pageNumber + 1,pageSize),
+            method: "GET"
+        },(data) => {
 
-    useEffect(() => {
-        fetchData<Club[]>({url: URL_SHORT_TEAMS, method: "GET"}, (data) => {
-            console.log({data})
-            setClubs(data.map((club) => {
-                const {clubId, url, name, squadSize, stadiumName, lastSeason,domesticCompetition,...others}=club;
-                const {name: competitionName,competitionId} =domesticCompetition;
-                return {
-                    clubId,
-                    url,
-                    name,
-                    squadSize,
-                    stadiumName,
-                    lastSeason,
-                    domesticCompetition:{
-                        competitionId,
-                        name:competitionName
-                    },
-                }
-            }));
+            const shortClubs = data.map(getshortclubFromClub);
+
+            setClubs(prev => [...prev, ...shortClubs])
+
+            setPageNumber(prev => prev + 1);
         });
-    }, [ fetchData]);
 
-    return {clubs, loading, error};
+    }
+    useEffect(() => {
+        fetchData<Club[]>({url: URL_SHORT_TEAMS(1, pageSize), method: "GET"}, (data) => {
+            console.log({data})
+            setClubs(data.map(getshortclubFromClub));
+        });
+    }, [fetchData, pageSize]);
+
+    return {clubs, loading, error , addMoreTeams};
 }
 
 export default useLoadTeams;

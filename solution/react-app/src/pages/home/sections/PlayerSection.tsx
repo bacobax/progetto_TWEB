@@ -8,9 +8,9 @@ import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
 
 
-import signalWindowSize from "../../../hooks/signalWindowSize";
 import {Pagination, ScrollShadow} from "@nextui-org/react";
 import useLoadPlayers from "../../../hooks/useLoadPlayers";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 interface PlayerSectionProps {
     name: string;
@@ -27,8 +27,8 @@ interface PlayerSectionProps {
  */
 const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
     const navigate = useNavigate();
-    const width = signalWindowSize.value.width;
-    const {players, error, loading} = useLoadPlayers();
+    const {width} = useWindowSize()
+    const {players, error, loading} = useLoadPlayers(30);
     const {current , currentIdx, setIndex, matrixLength, index} = useSlice(players, width < 768 ? 2: 4);
 
 
@@ -54,8 +54,7 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
 
             <Pagination className={`dark ${styles.pagination} cursor-pointer`} color={"secondary" } total={matrixLength} page={currentIdx} onChange={setIndex} />
 
-            <Button {...animatedButtonProps}
-                className={styles.moreButton} onClick={()=>{navigate("/gallery")}}>
+            <Button {...animatedButtonProps} className={styles.moreButton} onClick={()=>{navigate("/gallery/players")}}>
                 More
             </Button>
 

@@ -23,10 +23,10 @@ public class ClubController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/clubs")
     public List<Club> getEntities(
-            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "100") int pagesize
     ) {
-
+        page = page-1;
         List<Club> entities = clubService.findAll(page, pagesize);
 
         return entities;

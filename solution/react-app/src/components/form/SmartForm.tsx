@@ -9,7 +9,7 @@ import Modal from "../UI/modal/Modal";
 import useModal from "../../hooks/useModal";
 import { motion} from "framer-motion";
 
-import signalWindowSize from "../../hooks/signalWindowSize";
+import useWindowSize from "../../hooks/useWindowSize";
 
 interface DualFormProps {
 
@@ -24,7 +24,8 @@ const transitionForm=  {
 }
 const SmartForm: React.FC<DualFormProps> = () => {
     const [isSignin, setIsSignin] = useState(true)
-    const width = signalWindowSize.value.width
+
+    const {width} = useWindowSize();
     const {openModal, isModalOpen, closeModal} = useModal(false);
     const {loading,login,error,signup, setError} = useAuth()
 

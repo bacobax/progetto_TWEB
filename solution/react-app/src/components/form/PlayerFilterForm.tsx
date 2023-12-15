@@ -1,12 +1,11 @@
-import React, {useCallback} from "react";
+    import React, {useCallback, useState} from "react";
 import styles from "./PlayerFilterForm.module.css";
 import InputGroup from "../UI/Input/InputGroup";
 import Button from "../UI/button/Button";
-import {useForm} from "../../hooks/useForm";
 import IconButton from "../UI/button/IconButton";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
-import {animatedButtonProps, playerfilterFormState} from "../../constants/constants";
+import {animatedButtonProps} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 
 
@@ -27,92 +26,101 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
   onAddNameFilter,
   onAddScorefilter
 }) => {
-  const { formState, reset, handleInputChange } = useForm(playerfilterFormState);
+
+
+  const [formState, setFormState] = useState(   {name: "", scoreMin: "", scoreMax: ""});
   const { name, scoreMin, scoreMax } = formState;
 
 
 
   const handleClearFilters = useCallback(() => {
     onClearFilters();
-    reset();
-  }, [onClearFilters, reset]);
+    setFormState({
+        name: "",
+        scoreMin: "",
+        scoreMax: ""
+        });
 
-  const applyNameFilter = useCallback(() => {
-    const name = formState.name.value;
-    if (name.trim().length === 0) {
+  }, [onClearFilters]);
+
+  const applyNameFilter =() => {
+      console.log("applyNameFilter")
+   if (name.trim().length === 0) {
+        console.log("applyNameFilter -> return")
       return;
     }
+    console.log("applyNameFilter -> onAddNameFilter")
     onAddNameFilter(name);
-  }, [formState.name.value, onAddNameFilter]);
+  }
 
-  const applyScoreFilter = useCallback(() => {
-    if (
-      formState.scoreMin.value.trim().length === 0 ||
-      formState.scoreMax.value.trim().length === 0
-    ) {
+
+  const applyScoreFilter =()=>{
+      console.log("applyScoreFilter")
+    if (!scoreMin || !scoreMax || scoreMin.trim().length === 0 || scoreMax.trim().length === 0) {
       return;
     }
-    const scoreMin = Number(formState.scoreMin.value);
-    const scoreMax = Number(formState.scoreMax.value);
+    const numberScoreMin = Number(scoreMin);
+    const numberScoreMax = Number(scoreMax);
 
-    onAddScorefilter(scoreMin, scoreMax);
-  }, [formState.scoreMin.value, formState.scoreMax.value, onAddScorefilter]);
+    onAddScorefilter(numberScoreMin, numberScoreMax);
+  }
 
   const renderFilters = () => {
     return filterNames.map((filterName) => (
       <Filter name={filterName} onClose={() => onRemoveFilter(filterName)} />
     ));
   };
-    const handleApplyFilters = useCallback(() => {
+
+  const handleApplyFilters = () => {
+      console.log({name, scoreMin:Number(scoreMin), scoreMax: Number(scoreMax)})
         onApplyFilters({
-            name: name.value,
-            valueMin: Number(scoreMin.value),
-            valueMax: Number(scoreMax.value)
+            name: name,
+            valueMin: Number(scoreMin),
+            valueMax: Number(scoreMax)
         });
-    }, [name.value, scoreMin.value, scoreMax.value, onApplyFilters]);
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleApplyFilters();
   };
+
+
 
   return (
     <NeuromorphismDiv clickable={false}>
-      <form className={styles.filterForm} onSubmit={handleFormSubmit}>
+      <form className={styles.filterForm}>
         <InputGroup
           name={"name"}
-          error={[formState.name.error, formState.name.errorText]}
+          error={[false, ""]}
           inputProps={{
             type: "text",
             placeholder: "Name",
-            value: name.value,
+            value: name,
             onChange: (event) => {
-              handleInputChange({
-                value: event.target.value,
-                inputName: "name"
-              });
+              setFormState(prev=> ({
+                    ...prev,
+                    name: event.target.value
+              }))
             }
           }}
         />
-        <IconButton
-          {...animatedButtonProps}
-          className={styles.addFilter}
-          Icon={IoIosAddCircleOutline}
-          onClick={applyNameFilter}
-        />
+          <IconButton
+              {...animatedButtonProps}
+              className={styles.addFilter}
+              Icon={IoIosAddCircleOutline}
+              onClick={applyNameFilter}
+              type={"button"}
+          />
 
         <hr />
         <InputGroup
           name={"From"}
-          error={[formState.scoreMin.error, formState.scoreMin.errorText]}
+          error={[false, ""]}
           inputProps={{
             type: "number",
             placeholder: "Score",
-            value: scoreMin.value,
+            value: scoreMin,
             onChange: (event) => {
-              handleInputChange({
-                value: event.target.value,
-                inputName: "scoreMin"
-              });
+              setFormState(prev => ({
+                    ...prev,
+                    scoreMin: event.target.value
+              }))
             },
             min: 0
           }}
@@ -120,16 +128,16 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
 
         <InputGroup
           name={"To"}
-          error={[formState.scoreMax.error, formState.scoreMax.errorText]}
+          error={[false, ""]}
           inputProps={{
             type: "number",
             placeholder: "Score",
-            value: scoreMax.value,
+            value: scoreMax,
             onChange: (event) => {
-              handleInputChange({
-                value: event.target.value,
-                inputName: "scoreMax"
-              });
+              setFormState(prev=>({
+                    ...prev,
+                    scoreMax: event.target.value
+              }))
             },
             min: 0
           }}
@@ -139,15 +147,16 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
           className={styles.addFilter}
           Icon={IoIosAddCircleOutline}
           onClick={applyScoreFilter}
+          type="button"
         />
         <div className={styles.filters}>{renderFilters()}</div>
 
         <hr />
         <div className={styles.filterControl}>
-          <Button className={styles.btnApply} onClick={handleApplyFilters}>
+          <Button className={styles.btnApply} onClick={handleApplyFilters} type={"button"}>
             Apply Filters
           </Button>
-          <Button className={styles.btnClear} onClick={handleClearFilters}>
+          <Button className={styles.btnClear} onClick={handleClearFilters} type={"button"}>
             Clear Filters
           </Button>
         </div>

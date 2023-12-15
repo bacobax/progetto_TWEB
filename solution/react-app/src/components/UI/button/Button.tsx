@@ -10,6 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
 interface AnimatedButtonProps extends MotionProps{
     animated: true;
     className?: string;
+    onClick?: () => void;
 }
 
 

@@ -25,3 +25,8 @@
     color: var(--corvette);
     font-size: 4rem;
 }
+
+.moreButton{
+    background-color: var(--corvette);
+    border-radius: 10px;
+}

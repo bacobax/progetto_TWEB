@@ -208,4 +208,4 @@ export const animatedButtonProps = {
  */
 
 export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => `http://localhost:8000/api/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`;
-export const URL_SHORT_TEAMS = "http://localhost:8081/clubs";
+export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => `http://localhost:8081/clubs?page=${pageNumber}&pagesize=${pageSize}`;
