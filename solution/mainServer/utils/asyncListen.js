@@ -5,8 +5,12 @@
 */
 
 module.exports = asyncListen = (server, port) =>
-  new Promise((resolve, _) => {
-    server.listen(port, () => {
-      resolve();
+  new Promise((resolve, reject) => {
+    server.listen(port, (err) => {
+        if(err) {
+            reject(err)
+        }else{
+            resolve();
+        }
     });
   });

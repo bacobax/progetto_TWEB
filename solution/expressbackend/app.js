@@ -13,6 +13,7 @@ const gameRouter = require('./routes/game');
 const appearenceRouter = require('./routes/appearence');
 const playerValuationRouter = require('./routes/playerValuation');
 const playerRouter = require('./routes/player');
+const roomRouter = require('./routes/room');
 
 const schemas = require('./models/swaggerSchemas/index');
 
@@ -70,6 +71,7 @@ app.use('/api/game', gameRouter);
 app.use('/api/appearence', appearenceRouter);
 app.use('/api/playerValuation', playerValuationRouter);
 app.use('/api/player', playerRouter);
+app.use("/api/room" , roomRouter);
 
 
 app.use(function (req, res, next) {

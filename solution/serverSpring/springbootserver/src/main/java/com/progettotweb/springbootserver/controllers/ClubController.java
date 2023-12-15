@@ -21,7 +21,7 @@ public class ClubController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/clubs")
+    @GetMapping("/api/clubs")
     public List<Club> getEntities(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "100") int pagesize
@@ -33,7 +33,7 @@ public class ClubController {
     }
 
     //route clubs/:id
-    @GetMapping("/clubs/:id")
+    @GetMapping("/api/clubs/:id")
     public Club getClubById(
             @RequestParam(required = true) Long id
     ) {

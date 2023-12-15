@@ -41,6 +41,14 @@ const roomSchema = new mongoose.Schema({
     }
 });
 
+roomSchema.pre('save', async function(next) {
+    // Check if the admin is not already in the members array
+    if (!this.members.includes(this.admin)) {
+        this.members.push(this.admin);
+    }
+    next();
+});
+
 const Room = mongoose.model('Room', roomSchema);
 
 module.exports = Room;

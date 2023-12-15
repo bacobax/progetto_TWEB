@@ -207,5 +207,5 @@ export const animatedButtonProps = {
  * Fetch DATA
  */
 
-export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => `http://localhost:8000/api/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`;
-export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => `http://localhost:8081/clubs?page=${pageNumber}&pagesize=${pageSize}`;
+export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => `http://localhost:8080/api/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`;
+export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => `http://localhost:8080/api/clubs?page=${pageNumber}&pagesize=${pageSize}`;

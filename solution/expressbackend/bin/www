@@ -6,17 +6,12 @@
 
 const app = require('../app');
 
-const { createServer } = require('http');
-
 const mongoose = require('mongoose');
 
 const dotenv = require('dotenv');
 
-const { init } = require('../utils/socket/socket.io');
 
-const { Server } = require('socket.io');
 
-const asyncListen = require('../utils/asyncListen');
 dotenv.config({ path: './config.env' });
 /**
  * Get port from environment and store in Express.
@@ -33,17 +28,9 @@ mongoose
   .then(() => {
     console.log('Connected to mongodb');
 
-    const server = createServer(app);
 
-    const io = new Server(server, {
-      cors: {
-        origin: '*',
-      },
-    });
 
-    init(io);
-
-    return asyncListen(server, port);
+    return app.listen(port, host);
   })
   .then(() => {
     console.log(`listening on http://${host}:${port}`);
