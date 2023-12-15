@@ -7,21 +7,14 @@
 const app = require('../app');
 
 const { createServer } = require('http');
-
-
-const dotenv = require('dotenv');
-
 const { init } = require('../utils/socket/socket.io');
-
 const { Server } = require('socket.io');
-
 const asyncListen = require('../utils/asyncListen');
 
 /**
  * Get port from environment and store in Express.
  */
 
-console.log({envPort: process.env.PORT})
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
 
@@ -33,9 +26,11 @@ const io = new Server(server, {
     origin: '*',
   },
 });
-
 init(io);
-asyncListen(server, port).then(() => {
+
+
+asyncListen(server, port)
+    .then(() => {
       console.log(`listening on http://${host}:${port}`);
 }).catch((err) => {
       return console.error('Errore nella listen: ', err);

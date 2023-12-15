@@ -49,6 +49,9 @@ const UserSchema = new Schema({
   passwordResetExpires: Date,
   // 'age' : Number,
   // 'admin' : Boolean
+},{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
 
 UserSchema.pre(/create|save/, async function (next) {

@@ -3,9 +3,10 @@
  * @param io
  */
 const {findOneRoom, createRoom, deleteRoom} = require("../roomOperations");
+
+
 exports.initChat = (io) => {
     const chat = io.of('/chat').on('connection', (socket) => {
-        try {
             /**
              * it creates or joins a room
              */
@@ -41,8 +42,5 @@ exports.initChat = (io) => {
             socket.on('disconnect', function () {
                 console.log('someone disconnected');
             });
-        } catch (e) {
-            console.log({errorSocketTryCatch: e});
-        }
     });
 };

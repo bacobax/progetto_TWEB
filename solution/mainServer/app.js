@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/api/player", getNodeRESTRedirectRouter());
 app.use("/api/clubs", getJavaRESTRedirectRouter());
+app.use("/api/room" , getNodeRESTRedirectRouter());
 
 app.use(globalErrorMiddleware);
 
