@@ -5,16 +5,25 @@ import {ChangeEvent, FormEvent, useCallback, useEffect, useState} from "react";
 import {useKeyCombo} from "../../hooks/useKeyCombo";
 import FakeSearchBar from "./FakeSearchBar";
 import React from "react";
-interface SearchBarProps{
-    onSearch: (term: string) => void;
+import useSearch from "../../hooks/useSearch";
+import FoundedList from "./FoundedList";
 
+export interface ResponseType {
+    clubs: {
+        clubId: number,
+        name: string,
+    }[],
+    players: {
+        playerId: number,
+        name: string,
+    }[],
 }
 
-const SearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
+const SearchBar : React.FC = () => {
 
     const { closeModal, isModalOpen, openModal } = useModal(false);
 
-    const [searchTerm, setSearchTerm] = useState("");
+    const {searchTerm, setSearchTerm, loading, data} = useSearch<ResponseType>({clubs: [], players: []}, 1000);
 
     /**
      * This is a custom hook that listens to the key combo ctrl+k or cmd+k in order to toggle the modal
@@ -24,30 +33,18 @@ const SearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
     /**
      * This useEffect is used to trigger the search after 500ms of inactivity
      */
-    useEffect(() => {
-        const id = setTimeout(() => {
-            if(searchTerm.trim().length !==0){
-                onSearch(searchTerm);
-            }
-
-        },500);
-        return () => {
-            clearTimeout(id);
-        }
-    },[searchTerm, onSearch]);
-
 
 
 
 
     const handleSearch = useCallback((e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        onSearch(searchTerm);
-    },[onSearch, searchTerm]);
+        //TODO: handle search
+    },[]);
 
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
-    },[]);
+    },[setSearchTerm]);
 
 
     return (
@@ -55,8 +52,10 @@ const SearchBar : React.FC<SearchBarProps> = ({onSearch}) => {
             <FakeSearchBar onClick={openModal}  />
             <Modal className={styles.modal} onClose={closeModal} title={""} opened={isModalOpen}>
                 <form onSubmit={handleSearch}>
-                    <input type="text" placeholder="Search Everything..." onChange={handleChange} autoFocus={true}/>
+                    <input type="text" placeholder="Search Everything..." onChange={handleChange} autoFocus={true} value={searchTerm}/>
                 </form>
+                {loading && <p>Loading...</p>}
+                {!loading && <FoundedList data={data}/>}
             </Modal>
         </>
 

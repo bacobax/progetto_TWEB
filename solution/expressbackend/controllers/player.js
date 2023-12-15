@@ -13,6 +13,24 @@ exports.deleteAllPlayer = deleteAll(Player);
 
 exports.deletePlayer = deleteOne(Player);
 
+exports.getByName = catchAsync(async (req, res) => {
+    const name = req.params.name;
+
+    const first_name_query = {first_name: {$regex: name, $options: 'i'}};
+    const last_name_query = {last_name: {$regex: name, $options: 'i'}};
+
+    const query = {$or: [first_name_query, last_name_query]};
+
+
+    const docs = await Player.find(query).select('_id first_name last_name');
+
+    res.status(200).json({
+        status: 'success',
+        data: docs,
+    });
+
+});
+
 exports.getOnePlayer = catchAsync(async (req, res, next) => {
     const id = req.params.id;
     const doc = await Player.findById(id)

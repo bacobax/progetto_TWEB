@@ -1,0 +1,29 @@
+.item{
+    display: flex;
+    align-items: center;
+    padding: 5px 5px 5px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #101010;
+    color: white;
+    gap: 3rem;
+    width: 90%;
+}
+
+.item p{
+    font-size: 1.2rem;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-basis: 60%;
+}
+
+.item .icon{
+    height: 2rem;
+    width: 2rem;
+    color: #64b264;
+}
+
+.item:hover{
+    background-color: #262626;
+}

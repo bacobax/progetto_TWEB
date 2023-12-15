@@ -207,5 +207,10 @@ export const animatedButtonProps = {
  * Fetch DATA
  */
 
-export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => `http://localhost:8080/api/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`;
-export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => `http://localhost:8080/api/clubs?page=${pageNumber}&pagesize=${pageSize}`;
+export const HOST_MAIN_SERVER = "http://localhost:8080/api";
+
+export const getMainServerPath = (path: string) => {
+    return HOST_MAIN_SERVER + path;
+}
+export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => getMainServerPath(`/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`);
+export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => getMainServerPath(`/clubs?page=${pageNumber}&pagesize=${pageSize}`);

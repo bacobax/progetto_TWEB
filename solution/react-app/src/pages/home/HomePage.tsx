@@ -10,7 +10,7 @@ function HomePage() {
 
     return (
         <>
-            <Navbar onSearch={(t)=>{alert(t)}} elements={navbarElements}/>
+            <Navbar elements={navbarElements}/>
             <MainSection name={HOME_SECTIONS.HOME.name} />
             <PlayerSection name={HOME_SECTIONS.PLAYERS.name}/>
             <TeamSection name={HOME_SECTIONS.TEAMS.name}/>

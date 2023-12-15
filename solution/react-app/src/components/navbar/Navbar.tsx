@@ -14,11 +14,10 @@ import useWindowSize from "../../hooks/useWindowSize";
 
 
 interface NavbarProps {
-  onSearch: (query: string) => void;
   elements: Elements;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
+const Navbar: React.FC<NavbarProps> = ({elements}) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const {loggedIn} = useContext(AuthContext);
   const {logout} = useAuth();
@@ -36,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, elements}) => {
         <nav className={styles.navbar}>
 
           {!isPhone ? <ElementList sidebar={false} elements={elementsFinal} /> : <RxHamburgerMenu className={styles.burgericon} onClick={handleBurgerClick}/>}
-          <SearchBar onSearch={onSearch}/>
+          <SearchBar/>
         </nav>
         <AnimatePresence>
             {(isPhone && showSidebar) && <Sidebar onClose={handleCloseSidebar} elements={elementsFinal}/>}

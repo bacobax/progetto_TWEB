@@ -40,6 +40,10 @@ public class ClubService {
         return clubPageableRepository.findAll(paging).getContent();
     }
 
+    public List<Club> getClubByNameContains(String name){
+        return clubRepository.findByNameContains(name);
+    }
+
 
 
 }

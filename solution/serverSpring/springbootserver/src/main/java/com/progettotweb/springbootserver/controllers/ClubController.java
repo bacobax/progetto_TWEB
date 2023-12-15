@@ -3,10 +3,7 @@ package com.progettotweb.springbootserver.controllers;
 import com.progettotweb.springbootserver.entities.Club;
 import com.progettotweb.springbootserver.services.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class ClubController {
         this.clubService = clubService;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/clubs")
     public List<Club> getEntities(
             @RequestParam(defaultValue = "1") int page,
@@ -33,14 +30,27 @@ public class ClubController {
     }
 
     //route clubs/:id
-    @GetMapping("/api/clubs/:id")
+    @CrossOrigin(origins = "*")
+    @GetMapping("/api/clubs/{id}")
     public Club getClubById(
-            @RequestParam(required = true) Long id
+            @PathVariable(required = true) Long id
     ) {
 
         Club club = clubService.getClubById(id).orElse(null);
 
         return club;
+    }
+
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/api/clubs/name/{name}")
+    public List<Club> getClubByContainsName(
+            @PathVariable(required = true) String name
+    ) {
+
+        List<Club> clubs = clubService.getClubByNameContains(name);
+
+        return clubs;
     }
 
 
