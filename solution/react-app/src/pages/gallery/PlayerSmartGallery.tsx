@@ -87,7 +87,7 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
     return (
         <div className={styles.container}>
             <Breadcrumbs classNames={{
-                list:`z-20 dark fixed top-10 left-10 ${styles.navigation} `,
+                list:`z-20 dark fixed top-10 left-10 backdrop-blur bg-black/50`,
             }} itemClasses={{
                 item: "font-bold text-lg"
             }}

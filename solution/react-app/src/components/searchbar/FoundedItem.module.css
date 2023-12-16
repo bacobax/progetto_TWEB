@@ -7,11 +7,11 @@
     background-color: #101010;
     color: white;
     gap: 3rem;
-    width: 90%;
+    width: 94%;
 }
 
 .item p{
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: bolder;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -19,8 +19,8 @@
 }
 
 .item .icon{
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
     color: #64b264;
 }
 

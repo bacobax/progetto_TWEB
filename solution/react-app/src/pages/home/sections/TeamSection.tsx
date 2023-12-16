@@ -4,7 +4,7 @@ import TeamCard from "../../../components/TeamCard";
 
 import styles from "./TeamSection.module.css";
 import {useSlice} from "../../../hooks/useSlice";
-import {Pagination} from "@nextui-org/react";
+import {Divider, Pagination} from "@nextui-org/react";
 import useLoadTeams from "../../../hooks/useLoadTeams";
 import useWindowSize from "../../../hooks/useWindowSize";
 import {animatedButtonProps} from "../../../constants/constants";
@@ -40,6 +40,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
                 }
             </div>
             <Pagination className={`dark ${styles.pagination} cursor-pointer`} color="secondary" total={matrixLength} onChange={setIndex} />
+            <Divider orientation={"horizontal"} className={"my-4"} />
             <Button {...animatedButtonProps} className={styles.moreButton} onClick={()=>{navigate("/gallery/clubs")}}>
                 More
             </Button>

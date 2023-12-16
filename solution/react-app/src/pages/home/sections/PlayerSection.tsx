@@ -8,7 +8,7 @@ import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
 
 
-import {Pagination, ScrollShadow} from "@nextui-org/react";
+import {Divider, Pagination, ScrollShadow} from "@nextui-org/react";
 import useLoadPlayers from "../../../hooks/useLoadPlayers";
 import useWindowSize from "../../../hooks/useWindowSize";
 
@@ -53,7 +53,7 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
 
 
             <Pagination className={`dark ${styles.pagination} cursor-pointer`} color={"secondary" } total={matrixLength} page={currentIdx} onChange={setIndex} />
-
+            <Divider orientation={"horizontal"} className={"my-4"} />
             <Button {...animatedButtonProps} className={styles.moreButton} onClick={()=>{navigate("/gallery/players")}}>
                 More
             </Button>

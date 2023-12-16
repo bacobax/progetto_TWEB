@@ -8,7 +8,10 @@ import {AnimatePresence, motion} from "framer-motion";
 interface ModalProps {
   children: React.ReactNode;
   onClose: () => void;
-  className?: string;
+  classNames?: {
+      modal?: string,
+      content?:string
+  };
   title: string;
   opened?: boolean;
 }
@@ -18,10 +21,10 @@ const TRANSITION_DURATION = 0.3;
 const overlayElement = document.getElementById('overlay');
 const backdropElement = document.getElementById('backdrop');
 const ModalComponent: React.FC<ModalProps> = (props) => {
-  const { children, onClose, className, title } = props;
+  const { children, onClose, classNames, title } = props;
 
   return createPortal(
-      <AnimatedCard className={`${styles.modal} ${className}`}
+      <AnimatedCard className={`${styles.modal} ${classNames?.modal}`}
         variants={{
             hidden: {
                 opacity: 0,
@@ -41,12 +44,12 @@ const ModalComponent: React.FC<ModalProps> = (props) => {
             duration: TRANSITION_DURATION,
         }}
       >
-          <div className={styles.modalContent}>
+          <div className={`${styles.modalContent}`}>
               <div className={styles.modal__header}>
                   <AiOutlineClose onClick={onClose} className={styles.close} />
                   <h3 className={styles.title}>{title}</h3>
               </div>
-              <div className={styles.modal__content}>{children}</div>
+              <div className={`${styles.modal__content} ${classNames?.content}`}>{children}</div>
           </div>
       </AnimatedCard>,
       overlayElement instanceof Element ? overlayElement : document.body);

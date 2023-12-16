@@ -11,9 +11,12 @@ function HomePage() {
     return (
         <>
             <Navbar elements={navbarElements}/>
-            <MainSection name={HOME_SECTIONS.HOME.name} />
-            <PlayerSection name={HOME_SECTIONS.PLAYERS.name}/>
-            <TeamSection name={HOME_SECTIONS.TEAMS.name}/>
+            <div className="flex flex-col items-center">
+                <MainSection name={HOME_SECTIONS.HOME.name} />
+                <PlayerSection name={HOME_SECTIONS.PLAYERS.name}/>
+                <TeamSection name={HOME_SECTIONS.TEAMS.name}/>
+            </div>
+
 
         </>
     );

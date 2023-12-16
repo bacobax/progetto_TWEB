@@ -140,3 +140,14 @@ export interface Club extends ShortClub{
 type Statistic = {
     [key: string]: number
 }
+export interface Message{
+    from: string;
+    text: string;
+}
+export interface Room{
+    name: string;
+    _id: string;
+    admin: string;
+    members: string[];
+    messages: Message[];
+}

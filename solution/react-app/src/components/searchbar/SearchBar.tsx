@@ -1,7 +1,7 @@
 import Modal from "../UI/modal/Modal";
 import useModal from "../../hooks/useModal";
 import styles from "./SearchBar.module.css";
-import {ChangeEvent, FormEvent, useCallback, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useCallback} from "react";
 import {useKeyCombo} from "../../hooks/useKeyCombo";
 import FakeSearchBar from "./FakeSearchBar";
 import React from "react";
@@ -50,12 +50,14 @@ const SearchBar : React.FC = () => {
     return (
         <>
             <FakeSearchBar onClick={openModal}  />
-            <Modal className={styles.modal} onClose={closeModal} title={""} opened={isModalOpen}>
+            <Modal classNames={{
+                modal: styles.modal,
+                content: styles.content,
+            }} onClose={closeModal} title={""} opened={isModalOpen}>
                 <form onSubmit={handleSearch}>
                     <input type="text" placeholder="Search Everything..." onChange={handleChange} autoFocus={true} value={searchTerm}/>
                 </form>
-                {loading && <p>Loading...</p>}
-                {!loading && <FoundedList data={data}/>}
+                <FoundedList data={data} loading={loading}/>
             </Modal>
         </>
 

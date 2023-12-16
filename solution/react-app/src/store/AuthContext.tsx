@@ -18,9 +18,9 @@ export const AuthContextProvider: React.FC<Props> = ({children}) => {
 
     const [loggedIn, setLoggedIn] = useState<boolean>(getToken() !== null);
 
-    const login = (token:string, email:string, password:string) => {
+    const login = (token:string, email:string, password:string, _id:string) => {
         setLoggedIn(true)
-        storageLogin(token, email, password);
+        storageLogin(token, email, password, _id);
     }
 
     const logout = () => {

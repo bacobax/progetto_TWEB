@@ -22,7 +22,7 @@
     height: 100%;
     backdrop-filter: blur(150px);
     -webkit-backdrop-filter: blur(150px);
-
+    background-color: rgba(0, 0, 0, 0.82);
     filter: blur(0);
 
 
