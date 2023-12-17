@@ -78,12 +78,17 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
             console.log("REDIRECTING GET")
             const path = req.originalUrl; // Get the full path of the request
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
+            const headers = req.headers;
 
             try {
-                const response = await axios.get(targetUrl);
+                const response = await axios.get(targetUrl , {
+                    headers : {
+                        Authorization: `${req.headers.authorization}`
+                    },
+                });
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.message , error.response.status);
+                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
             }
         })
     }
@@ -91,13 +96,24 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
         return catchAsync(async (req, res,next) => {
             const path = req.originalUrl; // Get the full path of the request
             const body = req.body;
+            const headers = req.headers;
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
-
             try {
-                const response = await axios.post(targetUrl, body);
+                console.log({
+                    targetUrl,
+                    body,
+                    headers
+                })
+                const response = await axios.post(targetUrl, body, {
+                    headers : {
+                        Authorization: `${req.headers.authorization}`
+                    },
+                    timeout: 3000
+                });
+                console.log({response})
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.message , error.response.status);
+                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
             }
         })
     }
@@ -108,10 +124,15 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
 
             try {
-                const response = await axios.put(targetUrl, body);
+
+                const response = await axios.put(targetUrl, body, {
+                    headers : {
+                        Authorization: `${req.headers.authorization}`
+                    },
+                });
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.message , error.response.status);
+                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
             }
         })
     }
@@ -121,10 +142,14 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
 
             try {
-                const response = await axios.delete(targetUrl);
+                const response = await axios.delete(targetUrl, {
+                    headers : {
+                        Authorization: `${req.headers.authorization}`
+                    },
+                });
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.message , error.response.status);
+                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
             }
         })
     }

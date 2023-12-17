@@ -141,7 +141,11 @@ type Statistic = {
     [key: string]: number
 }
 export interface Message{
-    from: string;
+    from: {
+        _id: string;
+        id: string;
+        name: string;
+    };
     text: string;
 }
 export interface Room{

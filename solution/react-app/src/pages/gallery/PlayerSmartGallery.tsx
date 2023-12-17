@@ -19,6 +19,15 @@ interface SmartGalleryProps {
 
 }
 
+const getMinMarketValue = (players: ShortPlayer[]) => {
+    return Math.min(...players.filter(player => player.market_value_in_eur !== null).map((player) => player.market_value_in_eur || 0));
+
+}
+
+const getMaxMarketValue = (players: ShortPlayer[]) => {
+    return Math.max(...players.filter(player => player.market_value_in_eur !== null).map((player) => player.market_value_in_eur || 0));
+}
+
 
 const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
 
@@ -81,7 +90,7 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
     } , [addMarketValueFilter]);
 
 
-    console.log({filteredData,filterNames})
+
 
 
     return (
@@ -109,6 +118,8 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
                     filterNames={filterNames}
                     onAddNameFilter={handleAddNameFilter}
                     onAddScorefilter={handleAddScoreFilter}
+                    maxMarketValue={getMaxMarketValue(players)}
+                    minMarketValue={getMinMarketValue(players)}
                 />
             }
             <main>

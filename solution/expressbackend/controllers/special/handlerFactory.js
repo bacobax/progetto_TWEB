@@ -89,10 +89,10 @@ exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     // To allow for nested GET reviews on tour (hack)
     let filter = {};
-    const features = new APIFeatures(Model.find(filter), req.query).filter().limitFields().paginate().sort();
+    const features = new APIFeatures(Model.find(filter), req.query).filter().limitFields().sort().paginate();
     
 
-    const doc = await features.query;
+    const doc = await features.query.exec();
 
     // SEND RESPONSE
     res.status(200).json({

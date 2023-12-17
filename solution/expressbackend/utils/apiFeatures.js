@@ -52,13 +52,22 @@ class APIFeatures {
   }
 
   paginate() {
-    const page = this.queryString.page * 1 || 1;
-    const limit = this.queryString.limit * 1 || 100;
+    const page = parseInt(this.queryString.page) || 1;
+    const limit = parseInt(this.queryString.limit) || 100;
+
+    // Handling boundary conditions
+    if (page <= 0 || limit <= 0) {
+      throw new Error('Invalid pagination parameters');
+    }
+
     const skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit);
 
+    console.log(`paginating: page ${page}, limit ${limit}, skip ${skip}`);
+
     return this;
   }
+
 }
 module.exports = APIFeatures;

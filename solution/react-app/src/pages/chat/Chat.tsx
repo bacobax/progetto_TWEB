@@ -6,7 +6,7 @@ const Chat: FC = () => {
         <div style={{
             width: "100vw",
             height: "100vh",
-            backgroundColor: "#18191a",
+            backgroundColor: "#020715",
             display: "flex",
         }}>
             <StatefulChat />

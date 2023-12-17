@@ -7,6 +7,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
 import {animatedButtonProps} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
+    import {Slider} from "@nextui-org/react";
 
 
 interface FilterFormProps{
@@ -16,6 +17,8 @@ interface FilterFormProps{
     filterNames: string[];
     onAddNameFilter: (name: string)=>void;
     onAddScorefilter: (scoreMin: number, scoreMax: number)=>void;
+    minMarketValue: number;
+    maxMarketValue: number;
 }
 
 const PlayerFilterForm: React.FC<FilterFormProps> = ({
@@ -24,11 +27,14 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
   filterNames,
   onRemoveFilter,
   onAddNameFilter,
-  onAddScorefilter
+  onAddScorefilter,
+    minMarketValue,
+    maxMarketValue
+
 }) => {
 
 
-  const [formState, setFormState] = useState(   {name: "", scoreMin: "", scoreMax: ""});
+  const [formState, setFormState] = useState(   {name: "", scoreMin: "0", scoreMax: "1000000"});
   const { name, scoreMin, scoreMax } = formState;
 
 
@@ -109,38 +115,27 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
           />
 
         <hr />
-        <InputGroup
-          name={"From"}
-          error={[false, ""]}
-          inputProps={{
-            type: "number",
-            placeholder: "Score",
-            value: scoreMin,
-            onChange: (event) => {
-              setFormState(prev => ({
-                    ...prev,
-                    scoreMin: event.target.value
-              }))
-            },
-            min: 0
-          }}
-        />
 
-        <InputGroup
-          name={"To"}
-          error={[false, ""]}
-          inputProps={{
-            type: "number",
-            placeholder: "Score",
-            value: scoreMax,
-            onChange: (event) => {
-              setFormState(prev=>({
+
+        <Slider
+            label={"Market Value Range"}
+            step={10000}
+            minValue={minMarketValue}
+            maxValue={maxMarketValue}
+            defaultValue={[minMarketValue, maxMarketValue]}
+            formatOptions={{style: "currency", currency: "EUR"}}
+            className="max-w-md"
+            value={[Number(scoreMin)-10000, Number(scoreMax)]}
+            onChange={(array: number[]|number)=>{
+                if(typeof array === "number"){
+                    return;
+                }
+                setFormState(prev=> ({
                     ...prev,
-                    scoreMax: event.target.value
-              }))
-            },
-            min: 0
-          }}
+                    scoreMin: array[0].toString(),
+                    scoreMax: array[1].toString()
+                }))
+            }}
         />
         <IconButton
           {...animatedButtonProps}

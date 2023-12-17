@@ -1,33 +1,34 @@
 import {Room} from "../../constants/types";
 import {FC, useCallback} from "react";
 import {Avatar, Skeleton} from '@nextui-org/react';
-import {getUserInfo} from "../../auth/authFunctions";
-import {Navigate} from "react-router-dom";
 import ChatItem from "./ChatItem";
 
 interface ChatListProps {
     rooms: Room[];
     loading: boolean;
-    onSelectRoom?: (id:number) => void;
+    onSelectRoom: (id:number) => void;
     user: {
         _id: string;
         email: string;
         token: string;
         name:string;
     };
+    selectedRoomIdx: number;
 }
 
-const ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user }) => {
+const ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx }) => {
 
 
   const renderChats = useCallback(
     () =>
       rooms.length > 0 ? (
-        rooms.map((room, index) => <ChatItem key={room._id} room={room} />)
+        rooms.map((room, index) => <ChatItem key={room._id} room={room} selected={index === selectedRoomIdx} onClick={()=>{
+            onSelectRoom(index);
+        }} />)
       ) : (
         <h2 className="text-white"> start a new chat</h2>
       ),
-    [rooms]
+    [rooms, selectedRoomIdx, onSelectRoom]
   );
 
   const renderSkeletons = useCallback(() => {

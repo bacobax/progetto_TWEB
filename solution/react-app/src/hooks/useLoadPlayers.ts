@@ -34,6 +34,7 @@ const useLoadPlayers = (pageSize: number) => {
 
 
     useEffect(() => {
+        console.log(`calling api at url ${URL_SHORT_PLAYERS(1, pageSize)}`);
         fetchData<{ data: ShortPlayer[], status: string, message?: string }>({
             url: URL_SHORT_PLAYERS(1, pageSize),
             method: "GET"

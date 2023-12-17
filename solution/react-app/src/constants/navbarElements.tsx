@@ -3,6 +3,8 @@ import {Elements, NavbarElement} from "../components/navbar/types";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaRegNewspaper } from "react-icons/fa";
 import {IoIosLogIn, IoIosLogOut, IoMdInformationCircleOutline} from "react-icons/io";
+import { BsChatQuote } from "react-icons/bs";
+
 import {HOME_SECTIONS as s} from "./constants";
 
 import styles from "../components/navbar/Navbar.module.css";
@@ -31,17 +33,23 @@ export const navbarElements: Elements = [
     },
 
 
+
 ];
 
-export const logoutElement: NavbarElement = {
+export const logoutElement = (onClick: ()=>void) => ({
     name: "Logout",
     path: "/",
     icon: <IoIosLogOut className={styles.icon}/>,
-    onClick: () => {
-        console.log("logout")
-        logout();
-    },
+    onClick: onClick,
     routerLink: false
+})
+
+export const chatElement: NavbarElement = {
+    name: "Chat",
+    path: "/chat",
+    icon: <BsChatQuote className={styles.icon}/>,
+    routerLink: true
+
 }
 
 export const loginElement: NavbarElement = {

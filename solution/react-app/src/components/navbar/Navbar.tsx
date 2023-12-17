@@ -7,7 +7,7 @@ import {Elements} from "./types";
 import {AuthContext} from "../../store/AuthContext";
 import {useAuth} from "../../hooks/useAuth";
 import ElementList from "./ElementList";
-import {loginElement, logoutElement} from "../../constants/navbarElements";
+import {chatElement, loginElement, logoutElement} from "../../constants/navbarElements";
 import {AnimatePresence} from "framer-motion";
 
 import useWindowSize from "../../hooks/useWindowSize";
@@ -19,11 +19,10 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({elements}) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const {loggedIn} = useContext(AuthContext);
-  const {logout} = useAuth();
+  const {logout, loggedIn} = useAuth();
   const {isPhone} = useWindowSize();
 
-  const elementsFinal: Elements= loggedIn ? [...elements , logoutElement] : [...elements , loginElement];
+  const elementsFinal: Elements= loggedIn ? [...elements , logoutElement(logout), chatElement] : [...elements , loginElement];
     const handleBurgerClick = () => {
         setShowSidebar(prev => !prev)
     }
