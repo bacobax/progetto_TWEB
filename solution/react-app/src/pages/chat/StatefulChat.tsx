@@ -2,12 +2,16 @@ import { FC, useEffect, useState, useCallback } from "react";
 import { getUserInfo } from "../../auth/authFunctions";
 import { Room } from "../../constants/types";
 import useFetch from "../../hooks/useFetch";
-import { URL_NEW_MESSAGE, URL_ROOM_FROM_USER } from "../../constants/constants";
+import {URL_CREATE_ROOM, URL_NEW_MESSAGE, URL_ROOM_FROM_USER} from "../../constants/constants";
 import ChatList from "./ChatList";
 import { Navigate } from "react-router-dom";
 import ChatSpace from "./ChatSpace";
 import { socket } from "../../socket";
 import useWindowSize from "../../hooks/useWindowSize";
+import useModal from "../../hooks/useModal";
+import Modal from "../../components/UI/modal/Modal";
+import {Input} from "@nextui-org/react";
+import {NewChat} from "./NewChat";
 //import ErrorMessage from "./ErrorMessage"; // Assuming ErrorMessage is a new component for displaying errors
 
 interface StatefulChatProps {}
@@ -17,6 +21,7 @@ const StatefulChat: FC<StatefulChatProps> = () => {
     const [selectedRoomIdx, setSelectedRoomIdx] = useState<number>(-1);
     const [user, setUser] = useState(getUserInfo());
     const [isChatList, setIsChatList] = useState<boolean>(true);
+    const {closeModal, openModal, isModalOpen} = useModal(false);
 
     const { loading: loadingRooms, error: errorRooms, setError: setErrorRooms, fetchData: fetchRoomsData } = useFetch();
     const { loading: loadingNewMessage, error: errorNewMessage, setError: setErrorMessage, fetchData: fetchSendMessage } = useFetch();
@@ -107,6 +112,27 @@ const StatefulChat: FC<StatefulChatProps> = () => {
         socket.emit("create or join", userRooms[index]._id, user._id);
     }, [userRooms, user]);
 
+    const handleNewChat = useCallback((name:string) => {
+        if(!user) return;
+        console.log(name);
+        fetchRoomsData<{status: string, data: Room, message?:string}>({url:URL_CREATE_ROOM, token: user?.token, method: "POST", body: JSON.stringify({name: name})}, ({data,status,message}) => {
+            if(status === "success") {
+                setUserRooms(prevRooms => {
+                    const newRooms = [...prevRooms];
+                    newRooms.push(data);
+                    return newRooms;
+                });
+                setSelectedRoomIdx(userRooms.length);
+                setIsChatList(false);
+                socket.emit("create or join", data._id, user._id);
+                closeModal();
+            } else {
+                setErrorRooms(message ? message : "Error while creating room");
+            }
+        });
+
+    }, [user, userRooms, closeModal, setErrorRooms, fetchRoomsData]);
+
     if (!user) {
         return <Navigate to={'/auth'} />;
     }
@@ -114,6 +140,8 @@ const StatefulChat: FC<StatefulChatProps> = () => {
     if (!loadingRooms && errorRooms) {
         return <h1>Ciao</h1>;
     }
+
+
 
     return (
         <>
@@ -124,7 +152,9 @@ const StatefulChat: FC<StatefulChatProps> = () => {
                     user={user}
                     onSelectRoom={handleSelectRoom}
                     selectedRoomIdx={selectedRoomIdx}
-                    isPhone={isPhone} />
+                    isPhone={isPhone}
+                    onOpenNewChatForm={openModal}
+                />
             }
             {((isPhone && !isChatList) || !isPhone) &&
                 <ChatSpace room={userRooms[selectedRoomIdx]}
@@ -135,6 +165,7 @@ const StatefulChat: FC<StatefulChatProps> = () => {
                            isPhone={isPhone} onBack={() => { setIsChatList(true) }}
                            width={width} />
             }
+            <NewChat onClose={closeModal} opened={isModalOpen} onNewChat={handleNewChat}/>
         </>
     );
 };

@@ -1,7 +1,8 @@
 import {Room} from "../../constants/types";
 import {FC, useCallback} from "react";
-import {Avatar, Skeleton} from '@nextui-org/react';
+import {Skeleton, Tooltip} from '@nextui-org/react';
 import ChatItem from "./ChatItem";
+import { MdOutlineAddToPhotos } from "react-icons/md";
 
 interface ChatListProps {
     rooms: Room[],
@@ -14,10 +15,11 @@ interface ChatListProps {
         name: string;
     },
     selectedRoomIdx: number,
-    isPhone: boolean
+    isPhone: boolean,
+    onOpenNewChatForm: () => void
 }
 
-const ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx, isPhone }) => {
+const   ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx, isPhone, onOpenNewChatForm }) => {
 
 
   const renderChats = useCallback(
@@ -52,6 +54,9 @@ const ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selec
       <header>
         <div className="flex flex-row w-full h-[75px]  items-center pl-[40px] gap-[20px]">
           <h1 className="text-white font-bold text-xl"> {user.email}</h1>
+            <Tooltip content={"create new chat"} placement={"bottom"}>
+                <MdOutlineAddToPhotos className="text-primary cursor-pointer hover:scale-110 duration-250 text-2xl" onClick={onOpenNewChatForm}/>
+            </Tooltip>
         </div>
         <div className="flex flex-row w-full h-[75px]  items-center pl-[40px] gap-[20px]">
           <h2 className="text-white text-l"> Messages</h2>

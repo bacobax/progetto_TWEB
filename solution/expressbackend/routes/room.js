@@ -3,7 +3,7 @@ const {getAllRoom, getOneRoom, deleteRoom, createRoom, getAllUserRoom, updateRoo
 const {protect} = require("../controllers/special/authController");
 const router = express.Router();
 
-router.route('/').get(getAllRoom).post(createRoom);
+router.route('/').get(getAllRoom).post(protect, createRoom);
 router.route('/:id').get(getOneRoom).patch(updateRoom).delete(deleteRoom);
 router.route('/user/:id').get(getAllUserRoom);
 router.route('/newMessage/:roomID').post(protect, newMessage);

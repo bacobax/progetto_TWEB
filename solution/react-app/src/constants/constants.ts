@@ -219,3 +219,5 @@ export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => getMainSe
 export const URL_ROOM_FROM_USER = (userId:string) => getMainServerPath(`/room/user/${userId}`);
 
 export const URL_NEW_MESSAGE = (roomId:string) => getMainServerPath(`/room/newMessage/${roomId}`);
+
+export const URL_CREATE_ROOM = getMainServerPath("/room");

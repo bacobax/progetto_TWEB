@@ -24,12 +24,11 @@ const getRandomGradientColorTailwind = ():string => {
 }
 
 
-const SELECT_COLOR = "bg-stone-800";
 
 export const ChatItem:FC<ChatPreviewProps> = ({room,selected, onClick}) => {
     const lastMessage = room.messages.length > 0 ? room.messages[room.messages.length - 1]  : null;
     return (
-        <div className={`flex flex-row w-full h-[75px] flex-wrap items-center justify-around gap-[20px] hover:${SELECT_COLOR} cursor-pointer ${selected && SELECT_COLOR}`} onClick={onClick}>
+        <div className={`flex flex-row w-full h-[75px] flex-wrap items-center justify-around gap-[20px] hover:bg-gray-900 cursor-pointer ${selected && "bg-gray-900"}`} onClick={onClick}>
             <Avatar name={room.name} size="lg" classNames={{
                 base: `bg-gradient-to-tl ${getRandomGradientColorTailwind()} cursor-pointer shrink-0 grow-1`
             }}/>
@@ -38,7 +37,7 @@ export const ChatItem:FC<ChatPreviewProps> = ({room,selected, onClick}) => {
                     {room.name}
                 </label>
                 <label className="text-gray-500 cursor-pointer truncate">
-                    {lastMessage !== null && lastMessage.from.name}:  {"  "}
+                    {lastMessage !== null && (lastMessage.from.name+": ")}
                     {lastMessage === null ? "No messages yet" : lastMessage.text}
                 </label>
             </div>

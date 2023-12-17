@@ -5,7 +5,23 @@ const catchAsync = require('../utils/catchAsync');
 const {createOne, getAll, deleteAll, deleteOne, getOne, updateOne} = require('./special/handlerFactory');
 const AppError = require("../utils/appError");
 
-exports.createRoom = createOne(Room);
+exports.createRoom = catchAsync(async (req, res, next) => {
+    const user = req.user;
+    const name = req.body.name;
+
+    const doc = new Room({
+        name: name,
+        admin: user.id,
+    });
+
+    await doc.save();
+
+    res.status(201).json({
+        status: 'success',
+        data: doc,
+    });
+
+});
 
 exports.getAllRoom = getAll(Room);
 
