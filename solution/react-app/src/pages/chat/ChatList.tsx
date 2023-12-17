@@ -4,19 +4,20 @@ import {Avatar, Skeleton} from '@nextui-org/react';
 import ChatItem from "./ChatItem";
 
 interface ChatListProps {
-    rooms: Room[];
-    loading: boolean;
-    onSelectRoom: (id:number) => void;
+    rooms: Room[],
+    loading: boolean,
+    onSelectRoom: (id: number) => void,
     user: {
         _id: string;
         email: string;
         token: string;
-        name:string;
-    };
-    selectedRoomIdx: number;
+        name: string;
+    },
+    selectedRoomIdx: number,
+    isPhone: boolean
 }
 
-const ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx }) => {
+const ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx, isPhone }) => {
 
 
   const renderChats = useCallback(
@@ -47,7 +48,7 @@ const ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selec
   }, []);
 
   return (
-    <div className="w-full sm:w-2/5 md:max-w-[400px] h-full border-r-[0.5px] border-gray-rgba">
+    <div className="w-full sm:w-2/5 h-full border-r-[0.5px] border-gray-rgba">
       <header>
         <div className="flex flex-row w-full h-[75px]  items-center pl-[40px] gap-[20px]">
           <h1 className="text-white font-bold text-xl"> {user.email}</h1>

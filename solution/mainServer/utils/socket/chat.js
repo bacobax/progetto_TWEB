@@ -7,16 +7,10 @@ const {findOneRoom, createRoom, deleteRoom} = require("../roomOperations");
 
 exports.initChat = (io) => {
     const chat = io.of('/chat').on('connection', (socket) => {
-            /**
-             * it creates or joins a room
-             */
+            console.log('someone connected')
             socket.on('create or join', async (roomID, userId) => {
 
                 try{
-                    const roomDB = await findOneRoom(roomID);
-                    if (!roomDB) {
-                        await createRoom({name: roomID, description: roomID, adminUserID: userId});
-                    }
                     socket.join(roomID);
                     chat.to(roomID).emit('joined', roomID, userId);
                 }catch (e) {
@@ -24,14 +18,14 @@ exports.initChat = (io) => {
                 }
             });
 
-            socket.on('chat', function (room, userId, chatText) {
-                chat.to(room).emit('chat', room, userId, chatText);
+            socket.on('chat', function (room, userId, userName, chatText) {
+                console.log(`message from ${userId} in room ${room}: ${chatText}`)
+                chat.to(room).emit('chat', room, userId, userName, chatText);
             });
 
 
             socket.on('deleteRoom', async (roomID) => {
                 try{
-                    await deleteRoom(roomID);
                     socket.leave(roomID);
                     chat.to(roomID).emit('roomDeleted', roomID);
                 }catch (e) {

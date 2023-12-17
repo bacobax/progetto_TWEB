@@ -11,6 +11,7 @@ export interface Params{
     body?: string;
     headers?: HeadersInit;
     token?: string;
+    abortController?: AbortController;
 
 }
 
@@ -53,14 +54,15 @@ const useFetch = ( ):ReturnType => {
      *    console.log(data)
      *    });
      */
-    const fetchData: FetchData = useCallback( async (params, callback ) => {
+    const fetchData: FetchData = useCallback( async (params, callback, ) => {
         setLoading(true);
         const headers = params.token ? {...params.headers, "Authorization": `Bearer ${params.token}` , "Content-Type": "application/json"} : {...params.headers, "Content-Type": "application/json"};
         try {
             const res = await fetch(params.url, {
                 method: params.method || "GET",
                 body: params.body,
-                headers: headers
+                headers: headers,
+                signal: params.abortController?.signal
             });
 
             const data = await res.json();
