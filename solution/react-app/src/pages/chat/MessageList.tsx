@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Chip, ScrollShadow} from "@nextui-org/react";
+import {ScrollShadow} from "@nextui-org/react";
 import {Message} from "../../constants/types";
 
 interface MessageListProps {

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import useFetch from "./useFetch";
 import {getMainServerPath} from "../constants/constants";
 
-const useSearch = <T>(initialData: T , delayMillisec: number) => {
+const useSearch = <T>(initialData: T , delayMillisec: number, pathBeforeSearch?:string, token?:string|null) => {
     const [searchTerm, setSearchTerm] = useState("");
     const {fetchData, loading} = useFetch();
 
@@ -11,22 +11,21 @@ const useSearch = <T>(initialData: T , delayMillisec: number) => {
 
 
     useEffect(() => {
-        const abortController = new AbortController();
         const id = setTimeout(() => {
             if(searchTerm.trim().length !==0){
-                const path = "/search/" + searchTerm;
-
-                fetchData<{status:string, data: T}>({url: getMainServerPath(path), abortController} , (data)=>{
+                const path = pathBeforeSearch ? pathBeforeSearch + "/search/" + searchTerm : "/search/" + searchTerm;
+                const obj = (token!==undefined && token !== null) ? {url: getMainServerPath(path), token} : {url: getMainServerPath(path)};
+                fetchData<{status:string, data: T}>(obj , (data)=>{
                     console.log({data})
                     setData(data.data);
                 })
             }
+
         },delayMillisec);
         return () => {
-            abortController.abort();
             clearTimeout(id);
         }
-    },[searchTerm, fetchData, delayMillisec]);
+    },[searchTerm, fetchData, delayMillisec, pathBeforeSearch, token]);
 
     return {searchTerm, setSearchTerm, loading, data};
 }

@@ -18,16 +18,27 @@ exports.initChat = (io) => {
                 }
             });
 
+            socket.on('firstJoin', async (roomID, userId, userName) => {
+                try{
+                    socket.join(roomID);
+                    chat.to(roomID).emit('first-joined', roomID, userId, userName);
+                }catch (e) {
+                    console.log({errorSocketCreateOrJoin: e});
+                }
+            })
+
             socket.on('chat', function (room, userId, userName, chatText) {
                 console.log(`message from ${userId} in room ${room}: ${chatText}`)
                 chat.to(room).emit('chat', room, userId, userName, chatText);
             });
 
 
-            socket.on('deleteRoom', async (roomID) => {
+            socket.on('leave', async (roomID, userID) => {
                 try{
+
                     socket.leave(roomID);
-                    chat.to(roomID).emit('roomDeleted', roomID);
+                    console.log("EMITTING LEAVE")
+                    chat.to(roomID).emit('leave', roomID, userID);
                 }catch (e) {
                     console.log({errorSocketDeleteRoom: e});
                 }

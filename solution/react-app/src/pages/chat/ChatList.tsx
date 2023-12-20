@@ -1,8 +1,9 @@
 import {Room} from "../../constants/types";
 import {FC, useCallback} from "react";
-import {Skeleton, Tooltip} from '@nextui-org/react';
+import {Button, Skeleton, Tooltip} from '@nextui-org/react';
 import ChatItem from "./ChatItem";
 import { MdOutlineAddToPhotos } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
 
 interface ChatListProps {
     rooms: Room[],
@@ -17,19 +18,18 @@ interface ChatListProps {
     selectedRoomIdx: number,
     isPhone: boolean,
     onOpenNewChatForm: () => void
+    onOpenSearchChatForm: () => void
 }
 
-const   ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx, isPhone, onOpenNewChatForm }) => {
+const   ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx, isPhone, onOpenNewChatForm , onOpenSearchChatForm}) => {
 
 
   const renderChats = useCallback(
     () =>
-      rooms.length > 0 ? (
+      rooms.length > 0 && (
         rooms.map((room, index) => <ChatItem key={room._id} room={room} selected={index === selectedRoomIdx} onClick={()=>{
             onSelectRoom(index);
         }} />)
-      ) : (
-        <h2 className="text-white"> start a new chat</h2>
       ),
     [rooms, selectedRoomIdx, onSelectRoom]
   );
@@ -54,9 +54,18 @@ const   ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, sel
       <header>
         <div className="flex flex-row w-full h-[75px]  items-center pl-[40px] gap-[20px]">
           <h1 className="text-white font-bold text-xl"> {user.email}</h1>
-            <Tooltip content={"create new chat"} placement={"bottom"}>
-                <MdOutlineAddToPhotos className="text-primary cursor-pointer hover:scale-110 duration-250 text-2xl" onClick={onOpenNewChatForm}/>
+            <Tooltip content={"Create new chat"} placement={"bottom"} showArrow>
+                <Button isIconOnly className={"dark"} onClick={onOpenNewChatForm}>
+                    <MdOutlineAddToPhotos className="text-primary cursor-pointer hover:scale-110 duration-250 text-2xl" />
+                </Button>
+
             </Tooltip>
+            <Tooltip content={"Search new chat"} placement={"bottom"} showArrow>
+                <Button isIconOnly className={"dark"}  onClick={onOpenSearchChatForm}>
+                <FaSearch className="text-primary cursor-pointer hover:scale-110 duration-250 text-2xl"/>
+                </Button>
+            </Tooltip>
+
         </div>
         <div className="flex flex-row w-full h-[75px]  items-center pl-[40px] gap-[20px]">
           <h2 className="text-white text-l"> Messages</h2>

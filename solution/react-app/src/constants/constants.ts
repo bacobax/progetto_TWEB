@@ -221,3 +221,7 @@ export const URL_ROOM_FROM_USER = (userId:string) => getMainServerPath(`/room/us
 export const URL_NEW_MESSAGE = (roomId:string) => getMainServerPath(`/room/newMessage/${roomId}`);
 
 export const URL_CREATE_ROOM = getMainServerPath("/room");
+
+export const URL_JOIN_ROOM = (roomId:string) => getMainServerPath(`/room/join/${roomId}`);
+
+export const URL_LEAVE_ROOM = (roomId:string) => getMainServerPath(`/room/leave/${roomId}`);

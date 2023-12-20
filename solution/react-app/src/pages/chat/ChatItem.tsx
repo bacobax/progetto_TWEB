@@ -9,17 +9,35 @@ interface ChatPreviewProps {
 
 const getRandomGradientColorTailwind = ():string => {
     const colors = [
-        "from-orange-800 to-orange-900",
-        "from-pink-800 to-pink-900",
-        "from-purple-800 to-purple-900",
-        "from-blue-800 to-blue-900",
-        "from-green-800 to-green-900",
-        "from-yellow-800 to-yellow-900",
-        "from-red-800 to-red-900",
-        "from-indigo-800 to-indigo-900",
-        "from-gray-800 to-gray-900",
-        "from-stone-800 to-stone-900",
-    ];
+        "from-[#F9D423] to-[#FF4E50]",
+        "from-[#00B4DB] to-[#0083B0]",
+        "from-[#FF416C] to-[#FF4B2B]",
+        "from-[#FFA17F] to-[#00223E]",
+        "from-[#FBD3E9] to-[#BB377D]",
+        "from-[#F8B500] to-[#F9D423]",
+        "from-[#F953C6] to-[#B91D73]",
+        "from-[#00F260] to-[#0575E6]",
+        "from-[#FAD961] to-[#F76B1C]",
+        "from-[#00B4DB] to-[#0083B0]",
+        "from-[#FF416C] to-[#FF4B2B]",
+        "from-[#FFA17F] to-[#00223E]",
+        "from-[#FBD3E9] to-[#BB377D]",
+        "from-[#F8B500] to-[#F9D423]",
+        "from-[#F953C6] to-[#B91D73]",
+        "from-[#00F260] to-[#0575E6]",
+        "from-[#FAD961] to-[#F76B1C]",
+        "from-[#00B4DB] to-[#0083B0]",
+        "from-[#FF416C] to-[#FF4B2B]",
+        "from-[#FFA17F] to-[#00223E]",
+        "from-[#FBD3E9] to-[#BB377D]",
+        "from-[#F8B500] to-[#F9D423]",
+        "from-[#F953C6] to-[#B91D73]",
+        "from-[#00F260] to-[#0575E6]",
+        "from-[#FAD961] to-[#F76B1C]",
+        "from-[#00B4DB] to-[#0083B0]",
+        "from-[#FF416C] to-[#FF4B2B]",
+        "from-[#FFA17F] to-[#00223E]",
+    ]
     return colors[Math.floor(Math.random() * colors.length)];
 }
 

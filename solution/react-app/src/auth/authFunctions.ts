@@ -1,4 +1,4 @@
-import { BASE_URL } from "../constants/constants";
+import {BASE_URL} from "../constants/constants";
 
 //jwt authentication handling
 
@@ -37,13 +37,27 @@ export interface LoginResponse {
 }
 
 export type loginFN = (token:string, email: string, password: string, _id:string) => void;
+
+export const getTokenDuration = () => {
+    const now = new Date();
+    const storedExpiration = (localStorage.getItem("expiration"));
+    if(storedExpiration === null) return null;
+    const expiration = new Date(storedExpiration);
+    return expiration.getTime() - now.getTime();
+}
+
 export const login: loginFN = (token, name, email, _id) => {
 
     localStorage.setItem("token", token);
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("_id", _id);
+    const expiration = new Date();
+    expiration.setHours(expiration.getHours() + 4);
+    localStorage.setItem("expiration", expiration.toISOString());
 }
+
+
 
 export const logout = () => {
     localStorage.removeItem("token");
@@ -52,14 +66,21 @@ export const logout = () => {
     localStorage.removeItem("_id");
 }
 
-
-export const getToken = () => {
+type Token = string;
+export const getToken = ():null|Token|"EXPIRED" => {
 
     //verify if token is valid and not expired
 
     const token = localStorage.getItem("token");
+    const expDuration = getTokenDuration();
 
-    if(token === null || token.trim().length <= 0) return null;
+    if(token === null || expDuration===null || token.trim().length <= 0) return null;
+
+    if(expDuration <0){
+        return "EXPIRED";
+    }
+    return token;
+
 
 };
 

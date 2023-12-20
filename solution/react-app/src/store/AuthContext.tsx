@@ -1,5 +1,5 @@
-import React, {createContext, useState} from "react";
-import {getToken, loginFN} from "../auth/authFunctions";
+import React, {createContext, useEffect, useState} from "react";
+import {getToken, getTokenDuration, loginFN} from "../auth/authFunctions";
 import {login as storageLogin, logout as storageLogout} from "../auth/authFunctions";
 
 interface ContextProps {
@@ -17,7 +17,6 @@ interface Props{
 export const AuthContextProvider: React.FC<Props> = ({children}) => {
 
     const [loggedIn, setLoggedIn] = useState<boolean>(getToken() !== null);
-
     const login = (token:string, email:string, password:string, _id:string) => {
         setLoggedIn(true)
         storageLogin(token, email, password, _id);
@@ -27,6 +26,25 @@ export const AuthContextProvider: React.FC<Props> = ({children}) => {
         setLoggedIn(false)
         storageLogout();
     }
+
+    useEffect(() => {
+        const token = getToken();
+        const tokenDuration = getTokenDuration();
+        if(!token || !tokenDuration) return;
+
+        if(token === "EXPIRED"){
+            logout();
+            return;
+        }
+
+        console.log(`remaining time: ${tokenDuration}`);
+
+        setTimeout(() => {
+            logout();
+        }, tokenDuration);
+
+    }, []);
+
 
     return <AuthContext.Provider value={{loggedIn, login, logout}}>
         {children}

@@ -1,4 +1,4 @@
-import {Card, CardHeader, Image, Divider, CardFooter, CardBody, Link, Button} from "@nextui-org/react";
+import {Card, CardHeader, Image, Divider, CardFooter, CardBody, Link, Button, Spacer} from "@nextui-org/react";
 import {Club, ShortClub, ShortPlayer} from "../constants/types";
 import {useNavigate} from "react-router-dom";
 
@@ -24,8 +24,9 @@ const TeamCard: React.FC<TeamCardProps> = ({name,stadiumName, lastSeason, squadS
                     <p className="text-small text-default-500 w-full">{onlyHostFromLink(url)}</p>
                 </div>
             </CardHeader>
+            <Spacer y={2}/>
             <Divider/>
-
+            <Spacer y={2}/>
             <CardFooter className="flex-row gap-7 p-0 w-full">
                 <Link
                     isExternal
