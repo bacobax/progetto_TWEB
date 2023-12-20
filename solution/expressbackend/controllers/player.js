@@ -1,5 +1,4 @@
 const Player = require('../models/player');
-
 const catchAsync = require('../utils/catchAsync');
 
 const {createOne, getAll, deleteAll, deleteOne, getOne, updateOne} = require('./special/handlerFactory');
@@ -131,6 +130,11 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
     lineupsPositions.forEach(position => {
         lineupsCount[position] = lineups.filter(l => l.position === position).length;
     })
+
+    //const gamesPlayed = [...new Set(appearances.map(a => a.game_id))];
+
+
+
 
     const responseDoc = {
         ...(playerFields._doc),

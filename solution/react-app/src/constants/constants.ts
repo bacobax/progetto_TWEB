@@ -36,6 +36,7 @@ export const ROUTES = {
   HOME: '/',
   GALLERY: '/gallery',
   CHAT: '/chat',
+  PLAYER_INFO: 'player/:id',
   DEFAULT: "*",
 }
 
@@ -225,3 +226,5 @@ export const URL_CREATE_ROOM = getMainServerPath("/room");
 export const URL_JOIN_ROOM = (roomId:string) => getMainServerPath(`/room/join/${roomId}`);
 
 export const URL_LEAVE_ROOM = (roomId:string) => getMainServerPath(`/room/leave/${roomId}`);
+
+export const URL_PLAYER_INFO = (playerID:string) => getMainServerPath(`/playerStat/${playerID}`);

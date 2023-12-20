@@ -8,6 +8,7 @@ import {ShortPlayer} from "../constants/types";
 import {AnimatePresence, motion} from "framer-motion";
 import {numberFormatWithCommas} from "../constants/constants";
 import Button from "./UI/button/Button";
+import {useNavigate} from "react-router-dom";
 interface PlayerCardProps extends ShortPlayer {
   className?: string;
 }
@@ -21,7 +22,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
     highest_market_value_in_eur
 
 }) => {
-    const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate()
   return (
     <div className={styles.backdrop}>
       <motion.div
@@ -60,7 +61,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
                         scale: 1.1
                     }} className={styles.viewButton} style={{
                         border: "1px solid black"
-                    }}>View</Button>
+                    }} onClick={()=>{navigate(`/player/${_id}`)}}>View</Button>
                 </div>
 
 

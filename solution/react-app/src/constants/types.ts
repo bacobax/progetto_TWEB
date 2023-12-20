@@ -48,10 +48,22 @@ export interface ShortPlayer{
     market_value_in_eur?: number
     highest_market_value_in_eur?: number
 }
+
+export interface PlayerStats {
+
+        goals: number;
+        assists: number;
+        yellow_cards: number;
+        red_cards: number;
+        minutes_played: number;
+        appearances: number;
+
+}
 export interface Player extends ShortPlayer{
     last_season: string;
     player_code: string;
     country_of_birth?: string;
+    city_of_birth?: string;
     date_of_birth?: string;
     sub_position?:SubPosition;
     position: Position;
@@ -59,8 +71,21 @@ export interface Player extends ShortPlayer{
     height_in_cm?: number;
     contract_expiration_date?: string;
     agent_name?: string;
-    current_club?: string;
+    clubName: string;
     url?: string;
+    stats: {
+        [competitionID:string] : PlayerStats
+    };
+    totalStats: PlayerStats
+    lineupsCount?: {
+        [lineupPosition:string] : number
+    }
+    market_values_in_eur?: [
+        {
+            market_value_in_eur: number,
+            date: string
+        }
+    ]
 
 }
 

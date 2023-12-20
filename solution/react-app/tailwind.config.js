@@ -11,9 +11,13 @@ module.exports = {
     extend: {
       colors: {
         'gray-rgba': 'rgba(147,147,147,0.38)',
-        'blue-black' : '#020715'
+        'blue-black' : '#020715',
+        'corvette' : '#fbc994'
       }
     },
+    fontFamily: {
+      anonymousPro: ['Anonymous Pro', 'monospace'],
+    }
   },
   darkMode: "class",
   plugins: [nextui()],
