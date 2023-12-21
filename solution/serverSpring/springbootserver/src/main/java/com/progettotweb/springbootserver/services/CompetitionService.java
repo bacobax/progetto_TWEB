@@ -36,4 +36,11 @@ public class CompetitionService {
         List<String> fieldsList = List.of(fields.split(","));
         return competitionRepository.findByQueryParams(sortby, fieldsList, limit);
     }
+
+    public List<Competition> findCompetitionNameById(List<String> competitionIds){
+        List<Competition> res = competitionRepository.findCompetitionNameById(competitionIds);
+        System.out.println(res);
+        return res;
+    }
+
 }

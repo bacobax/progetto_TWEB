@@ -1,7 +1,7 @@
 import {FC} from "react";
 import {PlayerStats} from "../../constants/types";
 interface PlayerInfoStatsProps {
-    stats: PlayerStats;
+    stats: PlayerStats & {competitionName?:string};
 }
 
 const mapLabel:{[key:string]:string} ={
@@ -14,9 +14,12 @@ const mapLabel:{[key:string]:string} ={
 }
 
 export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({stats}) => {
+
+    const {competitionName, ...effectiveStats} = stats;
+
     return (
         <div className={"w-full flex flex-wrap gap-[10px] font-anonymousPro"}>
-            {stats && Object.keys(stats).map(key => (
+            {effectiveStats && Object.keys(effectiveStats).map(key => (
                 <div className={"flex text-white w-1/2 justify-between"} key={key}>
                     <label>
                         {mapLabel[key]}: {" "}

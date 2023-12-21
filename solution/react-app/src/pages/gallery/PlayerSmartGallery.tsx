@@ -12,6 +12,7 @@ import Modal from "../../components/UI/modal/Modal";
 import {animatedButtonProps, URL_SHORT_PLAYERS} from "../../constants/constants";
 import useLoadPlayers from "../../hooks/useLoadPlayers";
 import Button from "../../components/UI/button/Button";
+import {MyBreadcrumbs} from "../../components/MyBreadcrumbs";
 
 interface SmartGalleryProps {
 
@@ -95,15 +96,7 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
 
     return (
         <div className={styles.container}>
-            <Breadcrumbs classNames={{
-                list:`z-20 dark fixed top-10 left-10 backdrop-blur bg-black/50`,
-            }} itemClasses={{
-                item: "font-bold text-lg"
-            }}
-                color="secondary" variant="solid">
-                <BreadcrumbItem href="/">Home</BreadcrumbItem>
-                <BreadcrumbItem href="/gallery/players">PlayerGallery</BreadcrumbItem>
-            </Breadcrumbs>
+            <MyBreadcrumbs breadcumbs={[{href:"/", label:"Home"}, {href:"/gallery/players", label:"PlayerGallery"}]}/>
             <header>
                 <h1> PLayer Gallery </h1>
                 <IconButton  Icon={showForm ? FaAngleUp : FaAngleDown} className={styles.filterButton} onClick={handleShowForm} text={"FILTER"}/>

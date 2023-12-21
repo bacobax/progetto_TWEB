@@ -1,13 +1,14 @@
 import { FC} from "react";
 
 import ChatList from "./ChatList";
-import { Navigate } from "react-router-dom";
 import ChatSpace from "./ChatSpace";
 import {NewChat} from "./NewChat";
 import useStatefulChat from "./StatefulChat.hook";
 import useWindowSize from "../../hooks/useWindowSize";
 
 import {SearchChat} from "./SearchChat";
+import {FetchError} from "../../components/errors/FetchError";
+import {AuthError} from "../../components/errors/AuthError";
 //import ErrorMessage from "./ErrorMessage"; // Assuming ErrorMessage is a new component for displaying errors
 
 interface StatefulChatProps {}
@@ -44,16 +45,17 @@ const StatefulChat: FC<StatefulChatProps> = () => {
 
 
 
+
+
+
     if (!user) {
-        return <Navigate to={'/auth'} />;
+        return <AuthError onClose={()=>{}} type={"JWTMISSING"} opened={true}/>;
     }
 
     if (!loadingRooms && errorRooms) {
         return (
-            <div className={"text-white"}>
-                <h1>ERROR LOADING ROOMS</h1>
-                <h2>{errorRooms}</h2>
-            </div>
+            <FetchError opened={!!errorRooms} onClose={()=>{
+            }} message={errorRooms}/>
         );
     }
 
@@ -87,6 +89,7 @@ const StatefulChat: FC<StatefulChatProps> = () => {
             }
             <NewChat onClose={closeNewChatModal} opened={isNewChatModalOpen} onNewChat={handleNewChat}/>
             <SearchChat onClose={closeSearchChatModal} opened={isSeaerchChatModalOpen} onSelectRoom={handleSelectRoomToJoin}/>
+
         </>
     );
 };

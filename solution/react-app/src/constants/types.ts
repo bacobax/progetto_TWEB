@@ -74,7 +74,7 @@ export interface Player extends ShortPlayer{
     clubName: string;
     url?: string;
     stats: {
-        [competitionID:string] : PlayerStats
+        [competitionID:string] : PlayerStats & {competitionName:string}
     };
     totalStats: PlayerStats
     lineupsCount?: {
@@ -179,4 +179,5 @@ export interface Room{
     admin: string;
     members: string[];
     messages: Message[];
+    description?: string;
 }

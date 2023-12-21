@@ -9,6 +9,7 @@ import useLoadTeams from "../../hooks/useLoadTeams";
 import TeamCard from "../../components/TeamCard";
 import TeamFilterForm from "../../components/form/TeamFilterForm";
 import Button from "../../components/UI/button/Button";
+import {MyBreadcrumbs} from "../../components/MyBreadcrumbs";
 
 export const TeamSmartGallery: FC = () => {
   const [showForm, setShowForm] = useState(false);
@@ -43,19 +44,7 @@ export const TeamSmartGallery: FC = () => {
 
   return (
     <div className={styles.container}>
-      <Breadcrumbs
-        classNames={{
-          list: `z-20 dark fixed top-10 left-10 backdrop-blur bg-black/50 `,
-        }}
-        itemClasses={{
-          item: 'font-bold text-lg',
-        }}
-        color="secondary"
-        variant="solid"
-      >
-        <BreadcrumbItem href="/">Home</BreadcrumbItem>
-        <BreadcrumbItem href="/gallery/players">Team Gallery</BreadcrumbItem>
-      </Breadcrumbs>
+        <MyBreadcrumbs breadcumbs={[{href:"/", label:"Home"}, {href:"/gallery/teams", label:"Team Gallery"}]}/>
       <header>
         <h1>Team Gallery</h1>
         <IconButton

@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from "react";
 import Modal from "../../components/UI/modal/Modal";
 import {Room} from "../../constants/types";
 import useSearch from "../../hooks/useSearch";
-import {Input, Skeleton, Button} from "@nextui-org/react";
+import {Input, Skeleton, Button, Textarea} from "@nextui-org/react";
 import {FaSearch} from "react-icons/fa";
 import { IoChatbubbles } from "react-icons/io5";
 import {getToken} from "../../auth/authFunctions";
@@ -33,7 +33,7 @@ export const SearchChat:FC<SearchChatProps> = ({onClose, opened, onSelectRoom}) 
     console.log({selectedRoomIdx});
     return (
         <Modal onClose={onClose} title={"Search a chat"} opened={opened} classNames={{
-            modal: "bg-gray-800 text-white",
+            modal: "bg-gray-900 text-white",
             content: "mt-4 overflow-y-scroll gap-[10px] flex flex-col"
         }}>
             <form onSubmit={handleSubmit}>
@@ -60,6 +60,18 @@ export const SearchChat:FC<SearchChatProps> = ({onClose, opened, onSelectRoom}) 
             {
                 selectedRoomIdx !== -1 && (
                     <div className={"flex flex-col w-full items-center gap-[30px]"}>
+                        {!!data[selectedRoomIdx].description ? <Textarea
+                            isReadOnly
+                            label="Description"
+                            variant="flat"
+                            labelPlacement="outside"
+                            placeholder="Enter your description"
+                            defaultValue={data[selectedRoomIdx].description}
+                            className="max-w-full dark"
+                            classNames={{
+                                label: "text-xl"
+                            }}
+                        /> : <h1 className={"text-xl text-center text-gray-400"}>No description</h1>}
                         <p className={"text-default"}>Are You Sure to Join this room?</p>
                         <div className={"flex flex-row gap-[10px]"}>
                             <Button  onClick={()=>{

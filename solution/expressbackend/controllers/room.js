@@ -8,10 +8,12 @@ const AppError = require("../utils/appError");
 exports.createRoom = catchAsync(async (req, res, next) => {
     const user = req.user;
     const name = req.body.name;
+    const description = req.body.description;
 
     const doc = new Room({
         name: name,
         admin: user.id,
+        description: description,
     });
 
     await doc.save();

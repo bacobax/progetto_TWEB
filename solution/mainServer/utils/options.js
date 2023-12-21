@@ -88,7 +88,7 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
                 });
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
+                throw new AppError(error.response.data.message , error.response.status);
             }
         })
     }
@@ -113,7 +113,7 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
                 console.log({response})
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
+                throw new AppError(error.response.data.message , error.response.status);
             }
         })
     }
@@ -132,7 +132,7 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
                 });
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
+                throw new AppError(error.response.data.message , error.response.status);
             }
         })
     }
@@ -149,7 +149,7 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
                 });
                 res.json(response.data); // Forward the response from the other server to the client
             } catch (error) {
-                throw new AppError("Error redirecting request: " + error.response.data.message , error.response.status);
+                throw new AppError(error.response.data.message , error.response.status);
             }
         })
     }

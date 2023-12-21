@@ -10,6 +10,7 @@ import useModal from "../../hooks/useModal";
 import { motion} from "framer-motion";
 
 import useWindowSize from "../../hooks/useWindowSize";
+import {AuthError} from "../errors/AuthError";
 
 interface DualFormProps {
 
@@ -80,13 +81,10 @@ const SmartForm: React.FC<DualFormProps> = () => {
                 />
 
             {loading && <Loading />}
-            {error && <Modal onClose={()=>{
+            {error && <AuthError opened={isModalOpen} onClose={()=>{
                 setError(null);
-                closeModal()
-            }
-            } title={error} opened={isModalOpen}>
-                <h1>Error: {error}</h1>
-            </Modal> }
+                closeModal();
+            }} message={error}/> }
         </div>
     );
 }

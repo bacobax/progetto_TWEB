@@ -11,18 +11,24 @@ import {
     URL_ROOM_FROM_USER
 } from "../../constants/constants";
 import {socket} from "../../socket";
+import {useSearchParams} from "react-router-dom";
 
 const useStatefulChat = () =>{
     const [userRooms, setUserRooms] = useState<Room[]>([]);
     const [selectedRoomIdx, setSelectedRoomIdx] = useState<number>(-1);
     const [user, setUser] = useState(getUserInfo());
     const [isChatList, setIsChatList] = useState<boolean>(true);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const {closeModal: closeNewChatModal, openModal: openNewChatModal,isModalOpen: isNewChatModalOpen} = useModal(false);
     const {isModalOpen: isSeaerchChatModalOpen, closeModal: closeSearchChatModal, openModal:  openSearchChatModal} = useModal(false);
 
     const {loading: loadingRooms, error: errorRooms, setError: setErrorRooms, fetchData: fetchRoomsData} = useFetch();
     const {loading: loadingNewMessage, error: errorNewMessage, setError: setErrorMessage, fetchData: fetchSendMessage} = useFetch();
+
+    //hook for url query params
+    // const {search} = useLocation();
+
 
     useEffect(() => {
 
@@ -64,11 +70,18 @@ const useStatefulChat = () =>{
                 }
             })
         }
+
+        const searchParamPlayerID = searchParams.get("player");
+        if(searchParamPlayerID){
+            openNewChatModal();
+        }
+
+
         return () => {
             socket.off("chat");
             socket.disconnect();
         };
-    }, [user, fetchRoomsData, setErrorRooms, setUserRooms ]);
+    }, [user, fetchRoomsData, setErrorRooms, setUserRooms, searchParams, openNewChatModal ]);
 
 
     useEffect(() => {
@@ -117,10 +130,15 @@ const useStatefulChat = () =>{
         setIsChatList(false);
     }, [ user]);
 
-    const handleNewChat = useCallback((name: string) => {
+    const handleNewChat = useCallback((name: string, description:string) => {
         if (!user) return;
         console.log(name);
-        fetchRoomsData<{ status: string, data: Room, message?: string }>({url: URL_CREATE_ROOM, token: user?.token, method: "POST", body: JSON.stringify({name: name})}, ({data, status, message}) => {
+        fetchRoomsData<{ status: string, data: Room, message?: string }>({
+            url: URL_CREATE_ROOM,
+            token: user?.token,
+            method: "POST",
+            body: JSON.stringify({name,description})},
+            ({data, status, message}) => {
             if (status === "success") {
                 setUserRooms(prevRooms => {
                     const newRooms = [...prevRooms];
@@ -181,6 +199,9 @@ const useStatefulChat = () =>{
 
         })
     }, [user, setUserRooms, setSelectedRoomIdx, setErrorRooms, fetchRoomsData]);
+
+
+
 
     return {
         userRooms,

@@ -3,9 +3,7 @@ package com.progettotweb.springbootserver.controllers;
 import com.progettotweb.springbootserver.entities.Competition;
 import com.progettotweb.springbootserver.services.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class CompetitionController {
 
 
 
-    @GetMapping("/competitions")
+    @GetMapping("/api/competitions")
     public List<Competition> getEntities(
             @RequestParam(required = false) String sortBy,
             @RequestParam(required = false) String fields,
@@ -33,7 +31,7 @@ public class CompetitionController {
     }
 
 
-    @GetMapping("/competitions/:id")
+    @GetMapping("/api/competitions/:id")
     public Competition getCompetitionById(
             @RequestParam(required = true) String id
     ) {
@@ -44,16 +42,15 @@ public class CompetitionController {
         return competition;
     }
 
-    // route /competitions/:id/clubs
-    /*@GetMapping("/competitions/:id/clubs")
-    public List<Competition> getClubsByCompetitionId(
-            @RequestParam(required = true) String id
+    record CompetitionIDAndName(String competitionID, String competitionName){}
+    //get a list of competitionIDs from the body and return a list of touples (competitionID, competitionName)
+    @PostMapping("/api/competitions/name")
+    public List<CompetitionIDAndName> getCompetitionNameById(
+            @RequestBody(required = true) List<String> competitionIds
     ) {
 
-        Competition competition = competitionService.getCompetitionById(id);
-
-
-        return competition.getClubs();
-    }*/
+        List<Competition> competitions = competitionService.findCompetitionNameById(competitionIds);
+        return competitions.stream().map(competition -> new CompetitionIDAndName(competition.getCompetitionId(), competition.getName())).toList();
+    }
 
 }

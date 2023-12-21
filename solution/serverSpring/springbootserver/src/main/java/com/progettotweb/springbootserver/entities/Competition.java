@@ -133,6 +133,22 @@ public class Competition {
         this.url = url;
     }
 
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "competitionId='" + competitionId + '\'' +
+                ", competitionCode='" + competitionCode + '\'' +
+                ", name='" + name + '\'' +
+                ", subType='" + subType + '\'' +
+                ", type='" + type + '\'' +
+                ", countryId='" + countryId + '\'' +
+                ", countryName='" + countryName + '\'' +
+                ", domesticLeagueCode='" + domesticLeagueCode + '\'' +
+                ", confederation='" + confederation + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
     public Competition(String competitionId, String competitionCode, String name, String subType, String type, String countryId, String countryName, String domesticLeagueCode, String confederation, String url) {
         this.competitionId = competitionId;
         this.competitionCode = competitionCode;

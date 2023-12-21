@@ -19,13 +19,35 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
-    const expressResponsePromise = await axios.get(getNodeServerUrl(`/api/player/${req.params.id}`));
+    const expressResponse = await axios.get(getNodeServerUrl(`/api/player/${req.params.id}`));
 
-    const {current_club_id, ...otherPlayerData} = expressResponsePromise.data.data;
+    const {current_club_id, ...otherPlayerData} = expressResponse.data.data;
 
 
-    const javaResponsePromise = await axios.get(getJavaServerUrl(`/api/clubs/${current_club_id}`));
-    const clubName = javaResponsePromise.data.name;
+    const javaResponse = await axios.get(getJavaServerUrl(`/api/clubs/${current_club_id}`));
+    const clubName = javaResponse.data.name;
+
+    const competitionsIDS = Object.keys(otherPlayerData.stats);
+
+
+    const competitionNamesMappingRes = await axios.post(getJavaServerUrl("/api/competitions/name"),competitionsIDS);
+
+    const competitionNamesMapping = competitionNamesMappingRes.data;
+
+    /**
+     * shape of competitionNamesMapping:
+     *  [
+     *     { competitionID: 'EL', competitionName: 'europa-league' },
+     *     { competitionID: 'IT1', competitionName: 'serie-a' },
+     *     { competitionID: 'UKRS', competitionName: 'ukrainian-super-cup' }
+     *   ]
+     *
+     *
+     */
+
+    competitionsIDS.forEach(competitionID=>{
+        otherPlayerData.stats[competitionID].competitionName = competitionNamesMapping.find(c=>c.competitionID === competitionID).competitionName;
+    })
 
     res.status(200).json({
         status: "success",
