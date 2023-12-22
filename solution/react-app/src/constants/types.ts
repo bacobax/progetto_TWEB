@@ -148,6 +148,18 @@ export interface ShortClub{
     }
 }
 
+export interface PlayerInsideClub {
+    _id: string
+    first_name: string,
+    last_name: string,
+    country_of_citizenship: string,
+    date_of_birth: string,
+    position: string,
+    market_value_in_eur: string,
+    id: string,
+    contract_expiration_date: string,
+}
+
 export interface Club extends ShortClub{
     clubCode: string;
     totalMarketValue: number;
@@ -159,6 +171,7 @@ export interface Club extends ShortClub{
     netTransferRecord: string;
     coachName: string;
     domesticCompetition: Competition;
+    players: PlayerInsideClub[];
 }
 
 

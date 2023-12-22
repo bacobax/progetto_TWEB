@@ -37,6 +37,7 @@ export const ROUTES = {
   GALLERY: '/gallery',
   CHAT: '/chat',
   PLAYER_INFO: 'player/:id',
+  CLUB_INFO: "club/:id",
   DEFAULT: "*",
 }
 
@@ -63,6 +64,29 @@ export const numberFormatWithCommas = (n: string): string => {
     return n.replace(/\B(?=(\d{3})+(?!\d))/g, "ॱ");
 
 }
+
+export const MilionFormat = (n:string):string => {
+  if(n===null) return "NOT PROVIDED";
+  let num = Math.round(Number(n)/1000);
+  let numStr = num.toString();
+  let formattedNumStr = numberFormatWithCommas(numStr);
+  return formattedNumStr + "k";
+}
+
+export const calculateAgeFromDateBirth = (dateOfBirth:string):number => {
+  const today = new Date();
+  const birthDate = new Date(dateOfBirth);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+  if(monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())){
+    age--;
+  }
+  return age;
+}
+
+
+
+export const identity = (value:any) => value;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -188,6 +212,120 @@ export const initialSignUpState = {
 /**
  * DUMMY DATA
  */
+//TODO: da fare
+export const countriesFlags = [
+  {
+    name: "Austria",
+    flag: "🇦🇹",
+  },
+  {
+    name: "Belgium",
+    flag: "????",
+  },
+  {
+    name: "Bulgaria",
+    flag: "????",
+  },
+  {
+    name: "Croatia",
+    flag: "????",
+  },
+  {
+    name: "Cyprus",
+    flag: "????",
+  },
+  {
+    name: "Czech Republic",
+    flag: "????",
+  },
+  {
+    name: "Denmark",
+    flag: "????",
+  },
+  {
+    name: "Estonia",
+    flag: "????",
+  },
+  {
+    name: "Finland",
+    flag: "????",
+  },
+  {
+    name: "France",
+    flag: "????",
+  },
+  {
+    name: "Germany",
+    flag: "????",
+  },
+  {
+    name: "Greece",
+    flag: "????",
+  },
+  {
+    name: "Hungary",
+    flag: "????",
+  },
+  {
+    name: "Ireland",
+    flag: "????",
+  },
+  {
+    name: "Italy",
+    flag: "????",
+  },
+  {
+    name: "Latvia",
+    flag: "????",
+  },
+  {
+    name: "Lithuania",
+    flag: "????",
+  },
+  {
+    name: "Luxembourg",
+    flag: "????",
+  },
+  {
+    name: "Malta",
+    flag: "????",
+  },
+  {
+    name: "Netherlands",
+    flag: "????",
+  },
+  {
+    name: "Poland",
+    flag: "????",
+  },
+  {
+    name: "Portugal",
+    flag: "????",
+  },
+  {
+    name: "Romania",
+    flag: "????",
+  },
+  {
+    name: "Slovakia",
+    flag: "????",
+  },
+  {
+    name: "Slovenia",
+    flag: "????",
+  },
+  {
+    name: "Spain",
+    flag: "????",
+  },
+  {
+    name: "Sweden",
+    flag: "????",
+  },
+  {
+    name: "United Kingdom",
+    flag: "????",
+  }];
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,3 +366,5 @@ export const URL_JOIN_ROOM = (roomId:string) => getMainServerPath(`/room/join/${
 export const URL_LEAVE_ROOM = (roomId:string) => getMainServerPath(`/room/leave/${roomId}`);
 
 export const URL_PLAYER_INFO = (playerID:string) => getMainServerPath(`/playerStat/${playerID}`);
+
+export const URL_CLUB_INFO = (teamID:string) => getMainServerPath(`/clubStat/${teamID}`);

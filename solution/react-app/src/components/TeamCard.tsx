@@ -35,7 +35,7 @@ const TeamCard: React.FC<TeamCardProps> = ({name,stadiumName, lastSeason, squadS
                 >
                     Visit on
                 </Link>
-                <Button color="secondary" className="outline-0 border-0">View</Button>
+                <Button color="secondary" className="outline-0 border-0"><Link href={`/club/${clubId}`}>View</Link></Button>
             </CardFooter>
         </Card>
     );

@@ -34,17 +34,6 @@ app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
 
     const competitionNamesMapping = competitionNamesMappingRes.data;
 
-    /**
-     * shape of competitionNamesMapping:
-     *  [
-     *     { competitionID: 'EL', competitionName: 'europa-league' },
-     *     { competitionID: 'IT1', competitionName: 'serie-a' },
-     *     { competitionID: 'UKRS', competitionName: 'ukrainian-super-cup' }
-     *   ]
-     *
-     *
-     */
-
     competitionsIDS.forEach(competitionID=>{
         otherPlayerData.stats[competitionID].competitionName = competitionNamesMapping.find(c=>c.competitionID === competitionID).competitionName;
     })
@@ -56,6 +45,18 @@ app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
             clubName
         }
     })
+}));
+app.route("/api/clubStat/:id").get(catchAsync(async (req,res,next)=>{
+
+    const javaResponse = (await axios.get(getJavaServerUrl(`/api/clubs/${req.params.id}`))).data;
+    const clubID = javaResponse.clubId;
+    const expressResponse = await axios.get(getNodeServerUrl(`/api/player?current_club_id=${clubID}&fields=first_name,last_name,position,date_of_birth,country_of_citizenship,market_value_in_eur,contract_expiration_date`))
+    javaResponse.players = expressResponse.data.data;
+    res.status(200).json({
+        status: "success",
+        data: javaResponse
+    })
+
 }));
 app.use("/api/player", getNodeRESTRedirectRouter());
 app.use("/api/clubs", getJavaRESTRedirectRouter());
