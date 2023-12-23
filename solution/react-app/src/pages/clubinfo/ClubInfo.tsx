@@ -7,6 +7,7 @@ import {calculateAgeFromDateBirth, MilionFormat, URL_CLUB_INFO, URL_PLAYER_INFO}
 import Loading from "../../components/animations/Loading";
 import {FetchError} from "../../components/errors/FetchError";
 import {ClubInfoTable} from "./ClubInfoTable";
+import {Accordion, AccordionItem} from "@nextui-org/react";
 
 interface ClubInfoProps {
     id: string;
@@ -59,7 +60,7 @@ export const ClubInfo:FC<ClubInfoProps> = ({id}) => {
     const totalValue = club.players.reduce((acc, player) => acc + Number(player.market_value_in_eur), 0);
     const avarageAge = club.players.reduce((acc, player) => acc + calculateAgeFromDateBirth(player.date_of_birth), 0) / club.players.length;
     return (
-        <div className={"flex flex-col gap-[30px]"}>
+        <div className={"flex flex-col gap-[30px] max-w-full"}>
             <MyBreadcrumbs breadcumbs={breadcupbspath} top={0} left={0}/>
             <header className={"flex flex-col sm:flex-row gap-2"}>
                 <h1 className={"text-5xl font-extrabold text-corvette uppercase font-['Impact'] w-1/2"}>{club.name}</h1>
@@ -75,7 +76,12 @@ export const ClubInfo:FC<ClubInfoProps> = ({id}) => {
                 <label>Current transfer record: <b>{club.netTransferRecord}</b></label>
                 <label>Foreigers: <b>{club.foreignersNumber}</b> <i>{club.foreignersPercentage}%</i></label>
             </section>
-            <ClubInfoTable players={club.players} />
+
+            <div className={"w-full overflow-scroll"}>
+                <ClubInfoTable players={club.players} />
+
+            </div>
+
 
         </div>
     );

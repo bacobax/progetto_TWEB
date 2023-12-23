@@ -2,13 +2,11 @@
  * Represents a player card component.
  * @component
  */
-import React, {useState} from "react";
-import styles from "./PlayerCard.module.css";
+import React from "react";
 import {ShortPlayer} from "../constants/types";
-import {AnimatePresence, motion} from "framer-motion";
-import {numberFormatWithCommas} from "../constants/constants";
-import Button from "./UI/button/Button";
+import {MilionFormat} from "../constants/constants";
 import {useNavigate} from "react-router-dom";
+import {Card, Image, CardFooter, Button, CardBody} from "@nextui-org/react";
 interface PlayerCardProps extends ShortPlayer {
   className?: string;
 }
@@ -24,50 +22,29 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 }) => {
     const navigate = useNavigate()
   return (
-    <div className={styles.backdrop}>
-      <motion.div
-        className={styles.content}
-      >
-        <header>
-          <img
-            alt={(first_name ? first_name : "") + " " + (last_name ? last_name : "")}
-            src={image_url}
+      <Card className="py-4 dark min-h-[200px]">
 
-          />
-          <div
-            className={styles.imgBackdrop}
+          <CardBody className="overflow-visible py-2 w-full gap-2 flex-row ">
+              <div>
+                  <p className="text-tiny uppercase font-bold">Players</p>
+                  <small className="text-default-500">€ {MilionFormat(""+market_value_in_eur)}</small>
+                  <h4 className="font-bold text-large">{first_name}{" "}{last_name}</h4>
+              </div>
 
-          >
-            <div className={styles.scoreSection}>
-              <label>€ {numberFormatWithCommas(""+market_value_in_eur)}</label>
-            </div>
-          </div>
-        </header>
-        <main /*variants={{
-            hover:{
-                height: "100%",
-                flexDirection: "column",
-                alignItems: "center",
-                color: "black",
-                gap: "5rem"
-            }}}*/>
-          <label>{first_name} {last_name}</label>
-                <div
-
-                    className={styles.details}
-                >
-
-                    <Button animated={true} whileHover={{
-                        scale: 1.1
-                    }} className={styles.viewButton} style={{
-                        border: "1px solid black"
-                    }} onClick={()=>{navigate(`/player/${_id}`)}}>View</Button>
-                </div>
-
-
-        </main>
-      </motion.div>
-    </div>
+              <Image
+                  alt="Card background"
+                  className="object-cover rounded-xl "
+                  src={image_url}
+                  height={100}
+                  width={100}
+              />
+          </CardBody>
+          <CardFooter>
+              <Button className={"w-full"} color={"default"} variant={"solid"} onClick={()=>{navigate(`/player/${_id}`)}}>
+                  More
+              </Button>
+          </CardFooter>
+      </Card>
   );
 };
 

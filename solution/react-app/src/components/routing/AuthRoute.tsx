@@ -8,9 +8,11 @@ interface Props {
 const AuthRoute: React.FC<Props> = ({children}) => {
 
     const {loggedIn} = useContext(AuthContext);
+    const currentPath = window.location.pathname;
+
 
     if(!loggedIn){
-        return <Navigate to={"/auth"} replace={true} />
+        return <Navigate to={`/auth?redirectPath=${currentPath}`} replace={true} />
     }
 
     return <>{children}</>;

@@ -39,7 +39,6 @@ const SearchBar : React.FC = () => {
 
     const handleSearch = useCallback((e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        //TODO: handle search
     },[]);
 
     const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {

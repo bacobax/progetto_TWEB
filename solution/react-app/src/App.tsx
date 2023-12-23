@@ -4,7 +4,6 @@ import {lazy, Suspense} from "react";
 
 import Loading from "./components/animations/Loading";
 import Gallery from "./pages/gallery/Gallery";
-import Background from "./components/Background";
 import {ROUTES} from "./constants/constants";
 import PlayerSmartGallery from "./pages/gallery/PlayerSmartGallery";
 import {TeamSmartGallery} from "./pages/gallery/TeamSmartGallery";

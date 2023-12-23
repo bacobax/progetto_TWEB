@@ -3,12 +3,13 @@ import FoundedItem from "./FoundedItem";
 import React from "react";
 import styles from "./FoundedList.module.css";
 import {Skeleton} from "@nextui-org/react";
+import {useNavigate} from "react-router-dom";
 
 const FoundedList: React.FC<{ data: ResponseType, loading:boolean }> = ({data, loading}) => {
-    console.log({clubs: data.clubs, players: data.players})
+    const navigate = useNavigate();
 
-    const mapClubs = ({clubId, name}: {clubId:number, name:string}) => (<FoundedItem type="team" name={name} onClick={()=>{}} id={clubId} key={clubId}/>)
-    const mapPlayers = ({playerId, name}: {playerId:number, name:string}) => (<FoundedItem type="player" name={name} onClick={()=>{}} id={playerId} key={playerId} />)
+    const mapClubs = ({clubId, name}: {clubId:number, name:string}) => (<FoundedItem type="team" name={name} onClick={()=>{navigate(`/club/${clubId}`)}} id={clubId} key={clubId}/>)
+    const mapPlayers = ({playerId, name}: {playerId:number, name:string}) => (<FoundedItem type="player" name={name} onClick={()=>{navigate(`/player/${playerId}`)}} id={playerId} key={playerId} />)
 
 
 

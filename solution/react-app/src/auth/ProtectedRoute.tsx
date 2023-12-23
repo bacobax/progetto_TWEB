@@ -8,10 +8,11 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
     const { loggedIn } = useContext(AuthContext);
+    const currentPath = window.location.pathname;
     if(loggedIn){
         return <>{children}</>
     }else{
-        return <Navigate to={"/auth"} />
+        return <Navigate to={`/auth?redirectPath=${currentPath}`} />
     }
 }
 

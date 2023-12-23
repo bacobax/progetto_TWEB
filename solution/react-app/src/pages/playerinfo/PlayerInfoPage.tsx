@@ -11,7 +11,7 @@ export const PlayerInfoPage:FC = () => {
 
     if(id){
         return (
-            <div className={"min-w-[100vw] flex items-center justify-center p-[20px]"}>
+            <div className={"w-[100vw] flex items-center justify-center p-[20px]"}>
                 <PlayerInfo id={id}/>
             </div>
         );

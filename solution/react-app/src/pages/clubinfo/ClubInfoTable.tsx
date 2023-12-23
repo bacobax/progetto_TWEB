@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react";
 import {CiCircleMore} from "react-icons/ci";
 import {PlayerInsideClub} from "../../constants/types";
-import {calculateAgeFromDateBirth, identity, MilionFormat} from "../../constants/constants";
+import {calculateAgeFromDateBirth, countryEmojis, identity, MilionFormat} from "../../constants/constants";
 import {useNavigate} from "react-router-dom";
 
 const tableColumns = [
@@ -36,7 +36,7 @@ const transformationMap:{[key:string]: (value:string) => (string|number)} = {
     date_of_birth: calculateAgeFromDateBirth,
     first_name: identity,
     last_name: identity,
-    country_of_citizenship: identity,
+    country_of_citizenship: (country:string)=>`${country} ${countryEmojis[country.toLowerCase()] || ""}`,
     contract_expiration_date: dateFormatter,
 }
 const ROWS_PER_PAGE = 6;
