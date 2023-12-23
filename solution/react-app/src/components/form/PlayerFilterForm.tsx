@@ -62,7 +62,7 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
 
   const applyScoreFilter =()=>{
       console.log("applyScoreFilter")
-    if (!scoreMin || !scoreMax || scoreMin.trim().length === 0 || scoreMax.trim().length === 0) {
+    if (!scoreMin || !scoreMax || scoreMin.trim().length === 0 || scoreMax.trim().length === 0 || Number(maxMarketValue) === Number(minMarketValue)) {
       return;
     }
     const numberScoreMin = Number(scoreMin);
@@ -79,6 +79,12 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
 
   const handleApplyFilters = () => {
       console.log({name, scoreMin:Number(scoreMin), scoreMax: Number(scoreMax)})
+      if (!scoreMin || !scoreMax || scoreMin.trim().length === 0 || scoreMax.trim().length === 0 || Number(maxMarketValue) === Number(minMarketValue)) {
+          return;
+      }
+      if (name.trim().length === 0) {
+          return;
+      }
         onApplyFilters({
             name: name,
             valueMin: Number(scoreMin),
@@ -86,6 +92,7 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
         });
   };
 
+  console.log({minMarketValue, maxMarketValue})
 
 
   return (
@@ -112,6 +119,8 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
               Icon={IoIosAddCircleOutline}
               onClick={applyNameFilter}
               type={"button"}
+                disabled={name.trim().length === 0}
+
           />
 
         <hr />
@@ -122,6 +131,7 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
             step={10000}
             minValue={minMarketValue}
             maxValue={maxMarketValue}
+            isDisabled={minMarketValue===maxMarketValue}
             defaultValue={[minMarketValue, maxMarketValue]}
             formatOptions={{style: "currency", currency: "EUR"}}
             className="max-w-md"
@@ -137,12 +147,14 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
                 }))
             }}
         />
+          {minMarketValue === maxMarketValue && <p className={"text-center text-warning"}>No market value data available or only one market value is avaiable</p>}
         <IconButton
           {...animatedButtonProps}
           className={styles.addFilter}
           Icon={IoIosAddCircleOutline}
           onClick={applyScoreFilter}
           type="button"
+          disabled={maxMarketValue === minMarketValue}
         />
         <div className={styles.filters}>{renderFilters()}</div>
 

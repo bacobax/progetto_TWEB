@@ -1,58 +1,30 @@
-import {useEffect, useState} from "react";
+import {useCallback} from "react";
 import {ShortPlayer} from "../constants/types";
 import {URL_SHORT_PLAYERS} from "../constants/constants";
-import useFetch from "./useFetch";
+import {useAsyncList} from "@react-stately/data";
 
 
 const useLoadPlayers = (pageSize: number) => {
 
-    const [players, setPlayers] = useState<ShortPlayer[]>([]);
-    const [pageNumber , setPageNumber] = useState(1);
-    const {loading, error, fetchData, setError} = useFetch();
+    const list = useAsyncList<ShortPlayer>({
+        async load({signal,cursor}){
+            const url = cursor || URL_SHORT_PLAYERS(1,pageSize);
+            const response = await fetch(url,{signal});
+            const json = await response.json();
+            const players = json.data.map((player:ShortPlayer)=>player);
+            console.log({players})
+            return {
+                items: players,
+                cursor: json.nextRequestURL
+            };
+        }
+    })
 
+    const addMorePlayers =useCallback (() => {
+        list.loadMore();
+    },[list]);
 
-
-    const addMorePlayers = () => {
-
-        fetchData<{ data: ShortPlayer[], status: string, message?: string }>({
-            url: URL_SHORT_PLAYERS(pageNumber + 1,pageSize),
-            method: "GET"
-        },(data) => {
-            if (data.status !== "success") {
-                setError(data.message ? data.message : "An error occurred");
-                return;
-            }
-            if (!data.data) {
-                setError ("An error occurred");
-                return;
-            }
-            setPlayers(prev => [...prev, ...data.data])
-            setPageNumber(prev => prev + 1);
-        });
-
-    }
-
-
-    useEffect(() => {
-        console.log(`calling api at url ${URL_SHORT_PLAYERS(1, pageSize)}`);
-        fetchData<{ data: ShortPlayer[], status: string, message?: string }>({
-            url: URL_SHORT_PLAYERS(1, pageSize),
-            method: "GET"
-        }, (data) => {
-            if (data.status !== "success") {
-                setError(data.message ? data.message : "An error occurred");
-                return;
-            }
-            if (!data.data) {
-                setError("An error occurred");
-                return;
-            }
-            setPlayers(data.data);
-
-        });
-    }, [fetchData, setError, pageSize]);
-
-    return {loading, error, players, addMorePlayers};
+    return {loading:list.isLoading, error: list.error?.message, players:list.items, addMorePlayers};
 };
 
 export default useLoadPlayers;

@@ -2,11 +2,38 @@ const Player = require('../models/player');
 const catchAsync = require('../utils/catchAsync');
 
 const {createOne, getAll, deleteAll, deleteOne, getOne, updateOne} = require('./special/handlerFactory');
+const APIFeatures = require("../utils/apiFeatures");
 const AppError = require("../utils/appError");
 
 exports.createPlayer = createOne(Player);
 
-exports.getAllPlayer = getAll(Player);
+exports.getAllPlayer = catchAsync(async (req, res) => {
+    const features = new APIFeatures(Player.find(), req.query).filter().limitFields();
+
+    let query = features.query;
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 100;
+
+    // Handling boundary conditions
+    if (page <= 0 || limit <= 0) {
+        throw new Error('Invalid pagination parameters');
+    }
+
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    const docs = await query;
+    const myHOST = req.protocol + '://' + req.get('host');
+    const nextRequestURL = `${myHOST}/api/player?page=${page + 1}&limit=${limit}`;
+
+    res.status(200).json({
+        status: 'success',
+        data: docs,
+        nextRequestURL,
+    });
+});
 
 exports.deleteAllPlayer = deleteAll(Player);
 

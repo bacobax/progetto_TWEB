@@ -4,17 +4,19 @@ import {ShortClub} from "../../constants/types";
 import styles from "./SmartGallery.module.css";
 import IconButton from "../../components/UI/button/IconButton";
 import {FaAngleDown, FaAngleUp} from "react-icons/fa";
-import {BreadcrumbItem, Breadcrumbs, Card, Skeleton} from "@nextui-org/react";
+import {Card, Skeleton, Button} from "@nextui-org/react";
 import useLoadTeams from "../../hooks/useLoadTeams";
 import TeamCard from "../../components/TeamCard";
 import TeamFilterForm from "../../components/form/TeamFilterForm";
-import Button from "../../components/UI/button/Button";
 import {MyBreadcrumbs} from "../../components/MyBreadcrumbs";
+import {FetchError} from "../../components/errors/FetchError";
+
 
 export const TeamSmartGallery: FC = () => {
   const [showForm, setShowForm] = useState(false);
 
-  const { clubs, loading, error, addMoreTeams } = useLoadTeams(5);
+  const { clubs, loading, error,loadMore } = useLoadTeams(5);
+  console.log({clubs, loading, error})
 
   const { filteredData, removeFilter, resetFilters, addFilter, filterNames } = useFilter([...clubs]);
 
@@ -87,13 +89,11 @@ export const TeamSmartGallery: FC = () => {
             </Card>
           ))
         )}
+        <Button onClick={loadMore} className={"bg-corvette"}>
+          Load More</Button>
       </main>
-      <Button onClick={addMoreTeams} className={styles.addMoreButton}>Add more</Button>
       {error && (
-        <div className={styles.error}>
-          <p>An error occurred while loading teams. Please try again later.</p>
-          <button onClick={()=>{}}>Retry</button>
-        </div>
+          <FetchError opened={true} onClose={()=>{}} message={"An error occurred while fetching data, please try again"}></FetchError>
       )}
     </div>
   );

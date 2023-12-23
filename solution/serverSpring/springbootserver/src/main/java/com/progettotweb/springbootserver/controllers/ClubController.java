@@ -17,16 +17,20 @@ public class ClubController {
         this.clubService = clubService;
     }
 
+    record PaginateResponse(List<Club> items, String nextPageURL){};
+
     @CrossOrigin(origins = "*")
     @GetMapping("/api/clubs")
-    public List<Club> getEntities(
+    public PaginateResponse getClubs(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "100") int pagesize
     ) {
-        page = page-1;
-        List<Club> entities = clubService.findAll(page, pagesize);
+        int searchPage = page-1;
+        List<Club> entities = clubService.findAll(searchPage, pagesize);
+        int nextPage = page + 1;
+        String nextPageURL = "http://localhost:8081/api/clubs?page=" + nextPage + "&pagesize=" + pagesize;
 
-        return entities;
+        return new PaginateResponse(entities, nextPageURL);
     }
 
     //route clubs/:id

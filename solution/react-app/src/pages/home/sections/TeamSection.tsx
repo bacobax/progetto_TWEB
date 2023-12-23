@@ -31,7 +31,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
                     loading && <p>Loading...</p>
                 }
                 {
-                    error && <p>{error}</p>
+                    error && <p>{error.message}</p>
                 }
                 {
                     current.map((club) => (
