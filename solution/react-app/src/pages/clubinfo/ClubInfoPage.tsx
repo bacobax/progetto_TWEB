@@ -4,7 +4,7 @@ import {Navigate, useParams} from "react-router-dom";
 
 
 
-export const ClubInfoPage:FC = () => {
+const ClubInfoPage:FC = () => {
 
     const params = useParams();
 
@@ -18,3 +18,6 @@ export const ClubInfoPage:FC = () => {
         </div>
     );
 };
+
+
+export default ClubInfoPage;

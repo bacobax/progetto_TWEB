@@ -147,7 +147,7 @@ const useStatefulChat = () =>{
                 });
                 setSelectedRoomIdx(userRooms.length);
                 setIsChatList(false);
-                socket.emit("first-join", data._id, user._id, user.name);
+                socket.emit("firstJoin", data._id, user._id, user.name);
                 closeNewChatModal();
             } else {
                 setErrorRooms(message ? message : "Error while creating room");
@@ -167,7 +167,7 @@ const useStatefulChat = () =>{
                 });
                 setSelectedRoomIdx(userRooms.length);
                 setIsChatList(false);
-                socket.emit("first-join", data._id, user._id, user.name);
+                socket.emit("firstJoin", data._id, user._id, user.name);
                 closeSearchChatModal();
             } else {
                 setErrorRooms(message ? message : "Error while creating room");

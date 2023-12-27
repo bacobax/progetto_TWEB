@@ -42,9 +42,9 @@ public class CompetitionController {
         return competition;
     }
 
-    record CompetitionIDAndName(String competitionID, String competitionName){}
+    record CompetitionIDAndName(String competition_id, String name){}
     //get a list of competitionIDs from the body and return a list of touples (competitionID, competitionName)
-    @PostMapping("/api/competitions/name")
+    @PostMapping("/api/competitions/names")
     public List<CompetitionIDAndName> getCompetitionNameById(
             @RequestBody(required = true) List<String> competitionIds
     ) {
@@ -53,4 +53,11 @@ public class CompetitionController {
         return competitions.stream().map(competition -> new CompetitionIDAndName(competition.getCompetitionId(), competition.getName())).toList();
     }
 
+    @GetMapping("/api/competitions/names")
+    public List<CompetitionIDAndName> getAllCompetitionNames() {
+        List<Competition> competitions = competitionService.getAllCompetitions();
+        return competitions.stream().map(competition -> new CompetitionIDAndName(competition.getCompetitionId(), competition.getName())).toList();
+    }
+
 }
+

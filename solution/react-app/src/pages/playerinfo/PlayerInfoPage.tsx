@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {PlayerInfo} from "./PlayerInfo";
 
 
-export const PlayerInfoPage:FC = () => {
+const PlayerInfoPage:FC = () => {
     const params = useParams();
 
     const {id} = params;
@@ -20,3 +20,4 @@ export const PlayerInfoPage:FC = () => {
     }
 
 };
+export default PlayerInfoPage;

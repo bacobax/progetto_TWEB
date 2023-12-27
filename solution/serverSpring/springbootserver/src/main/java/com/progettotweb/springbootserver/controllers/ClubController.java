@@ -57,5 +57,23 @@ public class ClubController {
         return clubs;
     }
 
+    /**
+     * a request that handle a body like this : [
+     *   192, 172, 142
+     * ] that are the ids of the clubs
+     * and return a response like this:
+     * [{id:192, name: "name192", managerName: "managerName192"}, {id:172, name: "name172", managerName: "managerName172"}, {id:142, name: "name142", managerName: "managerName142"}]
+     *
+     */
+    record ClubIDAndName(Long club_id, String name){}
+    @CrossOrigin(origins = "*")
+    @PostMapping("/api/clubs/names")
+    public List<ClubIDAndName> getClubNameById(
+            @RequestBody(required = true) List<Long> clubIds
+    ) {
+
+        List<Club> clubs = clubService.findClubsNamesByIds(clubIds);
+        return clubs.stream().map(club -> new ClubIDAndName(club.getClubId(), club.getName())).toList();
+    }
 
 }

@@ -69,14 +69,21 @@ const SERVERS = {
  *
  * @param {string} method - The HTTP method of the request.
  * @param {function} getRedirectServer - A function that returns the URL of the server to redirect to.
+ * @param {string[]} except - An array of paths that should not be redirected.
  * @returns {function} A function that takes a request and a response, and redirects the request.
  */
-const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
+const getAxiosRedirect = (method=undefined, getRedirectServer, except)=>{
     if(method === METHODS.GET || method === undefined || !METHODS.containsValue(method)){
 
-        return catchAsync(async (req, res) => {
+        return catchAsync(async (req, res,next) => {
+
             console.log("REDIRECTING GET")
             const path = req.originalUrl; // Get the full path of the request
+
+            if(except && except.includes(path)){
+                return next();
+            }
+
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
             const headers = req.headers;
 
@@ -95,6 +102,9 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
     if(method === METHODS.POST){
         return catchAsync(async (req, res,next) => {
             const path = req.originalUrl; // Get the full path of the request
+            if(except && except.includes(path)){
+                return next();
+            }
             const body = req.body;
             const headers = req.headers;
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
@@ -118,8 +128,11 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
         })
     }
     if(method === METHODS.PUT){
-        return catchAsync(async (req, res) => {
+        return catchAsync(async (req, res,next) => {
             const path = req.originalUrl; // Get the full path of the request
+            if(except && except.includes(path)){
+                return next();
+            }
             const body = req.body;
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
 
@@ -137,8 +150,11 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
         })
     }
     if(method === METHODS.DELETE){
-        return catchAsync(async (req, res) => {
+        return catchAsync(async (req, res,next) => {
             const path = req.originalUrl; // Get the full path of the request
+            if(except && except.includes(path)){
+                return next();
+            }
             const targetUrl = getRedirectServer(path) // Replace with your target server URL
 
             try {
@@ -159,17 +175,18 @@ const getAxiosRedirect = (method=undefined, getRedirectServer)=>{
  * Returns a router that redirects REST requests to another server.
  *
  * @param {function} gerRedirectServer - A function that returns the URL of the server to redirect to.
+ * @param {string[]} except - An array of paths that should not be redirected.
  * @returns {Object} A router that redirects REST requests.
  */
-const getRESTRedirectRouter = (gerRedirectServer)=>{
+const getRESTRedirectRouter = (gerRedirectServer, except)=>{
     const router = express.Router();
-    router.get('/*', getAxiosRedirect(METHODS.GET, gerRedirectServer)).post('*', getAxiosRedirect(METHODS.POST, gerRedirectServer)).put('*', getAxiosRedirect(METHODS.PUT, gerRedirectServer)).delete('*', getAxiosRedirect(METHODS.DELETE, gerRedirectServer));
+    router.get('/*', getAxiosRedirect(METHODS.GET, gerRedirectServer, except)).post('*', getAxiosRedirect(METHODS.POST, gerRedirectServer, except)).put('*', getAxiosRedirect(METHODS.PUT, gerRedirectServer,except)).delete('*', getAxiosRedirect(METHODS.DELETE, gerRedirectServer,except));
     return router;
 }
 
 exports.getAxiosRedirect = getAxiosRedirect;
-exports.getJavaRESTRedirectRouter = ()=>getRESTRedirectRouter(SERVERS.JAVA);
-exports.getNodeRESTRedirectRouter = ()=>getRESTRedirectRouter(SERVERS.NODE);
+exports.getJavaRESTRedirectRouter = (except)=>getRESTRedirectRouter(SERVERS.JAVA, except);
+exports.getNodeRESTRedirectRouter = (except)=>getRESTRedirectRouter(SERVERS.NODE,except);
 exports.SERVERS = SERVERS;
 exports.getJavaServerUrl = getJavaServerUrl;
 exports.METHODS = METHODS;

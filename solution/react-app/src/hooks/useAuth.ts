@@ -56,7 +56,7 @@ export const useAuth = () => {
         }
         if (data.status === "success") {
           ctxLogin(data.token, data.user.name, data.user.email , data.user._id);
-          navigate(redirectPath);
+          navigate(-2);
         }
       };
     },

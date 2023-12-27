@@ -123,12 +123,6 @@ gameSchema.virtual('events', {
   localField: '_id',
 });
 
-gameSchema.pre(/find/, function (next) {
-  this.populate({
-    path: 'events',
-  });
-  next();
-});
 
 const Game = mongoose.model('Game', gameSchema);
 module.exports = Game;

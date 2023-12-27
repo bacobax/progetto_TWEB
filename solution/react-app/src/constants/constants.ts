@@ -1,6 +1,7 @@
 import MessiImage from "../assets/messi.jpg";
 import { Player } from "./types";
 import DummyProfileImage from "../assets/messi.jpg";
+import {QueryFilters} from "../pages/games/Games";
 
 /**
  * GENERIC CONSTANTS AND FUNCTIONS
@@ -25,6 +26,7 @@ export const HOME_SECTIONS = {
     name: "Matches",
     linkLabel: "Matches",
   },
+
 };
 
 export const LOREM_IPSUM =
@@ -38,6 +40,7 @@ export const ROUTES = {
   CHAT: '/chat',
   PLAYER_INFO: 'player/:id',
   CLUB_INFO: "club/:id",
+  GAMES: "/games",
   DEFAULT: "*",
 }
 
@@ -66,7 +69,7 @@ export const numberFormatWithCommas = (n: string): string => {
 }
 
 export const MilionFormat = (n:string):string => {
-  if(n===null) return "NOT PROVIDED";
+  if(n===null || n.trim().length === 0 || n === "null") return "NOT PROVIDED";
   let num = Math.round(Number(n)/1000);
   let numStr = num.toString();
   let formattedNumStr = numberFormatWithCommas(numStr);
@@ -87,6 +90,16 @@ export const calculateAgeFromDateBirth = (dateOfBirth:string):number => {
 
 
 export const identity = (value:any) => value;
+
+
+
+export const competitionTypes = [
+  {value : 'domestic_cup'  ,key : "DC"},
+  {value: 'domestic_league', key: "DL"},
+  {value: 'international_cup' , key: "IC"},
+  {value: 'other' , key: "O"},
+];
+
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -457,3 +470,16 @@ export const URL_LEAVE_ROOM = (roomId:string) => getMainServerPath(`/room/leave/
 export const URL_PLAYER_INFO = (playerID:string) => getMainServerPath(`/playerStat/${playerID}`);
 
 export const URL_CLUB_INFO = (teamID:string) => getMainServerPath(`/clubStat/${teamID}`);
+
+export const URL_COMPETITIONS_NAME = getMainServerPath("/competitions/names");
+
+export const URL_GAMES = (filters: QueryFilters) => {
+  const params = new URLSearchParams();
+  Object.entries(filters).forEach(([key, value]) => {
+    if (value !== null && value !== undefined) {
+      params.append(key, value);
+    }
+  });
+  const queryString = params.toString();
+  return getMainServerPath(`/game?${queryString}&sort=-season`);
+}

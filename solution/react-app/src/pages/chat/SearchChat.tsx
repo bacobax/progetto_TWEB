@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useCallback, useEffect, useState} from "react";
 import Modal from "../../components/UI/modal/Modal";
 import {Room} from "../../constants/types";
 import useSearch from "../../hooks/useSearch";
@@ -14,7 +14,7 @@ interface SearchChatProps {
 }
 export const SearchChat:FC<SearchChatProps> = ({onClose, opened, onSelectRoom}) => {
 
-    const {setSearchTerm, data, searchTerm, loading} = useSearch<Room[]>([] , 1000, "/room" , getToken());
+    const {setSearchTerm, data, searchTerm, loading, setData} = useSearch<Room[]>([] , 1000, "/room" , getToken());
     const [selectedRoomIdx, setSelectedRoomIdx] = useState<number>(-1);
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,12 +27,18 @@ export const SearchChat:FC<SearchChatProps> = ({onClose, opened, onSelectRoom}) 
     const handleSearchTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     }
+    const handleClose = useCallback(()=>{
+        setSelectedRoomIdx(-1);
+        setSearchTerm("");
+        setData([]);
+        onClose();
+    } , [onClose, setSearchTerm, setData]);
 
     console.log({roomsSearched: data});
 
     console.log({selectedRoomIdx});
     return (
-        <Modal onClose={onClose} title={"Search a chat"} opened={opened} classNames={{
+        <Modal onClose={handleClose} title={"Search a chat"} opened={opened} classNames={{
             modal: "bg-gray-900 text-white",
             content: "mt-4 overflow-y-scroll gap-[10px] flex flex-col"
         }}>

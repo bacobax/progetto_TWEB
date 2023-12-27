@@ -27,7 +27,7 @@ const useSearch = <T>(initialData: T , delayMillisec: number, pathBeforeSearch?:
         }
     },[searchTerm, fetchData, delayMillisec, pathBeforeSearch, token]);
 
-    return {searchTerm, setSearchTerm, loading, data};
+    return {searchTerm, setSearchTerm, loading, data, setData};
 }
 
 export default useSearch;

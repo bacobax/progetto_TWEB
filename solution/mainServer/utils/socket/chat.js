@@ -21,7 +21,7 @@ exports.initChat = (io) => {
             socket.on('firstJoin', async (roomID, userId, userName) => {
                 try{
                     socket.join(roomID);
-                    chat.to(roomID).emit('first-joined', roomID, userId, userName);
+                    chat.to(roomID).emit('firstJoin', roomID, userId, userName);
                 }catch (e) {
                     console.log({errorSocketCreateOrJoin: e});
                 }

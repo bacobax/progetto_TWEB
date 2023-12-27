@@ -50,7 +50,7 @@ const ChatSpace:FC<ChatSpaceProps> = ({
                 setPopup(null);
             }, 5000);
         });
-        socket.on("first-join" , (roomID: string, userID: string) => {
+        socket.on("firstJoin" , (roomID: string, userID: string) => {
             if(userID === user._id) return;
             console.log("CREATE OR JOIN RECEIVED")
             setPopup({

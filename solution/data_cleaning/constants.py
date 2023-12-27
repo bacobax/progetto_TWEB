@@ -17,10 +17,10 @@ null_columns = lambda df: list(df.columns[df.isnull().any()])
 
 datasets = [
         {"drop_id": None, "name": "new_games.csv"},
-        { "drop_id": "appearance_id", "name": "new_appearances.csv"},
-        {"drop_id": "game_event_id", "name": "game_events.csv"},
-        { "drop_id": "game_lineups_id", "name": "game_lineups.csv"},
-        { "drop_id": None, "name": "new_player_valuations.csv"},
+        #{ "drop_id": "appearance_id", "name": "new_appearances.csv"},
+        #{"drop_id": "game_event_id", "name": "game_events.csv"},
+        #{ "drop_id": "game_lineups_id", "name": "game_lineups.csv"},
+        #{ "drop_id": None, "name": "new_player_valuations.csv"},
     ]
 
 def dropping_useless_ids(column_to_drop, df):

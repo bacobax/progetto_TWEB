@@ -45,5 +45,8 @@ public class ClubService {
     }
 
 
+    public List<Club> findClubsNamesByIds(List<Long> clubIds) {
+        return clubRepository.findClubsNamesByIds(clubIds);
+    }
 
 }

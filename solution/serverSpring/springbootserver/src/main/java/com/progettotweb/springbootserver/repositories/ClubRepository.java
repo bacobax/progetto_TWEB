@@ -12,4 +12,7 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
 
     @Query("SELECT c FROM Club c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<Club> findByNameContains(String name);
+
+    @Query("SELECT c FROM Club c WHERE c.clubId IN :clubIds")
+    List<Club> findClubsNamesByIds(List<Long> clubIds);
 }

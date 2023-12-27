@@ -21,22 +21,35 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
     const expressResponse = await axios.get(getNodeServerUrl(`/api/player/${req.params.id}`));
 
+
+
     const {current_club_id, ...otherPlayerData} = expressResponse.data.data;
+
+
 
 
     const javaResponse = await axios.get(getJavaServerUrl(`/api/clubs/${current_club_id}`));
     const clubName = javaResponse.data.name;
 
+
+
     const competitionsIDS = Object.keys(otherPlayerData.stats);
 
 
-    const competitionNamesMappingRes = await axios.post(getJavaServerUrl("/api/competitions/name"),competitionsIDS);
 
+    const competitionNamesMappingRes = await axios.post(getJavaServerUrl("/api/competitions/names"),competitionsIDS);
     const competitionNamesMapping = competitionNamesMappingRes.data;
-
     competitionsIDS.forEach(competitionID=>{
-        otherPlayerData.stats[competitionID].competitionName = competitionNamesMapping.find(c=>c.competitionID === competitionID).competitionName;
+
+        console.log({competitionID})
+
+
+        otherPlayerData.stats[competitionID] = {
+            ...otherPlayerData.stats[competitionID],
+            competitionName: competitionNamesMapping.find(c => c.competition_id === competitionID).name
+        };
     })
+
 
     res.status(200).json({
         status: "success",
@@ -58,9 +71,14 @@ app.route("/api/clubStat/:id").get(catchAsync(async (req,res,next)=>{
     })
 
 }));
+
+
+
 app.use("/api/player", getNodeRESTRedirectRouter());
 app.use("/api/clubs", getJavaRESTRedirectRouter());
 app.use("/api/room" , getNodeRESTRedirectRouter());
+app.use("/api/competitions", getJavaRESTRedirectRouter());
+app.use("/api/game", getNodeRESTRedirectRouter());
 
 app.get("/api/search/:text",search);
 

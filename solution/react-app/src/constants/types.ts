@@ -194,3 +194,58 @@ export interface Room{
     messages: Message[];
     description?: string;
 }
+
+/**
+ * game example:
+ * "_id": "6574baea291260c74de2888d",
+ *             "competition_id": "CIT",
+ *             "season": "2023",
+ *             "round": "First Round",
+ *             "date": "2023-08-14T00:00:00.000Z",
+ *             "home_club_id": 1038,
+ *             "away_club_id": 4554,
+ *             "home_club_goals": 8,
+ *             "away_club_goals": 7,
+ *             "home_club_position": null,
+ *             "away_club_position": null,
+ *             "stadium": "Luigi Ferraris",
+ *             "attendance": 10948,
+ *             "referee": "Kevin Bonacina",
+ *             "url": "https://www.transfermarkt.co.uk/spielbericht/index/spielbericht/4137134",
+ *             "home_club_formation": "4-3-3 Attacking",
+ *             "away_club_formation": "4-4-2 double 6",
+ *             "home_club_name": "",
+ *             "away_club_name": "",
+ *             "aggregate": "8:7",
+ *             "competition_type": "domestic_cup",
+ *             "createdAt": "2023-12-09T19:09:36.851Z",
+ *             "updatedAt": "2023-12-09T19:09:36.851Z",
+ *             "id": "6574baea291260c74de2888d"
+ */
+
+export interface Game {
+    _id: string;
+    competition_id: string;
+    season: string;
+    round: string;
+    date: string;
+    home_club_id: number;
+    away_club_id: number;
+    home_club_goals: number;
+    away_club_goals: number;
+    home_club_position: number;
+    away_club_position: number;
+    stadium: string;
+    attendance: number;
+    referee: string;
+    url: string;
+    home_club_formation: string;
+    away_club_formation: string;
+    home_club_name: string;
+    away_club_name: string;
+    aggregate: string;
+    competition_type: string;
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+}
