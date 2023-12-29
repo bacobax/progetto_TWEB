@@ -11,7 +11,7 @@ interface StringKeys {
     [key: string]: string | undefined
 }
 export interface QueryFilters extends StringKeys{
-    competition_id: string;
+    competition_id: string | undefined;
     season: string | undefined;
     competition_type: string | undefined;
 }

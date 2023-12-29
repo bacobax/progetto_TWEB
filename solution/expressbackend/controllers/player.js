@@ -26,7 +26,7 @@ exports.getAllPlayer = catchAsync(async (req, res) => {
 
     const docs = await query;
     const myHOST = req.protocol + '://' + req.get('host');
-    const nextRequestURL = `${myHOST}/api/player?page=${page + 1}&limit=${limit}`;
+    const nextRequestURL = `${process.env.MAIN_SERVER_HOST}/api/player?page=${page + 1}&limit=${limit}`;
 
     res.status(200).json({
         status: 'success',

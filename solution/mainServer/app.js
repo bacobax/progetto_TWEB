@@ -79,6 +79,7 @@ app.use("/api/clubs", getJavaRESTRedirectRouter());
 app.use("/api/room" , getNodeRESTRedirectRouter());
 app.use("/api/competitions", getJavaRESTRedirectRouter());
 app.use("/api/game", getNodeRESTRedirectRouter());
+app.use("/api/gameEvent"    , getNodeRESTRedirectRouter());
 
 app.get("/api/search/:text",search);
 

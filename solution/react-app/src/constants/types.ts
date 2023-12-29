@@ -249,3 +249,47 @@ export interface Game {
     updatedAt: string;
     id: string;
 }
+
+
+/**
+ * GAme event shape example:
+ * {
+ *             "_id": "6574db930a845340382cfe54",
+ *             "date": "2012-08-18T00:00:00.000Z",
+ *             "game_id": "6574bae9291260c74de18e18",
+ *             "minute": 84,
+ *             "type": "Cards",
+ *             "club_id": 52,
+ *             "player_id": "6574baf3975bb4cdf6a015da",
+ *             "description": "1. Yellow card",
+ *             "player_in_id": null,
+ *             "player_assist_id": null
+ *         },
+ */
+
+
+export interface GameEvent{
+    _id: string;
+    date: string;
+    game_id: string;
+    minute: number;
+    type: string;
+    club_id: number;
+    player_id: string;
+    description: string;
+    player_in_id: string;
+    player_assist_id: string;
+    player:{
+        first_name: string;
+        last_name:string;
+    }[]
+    player_in: {
+        first_name: string;
+        last_name:string;
+    }[]
+    player_assist: {
+        first_name: string;
+        last_name:string;
+    }[]
+
+}

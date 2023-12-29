@@ -1,6 +1,7 @@
 import {Game} from "../constants/types";
 import {FC} from "react";
 import {Accordion, AccordionItem, Avatar, Divider} from "@nextui-org/react";
+import {GameStats} from "../pages/games/GameStats";
 
 
 //want to have a date with format ex: 2 MARCH 1999
@@ -48,7 +49,7 @@ export const GameCard:FC<Game & classNameProps> = (props) => {
                 <AccordionItem title={"Stats"} classNames={{
                     title: "text-white font-bold",
                 }}>
-                    <h1>Ciao</h1>
+                    <GameStats gameID={props._id} />
                 </AccordionItem>
             </Accordion>
         </div>

@@ -1,7 +1,7 @@
 import {FC, FormEvent} from "react";
 import {QueryFilters} from "./Games";
 import {useAsyncList} from "@react-stately/data";
-import {competitionTypes, URL_COMPETITIONS_NAME} from "../../constants/constants";
+import {competitionTypes, URL_COMPETITIONS_NAME, xor} from "../../constants/constants";
 import {
     Autocomplete,
     AutocompleteItem, Button,
@@ -44,8 +44,8 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
         },
         type: {
             value: "",
-            error: false,
-            validate: (_)=>true,
+            error: true,
+            validate: (value)=>value.trim().length > 0 ,
             errorText: ""
         },
         season: {
@@ -60,29 +60,24 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log({
-            competition_id: formState.competition_id.value,
-            season: formState.season.value.trim().length === 0  ? undefined : formState.season.value,
-            type: formState.type.value.trim().length === 0 ? undefined : formState.type.value
-        })
         onApplyFilters({
-            competition_id: formState.competition_id.value,
+            competition_id: formState.competition_id.value.trim().length === 0  ? undefined : formState.season.value,
             season: formState.season.value.trim().length === 0  ? undefined : formState.season.value,
             competition_type: formState.type.value.trim().length === 0 ? undefined : formState.type.value
         });
     }
 
-    const isYearValid = !formState.season.error;
     const isCompetitionValid = !formState.competition_id.error;
     const isTypeValid = !formState.type.error;
 
-    const formIsValid = isYearValid && isCompetitionValid && isTypeValid;
+    const formIsValid = xor(isCompetitionValid, isTypeValid);
 
     console.log({competitions})
     return (
         <form onSubmit={handleSubmit} className={"dark flex flex-col gap-2 w-4/5 md:flex-row md:items-center"}>
             {!isLoading && !error &&  <Autocomplete
                 label="Competition"
+
                 className="dark text-white"
                 defaultItems={competitions}
                 value={formState.competition_id.value}
@@ -93,11 +88,11 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
                         value: list.items.find(i => i.name === val)?.competition_id || ""
                     })
                 }}
-                isInvalid={formState.competition_id.error}
+                isInvalid={(formState.competition_id.error && formState.type.value.trim().length === 0) || (formState.type.value.trim().length > 0 && formState.competition_id.value.trim().length > 0)}
                 classNames={{
                     popoverContent: "dark",
                 }}
-                isRequired={true}
+                isRequired={formState.type.value.trim().length === 0}
             >
                 {(item) => <AutocompleteItem className={"dark text-white"} key={item.competition_id}>{item.name}</AutocompleteItem>}
             </Autocomplete>}
@@ -105,7 +100,7 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
                 <Select
                     items={competitionTypes}
                     label="Competition type"
-                    placeholder="Select a competition type"
+                    isInvalid={(formState.type.error && formState.competition_id.value.trim().length === 0) || (formState.type.value.trim().length > 0 && formState.competition_id.value.trim().length > 0)}
                     classNames={{
                         listboxWrapper: "dark text-white",
                         base: "dark",
@@ -120,6 +115,7 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
                             value: e.target.value
                         })
                     }}
+                    isRequired={formState.competition_id.value.trim().length === 0}
                 >
                     {(compType) => <SelectItem key={compType.value}>{compType.value}</SelectItem>}
                 </Select>

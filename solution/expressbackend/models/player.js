@@ -29,11 +29,6 @@ const playerSchema = new mongoose.Schema(
   }
 );
 
-playerSchema.virtual('gameEvents', {
-  ref: 'GameEvent',
-  foreignField: 'player_id',
-  localField: '_id',
-});
 
 playerSchema.virtual('valuations', {
   ref: 'PlayerValuation',
@@ -54,21 +49,7 @@ playerSchema.virtual('appearances', {
   foreignField: 'player_id',
   localField: '_id',
 });
-/*
-playerSchema.pre(/^findOne/, function(next) {
-  console.log("MIDDLEWARE");
-  this.populate({path: "gameEvents"});
-  this.populate({path:"valuations"});
-  this.populate({path: "lineups"});
-  this.populate({path: "appearances"});
-  next();
-} , function(err, docs) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    console.log(docs);
-});*/
+
 
 const Player = mongoose.model('Player', playerSchema);
 

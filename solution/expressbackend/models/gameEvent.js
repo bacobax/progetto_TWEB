@@ -44,7 +44,51 @@ const gameEventSchema = new mongoose.Schema({
     ref: 'Player',
     required: false,
   },
+},{
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
 });
+
+gameEventSchema.virtual('player' , {
+    ref: 'Player',
+    foreignField: '_id',
+    localField: 'player_id',
+});
+
+gameEventSchema.virtual('player_in' , {
+    ref: 'Player',
+    foreignField: '_id',
+    localField: 'player_in_id',
+});
+
+gameEventSchema.virtual('player_assist' , {
+    ref: 'Player',
+    foreignField: '_id',
+    localField: 'player_assist_id',
+});
+
+
+
+
+gameEventSchema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'player',
+        select: 'first_name last_name -_id',
+    });
+    this.populate({
+            path: 'player_in',
+            select: 'first_name last_name -_id',
+        });
+    this.populate({
+            path: 'player_assist',
+            select: 'first_name last_name -_id',
+        });
+    next();
+});
+
+
+
+
 const GameEvent = mongoose.model('GameEvent', gameEventSchema);
 
 module.exports = GameEvent;

@@ -91,7 +91,9 @@ export const calculateAgeFromDateBirth = (dateOfBirth:string):number => {
 
 export const identity = (value:any) => value;
 
-
+export const xor = (a:boolean,b:boolean) => {
+    return (a || b) && !(a && b);
+}
 
 export const competitionTypes = [
   {value : 'domestic_cup'  ,key : "DC"},
@@ -483,3 +485,6 @@ export const URL_GAMES = (filters: QueryFilters) => {
   const queryString = params.toString();
   return getMainServerPath(`/game?${queryString}&sort=-season`);
 }
+
+
+export const URL_GAME_EVENTS = (gameId:string, pagesize: number) => getMainServerPath(`/game/${gameId}/events?limit=${pagesize}&page=1`);
