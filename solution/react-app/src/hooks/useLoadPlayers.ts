@@ -12,7 +12,6 @@ const useLoadPlayers = (pageSize: number) => {
             const response = await fetch(url,{signal});
             const json = await response.json();
             const players = json.data.map((player:ShortPlayer)=>player);
-            console.log({players})
             return {
                 items: players,
                 cursor: json.nextRequestURL

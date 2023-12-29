@@ -28,7 +28,6 @@ const useLoadTeams = (pageSize: number) => {
             const response = await fetch(url,{signal});
             const json = await response.json();
             const clubs = json.items.map((club:Club)=>getshortclubFromClub(club));
-            console.log({clubs})
             return {
                 items: clubs,
                 cursor: json.nextPageURL

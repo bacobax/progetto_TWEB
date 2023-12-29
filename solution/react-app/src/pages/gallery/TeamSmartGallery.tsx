@@ -16,7 +16,6 @@ export const TeamSmartGallery: FC = () => {
   const [showForm, setShowForm] = useState(false);
 
   const { clubs, loading, error,loadMore } = useLoadTeams(5);
-  console.log({clubs, loading, error})
 
   const { filteredData, removeFilter, resetFilters, addFilter, filterNames } = useFilter([...clubs]);
 

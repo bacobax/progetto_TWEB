@@ -50,18 +50,14 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
   }, [onClearFilters]);
 
   const applyNameFilter =() => {
-      console.log("applyNameFilter")
    if (name.trim().length === 0) {
-        console.log("applyNameFilter -> return")
       return;
     }
-    console.log("applyNameFilter -> onAddNameFilter")
     onAddNameFilter(name);
   }
 
 
   const applyScoreFilter =()=>{
-      console.log("applyScoreFilter")
     if (!scoreMin || !scoreMax || scoreMin.trim().length === 0 || scoreMax.trim().length === 0 || Number(maxMarketValue) === Number(minMarketValue)) {
       return;
     }
@@ -78,7 +74,6 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
   };
 
   const handleApplyFilters = () => {
-      console.log({name, scoreMin:Number(scoreMin), scoreMax: Number(scoreMax)})
       if (!scoreMin || !scoreMax || scoreMin.trim().length === 0 || scoreMax.trim().length === 0 || Number(maxMarketValue) === Number(minMarketValue)) {
           return;
       }
@@ -92,7 +87,6 @@ const PlayerFilterForm: React.FC<FilterFormProps> = ({
         });
   };
 
-  console.log({minMarketValue, maxMarketValue})
 
 
   return (

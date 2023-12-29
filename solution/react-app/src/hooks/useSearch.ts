@@ -16,7 +16,6 @@ const useSearch = <T>(initialData: T , delayMillisec: number, pathBeforeSearch?:
                 const path = pathBeforeSearch ? pathBeforeSearch + "/search/" + searchTerm : "/search/" + searchTerm;
                 const obj = (token!==undefined && token !== null) ? {url: getMainServerPath(path), token} : {url: getMainServerPath(path)};
                 fetchData<{status:string, data: T}>(obj , (data)=>{
-                    console.log({data})
                     setData(data.data);
                 })
             }

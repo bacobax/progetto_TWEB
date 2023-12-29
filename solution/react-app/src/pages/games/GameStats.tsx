@@ -28,7 +28,7 @@ const tableColumns = [
     {key: "player_assist" , label: "Player Assist"}
 ]
 
-const PAGESIZE = 3;
+const PAGESIZE = 5;
 
 
 
@@ -36,7 +36,6 @@ const PAGESIZE = 3;
 export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
 
     const renderTableCell = useCallback (({label, gameEvent}:{label: Key, gameEvent: GameEvent}) => {
-        console.log({gameEvent})
         switch (label) {
             case "minute":
                 return gameEvent.minute
@@ -67,15 +66,17 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
 
     const [hasMore, setHasMore] = useState(true);
 
+    const [moreItemsLoading, setMoreItemsLoading] = useState(false);
 
     const list = useAsyncList<GameEvent>({
         async load({signal,cursor}){
 
+            setMoreItemsLoading(true);
+
             const json = await fetch((cursor || URL_GAME_EVENTS(gameID, PAGESIZE)), {signal});
             const res = await json.json();
 
-
-            console.log({res})
+            setMoreItemsLoading(false);
             setHasMore(res.hasMore);
             return {
                 items: res.data,
@@ -106,20 +107,16 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
 
     const {items: gameEvents, isLoading: listLoading, error} = list;
 
-    if(listLoading){
-        return <h1>Loading...</h1>
-    }
     if(error){
         return <FetchError opened={true} onClose={()=>{}} message={error.message} />
     }
 
-    console.log({gameEvents})
 
     return (
         <Table className={"dark text-white font-anonymousPro"} bottomContent={hasMore && !listLoading ? (
             <div className="flex w-full justify-center">
                 <Button isDisabled={list.isLoading} variant="flat" onPress={list.loadMore}>
-                    {list.isLoading && <Spinner color="white" size="sm" />}
+                    {moreItemsLoading && <Spinner color="white" size="sm" />}
                     Load More
                 </Button>
             </div>

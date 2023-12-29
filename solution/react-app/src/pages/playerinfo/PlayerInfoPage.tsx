@@ -7,7 +7,6 @@ const PlayerInfoPage:FC = () => {
     const params = useParams();
 
     const {id} = params;
-    console.log({id})
 
     if(id){
         return (

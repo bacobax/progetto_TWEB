@@ -46,7 +46,6 @@ export const NewChat:FC<NewChatProps> = ({onClose, opened, onNewChat}) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("submit");
         onNewChat(formState.roomName.value, formState.description.value);
     }
     return (

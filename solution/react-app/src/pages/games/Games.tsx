@@ -23,7 +23,6 @@ export const Games:FC = () => {
     const [games, setGames] = useState<Game[]>([]);
     const {loading, setError, error, fetchData} = useFetch();
     const handleApplyFilters = (filters: QueryFilters) => {
-        console.log({filters})
         fetchData<{status:string, results: number, data:Game[], message?:string}>({
             url: URL_GAMES(filters),
         } , (data) =>{
@@ -42,7 +41,7 @@ export const Games:FC = () => {
         <div className={"w-full flex flex-col items-center gap-5"}>
             <h1 className={"text-5xl font-['Impact'] text-corvette"}>GAMES</h1>
             <GameFiltersForm onApplyFilters={handleApplyFilters} idLoading={loading}/>
-            {!loading && games.length > 0 && <MemoizedMap items={games} className={"flex flex-wrap gap-4 w-full justify-center"}>
+            {!loading && games.length > 0 && <MemoizedMap items={games} className={"flex flex-wrap gap-4 w-full justify-center h-fit"}>
                 {(game) => <GameCard {...game } key={game._id} className={"w-4/5 max-w-[550px]"} />}
             </MemoizedMap>}
         </div>

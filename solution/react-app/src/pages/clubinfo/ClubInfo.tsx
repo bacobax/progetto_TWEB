@@ -55,7 +55,6 @@ export const ClubInfo:FC<ClubInfoProps> = ({id}) => {
         },
     ];
 
-    console.log({clubData: club});
 
     const totalValue = club.players.reduce((acc, player) => acc + Number(player.market_value_in_eur), 0);
     const avarageAge = club.players.reduce((acc, player) => acc + calculateAgeFromDateBirth(player.date_of_birth), 0) / club.players.length;

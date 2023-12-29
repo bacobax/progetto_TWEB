@@ -21,7 +21,6 @@ const CircleBackground: React.FC<{ className: string }> = ({ className }) => {
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         setDuration(distance / VELOCITY);
         setCoords({ x: newX, y: newY });
-        console.log('New coords:', newX, newY);
     }, [coords.x, coords.y]);
 
     useEffect(() => {

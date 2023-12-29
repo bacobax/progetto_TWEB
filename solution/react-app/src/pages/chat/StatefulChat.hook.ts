@@ -33,7 +33,6 @@ const useStatefulChat = () =>{
     useEffect(() => {
 
         socket.connect();
-        console.log("socket connected");
         socket.on("chat", (room, userId, userName, chatText) => {
             if (userId !== user?._id) {
                 setUserRooms(prevRooms => {
@@ -132,7 +131,6 @@ const useStatefulChat = () =>{
 
     const handleNewChat = useCallback((name: string, description:string) => {
         if (!user) return;
-        console.log(name);
         fetchRoomsData<{ status: string, data: Room, message?: string }>({
             url: URL_CREATE_ROOM,
             token: user?.token,
@@ -180,7 +178,6 @@ const useStatefulChat = () =>{
         if(!user) return;
 
         fetchRoomsData<{status:string, data: Room | null, message?:string}>({url:URL_LEAVE_ROOM(roomID) , token: user.token, method: "POST"}, (response) => {
-            console.log({leavingRoomRESPONSE: response})
             if(response.status === "success"){
                 setUserRooms(prevRooms => {
                     const newRooms = [...prevRooms];

@@ -29,7 +29,6 @@ const AuthForm = forwardRef<HTMLDivElement, FormProps>(({onSwitch, isLogin, logi
     const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log({formState});
         reset();
         onSubmit(formState);
     },[formState, onSubmit, reset]);

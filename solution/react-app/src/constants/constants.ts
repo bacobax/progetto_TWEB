@@ -15,7 +15,7 @@ export const HOME_SECTIONS = {
     linkLabel: "Home",
   },
   PLAYERS: {
-    name: "Tlayers",
+    name: "Players",
     linkLabel: "Players",
   },
   TEAMS: {
@@ -25,6 +25,10 @@ export const HOME_SECTIONS = {
   MATCHES: {
     name: "Matches",
     linkLabel: "Matches",
+  },
+  GAMES: {
+    name: "Games",
+    linkLabel: "/games",
   },
 
 };

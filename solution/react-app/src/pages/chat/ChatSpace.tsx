@@ -42,7 +42,6 @@ const ChatSpace:FC<ChatSpaceProps> = ({
     useEffect(() => {
         socket.connect();
         socket.on("leave" , (roomID: string, userID: string) => {
-            console.log("LEAVE RECEIVED")
             setPopup({
                 content:`${userID} has left the room`, type: "LEAVE"
             });
@@ -52,8 +51,7 @@ const ChatSpace:FC<ChatSpaceProps> = ({
         });
         socket.on("firstJoin" , (roomID: string, userID: string) => {
             if(userID === user._id) return;
-            console.log("CREATE OR JOIN RECEIVED")
-            setPopup({
+                setPopup({
                 content: `${userID} has joined the room`,
                 type: "JOIN"
             });

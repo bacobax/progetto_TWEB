@@ -4,7 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 
 const {createOne, getAll, deleteAll, deleteOne, getOne, updateOne} = require('./special/handlerFactory');
 const AppError = require("../utils/appError");
-const {ObjectID, ObjectId} = require("mongodb");
+const {ObjectId} = require("mongodb");
 
 exports.createGame = createOne(Game);
 

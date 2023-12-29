@@ -34,7 +34,6 @@ function useFilter<T>(data: T[]): UseFilterResult<T> {
             const filteredFilters = prev.filter(filter => filter.key !== config.key);
             return [...filteredFilters, config];
         })
-        console.log("finish setFilter");
 
     }
 

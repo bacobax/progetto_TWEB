@@ -4,6 +4,8 @@ import { IoHomeOutline } from "react-icons/io5";
 import { FaRegNewspaper } from "react-icons/fa";
 import {IoIosLogIn, IoIosLogOut, IoMdInformationCircleOutline} from "react-icons/io";
 import { BsChatQuote } from "react-icons/bs";
+import { TbSoccerField } from "react-icons/tb";
+
 
 import {HOME_SECTIONS as s} from "./constants";
 
@@ -31,7 +33,12 @@ export const navbarElements: Elements = [
         icon: <FaRegNewspaper  className={styles.icon}/>,
         routerLink: false
     },
-
+    {
+       name: s.GAMES.name,
+       path: s.GAMES.linkLabel,
+        icon: <TbSoccerField className={styles.icon}/>,
+        routerLink: true
+    }
 
 
 ];

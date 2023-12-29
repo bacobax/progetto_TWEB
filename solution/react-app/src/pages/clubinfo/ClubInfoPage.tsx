@@ -9,7 +9,6 @@ const ClubInfoPage:FC = () => {
     const params = useParams();
 
     const {id} = params;
-    console.log({id})
 
     return (
         <div className={"min-w-[100vw] flex items-center justify-center p-[20px]"}>

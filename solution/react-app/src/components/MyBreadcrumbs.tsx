@@ -16,7 +16,6 @@ export const MyBreadcrumbs:FC<MyBreadcrumbsProps> = ({breadcumbs, top, left}) =>
     const topPos = top ===undefined ?  DEF_TOP : top;
     const leftPos = left ===undefined ?  DEF_LEFT : left;
 
-    console.log({topPos, leftPos, top, left})
 
     return (
         <Breadcrumbs classNames={{

@@ -37,7 +37,6 @@ export const AuthContextProvider: React.FC<Props> = ({children}) => {
             return;
         }
 
-        console.log(`remaining time: ${tokenDuration}`);
 
         setTimeout(() => {
             logout();

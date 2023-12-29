@@ -88,7 +88,6 @@ export const PlayerInfo: FC<PlayerInfoProps> = ({ id }: PlayerInfoProps) => {
     </AccordionItem>
   );
 
-  console.log({ chartData: player.market_values_in_eur });
 
   const formattedData = player.market_values_in_eur!.map(
     ({ date, market_value_in_eur }) => ({

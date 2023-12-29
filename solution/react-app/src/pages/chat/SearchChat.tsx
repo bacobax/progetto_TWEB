@@ -34,9 +34,6 @@ export const SearchChat:FC<SearchChatProps> = ({onClose, opened, onSelectRoom}) 
         onClose();
     } , [onClose, setSearchTerm, setData]);
 
-    console.log({roomsSearched: data});
-
-    console.log({selectedRoomIdx});
     return (
         <Modal onClose={handleClose} title={"Search a chat"} opened={opened} classNames={{
             modal: "bg-gray-900 text-white",

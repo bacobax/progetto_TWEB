@@ -66,7 +66,6 @@ const PlayerSmartGallery:React.FC<SmartGalleryProps> = () => {
             return false;
         }
     })
-        console.log("finish addNameFilter")
     }, [addFilter]);
 
 

@@ -61,7 +61,7 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onApplyFilters({
-            competition_id: formState.competition_id.value.trim().length === 0  ? undefined : formState.season.value,
+            competition_id: formState.competition_id.value.trim().length === 0  ? undefined : formState.competition_id.value,
             season: formState.season.value.trim().length === 0  ? undefined : formState.season.value,
             competition_type: formState.type.value.trim().length === 0 ? undefined : formState.type.value
         });
@@ -72,7 +72,6 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
 
     const formIsValid = xor(isCompetitionValid, isTypeValid);
 
-    console.log({competitions})
     return (
         <form onSubmit={handleSubmit} className={"dark flex flex-col gap-2 w-4/5 md:flex-row md:items-center"}>
             {!isLoading && !error &&  <Autocomplete
