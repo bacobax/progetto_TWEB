@@ -1,0 +1,116 @@
+components:
+  schemas:
+    Appearence:
+      type: object
+      required:
+        - game_id
+        - player_id
+        - player_name
+        - player_club_id
+        - player_current_club_id
+        - date
+        - competition_id
+        - yellow_cards
+        - red_cards
+        - goals
+        - assists
+        - minutes_played
+      properties:
+        game_id:
+          type: string
+        player_id:
+          type: string
+        player_name:
+          type: string
+        player_club_id:
+          type: number
+        player_current_club_id:
+          type: number
+        date:
+          type: string
+        competition_id:
+          type: number
+        yellow_cards:
+          type: number
+        red_cards:
+          type: number
+        goals:
+          type: number
+        assists:
+          type: number
+        minutes_played:
+          type: number
+
+parameters:
+  game_id:
+    name: game_id
+    in: query
+    description: game_id of the appearance
+    schema:
+      type: string
+  player_id:
+    name: player_id
+    in: query
+    description: player_id of the appearance
+    schema:
+      type: string
+  player_name:
+    name: player_name
+    in: query
+    description: player_name of the appearance
+    schema:
+      type: string
+  player_club_id:
+    name: player_club_id
+    in: query
+    description: player_club_id of the appearance
+    schema:
+      type: integer
+  player_current_club_id:
+    name: player_current_club_id
+    in: query
+    description: player_current_club_id of the appearance
+    schema:
+      type: integer
+  date:
+    name: date
+    in: query
+    description: date of the appearance
+    schema:
+      type: string
+  competition_id:
+    name: competition_id
+    in: query
+    description: competition_id of the appearance
+    schema:
+      type: string
+  yellow_cards:
+    name: yellow_cards
+    in: query
+    description: yellow_cards of the appearance
+    schema:
+      type: number
+  red_cards:
+    name: red_cards
+    in: query
+    description: red_cards of the appearance
+    schema:
+      type: number
+  goals:
+    name: goals
+    in: query
+    description: goals of the appearance
+    schema:
+      type: number
+  assists:
+    name: assists
+    in: query
+    description: assists of the appearance
+    schema:
+      type: number
+  minutes_played:
+    name: minutes_played
+    in: query
+    description: minutes_played of the appearance
+    schema:
+      type: number

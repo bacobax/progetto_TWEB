@@ -5,4 +5,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ClubPageableRepository extends PagingAndSortingRepository<Club, Long> {
 
+
+
+
+
+
 }

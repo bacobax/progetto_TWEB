@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {sliceArray} from "../constants/constants";
 interface ReturnType<T> {
     current: T[];
@@ -7,15 +7,12 @@ interface ReturnType<T> {
     currentIdx: number;
     matrixLength: number;
     setIndex: React.Dispatch<React.SetStateAction<number>>;
-    index: number
 }
 export const useSlice = <T>(array: T[], size: number): ReturnType<T> => {
     const [index, setIndex] = useState(0);
-    const matrix = sliceArray(array, size);
 
-
-
-    const current = matrix[index%matrix.length];
+    const matrix = useMemo(() => sliceArray(array, size), [array, size]);
+    const current = matrix[index];
 
     const next = useCallback(() => {
         setIndex((prev) => (prev + 1) % matrix.length);
@@ -33,7 +30,6 @@ export const useSlice = <T>(array: T[], size: number): ReturnType<T> => {
 
 
 
-
     return {
         current,
         next,
@@ -41,8 +37,5 @@ export const useSlice = <T>(array: T[], size: number): ReturnType<T> => {
         currentIdx: index,
         matrixLength: matrix.length,
         setIndex,
-        index
-
     }
-
 }

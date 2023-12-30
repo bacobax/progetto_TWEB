@@ -1,10 +1,12 @@
 import React from 'react';
 import {Card, CardHeader, Image, Divider, CardFooter, CardBody, Link, Button, Spacer} from "@nextui-org/react";
-import {ShortClub} from "../constants/types";
+import {Club, ShortClub} from "../constants/types";
 import {useNavigate} from "react-router-dom";
+import {MilionFormat} from "../constants/constants";
 
 
-interface TeamCardProps extends ShortClub{
+interface TeamCardProps extends Club{
+
 }
 
 const onlyHostFromLink = (url: string) => {
@@ -26,7 +28,7 @@ const onlyHostFromLink = (url: string) => {
  *
  * @returns A card element with the team's information.
  */
-const TeamCard: React.FC<TeamCardProps> = ({ name, clubId, url }) => {
+const TeamCard: React.FC<TeamCardProps> = ({ name, clubId, url, totalMarketValue }) => {
   const navigate = useNavigate();
 
   return (
@@ -36,6 +38,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ name, clubId, url }) => {
           <p className="text-md  w-full">{name}</p>
           <p className="text-small text-default-500 w-full">{onlyHostFromLink(url)}</p>
         </div>
+          <h2 className={"flex flex-row text-green-400 font-bold"}>{ "€" + MilionFormat(""+totalMarketValue)}</h2>
       </CardHeader>
       <Spacer y={2} />
       <Divider />

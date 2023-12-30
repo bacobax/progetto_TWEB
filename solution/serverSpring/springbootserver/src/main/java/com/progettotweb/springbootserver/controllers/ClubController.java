@@ -1,5 +1,6 @@
 package com.progettotweb.springbootserver.controllers;
 
+import com.progettotweb.springbootserver.ClubIDAndTotalMarketValue;
 import com.progettotweb.springbootserver.entities.Club;
 import com.progettotweb.springbootserver.services.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,23 @@ public class ClubController {
 
         List<Club> clubs = clubService.findClubsNamesByIds(clubIds);
         return clubs.stream().map(club -> new ClubIDAndName(club.getClubId(), club.getName())).toList();
+    }
+
+
+    /**
+     * a request that handle a body like this : [
+     * {
+     *  "_id": 192, totalMarketValue: 1000000
+     *
+     * }...] and update every totalMarketValue of every club with the id in those objects
+     */
+    @CrossOrigin(origins = "*")
+    @PutMapping("/api/clubs/totalMarketValue")
+    public void updateClubTotalMarketValue(
+            @RequestBody(required = true) List<ClubIDAndTotalMarketValue> clubIdsAndTotalMarketValue
+    ) {
+
+        clubService.updateClubsTotalMarketValue(clubIdsAndTotalMarketValue);
     }
 
 }

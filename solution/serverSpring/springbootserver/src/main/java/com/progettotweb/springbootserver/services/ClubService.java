@@ -1,10 +1,12 @@
 package com.progettotweb.springbootserver.services;
 
+import com.progettotweb.springbootserver.ClubIDAndTotalMarketValue;
 import com.progettotweb.springbootserver.entities.Club;
 import com.progettotweb.springbootserver.repositories.ClubPageableRepository;
 import com.progettotweb.springbootserver.repositories.ClubRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,7 +38,8 @@ public class ClubService {
         clubRepository.deleteById(id);
     }
     public List<Club> findAll(int page, int pagesize){
-        Pageable paging = PageRequest.of(page, pagesize);
+        Sort sort = Sort.by(Sort.Direction.DESC, "totalMarketValue");
+        Pageable paging = PageRequest.of(page, pagesize, sort);
         return clubPageableRepository.findAll(paging).getContent();
     }
 
@@ -47,6 +50,11 @@ public class ClubService {
 
     public List<Club> findClubsNamesByIds(List<Long> clubIds) {
         return clubRepository.findClubsNamesByIds(clubIds);
+    }
+    public void updateClubsTotalMarketValue(List<ClubIDAndTotalMarketValue> clubsIDAndTotalMarketValue) {
+        for (ClubIDAndTotalMarketValue clubIDAndTotalMarketValue : clubsIDAndTotalMarketValue) {
+            clubRepository.updateTotalMarketValue(clubIDAndTotalMarketValue._id(), clubIDAndTotalMarketValue.totalMarketValue());
+        }
     }
 
 }

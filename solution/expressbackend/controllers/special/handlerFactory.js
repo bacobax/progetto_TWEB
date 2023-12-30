@@ -72,6 +72,7 @@ exports.getOne = (
   Model // find th document with id = req.params.id
 ) =>
   catchAsync(async (req, res, next) => {
+      console.log({id: req.params.id})
     let query = Model.findById(req.params.id);
         const doc = await query;
 

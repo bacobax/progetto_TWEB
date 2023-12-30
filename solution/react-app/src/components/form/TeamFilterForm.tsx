@@ -8,20 +8,27 @@ import Filter from "../Filter";
 import {animatedButtonProps, teamfilterFormState} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 import InputGroup from "../UI/Input/InputGroup";
+import {Competition} from "../../constants/types";
+import {Autocomplete, AutocompleteItem, Input} from "@nextui-org/react";
 
 interface FilterFormProps{
-    onApplyFilters: (filters: { name:string,competitionName:string })=>void;
-    onClearFilters: ()=>void;
-    onRemoveFilter: (filterName: string)=>void;
-    filterNames: string[];
-    addNameFilter: (name: string)=>void;
-    addCompetitionFilter: (competitionName: string)=>void;
-
+    onApplyFilters: (filters: { name: string, competitionName: string }) => void,
+    onClearFilters: () => void,
+    onRemoveFilter: (filterName: string) => void,
+    filterNames: string[],
+    addNameFilter: (name: string) => void,
+    addCompetitionFilter: (competitionName: string) => void,
+    domesticCometitions: Competition[]
 }
 
+function removeDuplicates<T>(array: T[], equalFn: (a: T, b: T) => boolean) {
+    return array.filter((item, index) => {
+        const firstIndex = array.findIndex((i) => equalFn(i, item));
+        return firstIndex === index;
+    });
+}
 
-
-const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilters, filterNames, onRemoveFilter, addCompetitionFilter, addNameFilter}) => {
+const TeamFilterForm: React.FC<FilterFormProps> = ({ onApplyFilters, onClearFilters, filterNames, onRemoveFilter, addCompetitionFilter, addNameFilter, domesticCometitions }) => {
 
 
     const [formState,setFormState] =  useState({name: "", competitionName: ""});
@@ -63,20 +70,15 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilte
         <NeuromorphismDiv clickable={false}>
             <form className={styles.filterForm} onSubmit={handleFormSubmit}>
 
-                <InputGroup name="Name" inputProps={{
-                    type: "text",
-                    value:formState.name,
-                    onChange: (e)=>{
-                        setFormState(prev => {
-                            return {
-                                ...prev,
-                                name: e.target.value
-                            }
-                        })
-                    },
-                    className:styles.input
-                    }}
-                />
+
+                <Input type={"text"} value={formState.name} onChange={ (e)=>{
+                    setFormState(prev => {
+                        return {
+                            ...prev,
+                            name: e.target.value
+                        }
+                    })
+                }} className={"dark"} label={"Name"}/>
 
                 <IconButton
                     {...animatedButtonProps}
@@ -86,19 +88,23 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({onApplyFilters, onClearFilte
 
                 />
                 <hr />
-                <InputGroup name="Competition" inputProps={{
-                    type: "text",
-                    value:formState.competitionName,
-                    onChange: (e)=>{
+                <Autocomplete name="Competition"
+                    type="text" label={"Domestic Competition"}
+                    value={formState.competitionName}
+                    onInputChange={(val)=>{
                         setFormState(prev => ({
                             ...prev,
-                            competitionName: e.target.value
+                            competitionName: val
                         }))
-                    },
-                    className:styles.input
-
-                }}
-                />
+                    }}
+                    className={"dark text-white"}
+                      classNames={{
+                          popoverContent: "dark"
+                      }}
+                    items={removeDuplicates(domesticCometitions, (a, b) => a.competitionId === b.competitionId)}
+                >
+                    {(item: Competition) => <AutocompleteItem className={"dark text-white"} key={item.competitionId}>{item.name}</AutocompleteItem>}
+                </Autocomplete>
 
                 <IconButton
                     {...animatedButtonProps}

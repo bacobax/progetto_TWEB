@@ -29,7 +29,7 @@ public class Club {
     private String name;
 
     @Column(name = "total_market_value" , nullable = true)
-    private String totalMarketValue;
+    private Long totalMarketValue;
 
     @Column(name = "squad_size")
     private String squadSize;
@@ -68,7 +68,7 @@ public class Club {
     @JoinColumn(name = "domestic_competition_id", referencedColumnName = "competition_id")
     private Competition domesticCompetition;
 
-    public Club(Long clubId, String clubCode, String name, String totalMarketValue, String squadSize, String averageAge, String foreignersNumber, String foreignersPercentage, String nationalTeamPlayers, String stadiumName, String stadiumSeats, String netTransferRecord, String coachName, String lastSeason, String url, Competition domesticCompetition) {
+    public Club(Long clubId, String clubCode, String name, Long totalMarketValue, String squadSize, String averageAge, String foreignersNumber, String foreignersPercentage, String nationalTeamPlayers, String stadiumName, String stadiumSeats, String netTransferRecord, String coachName, String lastSeason, String url, Competition domesticCompetition) {
         this.clubId = clubId;
         this.clubCode = clubCode;
         this.name = name;
@@ -115,11 +115,11 @@ public class Club {
         this.name = name;
     }
 
-    public String getTotalMarketValue() {
+    public Long getTotalMarketValue() {
         return totalMarketValue;
     }
 
-    public void setTotalMarketValue(String totalMarketValue) {
+    public void setTotalMarketValue(Long totalMarketValue) {
         this.totalMarketValue = totalMarketValue;
     }
 

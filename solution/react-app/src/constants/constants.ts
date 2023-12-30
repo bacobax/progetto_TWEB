@@ -73,6 +73,7 @@ export const numberFormatWithCommas = (n: string): string => {
 }
 
 export const MilionFormat = (n:string):string => {
+  console.log({n})
   if(n===null || n.trim().length === 0 || n === "null") return "NOT PROVIDED";
   let num = Math.round(Number(n)/1000);
   let numStr = num.toString();

@@ -1,0 +1,105 @@
+components:
+  schemas:
+    GameEvent:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date of the game event
+          example: '2020-12-12T00:00:00.000Z'
+        game_id:
+          type: string
+          description: Game id of the game event
+          example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+        minute:
+          type: number
+          description: Minute of the game event
+          example: 12
+        type:
+          type: string
+          description: Type of the game event
+          example: 'Cards'
+          enum: ['Cards', 'Goals', 'Substitutions', 'Shootout']
+        club_id:
+          type: number
+          description: Club id of the game event
+          example: 1
+        player_id:
+          type: string
+          description: Player id of the game event
+          example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+        description:
+          type: string
+          description: Description of the game event
+          example: 'Description of the game event'
+        player_in_id:
+          type: string
+          description: Player in id of the game event
+          example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+        player_assist_id:
+          type: string
+          description: Player assist id of the game event
+          example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+
+  parameters:
+    date:
+      name: date
+      in: query
+      description: Date of the game event
+      schema:
+        type: string
+        format: date
+    game_id:
+      name: game_id
+      in: query
+      description: Game id of the game event
+      schema:
+        type: string
+    minute:
+      name: minute
+      in: query
+      description: Minute of the game event
+      schema:
+        type: number
+    type:
+      name: type
+      in: query
+      description: Type of the game event
+      schema:
+        type: string
+      enum:
+        - 'Cards'
+        - 'Goals'
+        - 'Substitutions'
+        - 'Shootout'
+    club_id:
+      name: club_id
+      in: query
+      description: Club id of the game event
+      schema:
+        type: number
+    player_id:
+      name: player_id
+      in: query
+      description: Player id of the game event
+      schema:
+        type: string
+    description:
+      name: description
+      in: query
+      description: Description of the game event
+      schema:
+        type: string
+    player_in_id:
+      name: player_in_id
+      in: query
+      description: Player in id of the game event
+      schema:
+        type: string
+    player_assist_id:
+      name: player_assist_id
+      in: query
+      description: Player assist id of the game event
+      schema:
+        type: string

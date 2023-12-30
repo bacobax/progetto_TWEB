@@ -308,7 +308,7 @@ function mapPlayerInID(value) {
   // await cleaningOnlyPlayerDataset();
   // await cleaningOnlyGameDataset();
   // await cleaningGameDatasets();
-  // await populatePlayers();
+  await populatePlayers();
   // await populateGames();
   // await sanitizePlayerId(Appearence);
   // await sanitizeGameId(Apperence);

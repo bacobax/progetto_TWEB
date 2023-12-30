@@ -1,0 +1,25 @@
+parameters:
+  sort:
+    name: sort
+    in: query
+    description: Sorting criteria
+    schema:
+      type: string
+  fields:
+    name: fields
+    in: query
+    description: Fields to show separate by comma without spaces
+    schema:
+      type: string
+  page:
+    name: page
+    in: query
+    description: Page number
+    schema:
+      type: integer
+  limit:
+    name: limit
+    in: query
+    description: Limit of items per page
+    schema:
+      type: integer

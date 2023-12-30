@@ -8,7 +8,7 @@ const AppError = require("../utils/appError");
 exports.createPlayer = createOne(Player);
 
 exports.getAllPlayer = catchAsync(async (req, res) => {
-    const features = new APIFeatures(Player.find(), req.query).filter().limitFields();
+    const features = new APIFeatures(Player.find(), {...req.query , market_value_in_eur: {$ne:null}}).filter().limitFields()
 
     let query = features.query;
 
@@ -22,10 +22,9 @@ exports.getAllPlayer = catchAsync(async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    query = query.skip(skip).limit(limit);
+    query = query.sort({market_value_in_eur: -1}).skip(skip).limit(limit)
 
     const docs = await query;
-    const myHOST = req.protocol + '://' + req.get('host');
     const nextRequestURL = `${process.env.MAIN_SERVER_HOST}/api/player?page=${page + 1}&limit=${limit}`;
 
     res.status(200).json({
@@ -186,3 +185,17 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePlayer = updateOne(Player);
+
+
+exports.clubsTotalMarketValue = catchAsync(async (req, res) => {
+    const docs = await Player.aggregate([{
+        $group: {
+            _id: '$current_club_id',
+            totalMarketValue: {$sum: '$market_value_in_eur'},
+        },
+    }]);
+    res.status(200).json({
+        status: 'success',
+        data: docs,
+    });
+});

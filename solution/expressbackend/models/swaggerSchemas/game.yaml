@@ -1,0 +1,190 @@
+components:
+  schemas:
+    Game:
+      type: object
+      required:
+        - game_id
+        - home_club_id
+        - away_club_id
+        - date
+        - stadium
+        - attendance
+        - referee
+        - home_club_goals
+        - away_club_goals
+        - home_club_position
+        - away_club_position
+        - home_club_formation
+        - away_club_formation
+        - home_club_name
+        - away_club_name
+        - aggregate
+        - competition_type
+        - url
+      properties:
+        game_id:
+          type: string
+        home_club_id:
+          type: number
+        away_club_id:
+          type: number
+        date:
+          type: string
+        stadium:
+          type: string
+          default: ''
+        attendance:
+          type: number
+          default: -1
+        referee:
+          type: string
+          default: ''
+        home_club_goals:
+          type: number
+        away_club_goals:
+          type: number
+        home_club_position:
+          type: number
+          default: -1
+        away_club_position:
+          type: number
+          default: -1
+        home_club_formation:
+          type: string
+          default: ''
+        away_club_formation:
+          type: string
+          default: ''
+        home_club_name:
+          type: string
+          default: ''
+        away_club_name:
+          type: string
+          default: ''
+        aggregate:
+          type: string
+        competition_type:
+          type: string
+        url:
+          type: string
+          default: ''
+
+parameters:
+  game_id:
+    name: game_id
+    in: query
+    description: game_id of the game
+    schema:
+      type: string
+  home_club_id:
+    name: home_club_id
+    in: query
+    description: home_club_id of the game
+    schema:
+      type: integer
+  away_club_id:
+    name: away_club_id
+    in: query
+    description: away_club_id of the game
+    schema:
+      type: integer
+  date:
+    name: date
+    in: query
+    description: date of the game
+    schema:
+      type: string
+  stadium:
+    name: stadium
+    in: query
+    description: stadium of the game
+    schema:
+      type: string
+      default: ''
+  attendance:
+    name: attendance
+    in: query
+    description: attendance of the game
+    schema:
+      type: number
+      default: -1
+  referee:
+    name: referee
+    in: query
+    description: referee of the game
+    schema:
+      type: string
+      default: ''
+  home_club_goals:
+    name: home_club_goals
+    in: query
+    description: home_club_goals of the game
+    schema:
+      type: number
+  away_club_goals:
+    name: away_club_goals
+    in: query
+    description: away_club_goals of the game
+    schema:
+      type: number
+  home_club_position:
+    name: home_club_position
+    in: query
+    description: home_club_position of the game
+    schema:
+      type: number
+      default: -1
+  away_club_position:
+    name: away_club_position
+    in: query
+    description: away_club_position of the game
+    schema:
+      type: number
+      default: -1
+  home_club_formation:
+    name: home_club_formation
+    in: query
+    description: home_club_formation of the game
+    schema:
+      type: string
+      default: ''
+  away_club_formation:
+    name: away_club_formation
+    in: query
+    description: away_club_formation of the game
+    schema:
+      type: string
+      default: ''
+  home_club_name:
+    name: home_club_name
+    in: query
+    description: home_club_name of the game
+    schema:
+      type: string
+      default: ''
+  away_club_name:
+    name: away_club_name
+    in: query
+    description: away_club_name of the game
+    schema:
+      type: string
+      default: ''
+  aggregate:
+    name: aggregate
+    in: query
+    description: aggregate of the game
+    schema:
+      type: string
+  competition_type:
+    name: competition_type
+    in: query
+    description: competition_type of the game
+    schema:
+      type: string
+  url:
+    name: url
+    in: query
+    description: url of the game
+    schema:
+      type: string
+      default: ''

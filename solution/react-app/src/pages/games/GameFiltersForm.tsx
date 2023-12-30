@@ -72,6 +72,7 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
 
     const formIsValid = xor(isCompetitionValid, isTypeValid);
 
+    console.log({competitions})
     return (
         <form onSubmit={handleSubmit} className={"dark flex flex-col gap-2 w-4/5 md:flex-row md:items-center"}>
             {!isLoading && !error &&  <Autocomplete

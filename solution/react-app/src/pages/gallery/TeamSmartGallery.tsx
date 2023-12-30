@@ -63,6 +63,7 @@ export const TeamSmartGallery: FC = () => {
           filterNames={filterNames}
           addNameFilter={addNameFilter}
           addCompetitionFilter={addCompetitionFilter}
+          domesticCometitions={clubs.map((club) => club.domesticCompetition)}
         />
       )}
       <main>

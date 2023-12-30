@@ -105,7 +105,7 @@ export const PlayerInfo: FC<PlayerInfoProps> = ({ id }: PlayerInfoProps) => {
           "text-5xl font-extrabold text-corvette uppercase font-['Impact']"
         }
       >
-        {player.first_name} {player.last_name}
+        {player.first_name || ""} {player.last_name}
       </h1>
       <div className={"flex w-full"}>
         <h2

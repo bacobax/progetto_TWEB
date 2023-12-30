@@ -1,0 +1,435 @@
+openapi: 3.0.0
+info:
+  title: Football Manager API
+  version: 1.0.0
+  description: This is a simple CRUD API application made with Express and documented with Swagger
+
+security:
+  - bearerAuth: []
+servers:
+  - url: http://localhost:8000/api
+paths:
+  /appearence:
+    get:
+      tags:
+        - Appearence
+      description: Use to request all appearences
+      parameters:
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/page'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/sort'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/limit'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/fields'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/game_id'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/player_id'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/player_name'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/player_club_id'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/player_current_club_id'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/date'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/competition_id'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/yellow_cards'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/red_cards'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/goals'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/assists'
+        - $ref: '/models/swaggerSchemas/appearence.yaml#/parameters/minutes_played'
+
+      responses:
+        200:
+          description: A successful response
+    post:
+      tags:
+        - Appearence
+      description: Use to create a new appearence
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+
+      responses:
+        200:
+          description: A successful response
+  /appearence/{id}:
+    get:
+      tags:
+        - Appearence
+      description: Use to request one appearence
+      parameters:
+        - name: id
+          in: path
+          description: Appearence ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+    patch:
+      tags:
+        - Appearence
+      description: Use to update one appearence
+      parameters:
+        - name: id
+          in: path
+          description: Appearence ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+    delete:
+      tags:
+        - Appearence
+      description: Use to delete one appearence
+      parameters:
+        - name: id
+          in: path
+          description: Appearence ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+  /game:
+    get:
+      tags:
+        - Game
+      description: Use to request all games
+      parameters:
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/page'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/sort'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/limit'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/fields'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/game_id'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/home_club_id'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/away_club_id'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/home_club_goals'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/away_club_goals'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/home_club_position'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/away_club_position'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/stadium'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/attendance'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/referee'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/url'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/home_club_formation'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/away_club_formation'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/home_club_name'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/away_club_name'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/aggregate'
+        - $ref: '/models/swaggerSchemas/game.yaml#/parameters/competition_type'
+
+      responses:
+        200:
+          description: A successful response
+    post:
+      tags:
+        - Game
+      description: Use to create a new game
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/game.yaml#/components/schemas/Game'
+
+      responses:
+        200:
+          description: A successful response
+  /game/{id}:
+    get:
+      tags:
+        - Game
+      description: Use to request one game
+      parameters:
+        - name: id
+          in: path
+          description: Game ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+    patch:
+      tags:
+        - Game
+      description: Use to update one game
+      parameters:
+        - name: id
+          in: path
+          description: Game ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+    delete:
+      tags:
+        - Game
+      description: Use to delete one game
+      parameters:
+        - name: id
+          in: path
+          description: Game ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+  /game/{id}/events:
+    get:
+      tags:
+        - GameEvent
+      description: Use to request all game events
+      parameters:
+        - name: id
+          in: path
+          description: Game ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+
+
+
+  /gameEvent:
+    get:
+      #same as above
+      tags:
+         - GameEvent
+      description: Use to request all game events
+      parameters:
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/page'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/sort'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/limit'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/fields'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/date'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/game_id'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/minute'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/type'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/club_id'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/player_id'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/description'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/player_in_id'
+        - $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/parameters/player_assist_id'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+    post:
+        tags:
+            - GameEvent
+        description: Use to create a new game event
+        requestBody:
+          content:
+            application/json:
+                schema:
+                  $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+
+        responses:
+            200:
+              description: A successful response
+              content:
+                application/json:
+                    schema:
+                        $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+  /gameEvent/{id}:
+    get:
+      tags:
+        - GameEvent
+      description: Use to request one game event
+      parameters:
+        - name: id
+          in: path
+          description: Game Event ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+    patch:
+      tags:
+        - GameEvent
+      description: Use to update one game event
+      parameters:
+        - name: id
+          in: path
+          description: Game Event ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+    delete:
+      tags:
+        - GameEvent
+      description: Use to delete one game event
+      parameters:
+        - name: id
+          in: path
+          description: Game Event ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+  /gameLineup:
+    get:
+      tags:
+        - GameLineup
+      description: Use to request all game lineups
+      parameters:
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/page'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/sort'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/limit'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/fields'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/game_id'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/club_id'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/type'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/number'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/player_id'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/player_name'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/team_captain'
+        - $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/parameters/position'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+    post:
+      tags:
+        - GameLineup
+      description: Use to create a new game lineup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+  /gameLineup/{id}:
+    get:
+      tags:
+        - GameLineup
+      description: Use to request one game lineup
+      parameters:
+        - name: id
+          in: path
+          description: Game Lineup ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+    patch:
+      tags:
+        - GameLineup
+      description: Use to update one game lineup
+      parameters:
+        - name: id
+          in: path
+          description: Game Lineup ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+    delete:
+      tags:
+        - GameLineup
+      description: Use to delete one game lineup
+      parameters:
+        - name: id
+          in: path
+          description: Game Lineup ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'

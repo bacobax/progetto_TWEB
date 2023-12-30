@@ -36,7 +36,7 @@ const transformationMap:{[key:string]: (value:string) => (string|number)} = {
     date_of_birth: calculateAgeFromDateBirth,
     first_name: identity,
     last_name: identity,
-    country_of_citizenship: (country:string)=>`${country} ${countryEmojis[country.toLowerCase()] || ""}`,
+    country_of_citizenship: (country:string)=>country !== null ? `${country} ${countryEmojis[country.toLowerCase()] || ""}` : "NOT PROVIDED",
     contract_expiration_date: dateFormatter,
 }
 const ROWS_PER_PAGE = 6;
@@ -87,7 +87,7 @@ export const ClubInfoTable:FC<ClubInfoTableProps> = ({players}) => {
                         {(columnKey) => {
                             const value = getKeyValue(player, columnKey);
                             if(columnKey !== "action"){
-                                const transformedValue = transformationMap[columnKey](value);
+                                const transformedValue = transformationMap[columnKey](columnKey === "market_value_in_eur" ? ""+value : value);
                                 const myClassName = transformedValue === "NOT PROVIDED" ? "text-gray-500" : undefined;
 
                                 return (

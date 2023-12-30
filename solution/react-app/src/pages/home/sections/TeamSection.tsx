@@ -10,6 +10,7 @@ import useWindowSize from "../../../hooks/useWindowSize";
 import {animatedButtonProps} from "../../../constants/constants";
 import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
+import {MdKeyboardDoubleArrowUp} from "react-icons/md";
 
 interface TeamSectionProps {
     name: string;
@@ -26,6 +27,10 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
     return (
         <Section name={name} className={styles.teamsection}>
             <h1>{name} Section</h1>
+            <div className={"text-green-400 flex items-center text-xl font-bold"}>
+                <MdKeyboardDoubleArrowUp />
+                <h3> Market Value (eur)</h3>
+            </div>
             <div className={styles.gallery}>
                 {
                     loading && <p>Loading...</p>
@@ -39,7 +44,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
                     ))
                 }
             </div>
-            <Pagination className={`dark ${styles.pagination} cursor-pointer`} color="secondary" total={matrixLength} onChange={setIndex} />
+            <Pagination className={`dark ${styles.pagination} cursor-pointer`} color="secondary" total={matrixLength} onChange={(index)=>setIndex(index-1)} />
             <Divider orientation={"horizontal"} className={"my-4"} />
             <Button {...animatedButtonProps} className={styles.moreButton} onClick={()=>{navigate("/gallery/clubs")}}>
                 More

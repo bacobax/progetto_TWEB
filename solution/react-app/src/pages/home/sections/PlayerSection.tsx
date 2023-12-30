@@ -6,6 +6,7 @@ import {animatedButtonProps} from "../../../constants/constants";
 import {useSlice} from "../../../hooks/useSlice";
 import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
+import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 
 
 import {Divider, Pagination, ScrollShadow} from "@nextui-org/react";
@@ -29,13 +30,20 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
     const navigate = useNavigate();
     const {width} = useWindowSize()
     const {players, error, loading} = useLoadPlayers(30);
-    const {current , currentIdx, setIndex, matrixLength, index} = useSlice(players, width < 768 ? 2: 4);
+    const {current , currentIdx, setIndex, matrixLength} = useSlice(players, width < 768 ? 2: 3);
+
 
 
 
     return (
         <Section name={name} className={styles.container}>
+
+
             <h1>Players</h1>
+            <div className={"text-green-400 flex items-center text-xl font-bold"}>
+                <MdKeyboardDoubleArrowUp />
+                <h3> Market Value (eur)</h3>
+            </div>
             <ScrollShadow orientation={"horizontal"} className={styles.cardGallery}>
                 {
                     !loading && !error && current.map((player) => (
@@ -52,7 +60,7 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
             </ScrollShadow>
 
 
-            <Pagination className={`dark ${styles.pagination} cursor-pointer`} color={"secondary" } total={matrixLength} page={currentIdx} onChange={setIndex} />
+            <Pagination className={`dark ${styles.pagination} cursor-pointer`} color={"secondary" } total={matrixLength} page={currentIdx + 1} onChange={index => setIndex(index-1)} />
             <Divider orientation={"horizontal"} className={"my-4"} />
             <Button {...animatedButtonProps} className={styles.moreButton} onClick={()=>{navigate("/gallery/players")}}>
                 More
