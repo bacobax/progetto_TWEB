@@ -1,0 +1,107 @@
+components:
+  schemas:
+    UserProfile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the user
+          example: 'John'
+        surname:
+          type: string
+          description: Surname of the user
+          example: 'Doe'
+        email:
+          type: string
+          description: Email of the user
+          example: 'example@example.com'
+        role:
+          type: string
+          description: Role of the user
+          example: 'user'
+        password:
+          type: string
+          description: Password of the user
+          example: 'password'
+        confirmPassword:
+          type: string
+          description: Confirm password of the user
+          example: 'password'
+    UserLoginResponse:
+        type: object
+        properties:
+            token:
+              type: string
+              description: Token of the user
+              example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+            user:
+              type: object
+              properties:
+                  name:
+                    type: string
+                    description: Name of the user
+                    example: 'John'
+                  surname:
+                    type: string
+                    description: Surname of the user
+                    example: 'Doe'
+                  email:
+                    type: string
+                    description: Email of the user
+                    example: 'example@gmail.com'
+    UserLoginRequest:
+        type: object
+        properties:
+            email:
+              type: string
+              description: Email of the user
+              example: 'example@gmail.com'
+            password:
+                type: string
+                description: Password of the user
+                example: 'password'
+    UserResetPasswordRequest:
+        type: object
+        properties:
+            email:
+              type: string
+              description: Email of the user
+              example: 'caociao'
+
+  parameters:
+    name:
+      name: name
+      in: query
+      description: Name of the user
+      schema:
+        type: string
+    surname:
+      name: surname
+      in: query
+      description: Surname of the user
+      schema:
+        type: string
+    email:
+      name: email
+      in: query
+      description: Email of the user
+      schema:
+        type: string
+    role:
+      name: role
+      in: query
+      description: Role of the user
+      schema:
+        type: string
+    password:
+      name: password
+      in: query
+      description: Password of the user
+      schema:
+        type: string
+    confirmPassword:
+      name: confirmPassword
+      in: query
+      description: Confirm password of the user
+      schema:
+        type: string

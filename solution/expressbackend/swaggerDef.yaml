@@ -8,6 +8,30 @@ security:
   - bearerAuth: []
 servers:
   - url: http://localhost:8000/api
+components:
+  schemas:
+    Appearence:
+      $ref: '/models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+    Game:
+        $ref: '/models/swaggerSchemas/game.yaml#/components/schemas/Game'
+    GameEvent:
+        $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
+    GameLineup:
+        $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+    Player:
+        $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+    PlayerValuation:
+        $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+    ChatRoom:
+        $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+    UserProfile:
+        $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserProfile'
+    UserLoginRequest:
+        $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserLoginRequest'
+    UserLoginResponse:
+        $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserLoginResponse'
+    UserResetPasswordRequest:
+        $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserResetPasswordRequest'
 paths:
   /appearence:
     get:
@@ -65,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+                $ref: '/models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
     patch:
       tags:
         - Appearence
@@ -80,14 +104,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+              $ref: '/models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
       responses:
         200:
           description: A successful response
           content:
             application/json:
               schema:
-                $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+                $ref: '/models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
     delete:
       tags:
         - Appearence
@@ -104,7 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: './models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+                $ref: '/models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
   /game:
     get:
       tags:
@@ -166,7 +190,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+                $ref: '/models/swaggerSchemas/game.yaml#/components/schemas/Game'
     patch:
       tags:
         - Game
@@ -181,14 +205,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+              $ref: '/models/swaggerSchemas/game.yaml#/components/schemas/Game'
       responses:
         200:
           description: A successful response
           content:
             application/json:
               schema:
-                $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+                $ref: '/models/swaggerSchemas/game.yaml#/components/schemas/Game'
     delete:
       tags:
         - Game
@@ -205,7 +229,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: './models/swaggerSchemas/game.yaml#/components/schemas/Game'
+                $ref: '/models/swaggerSchemas/game.yaml#/components/schemas/Game'
   /game/{id}/events:
     get:
       tags:
@@ -226,9 +250,6 @@ paths:
                 type: array
                 items:
                   $ref: '/models/swaggerSchemas/gameEvent.yaml#/components/schemas/GameEvent'
-
-
-
   /gameEvent:
     get:
       #same as above
@@ -433,3 +454,600 @@ paths:
             application/json:
               schema:
                 $ref: '/models/swaggerSchemas/gameLineup.yaml#/components/schemas/GameLineup'
+  /player:
+    get:
+      tags:
+        - Player
+      description: Use to request all players
+      parameters:
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/page'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/sort'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/limit'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/fields'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/first_name'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/last_name'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/last_season'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/player_code'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/country_of_birth'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/city_of_birth'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/country_of_citizenship'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/date_of_birth'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/sub_position'
+        - $ref: '/models/swaggerSchemas/player.yaml#/components/parameters/position'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+    post:
+      tags:
+        - Player
+      description: Use to create a new player
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+  /player/{id}:
+    get:
+      tags:
+        - Player
+      description: Use to request one player
+      parameters:
+        - name: id
+          in: path
+          description: Player ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+    patch:
+      tags:
+        - Player
+      description: Use to update one player
+      parameters:
+        - name: id
+          in: path
+          description: Player ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+    delete:
+      tags:
+        - Player
+      description: Use to delete one player
+      parameters:
+        - name: id
+          in: path
+          description: Player ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+  /player/name/{name}:
+    get:
+      tags:
+        - Player
+      description: Use to request one player by name (the player's research is made checking if name param is a substring of the player's full name)
+      parameters:
+        - name: name
+          in: path
+          description: Player name
+          required: true
+          example: messi
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: array
+                    items:
+                      $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+  /player/clubsMarketValue:
+    get:
+      tags:
+        - Player
+        - Club
+      description: use to request all the club IDs each one with it's total market value based on the players that play in that club
+      responses:
+          200:
+            description: A successful response
+            content:
+                application/json:
+                  schema:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                            _id:
+                              type: number
+                              description: Club ID
+                              example: 1
+                            totalMarketValue:
+                              type: number
+                              description: Total market value of the club
+                              example: 100000000
+  /player/valuations:
+    get:
+      tags:
+        - Player
+        - PlayerValuation
+      description: Use to request all player valuations
+      parameters:
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/page'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/sort'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/limit'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/fields'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/player_id'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/last_season'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/datetime'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/date'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/dateweek'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/market_value_in_eur'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/current_club_id'
+        - $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/parameters/player_club_domestic_competition_id'
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: array
+                    items:
+                      $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+    post:
+      tags:
+        - Player
+        - PlayerValuation
+      description: Use to create a new player valuation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+  /player/valuations/{id}:
+    get:
+      tags:
+        - Player
+        - PlayerValuation
+      description: Use to request one player valuation
+      parameters:
+        - name: id
+          in: path
+          description: Player Valuation ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+    patch:
+      tags:
+        - Player
+        - PlayerValuation
+      description: Use to update one player valuation
+      parameters:
+        - name: id
+          in: path
+          description: Player Valuation ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+    delete:
+      tags:
+        - Player
+        - PlayerValuation
+      description: Use to delete one player valuation
+      parameters:
+        - name: id
+          in: path
+          description: Player Valuation ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    $ref: '/models/swaggerSchemas/playerValuation.yaml#/components/schemas/PlayerValuation'
+  /room:
+    get:
+      tags:
+        - Room
+      description: Use to request all rooms
+      parameters:
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/page'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/sort'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/limit'
+        - $ref: '/models/swaggerSchemas/apiFeaturesParams.yaml#/parameters/fields'
+        - $ref: '/models/swaggerSchemas/room.yaml#/components/parameters/name'
+        - $ref: '/models/swaggerSchemas/room.yaml#/components/parameters/description'
+        - $ref: '/models/swaggerSchemas/room.yaml#/components/parameters/members'
+        - $ref: '/models/swaggerSchemas/room.yaml#/components/parameters/messages'
+        - $ref: '/models/swaggerSchemas/room.yaml#/components/parameters/createdAt'
+        - $ref: '/models/swaggerSchemas/room.yaml#/components/parameters/admin'
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: array
+                    items:
+                      $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+    post:
+      tags:
+        - Room
+      description: Use to create a new room
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+  /room/{id}:
+    get:
+      tags:
+        - Room
+      description: Use to request one room
+      parameters:
+        - name: id
+          in: path
+          description: Room ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+    patch:
+      tags:
+        - Room
+      description: Use to update one room
+      parameters:
+        - name: id
+          in: path
+          description: Room ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+    delete:
+      tags:
+        - Room
+      description: Use to delete one room
+      parameters:
+        - name: id
+          in: path
+          description: Room ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+  /room/user/{id}:
+    get:
+      tags:
+        - Room
+      description: Use to request all rooms of a user
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: array
+                    items:
+                      $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+  /room/newMessage/{roomID}: #i want to protect this with bearer JWT token
+    post:
+      tags:
+        - Room
+      description: Use to create a new message in a room
+      parameters:
+        - name: roomID
+          in: path
+          description: Room ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from:
+                  type: string
+                  description: From id of the message
+                  example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+                text:
+                  type: string
+                  description: Text of the message
+                  example: 'Hello'
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  from:
+                    type: string
+                    description: From id of the message
+                    example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+                  text:
+                    type: string
+                    description: Text of the message
+                    example: 'Hello'
+  /room/join/{roomID}:
+    post:
+      tags:
+        - Room
+      description: Use to join a room
+      parameters:
+        - name: roomID
+          in: path
+          description: Room ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: string
+                  description: User ID
+                  example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userID:
+                    type: string
+                    description: User ID
+                    example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+  /room/leave/{roomID}:
+    post:
+      tags:
+        - Room
+      description: Use to leave a room
+      parameters:
+        - name: roomID
+          in: path
+          description: Room ID
+          required: true
+          example: 6574bc5d0a8453403804feea
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userID:
+                  type: string
+                  description: User ID
+                  example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userID:
+                    type: string
+                    description: User ID
+                    example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+  /room/search/{name}:
+    get:
+      tags:
+        - Room
+      description: Use to request all rooms that match the name param (the room's research is made checking if name param is a substring of the room's name)
+      parameters:
+        - name: name
+          in: path
+          description: Room name
+          required: true
+          example: room
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: array
+                    items:
+                      $ref: '/models/swaggerSchemas/room.yaml#/components/schemas/ChatRoom'
+  /user/signup:
+    post:
+      tags:
+        - User
+      description: Use to signup a new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserProfile'
+
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserLoginResponse'
+  /user/login:
+    post:
+      tags:
+        - User
+      description: Use to login a user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserLoginRequest'
+
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserLoginResponse'
+  /user/forgotPassword:
+    post: #only email field in body
+        tags:
+            - User
+        description: Use to send a email in order to reset password of a user, the email will contain following link, http://localhost:3000/resetPassword/{resetToken}
+        requestBody:
+            content:
+              application/json:
+                  schema:
+                    $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserResetPasswordRequest'
+
+        responses:
+            200:
+              description: A successful response
+              content:
+                  application/json:
+                    schema:
+                        type: object
+                        properties:
+                            message:
+                              type: string
+                              description: Message of the response
+                              example: 'Token sent to email'
+                            status:
+                              type: string
+                              description: Status of the response
+                              example: 'success'
+  /user/resetPassword/{token}:
+
+    patch:
+        tags:
+            - User
+        description: Use to reset password of a user
+        parameters:
+            - name: token
+              in: path
+              description: Reset token
+              required: true
+              example: 6574bc5d0a8453403804feea
+        responses:
+            200:
+              description: A successful response
+              content:
+                  application/json:
+                    schema:
+                        type: object
+                        properties:
+                            token:
+                              type: string
+                              description: Token of the response
+                              example: '6574bc5d0a8453403804feea'
+                            status:
+                              type: string
+                              description: Status of the response
+                              example: 'success'
+

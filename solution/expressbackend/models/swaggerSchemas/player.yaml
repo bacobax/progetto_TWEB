@@ -1,0 +1,197 @@
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: First name of the player
+          example: 'Lionel'
+        last_name:
+          type: string
+          description: Last name of the player
+          example: 'Messi'
+        last_season:
+          type: string
+          description: Last season of the player
+          example: '2019/2020'
+        player_code:
+          type: string
+          description: Player code of the player
+          example: '13136'
+        country_of_birth:
+          type: string
+          description: Country of birth of the player
+          example: 'Argentina'
+        city_of_birth:
+          type: string
+          description: City of birth of the player
+          example: 'Rosario'
+        country_of_citizenship:
+          type: string
+          description: Country of citizenship of the player
+          example: 'Argentina'
+        date_of_birth:
+          type: string
+          description: Date of birth of the player
+          example: '1987-06-24'
+        sub_position:
+          type: string
+          description: Sub position of the player
+          example: 'Centre-Forward'
+        position:
+          type: string
+          description: Position of the player
+          example: 'Forward'
+        foot:
+          type: string
+          description: Foot of the player
+          example: 'left'
+        height_in_cm:
+          type: string
+          description: Height in cm of the player
+          example: '170'
+        market_value_in_eur:
+          type: string
+          description: Market value in eur of the player
+          example: '100000000'
+        highest_market_value_in_eur:
+          type: string
+          description: Highest market value in eur of the player
+          example: '100000000'
+        contract_expiration_date:
+          type: string
+          description: Contract expiration date of the player
+          example: '2021-06-30'
+        agent_name:
+          type: string
+          description: Agent name of the player
+          example: 'Doyen Sports'
+        image_url:
+          type: string
+          description: Image URL of the player
+          example: 'https://tmssl.akamaized.net/images/portrait/header/28003-1568392677.jpg?lm=1568392693'
+        url:
+          type: string
+          description: URL of the player
+          example: 'https://www.transfermarkt.com/lionel-messi/profil/spieler/28003'
+        current_club:
+          type: string
+          description: Current club of the player
+          example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+
+  parameters:
+    first_name:
+      name: first_name
+      in: query
+      description: First name of the player
+      schema:
+        type: string
+    last_name:
+      name: last_name
+      in: query
+      description: Last name of the player
+      schema:
+        type: string
+    last_season:
+      name: last_season
+      in: query
+      description: Last season of the player
+      schema:
+        type: string
+    player_code:
+      name: player_code
+      in: query
+      description: Player code of the player
+      schema:
+        type: string
+    country_of_birth:
+      name: country_of_birth
+      in: query
+      description: Country of birth of the player
+      schema:
+        type: string
+    city_of_birth:
+      name: city_of_birth
+      in: query
+      description: City of birth of the player
+      schema:
+        type: string
+    country_of_citizenship:
+      name: country_of_citizenship
+      in: query
+      description: Country of citizenship of the player
+      schema:
+        type: string
+    date_of_birth:
+      name: date_of_birth
+      in: query
+      description: Date of birth of the player
+      schema:
+        type: string
+    sub_position:
+      name: sub_position
+      in: query
+      description: Sub position of the player
+      schema:
+        type: string
+    position:
+      name: position
+      in: query
+      description: Position of the player
+      schema:
+        type: string
+    foot:
+      name: foot
+      in: query
+      description: Foot of the player
+      schema:
+        type: string
+    height_in_cm:
+      name: height_in_cm
+      in: query
+      description: Height in cm of the player
+      schema:
+        type: string
+    market_value_in_eur:
+      name: market_value_in_eur
+      in: query
+      description: Market value in eur of the player
+      schema:
+        type: string
+    highest_market_value_in_eur:
+      name: highest_market_value_in_eur
+      in: query
+      description: Highest market value in eur of the player
+      schema:
+        type: string
+    contract_expiration_date:
+      name: contract_expiration_date
+      in: query
+      description: Contract expiration date of the player
+      schema:
+        type: string
+    agent_name:
+      name: agent_name
+      in: query
+      description: Agent name of the player
+      schema:
+        type: string
+    image_url:
+      name: image_url
+      in: query
+      description: Image URL of the player
+      schema:
+        type: string
+    url:
+      name: url
+      in: query
+      description: URL of the player
+      schema:
+        type: string
+    current_club:
+      name: current_club
+      in: query
+      description: Current club of the player
+      schema:
+        type: string

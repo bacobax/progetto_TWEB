@@ -1,0 +1,93 @@
+components:
+  schemas:
+    PlayerValuation:
+      type: object
+      properties:
+        player_id:
+          type: string
+          description: Player id of the player valuation
+          example: '5f9d1b4b2f6f1f0e5c1d7a0a'
+        last_season:
+          type: number
+          description: Last season of the player valuation
+          example: 2020
+        datetime:
+          type: string
+          format: date-time
+          description: Datetime of the player valuation
+          example: '2020-12-12T00:00:00.000Z'
+        date:
+          type: string
+          format: date
+          description: Date of the player valuation
+          example: '2020-12-12T00:00:00.000Z'
+        dateweek:
+          type: string
+          format: date
+          description: Dateweek of the player valuation
+          example: '2020-12-12T00:00:00.000Z'
+        market_value_in_eur:
+          type: number
+          description: Market value in eur of the player valuation
+          example: 1000000
+        current_club_id:
+          type: number
+          description: Current club id of the player valuation
+          example: 1
+        player_club_domestic_competition_id:
+          type: number
+          description: Player club domestic competition id of the player valuation
+          example: 1
+
+  parameters:
+    player_id:
+      name: player_id
+      in: query
+      description: Player id of the player valuation
+      schema:
+        type: string
+    last_season:
+      name: last_season
+      in: query
+      description: Last season of the player valuation
+      schema:
+        type: number
+    datetime:
+      name: datetime
+      in: query
+      description: Datetime of the player valuation
+      schema:
+        type: string
+        format: date-time
+    date:
+      name: date
+      in: query
+      description: Date of the player valuation
+      schema:
+        type: string
+        format: date
+    dateweek:
+      name: dateweek
+      in: query
+      description: Dateweek of the player valuation
+      schema:
+        type: string
+        format: date
+    market_value_in_eur:
+      name: market_value_in_eur
+      in: query
+      description: Market value in eur of the player valuation
+      schema:
+        type: number
+    current_club_id:
+      name: current_club_id
+      in: query
+      description: Current club id of the player valuation
+      schema:
+        type: number
+    player_club_domestic_competition_id:
+      name: player_club_domestic_competition_id
+      in: query
+      description: Player club domestic competition id of the player valuation
+      schema:
+        type: number

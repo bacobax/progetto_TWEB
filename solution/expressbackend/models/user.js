@@ -89,6 +89,7 @@ UserSchema.methods.createPasswordResetToken = function () {
     .digest('hex');
 
   console.log({ resetToken }, this.passwordResetToken);
+  //10 minutes
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
   return resetToken;
