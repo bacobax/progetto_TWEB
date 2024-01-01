@@ -4,7 +4,7 @@ const roomSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'A room must have a name'],
-        unique: true,
+        unique: [true , "A room with this name already exists"],
         trim: true,
         maxlength: [40, 'A room name must have less or equal then 40 characters'],
     },

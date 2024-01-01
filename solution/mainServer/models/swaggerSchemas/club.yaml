@@ -1,0 +1,50 @@
+Club:
+  type: object
+  properties:
+    clubId:
+      type: integer
+      example: 543
+    clubCode:
+      type: string
+      example: "wolverhampton-wanderers"
+    name:
+      type: string
+      example: "Wolverhampton Wanderers Football Club"
+    totalMarketValue:
+      type: integer
+      example: 386475000
+    squadSize:
+      type: string
+      example: "26"
+    averageAge:
+      type: string
+      example: "26.1"
+    foreignersNumber:
+      type: string
+      example: "22"
+    foreignersPercentage:
+      type: string
+      example: "84.6"
+    nationalTeamPlayers:
+      type: string
+      example: "14"
+    stadiumName:
+      type: string
+      example: "Molineux Stadium"
+    stadiumSeats:
+      type: string
+      example: "32050"
+    netTransferRecord:
+      type: string
+      example: "+€75.20m"
+    coachName:
+      type: string
+      nullable: true
+    lastSeason:
+      type: string
+      example: "2023"
+    url:
+      type: string
+      example: "https://www.transfermarkt.co.uk/wolverhampton-wanderers/startseite/verein/543"
+    domesticCompetition:
+      $ref: "/models/swaggerSchemas/competition.yaml#/Competition"

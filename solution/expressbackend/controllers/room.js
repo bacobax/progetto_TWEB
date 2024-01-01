@@ -15,8 +15,12 @@ exports.createRoom = catchAsync(async (req, res, next) => {
         admin: user.id,
         description: description,
     });
+    try{
+        await doc.save();
 
-    await doc.save();
+    }catch(e){
+        return next(new AppError("A room with this name already exists", 400));
+    }
 
     res.status(201).json({
         status: 'success',

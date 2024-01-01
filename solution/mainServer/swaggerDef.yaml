@@ -510,14 +510,129 @@ paths:
           in: path
           description: Player ID
           required: true
-          example: 6574bc5d0a8453403804feea
+          example: 6574baf3975bb4cdf6a05aee
       responses:
         200:
           description: A successful response
           content:
             application/json:
               schema:
-                $ref: '/models/swaggerSchemas/player.yaml#/components/schemas/Player'
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: "6574baf3975bb4cdf6a05aee"
+                      first_name:
+                        type: string
+                        example: "Vladyslav"
+                      last_name:
+                        type: string
+                        example: "Supryaga"
+                      last_season:
+                        type: string
+                        example: "2023"
+                      player_code:
+                        type: string
+                        example: "vladyslav-supryaga"
+                      country_of_birth:
+                        type: string
+                        example: "Ukraine"
+                      city_of_birth:
+                        type: string
+                        example: "Sarata, Odesa Oblast"
+                      country_of_citizenship:
+                        type: string
+                        example: "Ukraine"
+                      date_of_birth:
+                        type: string
+                        example: "2000-02-15"
+                      sub_position:
+                        type: string
+                        example: "Centre-Forward"
+                      position:
+                        type: string
+                        example: "Attack"
+                      foot:
+                        type: string
+                        example: "right"
+                      height_in_cm:
+                        type: string
+                        example: "185"
+                      market_value_in_eur:
+                        type: integer
+                        example: 1000000
+                      highest_market_value_in_eur:
+                        type: integer
+                        example: 7500000
+                      contract_expiration_date:
+                        type: string
+                        example: "2026-06-30 00:00:00"
+                      agent_name:
+                        type: string
+                        nullable: true
+                      image_url:
+                        type: string
+                        example: "https://img.a.transfermarkt.technology/portrait/header/419061-1665388396.png?lm=1"
+                      url:
+                        type: string
+                        example: "https://www.transfermarkt.co.uk/vladyslav-supryaga/profil/spieler/419061"
+                      __v:
+                        type: integer
+                        example: 0
+                      stats:
+                        type: object
+                        additionalProperties:
+                          type: object
+                          properties:
+                            goals:
+                              type: integer
+                            assists:
+                              type: integer
+                            yellow_cards:
+                              type: integer
+                            red_cards:
+                              type: integer
+                            minutes_played:
+                              type: integer
+                            appearances:
+                              type: integer
+                            competitionName:
+                              type: string
+                      lineupsCount:
+                        type: object
+                        additionalProperties:
+                          type: integer
+                      totalStats:
+                        type: object
+                        properties:
+                          goals:
+                            type: integer
+                          assists:
+                            type: integer
+                          yellow_cards:
+                            type: integer
+                          red_cards:
+                            type: integer
+                          minutes_played:
+                            type: integer
+                      market_values_in_eur:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            market_value_in_eur:
+                              type: integer
+                            date:
+                              type: string
+                      clubName:
+                        type: string
+                        example: "Futbolniy Klub Dynamo Kyiv"
     patch:
       tags:
         - Player
@@ -962,7 +1077,7 @@ paths:
   /user/signup:
     post:
       tags:
-        - User
+        - User/Authentication
       description: Use to signup a new user
       requestBody:
         content:
@@ -980,7 +1095,7 @@ paths:
   /user/login:
     post:
       tags:
-        - User
+        - User/Authentication
       description: Use to login a user
       requestBody:
         content:
@@ -998,7 +1113,7 @@ paths:
   /user/forgotPassword:
     post: #only email field in body
         tags:
-            - User
+            - User/Authentication
         description: Use to send a email in order to reset password of a user, the email will contain following link, http://localhost:3000/resetPassword/{resetToken}
         requestBody:
             content:
@@ -1026,7 +1141,7 @@ paths:
 
     patch:
         tags:
-            - User
+            - User/Authentication
         description: Use to reset password of a user
         parameters:
             - name: token
@@ -1050,140 +1165,6 @@ paths:
                               type: string
                               description: Status of the response
                               example: 'success'
-  /playerStat/{id}:
-    get:
-      tags:
-        - Player
-      description: return some statistics for one player
-
-      parameters:
-        - name: id
-          in: path
-          description: player ID
-          required: true
-          example: 6574baf3975bb4cdf6a05aee
-      responses:
-        200:
-          description: A successful response
-          content:
-              application/json:
-                schema:
-                    type: object
-                    properties:
-                      status:
-                        type: string
-                        example: "success"
-                      data:
-                        type: object
-                        properties:
-                          _id:
-                            type: string
-                            example: "6574baf3975bb4cdf6a05aee"
-                          first_name:
-                            type: string
-                            example: "Vladyslav"
-                          last_name:
-                            type: string
-                            example: "Supryaga"
-                          last_season:
-                            type: string
-                            example: "2023"
-                          player_code:
-                            type: string
-                            example: "vladyslav-supryaga"
-                          country_of_birth:
-                            type: string
-                            example: "Ukraine"
-                          city_of_birth:
-                            type: string
-                            example: "Sarata, Odesa Oblast"
-                          country_of_citizenship:
-                            type: string
-                            example: "Ukraine"
-                          date_of_birth:
-                            type: string
-                            example: "2000-02-15"
-                          sub_position:
-                            type: string
-                            example: "Centre-Forward"
-                          position:
-                            type: string
-                            example: "Attack"
-                          foot:
-                            type: string
-                            example: "right"
-                          height_in_cm:
-                            type: string
-                            example: "185"
-                          market_value_in_eur:
-                            type: integer
-                            example: 1000000
-                          highest_market_value_in_eur:
-                            type: integer
-                            example: 7500000
-                          contract_expiration_date:
-                            type: string
-                            example: "2026-06-30 00:00:00"
-                          agent_name:
-                            type: string
-                            nullable: true
-                          image_url:
-                            type: string
-                            example: "https://img.a.transfermarkt.technology/portrait/header/419061-1665388396.png?lm=1"
-                          url:
-                            type: string
-                            example: "https://www.transfermarkt.co.uk/vladyslav-supryaga/profil/spieler/419061"
-                          __v:
-                            type: integer
-                            example: 0
-                          stats:
-                            type: object
-                            additionalProperties:
-                              type: object
-                              properties:
-                                goals:
-                                  type: integer
-                                assists:
-                                  type: integer
-                                yellow_cards:
-                                  type: integer
-                                red_cards:
-                                  type: integer
-                                minutes_played:
-                                  type: integer
-                                appearances:
-                                  type: integer
-                                competitionName:
-                                  type: string
-                          lineupsCount:
-                            type: object
-                            additionalProperties:
-                              type: integer
-                          totalStats:
-                            type: object
-                            properties:
-                              goals:
-                                type: integer
-                              assists:
-                                type: integer
-                              yellow_cards:
-                                type: integer
-                              red_cards:
-                                type: integer
-                              minutes_played:
-                                type: integer
-                          market_values_in_eur:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                market_value_in_eur:
-                                  type: integer
-                                date:
-                                  type: string
-                          clubName:
-                            type: string
-                            example: "Futbolniy Klub Dynamo Kyiv"
   /clubStat/{id}:
     get:
       tags:
@@ -1363,5 +1344,31 @@ paths:
                         name:
                           type: string
                           example: "Thomas Hansen"
+  /club:
+    get:
+      tags:
+        - Club
+      description: Use to request all clubs
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          example: 1
+        - name: pagesize
+          in: query
+          description: Page size
+          required: false
+          example: 100
+
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: array
+                    items:
+                      $ref: '/models/swaggerSchemas/club.yaml#/Club'
 
 

@@ -21,7 +21,7 @@ public class ClubController {
     record PaginateResponse(List<Club> items, String nextPageURL){};
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/clubs")
+    @GetMapping("/api/club")
     public PaginateResponse getClubs(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "100") int pagesize
@@ -29,14 +29,14 @@ public class ClubController {
         int searchPage = page-1;
         List<Club> entities = clubService.findAll(searchPage, pagesize);
         int nextPage = page + 1;
-        String nextPageURL = "http://localhost:8081/api/clubs?page=" + nextPage + "&pagesize=" + pagesize;
+        String nextPageURL = "http://localhost:8080/api/club?page=" + nextPage + "&pagesize=" + pagesize;
 
         return new PaginateResponse(entities, nextPageURL);
     }
 
     //route clubs/:id
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/clubs/{id}")
+    @GetMapping("/api/club/{id}")
     public Club getClubById(
             @PathVariable(required = true) Long id
     ) {
@@ -48,7 +48,7 @@ public class ClubController {
 
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/api/clubs/name/{name}")
+    @GetMapping("/api/club/name/{name}")
     public List<Club> getClubByContainsName(
             @PathVariable(required = true) String name
     ) {
@@ -68,7 +68,7 @@ public class ClubController {
      */
     record ClubIDAndName(Long club_id, String name){}
     @CrossOrigin(origins = "*")
-    @PostMapping("/api/clubs/names")
+    @PostMapping("/api/club/names")
     public List<ClubIDAndName> getClubNameById(
             @RequestBody(required = true) List<Long> clubIds
     ) {
@@ -86,7 +86,7 @@ public class ClubController {
      * }...] and update every totalMarketValue of every club with the id in those objects
      */
     @CrossOrigin(origins = "*")
-    @PutMapping("/api/clubs/totalMarketValue")
+    @PutMapping("/api/club/totalMarketValue")
     public void updateClubTotalMarketValue(
             @RequestBody(required = true) List<ClubIDAndTotalMarketValue> clubIdsAndTotalMarketValue
     ) {

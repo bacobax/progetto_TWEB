@@ -38,8 +38,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
+app.route("/api/player/:id").get(catchAsync(async (req,res,next)=>{
     const expressResponse = await axios.get(getNodeServerUrl(`/api/player/${req.params.id}`));
+
 
 
 
@@ -48,7 +49,7 @@ app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
 
 
 
-    const javaResponse = await axios.get(getJavaServerUrl(`/api/clubs/${current_club_id}`));
+    const javaResponse = await axios.get(getJavaServerUrl(`/api/club/${current_club_id}`));
     const clubName = javaResponse.data.name;
 
 
@@ -79,9 +80,9 @@ app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
         }
     })
 }));
-app.route("/api/clubStat/:id").get(catchAsync(async (req,res,next)=>{
+app.route("/api/club/:id").get(catchAsync(async (req,res,next)=>{
 
-    const javaResponse = (await axios.get(getJavaServerUrl(`/api/clubs/${req.params.id}`))).data;
+    const javaResponse = (await axios.get(getJavaServerUrl(`/api/club/${req.params.id}`))).data;
     const clubID = javaResponse.clubId;
     const expressResponse = await axios.get(getNodeServerUrl(`/api/player?current_club_id=${clubID}&fields=first_name,last_name,position,date_of_birth,country_of_citizenship,market_value_in_eur,contract_expiration_date`))
     javaResponse.players = expressResponse.data.data;
@@ -96,7 +97,7 @@ app.route("/api/clubStat/:id").get(catchAsync(async (req,res,next)=>{
 
 app.use("/api/player", getNodeRESTRedirectRouter());
 app.use("/api/appearence", getNodeRESTRedirectRouter());
-app.use("/api/clubs", getJavaRESTRedirectRouter());
+app.use("/api/club", getJavaRESTRedirectRouter());
 app.use("/api/room" , getNodeRESTRedirectRouter());
 app.use("/api/competitions", getJavaRESTRedirectRouter());
 app.use("/api/game", getNodeRESTRedirectRouter());

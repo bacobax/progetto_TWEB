@@ -21,6 +21,7 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src",
+    "node_modules/preact/src/internal.d.ts"
   ]
 }

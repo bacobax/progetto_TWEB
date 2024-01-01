@@ -5,7 +5,7 @@ import {URL_GAME_EVENTS} from "../../constants/constants";
 import {FetchError} from "../../components/errors/FetchError";
 import {
     Button,
-    getKeyValue,
+    getKeyValue, ScrollShadow,
     Spinner,
     Table,
     TableBody,
@@ -24,11 +24,18 @@ const tableColumns = [
     { key: "type", label: "Type" },
     { key: "player", label: "Player" },
     { key: "description", label: "Desc" },
-    { key: "player_in", label: "Player In" },
     {key: "player_assist" , label: "Player Assist"}
 ]
 
+
 const PAGESIZE = 5;
+
+const substitutionsTableColumns = [
+    { key: "minute", label: "Minute"},
+    { key: "player", label: "Player Out" },
+    { key: "description", label: "Desc" },
+    { key: "player_in", label: "Player In" },
+]
 
 
 
@@ -43,19 +50,15 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
                 return gameEvent.type
             case "player":
                 if(gameEvent.player_id === null || gameEvent.player.length === 0){
-                    return "NONE"
+                    return <p className={"text-gray-400"}>NONE</p>
                 }
                 return gameEvent.player[0].first_name + " " + gameEvent.player[0].last_name
             case "description":
                 return gameEvent.description
-            case "player_in":
-                if(gameEvent.player_in_id === null || gameEvent.player_in.length === 0){
-                    return "NONE"
-                }
-                return gameEvent.player_in[0].first_name+ " " + gameEvent.player_in[0].last_name
+
             case "player_assist":
                 if(gameEvent.player_assist_id === null || gameEvent.player_assist.length === 0){
-                    return "NONE"
+                    return <p className={"text-gray-400"}>NONE</p>
                 }
                 return gameEvent.player_assist[0].first_name +  " " + gameEvent.player_assist[0].last_name
             default:
@@ -113,24 +116,56 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
 
 
     return (
-        <Table className={"dark text-white font-anonymousPro"} bottomContent={hasMore && !listLoading ? (
-            <div className="flex w-full justify-center">
-                <Button isDisabled={list.isLoading} variant="flat" onPress={list.loadMore}>
-                    {moreItemsLoading && <Spinner color="white" size="sm" />}
-                    Load More
-                </Button>
-            </div>
-        ) : null} sortDescriptor={list.sortDescriptor} onSortChange={list.sort}>
-            <TableHeader columns={tableColumns}>
-                {(column) => <TableColumn allowsSorting={true} key={column.key}>{column.label}</TableColumn>}
-            </TableHeader>
-            <TableBody items={gameEvents}>
-                {gameEvent => (
-                    <TableRow key={gameEvent._id}>
-                        {(columnKey) => <TableCell>{renderTableCell({label: columnKey, gameEvent})}</TableCell>}
-                    </TableRow>
-                )}
-            </TableBody>
-        </Table>
+        <>
+            <Table className={"dark text-white font-anonymousPro"} bottomContent={hasMore && !listLoading ? (
+                <div className="flex w-full justify-center">
+                    <Button isDisabled={list.isLoading} variant="flat" onPress={list.loadMore}>
+                        {moreItemsLoading && <Spinner color="white" size="sm" />}
+                        Load More
+                    </Button>
+                </div>
+            ) : null} sortDescriptor={list.sortDescriptor} onSortChange={list.sort}>
+                <TableHeader columns={tableColumns}>
+                    {(column) => <TableColumn allowsSorting={true} key={column.key}>{column.label}</TableColumn>}
+                </TableHeader>
+                <TableBody items={gameEvents.filter(GE => GE.type!=="Substitutions")}>
+                    {gameEvent => (
+                        <TableRow key={gameEvent._id}>
+                            {(columnKey) => <TableCell>{renderTableCell({label: columnKey, gameEvent})}</TableCell>}
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+            <Table className={"dark text-white font-anonymousPro"} bottomContent={hasMore && !listLoading ? (
+                <div className="flex w-full justify-center">
+                    <Button isDisabled={list.isLoading} variant="flat" onPress={list.loadMore}>
+                        {moreItemsLoading && <Spinner color="white" size="sm" />}
+                        Load More
+                    </Button>
+                </div>
+            ) : null} sortDescriptor={list.sortDescriptor} onSortChange={list.sort}>
+                <TableHeader columns={substitutionsTableColumns}>
+                    {(column) => <TableColumn allowsSorting={true} key={column.key}>{column.label}</TableColumn>}
+                </TableHeader>
+                <TableBody items={gameEvents.filter(GE => GE.type==="Substitutions")}>
+                    {gameEvent => (
+                        <TableRow key={gameEvent._id}>
+                            {(columnKey) => {
+                                if(columnKey === "player"){
+                                    return <TableCell className={"text-red-400"}>{gameEvent.player[0].first_name + " " + gameEvent.player[0].last_name}</TableCell>
+                                }
+                                if(columnKey === "player_in"){
+                                    console.log({player_in: gameEvent.player_in})
+                                    return gameEvent.player_in.length>0? <TableCell className={"text-green-400"}>{gameEvent.player_in[0].first_name + " " + gameEvent.player_in[0].last_name}</TableCell>: <TableCell>NONE</TableCell>
+                                }
+                                return <TableCell>{getKeyValue(gameEvent, columnKey)}</TableCell>
+                            }}
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+
+        </>
+
     );
 };

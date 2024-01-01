@@ -1,0 +1,33 @@
+Competition:
+  type: object
+  properties:
+    competitionId:
+      type: string
+      example: "CIT"
+    competitionCode:
+      type: string
+      example: "italy-cup"
+    name:
+      type: string
+      example: "italy-cup"
+    subType:
+      type: string
+      example: "domestic_cup"
+    type:
+      type: string
+      example: "domestic_cup"
+    countryId:
+      type: string
+      example: "75"
+    countryName:
+      type: string
+      example: "Italy"
+    domesticLeagueCode:
+      type: string
+      example: "IT1"
+    confederation:
+      type: string
+      example: "europa"
+    url:
+      type: string
+      example: "https://www.transfermarkt.co.uk/italy-cup/startseite/wettbewerb/CIT"

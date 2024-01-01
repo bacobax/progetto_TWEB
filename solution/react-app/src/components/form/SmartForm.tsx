@@ -11,7 +11,7 @@ import { motion} from "framer-motion";
 
 import useWindowSize from "../../hooks/useWindowSize";
 import {AuthError} from "../errors/AuthError";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 interface DualFormProps {
 
@@ -32,7 +32,7 @@ const SmartForm: React.FC<DualFormProps> = () => {
     const {loading,login,error,signup, setError} = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
     const redirectPath = searchParams.get("redirectPath") || "/";
-
+    const navigate = useNavigate();
 
     const toggleForm = useCallback (() => {
         setIsSignin(prev => !prev);
@@ -47,7 +47,14 @@ const SmartForm: React.FC<DualFormProps> = () => {
     const onSubmitHandler = useCallback ((state: State) => {
         if(isSignin) {
             const {email,password} = state;
-           login({email:email.value, password:password.value, redirectPath});
+           login({email:email.value, password:password.value, afterSuccess: () => {
+               if(searchParams.has("redirectPath")) {
+                   navigate(-2);
+               }else{
+                   navigate(-1);
+               }
+
+           }});
 
         } else {
             const {name,surname, password, confirmPassword, email} = state;
@@ -57,11 +64,17 @@ const SmartForm: React.FC<DualFormProps> = () => {
                 password: password.value,
                 confirmPassword: confirmPassword.value,
                 email: email.value,
-                redirectPath
+                afterSuccess: () => {
+                    if(searchParams.has("redirectPath")) {
+                        navigate(-2);
+                    }else{
+                        navigate(-1);
+                    }
+                }
             });
 
         }
-    },[isSignin,login,signup, redirectPath]);
+    },[isSignin,login,signup,navigate]);
 
 
     return (

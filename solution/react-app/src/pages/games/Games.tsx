@@ -42,7 +42,7 @@ export const Games:FC = () => {
             <h1 className={"text-5xl font-['Impact'] text-corvette"}>GAMES</h1>
             <GameFiltersForm onApplyFilters={handleApplyFilters} idLoading={loading}/>
             {!loading && games.length > 0 && <MemoizedMap items={games} className={"flex flex-wrap gap-4 w-full justify-center h-fit"}>
-                {(game) => <GameCard {...game } key={game._id} className={"w-4/5 max-w-[550px]"} />}
+                {(game) => <GameCard {...game } key={game._id} className={"w-4/5"} />}
             </MemoizedMap>}
         </div>
     );

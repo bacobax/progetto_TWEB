@@ -462,7 +462,7 @@ export const getMainServerPath = (path: string) => {
     return HOST_MAIN_SERVER + path;
 }
 export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => getMainServerPath(`/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`);
-export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => getMainServerPath(`/clubs?page=${pageNumber}&pagesize=${pageSize}`);
+export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => getMainServerPath(`/club?page=${pageNumber}&pagesize=${pageSize}`);
 
 export const URL_ROOM_FROM_USER = (userId:string) => getMainServerPath(`/room/user/${userId}`);
 
@@ -474,9 +474,9 @@ export const URL_JOIN_ROOM = (roomId:string) => getMainServerPath(`/room/join/${
 
 export const URL_LEAVE_ROOM = (roomId:string) => getMainServerPath(`/room/leave/${roomId}`);
 
-export const URL_PLAYER_INFO = (playerID:string) => getMainServerPath(`/playerStat/${playerID}`);
+export const URL_PLAYER_INFO = (playerID:string) => getMainServerPath(`/player/${playerID}`);
 
-export const URL_CLUB_INFO = (teamID:string) => getMainServerPath(`/clubStat/${teamID}`);
+export const URL_CLUB_INFO = (teamID:string) => getMainServerPath(`/club/${teamID}`);
 
 export const URL_COMPETITIONS_NAME = getMainServerPath("/competitions/names");
 
