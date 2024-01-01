@@ -7,7 +7,7 @@ info:
 security:
   - bearerAuth: []
 servers:
-  - url: http://localhost:8000/api
+  - url: http://localhost:8080/api
 components:
   schemas:
     Appearence:
@@ -1050,4 +1050,318 @@ paths:
                               type: string
                               description: Status of the response
                               example: 'success'
+  /playerStat/{id}:
+    get:
+      tags:
+        - Player
+      description: return some statistics for one player
+
+      parameters:
+        - name: id
+          in: path
+          description: player ID
+          required: true
+          example: 6574baf3975bb4cdf6a05aee
+      responses:
+        200:
+          description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: "success"
+                      data:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                            example: "6574baf3975bb4cdf6a05aee"
+                          first_name:
+                            type: string
+                            example: "Vladyslav"
+                          last_name:
+                            type: string
+                            example: "Supryaga"
+                          last_season:
+                            type: string
+                            example: "2023"
+                          player_code:
+                            type: string
+                            example: "vladyslav-supryaga"
+                          country_of_birth:
+                            type: string
+                            example: "Ukraine"
+                          city_of_birth:
+                            type: string
+                            example: "Sarata, Odesa Oblast"
+                          country_of_citizenship:
+                            type: string
+                            example: "Ukraine"
+                          date_of_birth:
+                            type: string
+                            example: "2000-02-15"
+                          sub_position:
+                            type: string
+                            example: "Centre-Forward"
+                          position:
+                            type: string
+                            example: "Attack"
+                          foot:
+                            type: string
+                            example: "right"
+                          height_in_cm:
+                            type: string
+                            example: "185"
+                          market_value_in_eur:
+                            type: integer
+                            example: 1000000
+                          highest_market_value_in_eur:
+                            type: integer
+                            example: 7500000
+                          contract_expiration_date:
+                            type: string
+                            example: "2026-06-30 00:00:00"
+                          agent_name:
+                            type: string
+                            nullable: true
+                          image_url:
+                            type: string
+                            example: "https://img.a.transfermarkt.technology/portrait/header/419061-1665388396.png?lm=1"
+                          url:
+                            type: string
+                            example: "https://www.transfermarkt.co.uk/vladyslav-supryaga/profil/spieler/419061"
+                          __v:
+                            type: integer
+                            example: 0
+                          stats:
+                            type: object
+                            additionalProperties:
+                              type: object
+                              properties:
+                                goals:
+                                  type: integer
+                                assists:
+                                  type: integer
+                                yellow_cards:
+                                  type: integer
+                                red_cards:
+                                  type: integer
+                                minutes_played:
+                                  type: integer
+                                appearances:
+                                  type: integer
+                                competitionName:
+                                  type: string
+                          lineupsCount:
+                            type: object
+                            additionalProperties:
+                              type: integer
+                          totalStats:
+                            type: object
+                            properties:
+                              goals:
+                                type: integer
+                              assists:
+                                type: integer
+                              yellow_cards:
+                                type: integer
+                              red_cards:
+                                type: integer
+                              minutes_played:
+                                type: integer
+                          market_values_in_eur:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                market_value_in_eur:
+                                  type: integer
+                                date:
+                                  type: string
+                          clubName:
+                            type: string
+                            example: "Futbolniy Klub Dynamo Kyiv"
+  /clubStat/{id}:
+    get:
+      tags:
+        - Club
+      description: return some statistics for one club
+      parameters:
+        - name: id
+          in: path
+          description: club ID
+          schema:
+            type: integer
+            example: 338
+          required: true
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  data:
+                    type: object
+                    properties:
+                      clubId:
+                        type: integer
+                        example: 338
+                      clubCode:
+                        type: string
+                        example: "dynamo-kiew"
+                      name:
+                        type: string
+                        example: "Futbolniy Klub Dynamo Kyiv"
+                      totalMarketValue:
+                        type: integer
+                        example: 88725000
+                      squadSize:
+                        type: string
+                        example: "27"
+                      averageAge:
+                        type: string
+                        example: "24.3"
+                      foreignersNumber:
+                        type: string
+                        example: "3"
+                      foreignersPercentage:
+                        type: string
+                        example: "11.1"
+                      nationalTeamPlayers:
+                        type: string
+                        example: "8"
+                      stadiumName:
+                        type: string
+                        example: "Valeriy Lobanovsky Stadion"
+                      stadiumSeats:
+                        type: string
+                        example: "16873"
+                      netTransferRecord:
+                        type: string
+                        example: "+€1.20m"
+                      coachName:
+                        type: string
+                        nullable: true
+                      lastSeason:
+                        type: string
+                        example: "2023"
+                      url:
+                        type: string
+                        example: "https://www.transfermarkt.co.uk/dynamo-kiew/startseite/verein/338"
+                      domesticCompetition:
+                        type: object
+                        properties:
+                          competitionId:
+                            type: string
+                            example: "UKR1"
+                          competitionCode:
+                            type: string
+                            example: "premier-liga"
+                          name:
+                            type: string
+                            example: "premier-liga"
+                          subType:
+                            type: string
+                            example: "first_tier"
+                          type:
+                            type: string
+                            example: "domestic_league"
+                          countryId:
+                            type: string
+                            example: "177"
+                          countryName:
+                            type: string
+                            example: "Ukraine"
+                          domesticLeagueCode:
+                            type: string
+                            example: "UKR1"
+                          confederation:
+                            type: string
+                            example: "europa"
+                          url:
+                            type: string
+                            example: "https://www.transfermarkt.co.uk/premier-liga/startseite/wettbewerb/UKR1"
+                      players:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                              example: "6574baf3975bb4cdf6a02818"
+                            first_name:
+                              type: string
+                              nullable: true
+                            last_name:
+                              type: string
+                              example: "Dudu"
+                            country_of_citizenship:
+                              type: string
+                              example: "Brazil"
+                            date_of_birth:
+                              type: string
+                              example: "1992-01-07"
+                            position:
+                              type: string
+                              example: "Attack"
+                            market_value_in_eur:
+                              type: integer
+                              example: 9000000
+                            contract_expiration_date:
+                              type: string
+                              example: "2026-01-31 00:00:00"
+                            id:
+                              type: string
+                              example: "6574baf3975bb4cdf6a02818"
+  /search/{text}:
+    get:
+      tags:
+        - Player
+        - Club
+      description: return players and clubs that match the text param (the research is made checking if text param is a substring of the player's full name or club's name)
+      parameters:
+        - name: text
+          in: path
+          description: text to search
+          required: true
+          example: messi
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clubs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        clubId:
+                          type: integer
+                          example: 12
+                        name:
+                          type: string
+                          example: "Associazione Sportiva Roma"
+                  players:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        playerId:
+                          type: string
+                          example: "6574baf3975bb4cdf6a00bde"
+                        name:
+                          type: string
+                          example: "Thomas Hansen"
+
 

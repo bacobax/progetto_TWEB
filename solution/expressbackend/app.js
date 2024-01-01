@@ -3,11 +3,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const AppError = require('./utils/appError');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-const yaml = require('js-yaml');
-const fs = require('fs');
-
 
 const usersRouter = require('./routes/user');
 const gameLineupRouter = require('./routes/gameLineup');
@@ -18,20 +13,8 @@ const playerValuationRouter = require('./routes/playerValuation');
 const playerRouter = require('./routes/player');
 const roomRouter = require('./routes/room');
 
-
 const globalErrorHandler = require('./controllers/special/errorController');
 const cors = require('cors');
-
-const swaggerDefinition = yaml.load(fs.readFileSync('./swaggerDef.yaml', 'utf8'));
-
-const options = {
-
-  swaggerDefinition,
-  apis: ["./routes/*.js"],
-
-}
-
-const specs = swaggerJsDoc(options);
 
 const app = express();
 
@@ -41,10 +24,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/models/swaggerSchemas', express.static('./models/swaggerSchemas'));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-
 
 app.use('/api/users', usersRouter);
 app.use('/api/gameLineup', gameLineupRouter);

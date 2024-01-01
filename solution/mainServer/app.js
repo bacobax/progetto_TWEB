@@ -8,6 +8,10 @@ const {getNodeRESTRedirectRouter, getJavaRESTRedirectRouter, getNodeServerUrl, g
 const catchAsync = require("./utils/catchAsync");
 const {search} = require("./controllers/search");
 const axios = require("axios");
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const yaml = require('js-yaml');
+const fs = require('fs');
 
 const app = express();
 
@@ -16,6 +20,22 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+const swaggerDefinition = yaml.load(fs.readFileSync('./swaggerDef.yaml', 'utf8'));
+
+const options = {
+
+    swaggerDefinition,
+    apis: ["./routes/*.js"],
+
+}
+
+const specs = swaggerJsDoc(options);
+
+app.use('/models/swaggerSchemas', express.static('./models/swaggerSchemas'));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.route("/api/playerStat/:id").get(catchAsync(async (req,res,next)=>{
@@ -75,6 +95,7 @@ app.route("/api/clubStat/:id").get(catchAsync(async (req,res,next)=>{
 
 
 app.use("/api/player", getNodeRESTRedirectRouter());
+app.use("/api/appearence", getNodeRESTRedirectRouter());
 app.use("/api/clubs", getJavaRESTRedirectRouter());
 app.use("/api/room" , getNodeRESTRedirectRouter());
 app.use("/api/competitions", getJavaRESTRedirectRouter());
