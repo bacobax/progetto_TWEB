@@ -12,6 +12,7 @@ import { motion} from "framer-motion";
 import useWindowSize from "../../hooks/useWindowSize";
 import {AuthError} from "../errors/AuthError";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import {MyBreadcrumbs} from "../MyBreadcrumbs";
 
 interface DualFormProps {
 
@@ -74,17 +75,19 @@ const SmartForm: React.FC<DualFormProps> = () => {
             });
 
         }
-    },[isSignin,login,signup,navigate]);
+    },[isSignin,login,signup,navigate,searchParams]);
 
 
     return (
-        <div className={`${styles.container} ${styles.row}`}>
+        <div className={"w-4/5 h-[90%] bg-bg-dark flex flex-row rounded-medium hover:shadow-mycorvette"}>
+            <MyBreadcrumbs breadcumbs={ [{label: "Home", href: "/"}, {label: "Sign In", href: "/auth"}]}/>
             <motion.div className={styles.image}
                 animate={{
                     x: (width > 800) ? (isSignin ? "0%" : "100%") : "0%",
                     borderRadius : isSignin ? "10px 0px 0px 10px" : "0px 10px 10px 0px"
                 }}
                 transition={transitionForm}
+                onClick={toggleForm}
             />
                 <AnimatedForm
                     animate={{

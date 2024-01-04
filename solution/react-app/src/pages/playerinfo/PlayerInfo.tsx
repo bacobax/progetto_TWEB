@@ -71,7 +71,7 @@ export const PlayerInfo: FC<PlayerInfoProps> = ({ id }: PlayerInfoProps) => {
     },
     {
       href: `/player/${id}`,
-      label: `${player.first_name} ${player.last_name}`,
+      label: [player.first_name,player.last_name].filter(Boolean).join(" "),
     },
   ];
 

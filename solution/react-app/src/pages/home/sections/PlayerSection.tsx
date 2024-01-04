@@ -1,6 +1,5 @@
 import React from 'react'
 import Section from "../../../components/containers/Section";
-import styles from "./PlayerSection.module.css";
 import PlayerCard from "../../../components/PlayerCard";
 import {animatedButtonProps} from "../../../constants/constants";
 import {useSlice} from "../../../hooks/useSlice";
@@ -36,15 +35,15 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
 
 
     return (
-        <Section name={name} className={styles.container}>
+        <Section name={name} className={"flex flex-col gap-16"}>
 
 
-            <h1>Players</h1>
+            <h1 className={"text-5xl text-corvette"}>Players</h1>
             <div className={"text-green-400 flex items-center text-xl font-bold"}>
                 <MdKeyboardDoubleArrowUp />
                 <h3> Market Value (eur)</h3>
             </div>
-            <ScrollShadow orientation={"horizontal"} className={styles.cardGallery}>
+            <ScrollShadow orientation={"horizontal"} className={"w-full flex justify-around gap-[20px]"}>
                 {
                     !loading && !error && current.map((player) => (
                         <PlayerCard key={player._id} {...player}/>
@@ -60,11 +59,9 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
             </ScrollShadow>
 
 
-            <Pagination className={`dark ${styles.pagination} cursor-pointer`} color={"secondary" } total={matrixLength} page={currentIdx + 1} onChange={index => setIndex(index-1)} />
+            <Pagination className={`dark cursor-pointer`} color={"secondary" } total={matrixLength} page={currentIdx + 1} onChange={index => setIndex(index-1)} />
             <Divider orientation={"horizontal"} className={"my-4"} />
-            <Button {...animatedButtonProps} className={styles.moreButton} onClick={()=>{navigate("/gallery/players")}}>
-                More
-            </Button>
+
 
 
         </Section>

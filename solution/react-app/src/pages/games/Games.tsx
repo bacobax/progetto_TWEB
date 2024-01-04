@@ -38,7 +38,7 @@ export const Games:FC = () => {
     }
 
     return (
-        <div className={"w-full flex flex-col items-center gap-5"}>
+        <div className={"w-full flex flex-col items-center gap-5 py-[20px]"}>
             <h1 className={"text-5xl font-['Impact'] text-corvette"}>GAMES</h1>
             <GameFiltersForm onApplyFilters={handleApplyFilters} idLoading={loading}/>
             {!loading && games.length > 0 && <MemoizedMap items={games} className={"flex flex-wrap gap-4 w-full justify-center h-fit"}>

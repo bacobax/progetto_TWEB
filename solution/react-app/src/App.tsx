@@ -5,8 +5,6 @@ import {lazy, Suspense} from "react";
 import Loading from "./components/animations/Loading";
 import Gallery from "./pages/gallery/Gallery";
 import {ROUTES} from "./constants/constants";
-import PlayerSmartGallery from "./pages/gallery/PlayerSmartGallery";
-import {TeamSmartGallery} from "./pages/gallery/TeamSmartGallery";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
 const GamesPage = lazy(() => import("./pages/games/GamesPage"));
@@ -22,12 +20,10 @@ function App() {
   return (
     <>
         <Suspense fallback={<Loading />}>
+
             <Routes>
                 <Route path={ROUTES.AUTH} element={<AuthPage />}/>
-                <Route path={ROUTES.GALLERY} element={<Gallery />}>
-                    <Route path="players" element={<PlayerSmartGallery />} />
-                    <Route path="clubs" element={<TeamSmartGallery />} />
-                </Route>
+                <Route path={ROUTES.GALLERY} element={<Gallery />} />
                 <Route path={ROUTES.HOME} element={<HomePage />} />
                 <Route path={ROUTES.CHAT} element={<ProtectedRoute>
                     <Chat />

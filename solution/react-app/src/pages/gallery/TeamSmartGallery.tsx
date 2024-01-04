@@ -45,7 +45,7 @@ export const TeamSmartGallery: FC = () => {
 
   return (
     <div className={styles.container}>
-        <MyBreadcrumbs breadcumbs={[{href:"/", label:"Home"}, {href:"/gallery/teams", label:"Team Gallery"}]}/>
+
       <header>
         <h1>Team Gallery</h1>
         <IconButton

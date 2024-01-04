@@ -1,15 +1,12 @@
 import React, {useCallback, useState} from "react";
 import styles from "./TeamFilterForm.module.css";
-import Button from "../UI/button/Button";
-import {useForm} from "../../hooks/useForm";
 import IconButton from "../UI/button/IconButton";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
 import {animatedButtonProps, teamfilterFormState} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
-import InputGroup from "../UI/Input/InputGroup";
 import {Competition} from "../../constants/types";
-import {Autocomplete, AutocompleteItem, Input} from "@nextui-org/react";
+import {Autocomplete, AutocompleteItem, Button, Input} from "@nextui-org/react";
 
 interface FilterFormProps{
     onApplyFilters: (filters: { name: string, competitionName: string }) => void,
@@ -80,10 +77,10 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({ onApplyFilters, onClearFilt
                     })
                 }} className={"dark"} label={"Name"}/>
 
-                <IconButton
-                    {...animatedButtonProps}
-                    className={styles.addFilter}
-                    Icon={IoIosAddCircleOutline}
+                <Button
+                    className={"dark rounded-full"}
+                    isIconOnly={true}
+                    endContent={<IoIosAddCircleOutline className={"w-4/5 h-4/5"} />}
                     onClick={addNameFilterHandler}
 
                 />
@@ -106,10 +103,10 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({ onApplyFilters, onClearFilt
                     {(item: Competition) => <AutocompleteItem className={"dark text-white"} key={item.competitionId}>{item.name}</AutocompleteItem>}
                 </Autocomplete>
 
-                <IconButton
-                    {...animatedButtonProps}
-                    className={styles.addFilter}
-                    Icon={IoIosAddCircleOutline}
+                <Button
+                    className={"dark rounded-full"}
+                    isIconOnly={true}
+                    endContent={<IoIosAddCircleOutline className={"w-4/5 h-4/5"} />}
                     onClick={addCompetitionFilterHandler}
                 />
 

@@ -12,7 +12,7 @@ const mapLabel:{[key:string]:string} ={
     red_cards: "Red Cards",
     yellow_cards: "Yellow Cards",
 }
-
+//TODO: mettere i gameEvents di questo giocatore in questa lega
 export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({stats}) => {
 
     const {competitionName, ...effectiveStats} = stats;

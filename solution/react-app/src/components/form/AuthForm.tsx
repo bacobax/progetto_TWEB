@@ -2,11 +2,9 @@ import styles from "./AuthForm.module.css";
 
 
 import React, {ChangeEvent, forwardRef, useCallback, useMemo} from "react";
-import InputGroup from "../UI/Input/InputGroup";
-import Button from "../UI/button/Button";
-
 import {useForm} from "../../hooks/useForm";
 import {State} from "../../reducers/formReducer";
+import {Button, Input} from "@nextui-org/react";
 
 interface FormProps {
     onSwitch: () => void;
@@ -46,25 +44,25 @@ const AuthForm = forwardRef<HTMLDivElement, FormProps>(({onSwitch, isLogin, logi
                     })
                 }
             }
-            return <InputGroup key={key} className={styles.group} name={key} inputProps={inputProps} error={[error, errorText]}/>
+            return <Input key={key} label={key} className={"dark"} color={error?"danger":"success"} name={key}  isInvalid={error} errorMessage={error && errorText} variant={"bordered"} {...inputProps}/>
         })
     },[formState, handleInputChange]);
 
 
 
     return (
-        <div className={styles.container} style={style} ref={ref}>
-            <h1>{isLogin ? "Sign In" : "Sign Up"}</h1>
+        <div className={"w-full md:w-1/2 h-full flex flex-col py-[30px] md:py-[70px] px-[20px] md:px-[50px] box-border gap-[30px] items-center justify-center text-white"} style={style} ref={ref}>
+            <h1 className={"font-anonymousPro text-5xl text-corvette font-extrabold"}>{isLogin ? "Sign In" : "Sign Up"}</h1>
             <form className={styles.form} onSubmit={handleSubmit}>
                     {
                         inputs
                     }
 
-                <div className={styles.controls}>
-                    <Button className={styles['submit-btn']} type="submit" disabled={!isValid}>
+                <div className={"w-4/5 flex justify-around"}>
+                    <Button type="submit" isDisabled={!isValid} color={"secondary"} className={"cursor-pointer dark"}>
                         Submit
                     </Button>
-                    <Button className={styles['switch-form-btn']} type="button" onClick={onSwitch}>
+                    <Button  type="button" onClick={onSwitch} color={"default"} className={"dark"}>
                         {isLogin ?  "Sign-Up" : "Sign-In"}
                     </Button>
                 </div>

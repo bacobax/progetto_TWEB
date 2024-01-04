@@ -1,16 +1,15 @@
-import Navbar from "../../components/navbar/Navbar";
-import {navbarElements} from "../../constants/navbarElements";
 
 import PlayerSection from "./sections/PlayerSection";
 import TeamSection from "./sections/TeamSection";
 import {HOME_SECTIONS} from "../../constants/constants";
 import MainSection from "./sections/MainSection";
+import {GlobalNavbar} from "../../components/navbar/GlobalNavbar";
 
 function HomePage() {
 
     return (
         <>
-            <Navbar elements={navbarElements}/>
+            <GlobalNavbar />
             <div className="flex flex-col items-center">
                 <MainSection name={HOME_SECTIONS.HOME.name} />
                 <PlayerSection name={HOME_SECTIONS.PLAYERS.name}/>

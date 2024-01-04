@@ -2,16 +2,13 @@ import React from 'react'
 import Section from "../../../components/containers/Section";
 import TeamCard from "../../../components/TeamCard";
 
-import styles from "./TeamSection.module.css";
 import {useSlice} from "../../../hooks/useSlice";
-import {Divider, Pagination} from "@nextui-org/react";
+import {Button, Divider, Pagination} from "@nextui-org/react";
 import useLoadTeams from "../../../hooks/useLoadTeams";
 import useWindowSize from "../../../hooks/useWindowSize";
-import {animatedButtonProps} from "../../../constants/constants";
-import Button from "../../../components/UI/button/Button";
+import {animatedButtonProps, ROUTES} from "../../../constants/constants";
 import {useNavigate} from "react-router-dom";
 import {MdKeyboardDoubleArrowUp} from "react-icons/md";
-
 interface TeamSectionProps {
     name: string;
 }
@@ -25,13 +22,13 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
     const { current, setIndex, matrixLength } = useSlice(clubs, isPhone ? 2: 3);
 
     return (
-        <Section name={name} className={styles.teamsection}>
-            <h1>{name} Section</h1>
+        <Section name={name} className={"flex flex-col gap-16"}>
+            <h1 className={"text-5xl text-corvette"}>{name} Section</h1>
             <div className={"text-green-400 flex items-center text-xl font-bold"}>
                 <MdKeyboardDoubleArrowUp />
                 <h3> Market Value (eur)</h3>
             </div>
-            <div className={styles.gallery}>
+            <div className={"flex justify-around items-center w-full flex-wrap gap-5"}>
                 {
                     loading && <p>Loading...</p>
                 }
@@ -44,9 +41,9 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
                     ))
                 }
             </div>
-            <Pagination className={`dark ${styles.pagination} cursor-pointer`} color="secondary" total={matrixLength} onChange={(index)=>setIndex(index-1)} />
+            <Pagination className={`dark cursor-pointer`} color="secondary" total={matrixLength} onChange={(index)=>setIndex(index-1)} />
             <Divider orientation={"horizontal"} className={"my-4"} />
-            <Button {...animatedButtonProps} className={styles.moreButton} onClick={()=>{navigate("/gallery/clubs")}}>
+            <Button  onClick={()=>{navigate(ROUTES.GALLERY)}} className={"bg-corvette"} size={"lg"}>
                 More
             </Button>
         </Section>

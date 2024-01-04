@@ -1,6 +1,4 @@
-import styles from "./FakeSearchBar.module.css";
 import {CiSearch} from "react-icons/ci";
-import {isMacOs} from "../../utils/functions";
 import React from "react";
 import {Kbd} from "@nextui-org/react";
 interface FakeSearchBarProps{
@@ -9,9 +7,9 @@ interface FakeSearchBarProps{
 
 const FakeSearchBar: React.FC<FakeSearchBarProps> = ({onClick}) => {
     return (
-        <div className={styles.searchbar} onClick={onClick}>
-            <CiSearch className={styles["search-icon"]}/>
-            <label className={styles.placeholder}>Search Everything...</label>
+        <div className={"flex justify-center items-center w-4/5 bg-searchbar text-white py-[12px] px-[9px] rounded-lg gap-[10px] cursor-pointer overflow-hidden"} onClick={onClick}>
+            <CiSearch className={"text-2xl"}/>
+            <label className={"text-gray-200 truncate cursor-pointer"}>Search Everything...</label>
             <Kbd keys={["command"]} className="dark">K</Kbd>
         </div>
     )

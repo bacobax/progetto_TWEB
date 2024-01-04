@@ -1,9 +1,11 @@
 import {FC} from "react";
 import {Games} from "./Games";
+import {GlobalNavbar} from "../../components/navbar/GlobalNavbar";
 
 const GamesPage:FC = () => {
     return (
-        <div className={"min-w-[100vw] flex items-center justify-center p-[20px]"}>
+        <div className={"min-w-[100vw] flex flex-col items-center "}>
+            <GlobalNavbar />
             <Games />
         </div>
     );

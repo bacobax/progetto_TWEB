@@ -64,10 +64,7 @@ const sanitizeGameId = async (Model) => {
     },
   ])
     .then((updatedEvents) => {
-      // At this point, updatedEvents will contain the modified documents with the "game_id" field converted to ObjectId
 
-      // Now, if you want to update the collection with these modified documents:
-      // You can perform a bulk write operation to update each document in the collection
       const bulkUpdateOps = updatedEvents.map((event) => ({
         updateOne: {
           filter: { _id: event._id }, // Assuming "_id" is the identifier field
@@ -87,7 +84,14 @@ const sanitizeGameId = async (Model) => {
       console.error('Error:', err);
     });
 };
-
+/**
+ * This function sanitizes the player_id field in the provided Mongoose model.
+ * It connects to the MongoDB instance, converts the player_id field to ObjectId,
+ * and then updates the documents in the collection with the new player_id.
+ * If no documents need sanitization, it logs a message and disconnects from the MongoDB instance.
+ *
+ * @param {Object} Model - The Mongoose model to sanitize.
+ */
 const sanitizePlayerId = async (Model) => {
   try {
     console.log(`Sanitizing ${Model.modelName} collection`);
@@ -126,10 +130,12 @@ const sanitizePlayerId = async (Model) => {
   }
 };
 
-// Utilizzo:
-// Chiamare sanitize_Id con il modello Mongoose (ad esempio, il modello Player)
-// sanitize_Id(Player);
 
+/**
+ * This function cleans the game datasets by replacing the game_id in each document
+ * with the corresponding mapped id from the GAME_ID_MAPPING_PATH file.
+ * It throws an error if a game_id is not found in the mapping.
+ */
 const cleaningGameDatasets = async () => {
   const mapped_ids = require(GAME_ID_MAPPING_PATH);
 
@@ -145,6 +151,11 @@ const cleaningGameDatasets = async () => {
   console.log('Fatto game related');
 };
 
+/**
+ * This function cleans the player datasets by replacing the player_id in each document
+ * with the corresponding mapped id from the PLAYER_ID_MAPPING_PATH file.
+ * It throws an error if a game_id is not found in the mapping.
+ */
 const cleaningPlayersDataset = async () => {
   const mapped_ids = require(PLAYER_ID_MAPPING_PATH);
 
@@ -160,7 +171,10 @@ const cleaningPlayersDataset = async () => {
   });
   console.log('Fatto players related');
 };
-
+/**
+ * This function cleans the player dataset by replacing the player_id in each document
+ * with the corresponding mapped id from the PLAYER_ID_MAPPING_PATH file and then deleting the player_id field.
+ */
 const cleaningOnlyPlayerDataset = async () => {
   const mapped_ids = require(PLAYER_ID_MAPPING_PATH);
 
@@ -174,6 +188,10 @@ const cleaningOnlyPlayerDataset = async () => {
   console.log('Fatto only player');
 };
 
+/**
+ * This function cleans the game dataset by replacing the game_id in each document
+ * with the corresponding mapped id from the GAME_ID_MAPPING_PATH file and then deleting the game_id field.
+ */
 const cleaningOnlyGameDataset = async () => {
   const mapped_ids = require(GAME_ID_MAPPING_PATH);
 
@@ -189,6 +207,10 @@ const cleaningOnlyGameDataset = async () => {
 
 // cleaningPlayersDataset();
 
+/**
+ * This function populates the Player collection in the MongoDB instance with data from the NEW_PLAYER_PATH file.
+ * It first deletes all existing documents in the collection, then inserts the new players.
+ */
 const populatePlayers = async () => {
   const players = require(NEW_PLAYER_PATH);
   await mongoose.connect('mongodb://127.0.0.1:27017/progetto_TWEB');
@@ -204,6 +226,10 @@ const populatePlayers = async () => {
   }
 };
 
+/**
+ * This function populates the Game collection in the MongoDB instance with data from the NEW_GAMES_PATH file.
+ * It first deletes all existing documents in the collection, then inserts the new games.
+ */
 const populateGames = async () => {
   const players = require(NEW_GAMES_PATH);
   await mongoose.connect('mongodb://127.0.0.1:27017/progetto_TWEB');
@@ -220,6 +246,10 @@ const populateGames = async () => {
 };
 
 const mapObj = require(PLAYER_ID_MAPPING_PATH);
+/**
+ * This function updates the player_in_id field in the game event dataset with the corresponding mapped id
+ * from the PLAYER_ID_MAPPING_PATH file. If a player_in_id is not found in the mapping, it assigns a new ObjectId.
+ */
 const gameEventFilterPlayer_in_id = async () => {
   const gameEventDataset = require(GAME_EVENTS_PATH);
   gameEventDataset.forEach((doc) => {
@@ -236,6 +266,11 @@ const gameEventFilterPlayer_in_id = async () => {
   });
   fs.writeFileSync(GAME_EVENTS_PATH, JSON.stringify(gameEventDataset));
 };
+
+/**
+ * This function updates the player_assist_id field in the game event dataset with the corresponding mapped id
+ * from the PLAYER_ID_MAPPING_PATH file. If a player_assist_id is not found in the mapping, it assigns a new ObjectId.
+ */
 const gameEventFilterPlayer_assist_id = async () => {
   const gameEventDataset = require(GAME_EVENTS_PATH);
   gameEventDataset.forEach((doc) => {
@@ -256,6 +291,14 @@ const gameEventFilterPlayer_assist_id = async () => {
   fs.writeFileSync(GAME_EVENTS_PATH, JSON.stringify(gameEventDataset));
 };
 
+/**
+ * This function sanitizes the player_in_id field in the provided Mongoose model.
+ * It connects to the MongoDB instance, converts the player_in_id field to ObjectId,
+ * and then updates the documents in the collection with the new player_in_id.
+ * If no documents need sanitization, it logs a message and disconnects from the MongoDB instance.
+ *
+ * @param {Object} Model - The Mongoose model to sanitize.
+ */
 const sanitizePlayer_inID = async (Model) => {
   try {
     console.log(`Sanitizing ${Model.modelName} collection`);
@@ -308,7 +351,7 @@ function mapPlayerInID(value) {
   // await cleaningOnlyPlayerDataset();
   // await cleaningOnlyGameDataset();
   // await cleaningGameDatasets();
-  await populatePlayers();
+  //await populatePlayers();
   // await populateGames();
   // await sanitizePlayerId(Appearence);
   // await sanitizeGameId(Apperence);

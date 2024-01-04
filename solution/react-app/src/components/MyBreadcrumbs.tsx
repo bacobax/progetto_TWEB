@@ -19,7 +19,7 @@ export const MyBreadcrumbs:FC<MyBreadcrumbsProps> = ({breadcumbs, top, left}) =>
 
     return (
         <Breadcrumbs classNames={{
-            list:`z-20 dark fixed top-${topPos} left-${leftPos} backdrop-blur bg-black/50`,
+            list:`z-20 dark fixed top-2 right-20 backdrop-blur bg-black/50`,
         }} itemClasses={{
             item: "font-bold text-lg"
         }} color="secondary" variant="solid">

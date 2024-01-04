@@ -52,7 +52,7 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
                 if(gameEvent.player_id === null || gameEvent.player.length === 0){
                     return <p className={"text-gray-400"}>NONE</p>
                 }
-                return gameEvent.player[0].first_name + " " + gameEvent.player[0].last_name
+                return [gameEvent.player[0].first_name,gameEvent.player[0].last_name].filter(Boolean).join(" ")
             case "description":
                 return gameEvent.description
 
@@ -60,7 +60,7 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
                 if(gameEvent.player_assist_id === null || gameEvent.player_assist.length === 0){
                     return <p className={"text-gray-400"}>NONE</p>
                 }
-                return gameEvent.player_assist[0].first_name +  " " + gameEvent.player_assist[0].last_name
+                return [gameEvent.player_assist[0].first_name,gameEvent.player_assist[0].last_name].filter(Boolean).join(" ")
             default:
                 return getKeyValue(gameEvent, label)
         }
@@ -152,11 +152,11 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
                         <TableRow key={gameEvent._id}>
                             {(columnKey) => {
                                 if(columnKey === "player"){
-                                    return <TableCell className={"text-red-400"}>{gameEvent.player[0].first_name + " " + gameEvent.player[0].last_name}</TableCell>
+                                    return <TableCell className={"text-red-400"}>{[gameEvent.player[0].first_name,gameEvent.player[0].last_name].filter(Boolean).join(" ")}</TableCell>
                                 }
                                 if(columnKey === "player_in"){
                                     console.log({player_in: gameEvent.player_in})
-                                    return gameEvent.player_in.length>0? <TableCell className={"text-green-400"}>{gameEvent.player_in[0].first_name + " " + gameEvent.player_in[0].last_name}</TableCell>: <TableCell>NONE</TableCell>
+                                    return gameEvent.player_in.length>0? <TableCell className={"text-green-400"}>{[gameEvent.player_in[0].first_name,gameEvent.player_in[0].last_name].filter(Boolean).join(" ")}</TableCell>: <TableCell>NONE</TableCell>
                                 }
                                 return <TableCell>{getKeyValue(gameEvent, columnKey)}</TableCell>
                             }}

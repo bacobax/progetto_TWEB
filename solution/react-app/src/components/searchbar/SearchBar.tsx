@@ -45,6 +45,7 @@ const SearchBar : React.FC = () => {
         setData({clubs: [], players: []});
     } , [setSearchTerm, setData]);
 
+    console.log({data})
     return (
         <>
             <FakeSearchBar onClick={openModal}  />

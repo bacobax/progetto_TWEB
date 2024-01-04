@@ -62,7 +62,7 @@ const StatefulChat: FC<StatefulChatProps> = () => {
 
 
     return (
-        <>
+        <div className={"flex w-full h-full"}>
             {((isPhone && isChatList) || !isPhone) &&
                 <ChatList
                     rooms={userRooms}
@@ -90,7 +90,7 @@ const StatefulChat: FC<StatefulChatProps> = () => {
             <NewChat onClose={closeNewChatModal} opened={isNewChatModalOpen} onNewChat={handleNewChat}/>
             <SearchChat onClose={closeSearchChatModal} opened={isSeaerchChatModalOpen} onSelectRoom={handleSelectRoomToJoin}/>
 
-        </>
+        </div>
     );
 };
 

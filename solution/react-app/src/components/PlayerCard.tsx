@@ -33,7 +33,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 
               <Image
                   alt="Card background"
-                  className="object-cover rounded-xl "
+                  className="object-cover rounded-xl z-0"
                   src={image_url}
                   height={100}
                   width={100}

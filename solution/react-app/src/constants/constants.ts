@@ -40,7 +40,7 @@ export const LOREM_IPSUM =
 export const ROUTES = {
   AUTH: '/auth',
   HOME: '/',
-  GALLERY: '/gallery',
+  GALLERY: '/clubs',
   CHAT: '/chat',
   PLAYER_INFO: 'player/:id',
   CLUB_INFO: "club/:id",
@@ -171,7 +171,7 @@ export const initialSignInState = {
   email: {
     value: "",
     error: false,
-    errorText: "username must be at least 6 characters long",
+    errorText: "please type a valid email",
     validate: (value: string) => {
       return value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null;
     },
@@ -493,3 +493,8 @@ export const URL_GAMES = (filters: QueryFilters) => {
 
 
 export const URL_GAME_EVENTS = (gameId:string, pagesize: number) => getMainServerPath(`/game/${gameId}/events?limit=${pagesize}&page=1`);
+/**
+ * TODO:
+ * 1. Erase player section
+ * 2. Make more persistent navigation trace
+ */

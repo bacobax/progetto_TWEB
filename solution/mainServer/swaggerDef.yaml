@@ -59,6 +59,25 @@ paths:
       responses:
         200:
           description: A successful response
+          content:
+              application/json:
+                schema:
+                    type: array
+                    items:
+                      $ref: '/models/swaggerSchemas/appearence.yaml#/components/schemas/Appearence'
+        404:
+          description: No appearences found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "fail"
+                  message:
+                    type: string
+                    example: "No appearences found"
     post:
       tags:
         - Appearence
