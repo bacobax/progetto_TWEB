@@ -79,7 +79,7 @@ const SmartForm: React.FC<DualFormProps> = () => {
 
 
     return (
-        <div className={"w-4/5 h-[90%] bg-bg-dark flex flex-row rounded-medium hover:shadow-mycorvette"}>
+        <div className={"w-4/5 h-[90%] bg-bg-dark flex flex-row rounded-medium"}>
             <MyBreadcrumbs breadcumbs={ [{label: "Home", href: "/"}, {label: "Sign In", href: "/auth"}]}/>
             <motion.div className={styles.image}
                 animate={{

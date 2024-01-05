@@ -498,3 +498,5 @@ export const URL_GAME_EVENTS = (gameId:string, pagesize: number) => getMainServe
  * 1. Erase player section
  * 2. Make more persistent navigation trace
  */
+
+export const URL_PLAYER_EVENTS = (playerID: string) => getMainServerPath(`/gameEvents?player_id=${playerID}`);

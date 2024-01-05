@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Player } from "../../constants/types";
+import {GameEvent, Player} from "../../constants/types";
 import useFetch from "../../hooks/useFetch";
 import { URL_PLAYER_INFO } from "../../constants/constants";
 import Loading from "../../components/animations/Loading";
@@ -33,6 +33,7 @@ const PersonalToolTip = ({ active, payload, label }: any) => {
   }
   return null;
 };
+
 
 export const PlayerInfo: FC<PlayerInfoProps> = ({ id }: PlayerInfoProps) => {
   const [player, setPlayer] = useState<Player | null>(null);
@@ -162,7 +163,7 @@ export const PlayerInfo: FC<PlayerInfoProps> = ({ id }: PlayerInfoProps) => {
                 .join(" ")
                 .toUpperCase()}
             >
-              <PlayerInfoStats stats={player.stats[competitionID]} />
+              <PlayerInfoStats stats={player.stats[competitionID]} events={player.gameEvents!.filter(GE => GE.game?.competition_id===competitionID)}/>
             </AccordionItem>
           )),
         ]}

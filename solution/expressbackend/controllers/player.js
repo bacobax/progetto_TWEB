@@ -119,7 +119,8 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
     const doc = await Player.findById(id)
         .populate('valuations')
         .populate('lineups')
-        .populate('appearances');
+        .populate('appearances')
+        .populate('gameEvents');
     if (!doc) {
         return next(new AppError('No document found with that ID', 404));
 
@@ -132,7 +133,7 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
      * Goals, Cards and Minutes played are in every appearences' elements virtual property (appearences.goals, appearences.yellow_cards, appearences.red_cards, appearences.minutes_played)
      * Market values are in every valuations' elements virtual property (valuations.market_value_in_eur)
      */
-    const {valuations, lineups, appearances, ...playerFields} = doc;
+    const {valuations, lineups, appearances,gameEvents, ...playerFields} = doc;
 
 
     const {goals, assists, yellow_cards, red_cards, minutes_played} = statsFromAppearances(appearances);
@@ -174,6 +175,7 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
             minutes_played,
         },
         market_values_in_eur,
+        gameEvents
     }
 
 

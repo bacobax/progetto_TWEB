@@ -67,6 +67,13 @@ gameEventSchema.virtual('player_assist' , {
     localField: 'player_assist_id',
 });
 
+gameEventSchema.virtual('game' , {
+    ref: 'Game',
+    foreignField: '_id',
+    localField: 'game_id',
+    justOne:true
+});
+
 
 
 
@@ -83,6 +90,11 @@ gameEventSchema.pre(/^find/, function (next) {
             path: 'player_assist',
             select: 'first_name last_name -_id',
         });
+    this.populate({
+        path: 'game',
+        select: 'home_club_name away_club_name competition_id -_id',
+    });
+
     next();
 });
 

@@ -4,7 +4,8 @@ import {Accordion, AccordionItem, Avatar, Divider} from "@nextui-org/react";
 import {GameStats} from "../pages/games/GameStats";
 import {motion} from "framer-motion";
 import {useOutClickRef} from "../hooks/useOutClickRef";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import useQueryParams from "../hooks/useQueryParams";
 
 //want to have a date with format ex: 2 MARCH 1999
 const dateToStringFormatter = (date: string) => {
@@ -29,32 +30,43 @@ interface classNameProps {
 export const GameCard:FC<Game & classNameProps> = (props) => {
 
     const [homeClubGoals, awayClubGoals] = props.aggregate.split(":");
-    const [isStatisticsSeleected, setIsStatisticsSelected] = useState<boolean>(false);
     const navigate = useNavigate();
+    const {setQueryParam, removeQueryParam, getQueryParam} = useQueryParams();
+    const isSelected = getQueryParam("game_id") === props._id;
+    const setIsSelectedToTrue = useCallback(() => {
+        setQueryParam("game_id", props._id);
+    } , [props._id, setQueryParam]);
+    const setIsSelectedToFalse = useCallback(() => {
+        removeQueryParam("game_id");
+    } , [removeQueryParam]);
 
     const navigateToClubPage = useCallback((club_id: number) => {
         navigate(`/club/${club_id}`);
     },[navigate]);
 
     const toggleStatisticsSelected = useCallback(() => {
-        setIsStatisticsSelected(prevState => !prevState);
-    },[]);
+        if(isSelected){
+            setIsSelectedToFalse();
+        }else{
+            setIsSelectedToTrue();
+        }
+    },[ isSelected, setIsSelectedToFalse, setIsSelectedToTrue]);
 
 
     return (
         <>
-            {isStatisticsSeleected && <div className={"fixed w-[100vw] h-[100vh] bg-black top-0 left-0 z-30"} />}
+            {isSelected && <div className={"fixed w-[100vw] h-[100vh] bg-black top-0 left-0 z-30"} />}
             <motion.div className={`rounded-medium bg-gray-900 text-white flex flex-col items-center p-3 gap-6 ${props.className ? props.className : ""}`} animate={{
-                scale: isStatisticsSeleected ? 1.1 : 1,
-                position:  isStatisticsSeleected ? "fixed" : "static",
-                zIndex: isStatisticsSeleected ? 30 : 0,
-                top: isStatisticsSeleected ? "50%" : "0%",
-                left: isStatisticsSeleected ? "50%" : "0%",
-                translateX: isStatisticsSeleected ? "-50%" : "0%",
-                translateY: isStatisticsSeleected ? "-50%" : "0%",
-                width: isStatisticsSeleected ? "80vw" : "550px",
-                height: isStatisticsSeleected ? "80vh" : "fit-content",
-                overflowY: isStatisticsSeleected ? "scroll" : "hidden",
+                scale: isSelected ? 1.1 : 1,
+                position:  isSelected ? "fixed" : "static",
+                zIndex: isSelected ? 30 : 0,
+                top: isSelected ? "50%" : "0%",
+                left: isSelected ? "50%" : "0%",
+                translateX: isSelected ? "-50%" : "0%",
+                translateY: isSelected ? "-50%" : "0%",
+                width: isSelected ? "80vw" : "550px",
+                height: isSelected ? "80vh" : "fit-content",
+                overflowY: isSelected ? "scroll" : "hidden",
                 transition: {
                     duration: 0,
                     type: "spring",

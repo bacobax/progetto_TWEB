@@ -38,33 +38,33 @@ const substitutionsTableColumns = [
 ]
 
 
+export const renderTableCell = ({label, gameEvent}:{label: Key, gameEvent: GameEvent}) => {
+    switch (label) {
+        case "minute":
+            return gameEvent.minute
+        case "type":
+            return gameEvent.type
+        case "player":
+            if(gameEvent.player_id === null || gameEvent.player.length === 0){
+                return <p className={"text-gray-400"}>NONE</p>
+            }
+            return [gameEvent.player[0].first_name,gameEvent.player[0].last_name].filter(Boolean).join(" ")
+        case "description":
+            return gameEvent.description
 
+        case "player_assist":
+            if(gameEvent.player_assist_id === null || gameEvent.player_assist.length === 0){
+                return <p className={"text-gray-400"}>NONE</p>
+            }
+            return [gameEvent.player_assist[0].first_name,gameEvent.player_assist[0].last_name].filter(Boolean).join(" ")
+        default:
+            return getKeyValue(gameEvent, label)
+    }
+}
 
 export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
 
-    const renderTableCell = useCallback (({label, gameEvent}:{label: Key, gameEvent: GameEvent}) => {
-        switch (label) {
-            case "minute":
-                return gameEvent.minute
-            case "type":
-                return gameEvent.type
-            case "player":
-                if(gameEvent.player_id === null || gameEvent.player.length === 0){
-                    return <p className={"text-gray-400"}>NONE</p>
-                }
-                return [gameEvent.player[0].first_name,gameEvent.player[0].last_name].filter(Boolean).join(" ")
-            case "description":
-                return gameEvent.description
 
-            case "player_assist":
-                if(gameEvent.player_assist_id === null || gameEvent.player_assist.length === 0){
-                    return <p className={"text-gray-400"}>NONE</p>
-                }
-                return [gameEvent.player_assist[0].first_name,gameEvent.player_assist[0].last_name].filter(Boolean).join(" ")
-            default:
-                return getKeyValue(gameEvent, label)
-        }
-    }, []);
 
 
     const [hasMore, setHasMore] = useState(true);

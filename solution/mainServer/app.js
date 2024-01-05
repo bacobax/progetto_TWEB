@@ -46,8 +46,7 @@ app.route("/api/player/:id").get(catchAsync(async (req,res,next)=>{
 
     const {current_club_id, ...otherPlayerData} = expressResponse.data.data;
 
-
-
+    console.log({otherPlayerData})
 
     const javaResponse = await axios.get(getJavaServerUrl(`/api/club/${current_club_id}`));
     const clubName = javaResponse.data.name;
@@ -62,7 +61,6 @@ app.route("/api/player/:id").get(catchAsync(async (req,res,next)=>{
     const competitionNamesMapping = competitionNamesMappingRes.data;
     competitionsIDS.forEach(competitionID=>{
 
-        console.log({competitionID})
 
 
         otherPlayerData.stats[competitionID] = {

@@ -49,6 +49,11 @@ playerSchema.virtual('appearances', {
   foreignField: 'player_id',
   localField: '_id',
 });
+playerSchema.virtual('gameEvents' , {
+    ref: 'GameEvent',
+    foreignField: 'player_id',
+    localField: '_id',
+});
 
 
 const Player = mongoose.model('Player', playerSchema);

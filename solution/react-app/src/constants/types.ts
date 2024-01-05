@@ -86,6 +86,7 @@ export interface Player extends ShortPlayer{
             date: string
         }
     ]
+    gameEvents?: GameEvent[]
 
 }
 
@@ -291,5 +292,10 @@ export interface GameEvent{
         first_name: string;
         last_name:string;
     }[]
+    game?: {
+        competition_id: string;
+        home_club_name: string;
+        away_club_name: string;
+    }
 
 }
