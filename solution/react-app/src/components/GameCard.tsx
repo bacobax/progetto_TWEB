@@ -1,10 +1,9 @@
 import {Game} from "../constants/types";
-import {FC, useCallback, useRef, useState} from "react";
+import {FC, useCallback} from "react";
 import {Accordion, AccordionItem, Avatar, Divider} from "@nextui-org/react";
 import {GameStats} from "../pages/games/GameStats";
 import {motion} from "framer-motion";
-import {useOutClickRef} from "../hooks/useOutClickRef";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import useQueryParams from "../hooks/useQueryParams";
 
 //want to have a date with format ex: 2 MARCH 1999
@@ -31,8 +30,10 @@ export const GameCard:FC<Game & classNameProps> = (props) => {
 
     const [homeClubGoals, awayClubGoals] = props.aggregate.split(":");
     const navigate = useNavigate();
+
     const {setQueryParam, removeQueryParam, getQueryParam} = useQueryParams();
     const isSelected = getQueryParam("game_id") === props._id;
+
     const setIsSelectedToTrue = useCallback(() => {
         setQueryParam("game_id", props._id);
     } , [props._id, setQueryParam]);
@@ -73,7 +74,7 @@ export const GameCard:FC<Game & classNameProps> = (props) => {
                     bounce: 0.5
                 }
             }}>
-                <label className={"text-red-400 font-bold"}>{dateToStringFormatter(props.date)}</label>
+                <label className={"text-red-400 text-2xl font-bold"}>{dateToStringFormatter(props.date)}</label>
                 <label>{props.stadium}</label>
                 <main className={"flex justify-around w-full"}>
                     <ClubAvatar club_name={props.home_club_name} onClick={()=>{navigateToClubPage(props.home_club_id)}}  />
@@ -89,10 +90,10 @@ export const GameCard:FC<Game & classNameProps> = (props) => {
                     <ClubAvatar club_name={props.away_club_name} onClick={()=>{navigateToClubPage(props.away_club_id)}}/>
                 </main>
                 <Divider className={"bg-gray-500"}/>
-                <Accordion>
+                <Accordion selectedKeys={isSelected ? new Set(["1"]) : new Set([])}>
                     <AccordionItem title={"Stats"} classNames={{
                         title: "text-white font-bold",
-                    }} onPress={toggleStatisticsSelected} >
+                    }} onPress={toggleStatisticsSelected} key={"1"} >
                         <GameStats gameID={props._id} />
                     </AccordionItem>
                 </Accordion>

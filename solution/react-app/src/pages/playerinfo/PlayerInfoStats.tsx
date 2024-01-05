@@ -9,6 +9,7 @@ import {
     TableHeader,
     TableRow
 } from "@nextui-org/react";
+import {Link} from "react-router-dom"
 import {renderTableCell} from "../games/GameStats";
 interface PlayerInfoStatsProps {
     stats: PlayerStats & { competitionName?: string },
@@ -81,7 +82,7 @@ export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({ stats, events }) => {
                 {
                     eventsByGamesIDS && showEvents && Object.keys(eventsByGamesIDS).map((key,idx) => (
                             <>
-                                <h1 className={" w-full text-center text-green-400 font-bold"}>Game: {eventsByGamesIDS[key][0].game?.home_club_name} v/s {eventsByGamesIDS[key][0].game?.away_club_name} </h1>
+                                <h1 className={" w-full text-center text-green-400 font-bold"}><Link to={`/games?game_id=${key}`}>Game: {eventsByGamesIDS[key][0].game?.home_club_name} v/s {eventsByGamesIDS[key][0].game?.away_club_name}</Link> </h1>
                                 <Table className={"dark text-white font-anonymousPro"}>
                                     <TableHeader columns={tableColumns}>
                                         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}

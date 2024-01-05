@@ -1,7 +1,6 @@
 import {FC, useState} from "react";
 import {
     Button,
-    Link,
     Navbar,
     NavbarBrand,
     NavbarContent,
@@ -11,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import {ROUTES} from "../../constants/constants";
 import {useAuth} from "../../hooks/useAuth";
-import {useLocation} from "react-router-dom";
+import {useLocation,Link} from "react-router-dom";
 import SearchBar from "../searchbar/SearchBar";
 
 
@@ -77,7 +76,7 @@ export const GlobalNavbar:FC = () => {
                 {
                     items.map((el,idx) => (
                         <NavbarMenuItem isActive={pathname === el.href} key={idx}>
-                            <Link color="foreground" href={el.href}>
+                            <Link className={"text-white"} to={el.href}>
                                 {el.label}
                             </Link>
                         </NavbarMenuItem>
@@ -88,7 +87,7 @@ export const GlobalNavbar:FC = () => {
                 {
                     !loggedIn ? <>
                     <NavbarItem className="hidden lg:flex">
-                        <Link href={ROUTES.AUTH}>Login</Link>
+                        <Link className={"text-white"} to={ROUTES.AUTH}>Login</Link>
                     </NavbarItem>
                     <NavbarItem>
                         <Button as={Link} color="primary" href={ROUTES.AUTH} variant="flat">
@@ -105,9 +104,8 @@ export const GlobalNavbar:FC = () => {
                 {items.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`} isActive={item.href === pathname}>
                         <Link
-                            className="w-full text-2xl"
-                            href={item.href}
-                            size="lg"
+                            className="w-full text-2xl text-white"
+                            to={item.href}
                             key={index}
                             color={"foreground"}
                         >

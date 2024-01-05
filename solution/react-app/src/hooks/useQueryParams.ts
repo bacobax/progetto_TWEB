@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import {useCallback} from "react";
 
 /**
  * Custom hook to manage query parameters in a URL.
@@ -12,10 +13,10 @@ const useQueryParams = () => {
      * @param param The name of the query parameter.
      * @returns The value of the query parameter.
      */
-    const getQueryParam = (param:string) => {
+    const getQueryParam =useCallback ((param:string) => {
         const queryParams = new URLSearchParams(location.search);
         return queryParams.get(param);
-    };
+    },[location.search]);
 
     /**
      * Sets the value of a query parameter. Adds the parameter if it doesn't exist.

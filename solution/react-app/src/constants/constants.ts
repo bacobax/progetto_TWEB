@@ -500,3 +500,5 @@ export const URL_GAME_EVENTS = (gameId:string, pagesize: number) => getMainServe
  */
 
 export const URL_PLAYER_EVENTS = (playerID: string) => getMainServerPath(`/gameEvents?player_id=${playerID}`);
+
+export const URL_GAME_BY_ID = (gameID: string) => getMainServerPath(`/game/${gameID}`)

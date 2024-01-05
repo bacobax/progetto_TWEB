@@ -116,7 +116,7 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
 
 
     return (
-        <>
+        <div className={"w-full flex flex-col gap-8"}>
             <Table className={"dark text-white font-anonymousPro"} bottomContent={hasMore && !listLoading ? (
                 <div className="flex w-full justify-center">
                     <Button isDisabled={list.isLoading} variant="flat" onPress={list.loadMore}>
@@ -136,6 +136,7 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
                     )}
                 </TableBody>
             </Table>
+            <h1 className={"text-2xl text-white font-anonymousPro font-bold w-full text-center"}>Substitutions</h1>
             <Table className={"dark text-white font-anonymousPro"} bottomContent={hasMore && !listLoading ? (
                 <div className="flex w-full justify-center">
                     <Button isDisabled={list.isLoading} variant="flat" onPress={list.loadMore}>
@@ -165,7 +166,7 @@ export const GameStats:FC<GameStatsProps> = ({gameID}: GameStatsProps) => {
                 </TableBody>
             </Table>
 
-        </>
+        </div>
 
     );
 };

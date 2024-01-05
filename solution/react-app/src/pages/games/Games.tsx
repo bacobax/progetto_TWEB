@@ -1,11 +1,12 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {GameFiltersForm} from "./GameFiltersForm";
 import useFetch from "../../hooks/useFetch";
 import {Game} from "../../constants/types";
-import {URL_GAMES} from "../../constants/constants";
+import {URL_GAME_BY_ID, URL_GAMES} from "../../constants/constants";
 import {FetchError} from "../../components/errors/FetchError";
 import MemoizedMap from "../../components/containers/MemoizedMap";
 import {GameCard} from "../../components/GameCard";
+import useQueryParams from "../../hooks/useQueryParams";
 
 interface StringKeys {
     [key: string]: string | undefined
@@ -22,6 +23,7 @@ export const Games:FC = () => {
 
     const [games, setGames] = useState<Game[]>([]);
     const {loading, setError, error, fetchData} = useFetch();
+    const {getQueryParam} = useQueryParams();
     const handleApplyFilters = (filters: QueryFilters) => {
         fetchData<{status:string, results: number, data:Game[], message?:string}>({
             url: URL_GAMES(filters),
@@ -32,6 +34,20 @@ export const Games:FC = () => {
             setGames(data.data);
         })
     }
+
+    useEffect(()=>{
+        const game_id = getQueryParam("game_id");
+        if(!!game_id){
+            fetchData<{status:string, results: number, data:Game, message?:string}>({
+                url: URL_GAME_BY_ID(game_id)
+            }, res => {
+                if(res.status !== "success"){
+                    return setError(res.message || "Error");
+                }
+                setGames([res.data]);
+            })
+        }
+    },[setGames, setError, fetchData, getQueryParam])
 
     if(!!error){
         return <FetchError opened={true} onClose={()=>setError("")} message={error} />

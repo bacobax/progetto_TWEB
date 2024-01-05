@@ -1,6 +1,6 @@
 import React from 'react';
-import {Card, CardHeader, Image, Divider, CardFooter, CardBody, Link, Button, Spacer} from "@nextui-org/react";
-import {Club, ShortClub} from "../constants/types";
+import {Card, CardHeader, Divider, CardFooter, Link, Button, Spacer} from "@nextui-org/react";
+import {Club,} from "../constants/types";
 import {useNavigate} from "react-router-dom";
 import {MilionFormat} from "../constants/constants";
 
