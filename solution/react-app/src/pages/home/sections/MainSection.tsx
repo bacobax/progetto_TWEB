@@ -25,7 +25,7 @@ const MainSection: React.FC<MainSectionProps> = React.memo(({name}) => {
 
     return (
         <Section name={name}>
-            <FancyHeader title={"Welcome to Football App"}/>
+            <FancyHeader title={"Welcome to Goal Grapher"}/>
             <Lottie onComplete={handleComplete} animationData={fieldAnimation} className={styles.animatedFootball} lottieRef={footballRef} loop={true}/>
             <div className={styles.auth}>
                 <Button

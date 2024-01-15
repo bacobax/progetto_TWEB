@@ -39,6 +39,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.route("/api/player/:id").get(catchAsync(async (req,res,next)=>{
+    if(["clubsMarketValue", "nationalities"].includes(req.params.id)){
+        return next();
+    }
     const expressResponse = await axios.get(getNodeServerUrl(`/api/player/${req.params.id}`));
 
 

@@ -1,9 +1,7 @@
 import React, {useCallback, useState} from "react";
 import styles from "./TeamFilterForm.module.css";
-import IconButton from "../UI/button/IconButton";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Filter from "../Filter";
-import {animatedButtonProps, teamfilterFormState} from "../../constants/constants";
 import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 import {Competition} from "../../constants/types";
 import {Autocomplete, AutocompleteItem, Button, Input} from "@nextui-org/react";
@@ -64,7 +62,7 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({ onApplyFilters, onClearFilt
     },[formState,addCompetitionFilter ]);
 
     return (
-        <NeuromorphismDiv clickable={false}>
+        <NeuromorphismDiv clickable={false} className={"w-4/5"}>
             <form className={styles.filterForm} onSubmit={handleFormSubmit}>
 
 
@@ -113,11 +111,11 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({ onApplyFilters, onClearFilt
                 <div className={styles.filters}>{renderFilters()}</div>
 
                 <hr />
-                <div className={styles.filterControl}>
-                    <Button className={styles.btnApply} onClick={handleFormSubmit}>
+                <div className={"w-full flex justify-around"}>
+                    <Button className={styles.btnApply} onClick={handleFormSubmit} size={"lg"} color={"success"} variant={"bordered"}>
                         Apply Filters
                     </Button>
-                    <Button className={styles.btnClear} onClick={handleClearFilters}>
+                    <Button className={styles.btnClear} onClick={handleClearFilters} size={"lg"} color={"danger"} variant={"bordered"}>
                         Clear Filters
                     </Button>
                 </div>

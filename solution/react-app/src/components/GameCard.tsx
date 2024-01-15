@@ -1,4 +1,4 @@
-import {Game} from "../constants/types";
+import {Player} from "../constants/types";
 import {FC, useCallback} from "react";
 import {Accordion, AccordionItem, Avatar, Divider} from "@nextui-org/react";
 import {GameStats} from "../pages/games/GameStats";
@@ -26,7 +26,7 @@ interface classNameProps {
     className?:string
 }
 
-export const GameCard:FC<Game & classNameProps> = (props) => {
+export const GameCard:FC<Player & classNameProps> = (props) => {
 
     const [homeClubGoals, awayClubGoals] = props.aggregate.split(":");
     const navigate = useNavigate();
@@ -61,7 +61,7 @@ export const GameCard:FC<Game & classNameProps> = (props) => {
                 scale: isSelected ? 1.1 : 1,
                 position:  isSelected ? "fixed" : "static",
                 zIndex: isSelected ? 30 : 0,
-                top: isSelected ? "50%" : "0%",
+                top: isSelected ? "55%" : "0%",
                 left: isSelected ? "50%" : "0%",
                 translateX: isSelected ? "-50%" : "0%",
                 translateY: isSelected ? "-50%" : "0%",

@@ -8,7 +8,20 @@ const AppError = require("../utils/appError");
 exports.createPlayer = createOne(Player);
 
 exports.getAllPlayer = catchAsync(async (req, res) => {
-    const features = new APIFeatures(Player.find(), {...req.query , market_value_in_eur: {$ne:null}}).filter().limitFields()
+    console.log({query: req.query})
+    if(req.query.market_value_in_eur){
+        let market_value_in_eur;
+        try{
+            market_value_in_eur = JSON.parse(req.query.market_value_in_eur);
+
+        }catch(e){
+            console.error(e);
+            market_value_in_eur = req.query.market_value_in_eur;
+        }
+        req.query.market_value_in_eur = market_value_in_eur;
+    }
+
+    const features = new APIFeatures(Player.find(), {...req.query }).filter().limitFields()
 
     let query = features.query;
 
@@ -201,3 +214,27 @@ exports.clubsTotalMarketValue = catchAsync(async (req, res) => {
         data: docs,
     });
 });
+
+exports.getAllNationalities = catchAsync(async (req, res) => {
+       const docs = await Player.find().select("country_of_citizenship -_id");
+       console.log(docs)
+        res.status(200).json({
+            status: 'success',
+            data: [... new Set(docs.map(d => d.country_of_citizenship))]
+        });
+})
+
+
+exports.getMinMaxMarketValue = catchAsync(async (req, res) => {
+    const docs = await Player.aggregate([{
+        $group: {
+            _id: null,
+            min: {$min: '$market_value_in_eur'},
+            max: {$max: '$market_value_in_eur'},
+        },
+    }]);
+    res.status(200).json({
+        status: 'success',
+        data: docs[0],
+    });
+})

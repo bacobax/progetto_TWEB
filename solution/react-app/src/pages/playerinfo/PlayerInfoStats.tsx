@@ -13,7 +13,8 @@ import {Link} from "react-router-dom"
 import {renderTableCell} from "../games/GameStats";
 interface PlayerInfoStatsProps {
     stats: PlayerStats & { competitionName?: string },
-    events?: GameEvent[]
+    events?: GameEvent[],
+    permitGameEventsShow: boolean
 }
 
 const mapLabel:{[key:string]:string} ={
@@ -49,8 +50,11 @@ const separateEventsByGameID = (events: GameEvent[]) => {
     return eventsByGameID;
 }
 
+const getEntriesWithNoSubstitutions = (eventsByGameID: { [key: string]: GameEvent[] }) => Object.entries(eventsByGameID)
+    .filter(([gameID, events]) => events.filter(GE => GE.type !== "Substitutions").length > 0);
 
-export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({ stats, events }) => {
+
+export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({ stats, events, permitGameEventsShow }) => {
 
     const {competitionName, ...effectiveStats} = stats;
 
@@ -63,31 +67,36 @@ export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({ stats, events }) => {
     const eventsByGamesIDS = events ? separateEventsByGameID(events) : null;
 
     return (
-        <div className={"font-anonymousPro w-full flex flex-col gap-10"}>
-        <div className={"flex flex-wrap gap-[10px] "}>
-            {effectiveStats && Object.keys(effectiveStats).map(key => (
-                <div className={"flex text-white w-1/2 justify-between"} key={key}>
-                    <label>
-                        {mapLabel[key]}: {" "}
-                    </label>
-                    <div>
-                        {/*@ts-ignore*/}
-                        <b>{stats[key]}</b>
+        <div className="font-anonymousPro w-full flex flex-col gap-10">
+            <div className="flex flex-wrap gap-[10px]">
+                {effectiveStats && Object.entries(effectiveStats).map(([key, value]) => (
+                    <div className="flex text-white w-1/2 justify-between" key={key}>
+                        <label>{mapLabel[key]}: </label>
+                        <div><b>{value}</b></div>
                     </div>
-                </div>
-            ))}
-        </div>
-            <div className={"flex flex-col gap-[30px]"}>
-                <Button size={"lg"} className={"w-full"} onClick={toggleShowEvents} color={showEvents ? "warning" : "primary"}>{showEvents ? "Hide" : "Show"} All Player's events {!showEvents && "(Advanced)"}</Button>
-                {
-                    eventsByGamesIDS && showEvents && Object.keys(eventsByGamesIDS).map((key,idx) => (
-                            <>
-                                <h1 className={" w-full text-center text-green-400 font-bold"}><Link to={`/games?game_id=${key}`}>Game: {eventsByGamesIDS[key][0].game?.home_club_name} v/s {eventsByGamesIDS[key][0].game?.away_club_name}</Link> </h1>
-                                <Table className={"dark text-white font-anonymousPro"}>
+                ))}
+            </div>
+            {permitGameEventsShow && eventsByGamesIDS &&
+                <div className="flex flex-col gap-[30px]">
+                    {getEntriesWithNoSubstitutions(eventsByGamesIDS).length > 0 &&
+                        <Button size="lg" className="w-full" onClick={toggleShowEvents}
+                            color={showEvents ? "warning" : "primary"}>
+                            {showEvents ? "Hide" : "Show"} All Player's events {!showEvents && "(Advanced)"}
+                        </Button>
+                    }
+                    {showEvents && getEntriesWithNoSubstitutions(eventsByGamesIDS)
+                        .map(([key, events], idx) => (
+                            <div key={idx}>
+                                <h1 className="w-full text-center text-green-400 font-bold">
+                                    <Link to={`/games?game_id=${key}`}>
+                                        Game: {events[0].game?.home_club_name} v/s {events[0].game?.away_club_name}
+                                    </Link>
+                                </h1>
+                                <Table className="dark text-white font-anonymousPro" aria-label="player game events">
                                     <TableHeader columns={tableColumns}>
                                         {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
                                     </TableHeader>
-                                    <TableBody items={eventsByGamesIDS[key].filter(GE => GE.type !== "Substitutions")}>
+                                    <TableBody items={events.filter(GE => GE.type !== "Substitutions")}>
                                         {gameEvent => (
                                             <TableRow key={gameEvent._id}>
                                                 {(columnKey) => <TableCell>{renderTableCell({label: columnKey, gameEvent})}</TableCell>}
@@ -95,14 +104,12 @@ export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({ stats, events }) => {
                                         )}
                                     </TableBody>
                                 </Table>
-                                {idx !== Object.keys(eventsByGamesIDS).length - 1 && <Divider className={"bg-white"}/>}
-                            </>
+                                {idx !== Object.keys(eventsByGamesIDS).length - 1 && <Divider className="bg-white"/>}
+                            </div>
                         )
-                    )
-                }
-            </div>
-
-
+                    )}
+                </div>
+            }
         </div>
     );
 };

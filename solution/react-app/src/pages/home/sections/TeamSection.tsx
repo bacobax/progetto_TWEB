@@ -43,7 +43,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
             </div>
             <Pagination className={`dark cursor-pointer`} color="secondary" total={matrixLength} onChange={(index)=>setIndex(index-1)} />
             <Divider orientation={"horizontal"} className={"my-4"} />
-            <Button  onClick={()=>{navigate(ROUTES.GALLERY)}} className={"bg-corvette"} size={"lg"}>
+            <Button onClick={()=>{navigate(ROUTES.CLUBS)}} className={"bg-corvette"} size={"lg"}>
                 More
             </Button>
         </Section>

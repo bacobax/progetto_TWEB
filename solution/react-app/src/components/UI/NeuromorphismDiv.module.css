@@ -1,8 +1,8 @@
 .container{
-    border-radius: 46px;
-    background: linear-gradient(145deg, #333142, #2b2938);
-    box-shadow:  30px 30px 60px #272532,
-    -30px -30px 60px #39374a;
+    border-radius: 50px;
+    background: #151515;
+    box-shadow:  20px 20px 60px #080808,
+    -20px -20px 60px #222222;
 }
 
 .container.clickable:hover,

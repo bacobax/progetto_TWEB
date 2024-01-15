@@ -6,6 +6,7 @@ import Loading from "./components/animations/Loading";
 import Gallery from "./pages/gallery/Gallery";
 import {ROUTES} from "./constants/constants";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import PlayersPage from "./pages/players/PlayersPage";
 
 const GamesPage = lazy(() => import("./pages/games/GamesPage"));
 const PlayerInfoPage = lazy(() => import("./pages/playerinfo/PlayerInfoPage"));
@@ -23,7 +24,8 @@ function App() {
 
             <Routes>
                 <Route path={ROUTES.AUTH} element={<AuthPage />}/>
-                <Route path={ROUTES.GALLERY} element={<Gallery />} />
+                <Route path={ROUTES.CLUBS} element={<Gallery />} />
+                <Route path={ROUTES.PLAYERS} element={<PlayersPage />} />
                 <Route path={ROUTES.HOME} element={<HomePage />} />
                 <Route path={ROUTES.CHAT} element={<ProtectedRoute>
                     <Chat />

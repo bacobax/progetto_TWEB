@@ -4,6 +4,14 @@
 
 export type Position ='Missing'| 'Midfield'| 'Attack'| 'Defender' | 'Goalkeeper';
 
+export const positions: Position[] = [
+    'Missing',
+    'Midfield',
+    'Attack',
+    'Defender',
+    'Goalkeeper'
+]
+
 export type SubPosition =
     'Attacking Midfield'|
     'Central Midfield'|
@@ -18,6 +26,22 @@ export type SubPosition =
     'Right Winger'|
     'Right-Back'|
     'Second Striker'
+
+export const subPositions: SubPosition[] = [
+    'Attacking Midfield',
+    'Central Midfield',
+    'Centre-Back',
+    'Centre-Forward',
+    'Defensive Midfield',
+    'Goalkeeper',
+    'Left Midfield',
+    'Left Winger',
+    'Left-Back',
+    'Right Midfield',
+    'Right Winger',
+    'Right-Back',
+    'Second Striker'
+]
 
 export type LineupPosition =
     'Goalkeeper'|
@@ -37,6 +61,26 @@ export type LineupPosition =
     'Second Striker'|
     'Left Midfield'|
     'Sweeper'
+
+export const lineupPositions: LineupPosition[] = [
+    'Goalkeeper',
+    'Right-Back',
+    'Central Midfield',
+    'Left Winger',
+    'Attacking Midfield',
+    'Right Midfield',
+    'Right Winger',
+    'Defender',
+    'Defensive Midfield',
+    'Left-Back',
+    'midfield',
+    'Attack',
+    'Centre-Back',
+    'Centre-Forward',
+    'Second Striker',
+    'Left Midfield',
+    'Sweeper'
+]
 
 export interface ShortPlayer{
 
@@ -224,7 +268,7 @@ export interface Room{
  *             "id": "6574baea291260c74de2888d"
  */
 
-export interface Game {
+export interface Player {
     _id: string;
     competition_id: string;
     season: string;
@@ -239,7 +283,7 @@ export interface Game {
     stadium: string;
     attendance: number;
     referee: string;
-    url: string;
+    url?: string;
     home_club_formation: string;
     away_club_formation: string;
     home_club_name: string;
@@ -298,4 +342,12 @@ export interface GameEvent{
         away_club_name: string;
     }
 
+}
+
+export interface PlayerSearchFilters{
+    min_market_value_in_eur?: number;
+    max_market_value_in_eur?: number;
+    position?: Position;
+    sub_position?: SubPosition;
+    country_of_citizenship?: string;
 }

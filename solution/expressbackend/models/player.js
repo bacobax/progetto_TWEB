@@ -35,7 +35,7 @@ playerSchema.virtual('valuations', {
   foreignField: 'player_id',
   localField: '_id',
   options: {
-    sort: { date: -1 },
+    sort: { date: 1 },
   },
 });
 playerSchema.virtual('lineups', {

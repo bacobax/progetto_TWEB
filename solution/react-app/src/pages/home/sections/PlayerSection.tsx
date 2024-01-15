@@ -1,14 +1,13 @@
 import React from 'react'
 import Section from "../../../components/containers/Section";
 import PlayerCard from "../../../components/PlayerCard";
-import {animatedButtonProps} from "../../../constants/constants";
+import {animatedButtonProps, ROUTES} from "../../../constants/constants";
 import {useSlice} from "../../../hooks/useSlice";
-import Button from "../../../components/UI/button/Button";
 import {useNavigate} from "react-router-dom";
 import { MdKeyboardDoubleArrowUp } from "react-icons/md";
 
 
-import {Divider, Pagination, ScrollShadow} from "@nextui-org/react";
+import {Divider, Pagination, ScrollShadow,Button} from "@nextui-org/react";
 import useLoadPlayers from "../../../hooks/useLoadPlayers";
 import useWindowSize from "../../../hooks/useWindowSize";
 
@@ -60,7 +59,11 @@ const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {
 
 
             <Pagination className={`dark cursor-pointer`} color={"secondary" } total={matrixLength} page={currentIdx + 1} onChange={index => setIndex(index-1)} />
+            <Button onClick={()=>{navigate(ROUTES.PLAYERS)}} className={"bg-corvette"} size={"lg"}>
+                More
+            </Button>
             <Divider orientation={"horizontal"} className={"my-4"} />
+
 
 
 

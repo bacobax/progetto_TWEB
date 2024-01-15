@@ -1,12 +1,13 @@
 import {FC, useEffect, useState} from "react";
 import {GameFiltersForm} from "./GameFiltersForm";
 import useFetch from "../../hooks/useFetch";
-import {Game} from "../../constants/types";
+import {Player} from "../../constants/types";
 import {URL_GAME_BY_ID, URL_GAMES} from "../../constants/constants";
 import {FetchError} from "../../components/errors/FetchError";
 import MemoizedMap from "../../components/containers/MemoizedMap";
 import {GameCard} from "../../components/GameCard";
 import useQueryParams from "../../hooks/useQueryParams";
+import NeuromorphismDiv from "../../components/UI/NeuromorphismDiv";
 
 interface StringKeys {
     [key: string]: string | undefined
@@ -21,11 +22,11 @@ export interface QueryFilters extends StringKeys{
 export const Games:FC = () => {
 
 
-    const [games, setGames] = useState<Game[]>([]);
+    const [games, setGames] = useState<Player[]>([]);
     const {loading, setError, error, fetchData} = useFetch();
     const {getQueryParam} = useQueryParams();
     const handleApplyFilters = (filters: QueryFilters) => {
-        fetchData<{status:string, results: number, data:Game[], message?:string}>({
+        fetchData<{status:string, results: number, data:Player[], message?:string}>({
             url: URL_GAMES(filters),
         } , (data) =>{
             if(data.status!== "success"){
@@ -38,7 +39,7 @@ export const Games:FC = () => {
     useEffect(()=>{
         const game_id = getQueryParam("game_id");
         if(!!game_id){
-            fetchData<{status:string, results: number, data:Game, message?:string}>({
+            fetchData<{status:string, results: number, data:Player, message?:string}>({
                 url: URL_GAME_BY_ID(game_id)
             }, res => {
                 if(res.status !== "success"){
@@ -55,8 +56,11 @@ export const Games:FC = () => {
 
     return (
         <div className={"w-full flex flex-col items-center gap-5 py-[20px]"}>
+            <NeuromorphismDiv clickable={false} className={"w-4/5 flex justify-center items-center py-20 flex-col gap-[30px]"}>
+
             <h1 className={"text-5xl font-['Impact'] text-corvette"}>GAMES</h1>
             <GameFiltersForm onApplyFilters={handleApplyFilters} idLoading={loading}/>
+            </NeuromorphismDiv>
             {!loading && games.length > 0 && <MemoizedMap items={games} className={"flex flex-wrap gap-4 w-full justify-center h-fit"}>
                 {(game) => <GameCard {...game } key={game._id} className={"w-4/5"} />}
             </MemoizedMap>}

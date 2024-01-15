@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import {ROUTES} from "../../constants/constants";
 import {useAuth} from "../../hooks/useAuth";
-import {useLocation,Link} from "react-router-dom";
+import {useLocation, Link, useNavigate} from "react-router-dom";
 import SearchBar from "../searchbar/SearchBar";
 
 
@@ -25,18 +25,24 @@ const items = [
     },
     {
         label: "Gallery",
-        href: ROUTES.GALLERY
+        href: ROUTES.CLUBS
+    },
+    {
+        label: "Players",
+        href: ROUTES.PLAYERS
     },
     {
         label: "Chat",
         href: ROUTES.CHAT
-    }
+    },
+
 ]
 
 export const GlobalNavbar:FC = () => {
 
     const {loggedIn, logout} = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
     //get the current path
     const {pathname} = useLocation();
     console.log({pathname})
@@ -90,7 +96,9 @@ export const GlobalNavbar:FC = () => {
                         <Link className={"text-white"} to={ROUTES.AUTH}>Login</Link>
                     </NavbarItem>
                     <NavbarItem>
-                        <Button as={Link} color="primary" href={ROUTES.AUTH} variant="flat">
+                        <Button color="primary" variant="flat" onClick={()=>{
+                            navigate("/auth");
+                        }}>
                             Sign Up
                         </Button>
                     </NavbarItem></> : <NavbarItem>

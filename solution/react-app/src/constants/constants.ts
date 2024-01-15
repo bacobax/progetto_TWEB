@@ -1,5 +1,5 @@
 import MessiImage from "../assets/messi.jpg";
-import { Player } from "./types";
+import {Player, PlayerSearchFilters} from "./types";
 import DummyProfileImage from "../assets/messi.jpg";
 import {QueryFilters} from "../pages/games/Games";
 
@@ -14,10 +14,6 @@ export const HOME_SECTIONS = {
     name: "Tome",
     linkLabel: "Home",
   },
-  PLAYERS: {
-    name: "Players",
-    linkLabel: "Players",
-  },
   TEAMS: {
     name: "Teams",
     linkLabel: "Teams",
@@ -30,6 +26,10 @@ export const HOME_SECTIONS = {
     name: "Games",
     linkLabel: "/games",
   },
+  PLAYERS: {
+    name: "Players",
+    linkLabel: "/players",
+  }
 
 };
 
@@ -40,7 +40,8 @@ export const LOREM_IPSUM =
 export const ROUTES = {
   AUTH: '/auth',
   HOME: '/',
-  GALLERY: '/clubs',
+  CLUBS: '/clubs',
+  PLAYERS: "/players",
   CHAT: '/chat',
   PLAYER_INFO: 'player/:id',
   CLUB_INFO: "club/:id",
@@ -75,10 +76,10 @@ export const numberFormatWithCommas = (n: string): string => {
 export const MilionFormat = (n:string):string => {
   console.log({n})
   if(n===null || n.trim().length === 0 || n === "null") return "NOT PROVIDED";
-  let num = Math.round(Number(n)/1000);
+  let num = Math.round(Number(n)/1000000);
   let numStr = num.toString();
   let formattedNumStr = numberFormatWithCommas(numStr);
-  return formattedNumStr + "k";
+  return formattedNumStr + "m";
 }
 
 export const calculateAgeFromDateBirth = (dateOfBirth:string):number => {
@@ -461,7 +462,29 @@ export const HOST_MAIN_SERVER = "http://localhost:8080/api";
 export const getMainServerPath = (path: string) => {
     return HOST_MAIN_SERVER + path;
 }
-export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => getMainServerPath(`/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`);
+export const URL_SHORT_PLAYERS = (pageNumber:number,pageSize:number) => getMainServerPath(`/player?limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur&market_value_in_eur={"$ne":null}`);
+
+export const URL_SHORT_PLAYERS_QUERIED = (pageNumber:number,pageSize:number,filters:PlayerSearchFilters):string => {
+  const params = new URLSearchParams();
+  const {min_market_value_in_eur, max_market_value_in_eur,... others} = filters;
+  Object.entries(others).forEach(([key, value]) => {
+    if (value !== null && value !== undefined) {
+      params.append(key, value);
+    }
+  });
+  if(min_market_value_in_eur !== undefined || max_market_value_in_eur !== undefined){
+    const gte = min_market_value_in_eur ?` "$gte": ${min_market_value_in_eur}` : "";
+    const lte = max_market_value_in_eur ? ` "$lte": ${max_market_value_in_eur}` : "";
+    params.append("market_value_in_eur", ` {${gte}${min_market_value_in_eur !== undefined && max_market_value_in_eur !== undefined ? "," : ""}${lte} }`);
+  }
+
+
+
+
+  const queryParams = params.toString();
+  console.log({queryParams})
+  return getMainServerPath(`/player?${queryParams}&limit=${pageSize}&page=${pageNumber}&sort=-market_value_in_eur&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur`);
+}
 export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => getMainServerPath(`/club?page=${pageNumber}&pagesize=${pageSize}`);
 
 export const URL_ROOM_FROM_USER = (userId:string) => getMainServerPath(`/room/user/${userId}`);
@@ -502,3 +525,7 @@ export const URL_GAME_EVENTS = (gameId:string, pagesize: number) => getMainServe
 export const URL_PLAYER_EVENTS = (playerID: string) => getMainServerPath(`/gameEvents?player_id=${playerID}`);
 
 export const URL_GAME_BY_ID = (gameID: string) => getMainServerPath(`/game/${gameID}`)
+
+export const URL_NATIONALITIES = getMainServerPath("/player/nationalities");
+
+export const URL_MIN_MAX_MARKET_VALUE = getMainServerPath("/player/market_value_in_eur/minmax");

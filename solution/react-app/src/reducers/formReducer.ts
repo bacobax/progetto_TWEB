@@ -1,6 +1,6 @@
 export interface State{
     [inputName: string] : {
-        value: string,
+        value: any,
         error: boolean,
         errorText: string,
         validate?: (value: string) => boolean,
@@ -8,7 +8,7 @@ export interface State{
 }
 export interface Target{
     inputName: string,
-    value: string,
+    value: any,
 }
 interface Action{
     type: "SET_FORM_VALUE" | "RESET_FORM" | "SET_FORM_STATE",
