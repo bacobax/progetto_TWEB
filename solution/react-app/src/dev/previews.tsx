@@ -4,9 +4,9 @@ import {PaletteTree} from "./palette";
 import App from "../App";
 import MainSection from "../pages/home/sections/MainSection";
 import {HOME_SECTIONS} from "../constants/constants";
-import FancyHeader from "../components/FancyHeader";
+import FancyHeader from "../pages/home/sections/FancyHeader";
 import IconButton from "../components/UI/button/IconButton";
-import TeamFilterForm from "../components/form/TeamFilterForm";
+import TeamFilterForm from "../components/Club/TeamFilterForm";
 
 const ComponentPreviews = () => {
     return (

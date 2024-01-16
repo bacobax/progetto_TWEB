@@ -1,5 +1,5 @@
-import SmartForm from "../../components/form/SmartForm";
-import {GlobalNavbar} from "../../components/navbar/GlobalNavbar";
+import SmartForm from "../../components/common/form/SmartForm";
+import {GlobalNavbar} from "../../components/common/navbar/GlobalNavbar";
 
 const AuthPage = () => {
     return (

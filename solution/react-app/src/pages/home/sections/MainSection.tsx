@@ -1,6 +1,6 @@
 import React, {useCallback, useRef} from 'react'
-import Section from "../../../components/containers/Section";
-import FancyHeader from "../../../components/FancyHeader";
+import Section from "../../../components/common/containers/Section";
+import FancyHeader from "./FancyHeader";
 import Lottie, {LottieRefCurrentProps} from "lottie-react";
 import fieldAnimation from "../../../assets/animations/home.json";
 import styles from "./MainSection.module.css";

@@ -7,7 +7,6 @@ import {
   SignUpResponse,
 } from "../auth/authFunctions";
 import { AuthContext } from "../store/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 interface LoginParams {
   email: string;

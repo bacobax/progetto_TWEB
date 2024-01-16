@@ -1,7 +1,6 @@
 import {FC} from "react";
-import StatefulChat from "./StatefulChat";
-import {MyBreadcrumbs} from "../../components/MyBreadcrumbs";
-import {GlobalNavbar} from "../../components/navbar/GlobalNavbar";
+import StatefulChat from "../../components/Chat/StatefulChat";
+import {GlobalNavbar} from "../../components/common/navbar/GlobalNavbar";
 
 const Chat: FC = () => {
     return (

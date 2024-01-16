@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {ClubInfo} from "./ClubInfo";
+import {ClubInfo} from "../../components/Club/ClubInfo";
 import {Navigate, useParams} from "react-router-dom";
 
 

@@ -1,7 +1,7 @@
 import {useCallback} from "react";
-import {ShortPlayer} from "../constants/types";
 import {URL_SHORT_PLAYERS} from "../constants/constants";
 import {useAsyncList} from "@react-stately/data";
+import {ShortPlayer} from "../components/Player/types";
 
 
 const useLoadPlayers = (pageSize: number) => {

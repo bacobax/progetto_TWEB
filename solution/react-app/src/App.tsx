@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import {lazy, Suspense} from "react";
 
 import Loading from "./components/animations/Loading";
-import Gallery from "./pages/gallery/Gallery";
+import Gallery from "./pages/clubs/Gallery";
 import {ROUTES} from "./constants/constants";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import PlayersPage from "./pages/players/PlayersPage";

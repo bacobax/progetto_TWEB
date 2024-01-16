@@ -1,12 +1,12 @@
 import React from 'react'
-import Section from "../../../components/containers/Section";
-import TeamCard from "../../../components/TeamCard";
+import Section from "../../../components/common/containers/Section";
+import TeamCard from "../../../components/Club/TeamCard";
 
 import {useSlice} from "../../../hooks/useSlice";
 import {Button, Divider, Pagination} from "@nextui-org/react";
 import useLoadTeams from "../../../hooks/useLoadTeams";
 import useWindowSize from "../../../hooks/useWindowSize";
-import {animatedButtonProps, ROUTES} from "../../../constants/constants";
+import { ROUTES} from "../../../constants/constants";
 import {useNavigate} from "react-router-dom";
 import {MdKeyboardDoubleArrowUp} from "react-icons/md";
 interface TeamSectionProps {

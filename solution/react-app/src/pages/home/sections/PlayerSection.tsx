@@ -1,7 +1,7 @@
 import React from 'react'
-import Section from "../../../components/containers/Section";
-import PlayerCard from "../../../components/PlayerCard";
-import {animatedButtonProps, ROUTES} from "../../../constants/constants";
+import Section from "../../../components/common/containers/Section";
+import PlayerCard from "../../../components/Player/PlayerCard";
+import { ROUTES} from "../../../constants/constants";
 import {useSlice} from "../../../hooks/useSlice";
 import {useNavigate} from "react-router-dom";
 import { MdKeyboardDoubleArrowUp } from "react-icons/md";
@@ -17,11 +17,11 @@ interface PlayerSectionProps {
 
 /**
  * Summary
- * This code defines a React functional component called PlayerSection that displays a section of player cards. It uses various imported components and hooks to handle navigation, window size, and slicing of player data.
+ * This code defines a React functional component called PlayerSection that displays a section of Player cards. It uses various imported components and hooks to handle navigation, window size, and slicing of Player data.
  * @example
  * <PlayerSection name="Home Players" />
  * Inputs
- * @param name (string): The name of the player section.
+ * @param name (string): The name of the Player section.
  * @constructor
  */
 const PlayerSection: React.FC<PlayerSectionProps> = ({name}) => {

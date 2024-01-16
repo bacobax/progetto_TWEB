@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {GlobalNavbar} from "../../components/navbar/GlobalNavbar";
-import {Players} from "./Players";
+import {GlobalNavbar} from "../../components/common/navbar/GlobalNavbar";
+import {Players} from "../../components/Player/Players";
 
 const PlayersPage:FC = () => {
     return (

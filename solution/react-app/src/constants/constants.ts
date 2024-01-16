@@ -1,7 +1,7 @@
 import MessiImage from "../assets/messi.jpg";
-import {Player, PlayerSearchFilters} from "./types";
 import DummyProfileImage from "../assets/messi.jpg";
-import {QueryFilters} from "../pages/games/Games";
+import {QueryFilters} from "../components/Game/Games";
+import {Player, PlayerSearchFilters} from "../components/Player/types";
 
 /**
  * GENERIC CONSTANTS AND FUNCTIONS
@@ -42,9 +42,9 @@ export const ROUTES = {
   HOME: '/',
   CLUBS: '/clubs',
   PLAYERS: "/players",
-  CHAT: '/chat',
-  PLAYER_INFO: 'player/:id',
-  CLUB_INFO: "club/:id",
+  CHAT: '/Chat',
+  PLAYER_INFO: 'Player/:id',
+  CLUB_INFO: "Club/:id",
   GAMES: "/games",
   DEFAULT: "*",
 }
@@ -518,7 +518,7 @@ export const URL_GAMES = (filters: QueryFilters) => {
 export const URL_GAME_EVENTS = (gameId:string, pagesize: number) => getMainServerPath(`/game/${gameId}/events?limit=${pagesize}&page=1`);
 /**
  * TODO:
- * 1. Erase player section
+ * 1. Erase Player section
  * 2. Make more persistent navigation trace
  */
 
@@ -526,6 +526,6 @@ export const URL_PLAYER_EVENTS = (playerID: string) => getMainServerPath(`/gameE
 
 export const URL_GAME_BY_ID = (gameID: string) => getMainServerPath(`/game/${gameID}`)
 
-export const URL_NATIONALITIES = getMainServerPath("/player/nationalities");
+export const URL_NATIONALITIES = getMainServerPath("/Player/nationalities");
 
-export const URL_MIN_MAX_MARKET_VALUE = getMainServerPath("/player/market_value_in_eur/minmax");
+export const URL_MIN_MAX_MARKET_VALUE = getMainServerPath("/Player/market_value_in_eur/minmax");

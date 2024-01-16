@@ -1,10 +1,10 @@
-import {Club, ShortClub} from "../constants/types";
 import {useCallback} from "react";
 import {URL_SHORT_TEAMS} from "../constants/constants";
 import {useAsyncList} from "@react-stately/data";
+import {Club} from "../components/Club/types";
 
-/*const getshortclubFromClub = (club:Club):ShortClub => {
-    const {clubId, url, name, squadSize, stadiumName, lastSeason,domesticCompetition, totalMarketValue, ...others}=club;
+/*const getshortclubFromClub = (Club:Club):ShortClub => {
+    const {clubId, url, name, squadSize, stadiumName, lastSeason,domesticCompetition, totalMarketValue, ...others}=Club;
     const {name: competitionName,competitionId} =domesticCompetition;
     return {
         clubId,

@@ -3,7 +3,7 @@ import PlayerSection from "./sections/PlayerSection";
 import TeamSection from "./sections/TeamSection";
 import {HOME_SECTIONS} from "../../constants/constants";
 import MainSection from "./sections/MainSection";
-import {GlobalNavbar} from "../../components/navbar/GlobalNavbar";
+import {GlobalNavbar} from "../../components/common/navbar/GlobalNavbar";
 
 function HomePage() {
 

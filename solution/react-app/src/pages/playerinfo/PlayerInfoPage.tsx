@@ -1,6 +1,6 @@
 import {FC} from "react";
 import {useParams} from "react-router-dom";
-import {PlayerInfo} from "./PlayerInfo";
+import {PlayerInfo} from "../../components/Player/PlayerInfo";
 
 
 const PlayerInfoPage:FC = () => {

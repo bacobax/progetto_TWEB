@@ -1,4 +1,4 @@
-import {Elements, NavbarElement} from "../components/navbar/types";
+import {Elements, NavbarElement} from "../components/common/navbar/types";
 
 import { IoHomeOutline } from "react-icons/io5";
 import { FaRegNewspaper } from "react-icons/fa";
@@ -9,7 +9,7 @@ import { TbSoccerField } from "react-icons/tb";
 
 import {HOME_SECTIONS as s} from "./constants";
 
-import styles from "../components/navbar/Navbar.module.css";
+import styles from "../components/common/navbar/Navbar.module.css";
 import React from "react";
 import {logout} from "../auth/authFunctions";
 export const navbarElements: Elements = [
@@ -53,7 +53,7 @@ export const logoutElement = (onClick: ()=>void) => ({
 
 export const chatElement: NavbarElement = {
     name: "Chat",
-    path: "/chat",
+    path: "/Chat",
     icon: <BsChatQuote className={styles.icon}/>,
     routerLink: true
 
