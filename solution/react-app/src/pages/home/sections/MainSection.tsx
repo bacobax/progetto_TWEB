@@ -5,7 +5,8 @@ import Lottie, {LottieRefCurrentProps} from "lottie-react";
 import fieldAnimation from "../../../assets/animations/home.json";
 import styles from "./MainSection.module.css";
 import Button from "../../../components/UI/button/Button";
-import {animatedButtonProps} from "../../../constants/constants";
+import {animatedButtonProps, ROUTES} from "../../../constants/constants";
+import {useNavigate} from "react-router-dom";
 
 
 interface MainSectionProps {
@@ -18,6 +19,7 @@ interface MainSectionProps {
  */
 const MainSection: React.FC<MainSectionProps> = React.memo(({name}) => {
     const footballRef = useRef<LottieRefCurrentProps>(null);
+    const navigate = useNavigate();
 
     const handleComplete = useCallback(() => {
         footballRef.current?.goToAndPlay(20, true);
@@ -30,6 +32,7 @@ const MainSection: React.FC<MainSectionProps> = React.memo(({name}) => {
             <div className={styles.auth}>
                 <Button
                     {...animatedButtonProps}
+                    onClick={() => navigate(ROUTES.AUTH("IN"))}
                 >Get Started </Button>
             </div>
         </Section>

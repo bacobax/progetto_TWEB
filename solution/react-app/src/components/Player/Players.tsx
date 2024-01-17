@@ -49,7 +49,7 @@ export const Players:FC = () => {
                 <PlayerFilterForm onApplyFilters={handleApplyFilters}/>
 
             </NeuromorphismDiv>
-            {!loading && players.length > 0 && <MemoizedMap items={players} className={"flex flex-wrap gap-4 w-full justify-center h-fit px-20"}>
+            {!loading && players.length > 0 && <MemoizedMap items={players} className={"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row gap-4 w-full justify-center h-fit px-20"}>
                 {(player) => <PlayerCard {...player } key={player._id} className={"w-4/5"} />}
             </MemoizedMap>}
         </div>

@@ -36,9 +36,14 @@ export const HOME_SECTIONS = {
 export const LOREM_IPSUM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nis";
 
-
+const authURLS = {
+  "IN": "/auth?mode=IN",
+    "UP": "/auth?mode=UP",
+  "_": "/auth",
+  "OTHER_PAGE" : "/auth?mode=IN&frompage=0"
+}
 export const ROUTES = {
-  AUTH: '/auth',
+  AUTH: (mode: "IN" | "UP" | "_" | "OTHER_PAGE",)=>authURLS[mode],
   HOME: '/',
   CLUBS: '/clubs',
   PLAYERS: "/players",
@@ -176,6 +181,7 @@ export const initialSignInState = {
     validate: (value: string) => {
       return value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null;
     },
+    type: "email",
   },
   password: {
     type: "password",
@@ -226,6 +232,7 @@ export const initialSignUpState = {
     validate: (value: string) => {
       return value.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null;
     },
+    type: "email",
   },
 };
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -526,6 +533,10 @@ export const URL_PLAYER_EVENTS = (playerID: string) => getMainServerPath(`/gameE
 
 export const URL_GAME_BY_ID = (gameID: string) => getMainServerPath(`/game/${gameID}`)
 
-export const URL_NATIONALITIES = getMainServerPath("/Player/nationalities");
+export const URL_NATIONALITIES = getMainServerPath("/player/nationalities");
 
-export const URL_MIN_MAX_MARKET_VALUE = getMainServerPath("/Player/market_value_in_eur/minmax");
+export const URL_MIN_MAX_MARKET_VALUE = getMainServerPath("/player/market_value_in_eur/minmax");
+
+export const URL_FORGOT_PASSWORD = getMainServerPath("/users/forgotPassword");
+
+export const URL_RESET_PASSWORD = (token:string) => getMainServerPath("/users/resetPassword/" + token);

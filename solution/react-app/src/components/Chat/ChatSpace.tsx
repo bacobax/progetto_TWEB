@@ -62,7 +62,7 @@ const ChatSpace:FC<ChatSpaceProps> = ({
         return () => {
             socket.off("leave");
         }
-    }, []);
+    }, [user._id]);
     const handleNewMessage = (text:string) => {
         onNewMessage(text);
     }
@@ -71,7 +71,7 @@ const ChatSpace:FC<ChatSpaceProps> = ({
 
     if(!!room){
         return (
-            <div className={`bg-gradient-to-r from-blue-black to-gray-900 w-full  h-full flex flex-col md:w-[${width-400}] sm:w-3/5`}>
+            <div className={`bg-gradient-to-r from-blue-black to-gray-900 max-h-full w-full   flex flex-col md:w-[${width-400}] sm:w-3/5`}>
                 {!!popup &&
                     <div className={"fixed top-3 right-3 rounded-xl bg-blue-300/50 backdrop-blur text-black flex justify-center items-center p-[20px] z-20"}>
                         <h1 className={`font-bold ${popup.type === "LEAVE" ? "text-red-400" : "text-green-300"}`}>{popup.content}</h1>

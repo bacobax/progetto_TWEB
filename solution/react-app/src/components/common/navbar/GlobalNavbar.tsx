@@ -72,8 +72,7 @@ export const GlobalNavbar:FC = () => {
         }>
             <NavbarMenuToggle
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                className="sm:hidden text-white"
-            />
+                className="sm:hidden text-white"/>
             <NavbarBrand>
 
                 <SearchBar />
@@ -82,7 +81,7 @@ export const GlobalNavbar:FC = () => {
                 {
                     items.map((el,idx) => (
                         <NavbarMenuItem isActive={pathname === el.href} key={idx}>
-                            <Link className={"text-white"} to={el.href}>
+                            <Link className={"text-white text-sm md:text-medium"} to={el.href}>
                                 {el.label}
                             </Link>
                         </NavbarMenuItem>
@@ -93,16 +92,16 @@ export const GlobalNavbar:FC = () => {
                 {
                     !loggedIn ? <>
                     <NavbarItem className="hidden lg:flex">
-                        <Link className={"text-white"} to={ROUTES.AUTH}>Login</Link>
+                        <Link className={"text-white"} to={ROUTES.AUTH("IN")}>Login</Link>
                     </NavbarItem>
                     <NavbarItem>
                         <Button color="primary" variant="flat" onClick={()=>{
-                            navigate("/auth");
+                            navigate(ROUTES.AUTH("UP"));
                         }}>
                             Sign Up
                         </Button>
                     </NavbarItem></> : <NavbarItem>
-                        <Button onClick={logout} color={"danger"} variant={"flat"}>
+                        <Button onClick={logout} color={"danger"} variant={"flat"} size={"sm"}>
                             Logout
                         </Button>
                     </NavbarItem>
@@ -110,7 +109,7 @@ export const GlobalNavbar:FC = () => {
             </NavbarContent>
             <NavbarMenu className={"dark flex flex-col items-center justify-center gap-5"}>
                 {items.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`} isActive={item.href === pathname}>
+                    <NavbarMenuItem key={`${item}-${index}`} isActive={item.href === pathname} className={"h-fit"}>
                         <Link
                             className="w-full text-2xl text-white"
                             to={item.href}

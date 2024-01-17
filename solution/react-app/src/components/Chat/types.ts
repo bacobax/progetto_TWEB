@@ -5,6 +5,7 @@ export interface Message {
         name: string;
     };
     text: string;
+    id?: string;
 }
 
 export interface Room {

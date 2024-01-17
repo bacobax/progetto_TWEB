@@ -22,10 +22,10 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 }) => {
     const navigate = useNavigate()
   return (
-      <Card className="py-4 dark min-h-[200px]">
+      <Card className="py-4 dark min-h-[200px] min-w-[200px]">
 
-          <CardBody className="overflow-visible py-2 w-full gap-2 flex-row ">
-              <div>
+          <CardBody className="overflow-visible py-2 w-full gap-5 flex-row items-center">
+              <div className={"w-1/2 self-start"}>
                   <p className="text-tiny uppercase font-bold">Players</p>
                   <small className="text-default-500">€ {MilionFormat(""+market_value_in_eur)}</small>
                   <h4 className="font-bold text-large">{first_name}{" "}{last_name}</h4>
@@ -35,8 +35,8 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
                   alt="Card background"
                   className="object-cover rounded-xl z-0"
                   src={image_url}
-                  height={100}
-                  width={100}
+                  height={200}
+                  width={200}
               />
           </CardBody>
           <CardFooter>

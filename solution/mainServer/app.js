@@ -103,7 +103,7 @@ app.use("/api/room" , getNodeRESTRedirectRouter());
 app.use("/api/competitions", getJavaRESTRedirectRouter());
 app.use("/api/game", getNodeRESTRedirectRouter());
 app.use("/api/gameEvent"    , getNodeRESTRedirectRouter());
-
+app.use("/api/users"    , getNodeRESTRedirectRouter());
 app.get("/api/search/:text",search);
 
 app.use(globalErrorMiddleware);

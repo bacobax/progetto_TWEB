@@ -27,9 +27,9 @@ exports.initChat = (io) => {
                 }
             })
 
-            socket.on('chat', function (room, userId, userName, chatText) {
+            socket.on('chat', function (room, userId, userName, chatText, messageID) {
                 console.log(`message from ${userId} in room ${room}: ${chatText}`)
-                chat.to(room).emit('chat', room, userId, userName, chatText);
+                chat.to(room).emit('chat', room, userId, userName, chatText, messageID);
             });
 
 

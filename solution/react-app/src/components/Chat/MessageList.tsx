@@ -13,7 +13,7 @@ interface MessageListProps {
 
 export const MessageList: FC<MessageListProps> = ({ messages, userID, loadingMessage, errorNewMessage }) => {
     return (
-        <ScrollShadow orientation={"vertical"} className={"h-4/6 w-full flex flex-col p-[30px] gap-[10px] overflow-scroll"}>
+        <ScrollShadow orientation={"vertical"} className={"h-5/6 w-full flex flex-col p-[30px] gap-[10px] overflow-scroll"}>
             {messages.length > 0 && messages.map((message, index) => {
                 const itsMe = message.from._id === userID;
                 const isLast = index === messages.length - 1;

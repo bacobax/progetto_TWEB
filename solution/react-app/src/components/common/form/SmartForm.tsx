@@ -1,11 +1,10 @@
 import styles from './SmartForm.module.css';
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect} from "react";
 import {initialSignInState , initialSignUpState} from "../../../constants/constants";
 import AuthForm from "./AuthForm";
 import {State} from "../../../reducers/formReducer";
 import {useAuth} from "../../../hooks/useAuth";
 import Loading from "../../animations/Loading";
-import Modal from "../../UI/modal/Modal";
 import useModal from "../../../hooks/useModal";
 import { motion} from "framer-motion";
 
@@ -26,18 +25,21 @@ const transitionForm=  {
     damping: 30,
 }
 const SmartForm: React.FC<DualFormProps> = () => {
-    const [isSignin, setIsSignin] = useState(true)
 
     const {width} = useWindowSize();
     const {openModal, isModalOpen, closeModal} = useModal(false);
     const {loading,login,error,signup, setError} = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
-    const redirectPath = searchParams.get("redirectPath") || "/";
+    const mode = searchParams.get("mode");
+    const isSignin = mode === "IN";
+
     const navigate = useNavigate();
 
     const toggleForm = useCallback (() => {
-        setIsSignin(prev => !prev);
-    },[])
+
+            setSearchParams({mode: isSignin ? "UP" : "IN"});
+
+    },[isSignin, setSearchParams]);
 
     useEffect(() => {
         if(error) {
@@ -49,8 +51,8 @@ const SmartForm: React.FC<DualFormProps> = () => {
         if(isSignin) {
             const {email,password} = state;
            login({email:email.value, password:password.value, afterSuccess: () => {
-               if(searchParams.has("redirectPath")) {
-                   navigate(-2);
+               if(searchParams.has("frompage")) {
+                   navigate(-1);
                }else{
                    navigate(-1);
                }
@@ -66,10 +68,10 @@ const SmartForm: React.FC<DualFormProps> = () => {
                 confirmPassword: confirmPassword.value,
                 email: email.value,
                 afterSuccess: () => {
-                    if(searchParams.has("redirectPath")) {
+                    if(searchParams.has("frompage")) {
                         navigate(-2);
                     }else{
-                        navigate(-1);
+                        navigate(-2);
                     }
                 }
             });

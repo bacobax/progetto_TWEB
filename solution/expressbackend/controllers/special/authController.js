@@ -186,11 +186,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   //3) Send it to yser's email
 
-  const resetURL = `${req.protocol}://${req.get(
-    'host'
-  )}/user/resetPassword/${resetToken}`;
+  //const resetURL = `${process.env.MAIN_SERVER_HOST}/api/users/resetPassword/${resetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget you password, please ignore this email!`;
+  const message = `Here is the token: ${resetToken}`;
 
   try {
     await sendEmail({
@@ -201,7 +199,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   } catch (err) {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
-
+    console.log({ err });
     await user.save({ validateBeforeSave: false });
     return next(new AppError("We couldn't send the email", 500));
   }

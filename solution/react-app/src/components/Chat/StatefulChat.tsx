@@ -42,12 +42,6 @@ const StatefulChat: FC<StatefulChatProps> = () => {
     const isPhone = width < 640;
 
 
-
-
-
-
-
-
     if (!user) {
         return <AuthError onClose={()=>{}} type={"JWTMISSING"} opened={true}/>;
     }
@@ -58,9 +52,6 @@ const StatefulChat: FC<StatefulChatProps> = () => {
             }} message={errorRooms}/>
         );
     }
-
-
-
     return (
         <div className={"flex w-full h-full"}>
             {((isPhone && isChatList) || !isPhone) &&
@@ -79,7 +70,8 @@ const StatefulChat: FC<StatefulChatProps> = () => {
                 <ChatSpace room={userRooms[selectedRoomIdx]}
                            loadingRooms={loadingRooms}
                            loadingMessage={loadingNewMessage}
-                           user={user} onNewMessage={handleNewMessage}
+                           user={user}
+                           onNewMessage={handleNewMessage}
                            errorNewMessage={errorNewMessage}
                            isPhone={isPhone} onBack={() => { setIsChatList(true) }}
                            width={width}

@@ -1,6 +1,7 @@
 import {Navigate} from "react-router-dom";
 import React, {FC, useContext} from "react";
 import {AuthContext} from "../store/AuthContext";
+import {ROUTES} from "../constants/constants";
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -8,11 +9,10 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
     const { loggedIn } = useContext(AuthContext);
-    const currentPath = window.location.pathname;
     if(loggedIn){
         return <>{children}</>
     }else{
-        return <Navigate to={`/auth?redirectPath=${currentPath}`} />
+        return <Navigate to={ROUTES.AUTH("OTHER_PAGE")} />
     }
 }
 

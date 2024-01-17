@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {getUserInfo} from "../../auth/authFunctions";
 import useModal from "../../hooks/useModal";
 import useFetch from "../../hooks/useFetch";
@@ -12,7 +12,6 @@ import {
 import {socket} from "../../socket";
 import {useSearchParams} from "react-router-dom";
 import {Room} from "./types";
-
 const useStatefulChat = () =>{
     const [userRooms, setUserRooms] = useState<Room[]>([]);
     const [selectedRoomIdx, setSelectedRoomIdx] = useState<number>(-1);
@@ -28,30 +27,39 @@ const useStatefulChat = () =>{
 
     //hook for url query params
     // const {search} = useLocation();
+    const listenerAdded = useRef(false);
 
 
     useEffect(() => {
 
-        socket.connect();
-        socket.on("Chat", (room, userId, userName, chatText) => {
-            if (userId !== user?._id) {
-                setUserRooms(prevRooms => {
-                    const newRooms = [...prevRooms];
-                    const roomIdx = newRooms.findIndex(r => r._id === room);
-                    if (roomIdx !== -1) {
-                        newRooms[roomIdx].messages.push({
-                            from: {
-                                _id: userId,
-                                name: userName,
-                                id: userId,
-                            },
-                            text: chatText,
-                        });
-                    }
-                    return newRooms;
-                });
-            }
-        });
+        if(!listenerAdded.current){
+            socket.connect();
+            socket.on("chat", (room, userId, userName, chatText, messageID) => {
+                if (userId !== user?._id) {
+                    console.log("RECEIVED CHAT")
+                    setUserRooms(prevRooms => {
+
+                        console.log("ADDING CHAT")
+                        const newRooms = [...prevRooms];
+                        const roomIdx = newRooms.findIndex(r => r._id === room);
+                        if (roomIdx !== -1) {
+                            if(newRooms[roomIdx].messages.find(m => m.id === messageID)) return newRooms;
+                            newRooms[roomIdx].messages.push({
+                                from: {
+                                    _id: userId,
+                                    name: userName,
+                                    id: userId,
+                                },
+                                text: chatText,
+                                id: messageID
+                            });
+                        }
+                        return newRooms;
+                    });
+                }
+            });
+            listenerAdded.current = true;
+        }
 
         if (!user) {
             setErrorRooms("Not logged in");
@@ -77,19 +85,13 @@ const useStatefulChat = () =>{
 
 
         return () => {
-            socket.off("Chat");
+            socket.off("chat");
             socket.disconnect();
+            listenerAdded.current = false;
         };
     }, [user, fetchRoomsData, setErrorRooms, setUserRooms, searchParams, openNewChatModal ]);
 
 
-    useEffect(() => {
-        return () => {
-            /*userRooms.forEach((room) => {
-                socket.emit("leave", room._id, user?._id);
-            });*/
-        }
-    }, [userRooms, user]);
 
     const handleNewMessage = useCallback((text: string) => {
         if (!user) return;
@@ -119,7 +121,8 @@ const useStatefulChat = () =>{
                     setUser(null);
                 }
             }
-            socket.emit("Chat", userRooms[selectedRoomIdx]._id, user._id, user.name, text);
+            console.log("EMITTING CHAT")
+            socket.emit("chat", userRooms[selectedRoomIdx]._id, user._id, user.name, text, new Date().getTime());
         });
     }, [user, userRooms, selectedRoomIdx, fetchSendMessage, setErrorMessage]);
 

@@ -4,10 +4,14 @@ import {GlobalNavbar} from "../../components/common/navbar/GlobalNavbar";
 
 const Chat: FC = () => {
     return (
-        <div className={"flex flex-col w-full h-[100vh]"}>
+        <>
             <GlobalNavbar />
-            <StatefulChat />
-        </div>
+
+            <div className={"flex flex-col w-full h-[100vh]"}>
+                <StatefulChat />
+            </div>
+        </>
+
     )
 }
 

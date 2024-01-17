@@ -62,7 +62,7 @@ const TeamFilterForm: React.FC<FilterFormProps> = ({ onApplyFilters, onClearFilt
     },[formState,addCompetitionFilter ]);
 
     return (
-        <NeuromorphismDiv clickable={false} className={"w-4/5"}>
+        <NeuromorphismDiv clickable={false} className={"w-2/3"}>
             <form className={styles.filterForm} onSubmit={handleFormSubmit}>
 
 

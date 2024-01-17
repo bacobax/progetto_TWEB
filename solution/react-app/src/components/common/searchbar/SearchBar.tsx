@@ -50,7 +50,7 @@ const SearchBar : React.FC = () => {
         <>
             <FakeSearchBar onClick={openModal}  />
             <Modal classNames={{
-                modal: "bg-gray-900/50 backdrop-blur text-white flex flex-col max-h-[40vh] border-[1px] border-gray-900 rounded-md overflow-hidden",
+                modal: "bg-black/70 backdrop-blur text-white flex flex-col max-h-[40vh] border-[1px] border-gray-900 rounded-md overflow-hidden",
                 content: "flex flex-col gap-[10px] p-[20px]"
             }} onClose={closeModal} title={""} opened={isModalOpen}>
                 <Input type="text" className={"dark"} label={"search everything"} value={searchTerm} onChange={handleChange} autoFocus={true} endContent={

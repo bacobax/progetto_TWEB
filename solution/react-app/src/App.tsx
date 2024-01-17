@@ -14,6 +14,7 @@ const ClubInfoPage = lazy(() => import("./pages/clubinfo/ClubInfoPage"));
 const AuthPage = lazy(() => import("./pages/auth/AuthPage"));
 const HomePage = lazy(() => import("./pages/home/HomePage"));
 const Chat = lazy(() => import("./pages/chat/Chat"));
+const ForgotPasswordPage = lazy(() => import("./pages/auth/ForgotPasswordPage"));
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
         <Suspense fallback={<Loading />}>
 
             <Routes>
-                <Route path={ROUTES.AUTH} element={<AuthPage />}/>
+                <Route path={ROUTES.AUTH("_")} element={<AuthPage />}/>
+                <Route path={ROUTES.AUTH("_")+"/forgot"} element={<ForgotPasswordPage />}/>
                 <Route path={ROUTES.CLUBS} element={<Gallery />} />
                 <Route path={ROUTES.PLAYERS} element={<PlayersPage />} />
                 <Route path={ROUTES.HOME} element={<HomePage />} />

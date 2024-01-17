@@ -5,6 +5,8 @@ const nodemailer = require('nodemailer');
  * @returns {Promise<void>}
  */
 const sendEmail = async (options) => {
+
+
   // 1) Create a Transporter
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -16,6 +18,7 @@ const sendEmail = async (options) => {
     },
     // Activate in gmail "less secure app" option
   });
+
 
   // 2) Define the mail options
 

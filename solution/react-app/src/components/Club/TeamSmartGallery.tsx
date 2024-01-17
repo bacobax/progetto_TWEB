@@ -43,16 +43,18 @@ export const TeamSmartGallery: FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={"w-full h-full flex flex-col items-center text-white gap-[10vh] pb-[10vh]"}>
 
-      <header>
-        <h1>Team Gallery</h1>
-        <IconButton
-          Icon={showForm ? FaAngleUp : FaAngleDown}
-          className={styles.filterButton}
+      <header className={"w-full h-[20vh] flex items-center justify-center gap-[5rem]"}>
+        <h1 className={"text-5xl font-['Impact'] text-corvette"}>Clubs</h1>
+        <Button
+          endContent={showForm ? <FaAngleUp /> : <FaAngleDown />}
+          className={"dark"}
+          size={"lg"}
+          variant={"ghost"}
           onClick={handleShowForm}
-          text={'FILTER'}
-        />
+
+        >FILTER</Button>
         <Button onClick={loadMore} className={"bg-corvette"}>
           Load More</Button>
       </header>
@@ -67,7 +69,7 @@ export const TeamSmartGallery: FC = () => {
           domesticCometitions={clubs.map((club) => club.domesticCompetition)}
         />
       )}
-      <main>
+      <main className={"w-4/5 h-full grid grid-cols-3 grid-flow-row gap-5"}>
         {!loading ? (
           filteredData.map((club) => <TeamCard key={club.clubId} {...club} />)
         ) : (
