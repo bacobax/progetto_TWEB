@@ -54,7 +54,7 @@ const SmartForm: React.FC<DualFormProps> = () => {
                if(searchParams.has("frompage")) {
                    navigate(-1);
                }else{
-                   navigate(-1);
+                   navigate(-2);
                }
 
            }});
@@ -69,7 +69,7 @@ const SmartForm: React.FC<DualFormProps> = () => {
                 email: email.value,
                 afterSuccess: () => {
                     if(searchParams.has("frompage")) {
-                        navigate(-2);
+                        navigate(-1);
                     }else{
                         navigate(-2);
                     }

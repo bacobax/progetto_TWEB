@@ -6,7 +6,7 @@ interface FancyHeaderProps {
 const FancyHeader: React.FC<FancyHeaderProps> = ({title}) => {
     return (
         <header className={styles.header}>
-        <h1>{title}</h1>
+        <h1 className={"font-sansDM"}>{title}</h1>
         </header>
     );
 

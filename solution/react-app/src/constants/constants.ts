@@ -162,7 +162,7 @@ export const teamfilterFormState = {
 
 };
 
-const passwordRegexValidation = (value: string): boolean => {
+export const passwordRegexValidation = (value: string): boolean => {
   return (
     value.length >= 6 &&
     value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{6,}$/) !==

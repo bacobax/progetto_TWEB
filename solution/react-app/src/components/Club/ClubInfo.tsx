@@ -73,7 +73,7 @@ export const ClubInfo:FC<ClubInfoProps> = ({id}) => {
                 <label>Foreigers: <b>{club.foreignersNumber}</b> <i>{club.foreignersPercentage}%</i></label>
             </section>
 
-            <div className={"w-full overflow-scroll"}>
+            <div className={"w-full overflow-auto"}>
                 <ClubInfoTable players={club.players} />
 
             </div>

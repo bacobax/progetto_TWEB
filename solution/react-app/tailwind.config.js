@@ -23,6 +23,7 @@ module.exports = {
     },
     fontFamily: {
       anonymousPro: ['Anonymous Pro', 'monospace'],
+      sansDM : ['DM Sans', 'sans-serif']
     }
   },
   darkMode: "class",

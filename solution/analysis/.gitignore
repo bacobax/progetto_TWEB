@@ -1,0 +1,3 @@
+#ignore all .csv in all subdirectories
+
+*.csv

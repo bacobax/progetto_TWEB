@@ -66,6 +66,8 @@ const useFetch = ( ):ReturnType => {
             });
 
             const data = await res.json();
+            console.log({data})
+
             if(callback) callback(data);
 
         } catch (err : any){

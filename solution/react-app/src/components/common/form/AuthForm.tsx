@@ -2,6 +2,7 @@ import React, { ChangeEvent, forwardRef, useCallback, useMemo } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { State } from "../../../reducers/formReducer";
 import { Button, Input } from "@nextui-org/react";
+import {Link} from "react-router-dom";
 
 interface FormProps {
     onSwitch: () => void;
@@ -50,7 +51,6 @@ const AuthForm = forwardRef<HTMLDivElement, FormProps>(({ onSwitch, isLogin, log
                     aria-label={`Enter your ${key}`}
                     aria-describedby={error ? `${key}-error` : undefined}
                 />
-                {error && <span id={`${key}-error`} className="error-text" role="alert">{errorText}</span>}
             </div>
         ));
     }, [formState, handleInputChange]);
@@ -58,7 +58,7 @@ const AuthForm = forwardRef<HTMLDivElement, FormProps>(({ onSwitch, isLogin, log
     return (
         <div className={"w-full md:w-1/2 h-full flex flex-col py-[30px] md:py-[70px] px-[20px] md:px-[50px] box-border gap-[30px] items-center justify-center text-white"} style={style} ref={ref}>
             <h1 className={"font-['Impact'] text-5xl text-corvette font-extrabold"}>{isLogin ? "Sign In" : "Sign Up"}</h1>
-            <form className={"w-full flex flex-col py-0 px-[20px] gap-[40px] items-center justify-center"} onSubmit={handleSubmit} aria-labelledby="form-heading">
+            <form className={"w-full flex flex-col py-0 gap-[40px] items-center justify-center"} onSubmit={handleSubmit} aria-labelledby="form-heading">
                 {inputs}
                 <div className={"w-4/5 flex justify-around"}>
                     <Button type="submit" isDisabled={!isValid} color={"secondary"} className={"cursor-pointer dark"} aria-label={isLogin ? "Submit Login" : "Submit Registration"}>
@@ -68,6 +68,7 @@ const AuthForm = forwardRef<HTMLDivElement, FormProps>(({ onSwitch, isLogin, log
                         {isLogin ? "Sign-Up" : "Sign-In"}
                     </Button>
                 </div>
+                <Link to={"/auth/forgot"} className={"underline text-primary-300"} >Forgot my password</Link>
             </form>
         </div>
     )

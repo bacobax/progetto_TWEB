@@ -69,7 +69,7 @@ export const TeamSmartGallery: FC = () => {
           domesticCometitions={clubs.map((club) => club.domesticCompetition)}
         />
       )}
-      <main className={"w-4/5 h-full grid grid-cols-3 grid-flow-row gap-5"}>
+      <main className={"w-4/5 h-full grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-5"}>
         {!loading ? (
           filteredData.map((club) => <TeamCard key={club.clubId} {...club} />)
         ) : (
