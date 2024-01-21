@@ -10,7 +10,10 @@ import jakarta.persistence.*;
 // stadium_seats,net_transfer_record,
 // coach_name,last_season,url)
 
-
+/**
+ * This is the entity class for Club.
+ * It contains the mapping between the database and the Java object.
+ */
 
 @Entity
 @Table(name = "clubs")

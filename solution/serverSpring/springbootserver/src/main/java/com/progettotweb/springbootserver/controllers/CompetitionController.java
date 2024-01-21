@@ -17,7 +17,7 @@ public class CompetitionController {
     }
 
 
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/competitions")
     public List<Competition> getEntities(
             @RequestParam(required = false) String sortBy,
@@ -29,8 +29,7 @@ public class CompetitionController {
 
         return entities;
     }
-
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/competitions/:id")
     public Competition getCompetitionById(
             @RequestParam(required = true) String id
@@ -38,12 +37,13 @@ public class CompetitionController {
 
         Competition competition = competitionService.getCompetitionById(id);
 
-
+        System.out.println(competition);
         return competition;
     }
 
     record CompetitionIDAndName(String competition_id, String name){}
     //get a list of competitionIDs from the body and return a list of touples (competitionID, competitionName)
+    @CrossOrigin(origins = "*")
     @PostMapping("/api/competitions/names")
     public List<CompetitionIDAndName> getCompetitionNameById(
             @RequestBody(required = true) List<String> competitionIds
@@ -52,7 +52,7 @@ public class CompetitionController {
         List<Competition> competitions = competitionService.findCompetitionNameById(competitionIds);
         return competitions.stream().map(competition -> new CompetitionIDAndName(competition.getCompetitionId(), competition.getName())).toList();
     }
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/api/competitions/names")
     public List<CompetitionIDAndName> getAllCompetitionNames() {
         List<Competition> competitions = competitionService.getAllCompetitions();

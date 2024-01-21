@@ -32,6 +32,10 @@ components:
         $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserLoginResponse'
     UserResetPasswordRequest:
         $ref: '/models/swaggerSchemas/user.yaml#/components/schemas/UserResetPasswordRequest'
+    Competition:
+        $ref: '/models/swaggerSchemas/competition.yaml#/Competition'
+    Club:
+        $ref: '/models/swaggerSchemas/club.yaml#/Club'
   securitySchemes:
     bearerAuth:
       type: http
@@ -1300,5 +1304,110 @@ paths:
                     type: array
                     items:
                       $ref: '/models/swaggerSchemas/club.yaml#/Club'
+  /competitions:
+    get:
+      tags:
+        - Competition
+      description: Use to request all competitions
+      parameters:
+        - name: sortBy
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: Fields to include in the response
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of records to return
+          required: false
+          schema:
+            type: integer
+            default: 100
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '/models/swaggerSchemas/competition.yaml#/Competition'
+  /competitions/{id}:
+    get:
+      tags:
+        - Competition
+      description: Use to request one competition
+      parameters:
+        - name: id
+          in: path
+          description: Competition ID
+          required: true
+          example: RUSS
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '/models/swaggerSchemas/competition.yaml#/Competition'
+  /competitions/names:
+    post:
+      tags:
+        - Competition
+      description: Use to request competition names by their IDs
+      parameters: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                example: "RUSS"
+      responses:
+        200:
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                      competition_id:
+                        type: string
+                        example: "RUSS"
+                      name:
+                        type: string
+                        example: "Russian Premier League"
+
+    get:
+        tags:
+            - Competition
+        description: Use to request all competition names
+        responses:
+            200:
+              description: A successful response
+              content:
+                  application/json:
+                    schema:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                              competition_id:
+                                  type: string
+                                  example: "RUSS"
+                              name:
+                                  type: string
+                                  example: "Russian Premier League"
+
 
 

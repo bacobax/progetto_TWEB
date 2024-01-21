@@ -8,6 +8,12 @@ import java.util.UUID;
 
 //competitions(competition_id,competition_code,name,sub_type,type,
 // country_id,country_name,domestic_league_code,confederation,url)
+
+/**
+ * This is the entity class for Competition.
+ * It contains the mapping between the database and the Java object.
+ *
+ */
 @Entity
 @Table(name = "competitions")
 public class Competition {

@@ -9,17 +9,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+/**
+ * This is the controller class for Club.
+ * It contains methods for handling HTTP requests related to Club objects.
+ */
 public class ClubController {
 
+    // The service for Club objects
     private final ClubService clubService;
 
+    /**
+     * Constructor for the ClubController class.
+     * @param clubService The service for Club objects
+     */
     @Autowired
     public ClubController(ClubService clubService) {
         this.clubService = clubService;
     }
 
+    // Record for paginated response
     record PaginateResponse(List<Club> items, String nextPageURL){};
 
+    /**
+     * Handles GET requests to retrieve all Club objects in a paginated format.
+     * @param page The page number to retrieve
+     * @param pagesize The number of Club objects per page
+     * @return A PaginateResponse object containing the Club objects for the given page and the URL for the next page
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/api/club")
     public PaginateResponse getClubs(
@@ -34,7 +50,11 @@ public class ClubController {
         return new PaginateResponse(entities, nextPageURL);
     }
 
-    //route clubs/:id
+    /**
+     * Handles GET requests to retrieve a Club object by its ID.
+     * @param id The ID of the Club object
+     * @return The Club object with the given ID, or null if no such object exists
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/api/club/{id}")
     public Club getClubById(
@@ -46,7 +66,11 @@ public class ClubController {
         return club;
     }
 
-
+    /**
+     * Handles GET requests to retrieve Club objects that contain the given name.
+     * @param name The name to search for
+     * @return A list of Club objects that contain the given name
+     */
     @CrossOrigin(origins = "*")
     @GetMapping("/api/club/name/{name}")
     public List<Club> getClubByContainsName(
@@ -58,15 +82,14 @@ public class ClubController {
         return clubs;
     }
 
-    /**
-     * a request that handle a body like this : [
-     *   192, 172, 142
-     * ] that are the ids of the clubs
-     * and return a response like this:
-     * [{id:192, name: "name192", managerName: "managerName192"}, {id:172, name: "name172", managerName: "managerName172"}, {id:142, name: "name142", managerName: "managerName142"}]
-     *
-     */
+    // Record for Club ID and name
     record ClubIDAndName(Long club_id, String name){}
+
+    /**
+     * Handles POST requests to retrieve the names of Club objects based on their IDs.
+     * @param clubIds The IDs of the Club objects
+     * @return A list of ClubIDAndName objects, each containing a Club ID and name
+     */
     @CrossOrigin(origins = "*")
     @PostMapping("/api/club/names")
     public List<ClubIDAndName> getClubNameById(
@@ -77,13 +100,9 @@ public class ClubController {
         return clubs.stream().map(club -> new ClubIDAndName(club.getClubId(), club.getName())).toList();
     }
 
-
     /**
-     * a request that handle a body like this : [
-     * {
-     *  "_id": 192, totalMarketValue: 1000000
-     *
-     * }...] and update every totalMarketValue of every club with the id in those objects
+     * Handles PUT requests to update the total market value of Club objects.
+     * @param clubIdsAndTotalMarketValue A list of ClubIDAndTotalMarketValue objects, each containing a Club ID and the new total market value
      */
     @CrossOrigin(origins = "*")
     @PutMapping("/api/club/totalMarketValue")
