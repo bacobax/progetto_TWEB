@@ -6,6 +6,5 @@ const router = express.Router();
 
 
 router.route('/').get(getAllPlayerValuation).post(createPlayerValuation);
-router.route('/:id').get(getOnePlayerValuation).patch(updatePlayerValuation).delete(deletePlayerValuation);
 
 module.exports = router;

@@ -33,7 +33,32 @@ const PersonalToolTip = ({ active, payload, label }: any) => {
   }
   return null;
 };
-
+/**
+ * PlayerInfo is a functional component in React that displays detailed information about a player.
+ * It accepts props of type PlayerInfoProps which includes:
+ * - id: A string representing the ID of the player.
+ *
+ * The component maintains several state variables:
+ * - player: An object representing the player's data, retrieved from the server.
+ * - fetchData, error, loading, setError: The functions and state returned from the useFetch custom hook.
+ *
+ * The useEffect hook is used to fetch the player data when the component mounts. The fetchData function from the useFetch hook is called with the URL of the player data.
+ * If the fetch is successful, the player state is updated with the retrieved data. If the fetch fails, the error state is updated with the error message.
+ *
+ * If the player data is still loading, a Loading component is returned.
+ * If there is an error fetching the player data, an error message is displayed.
+ *
+ * The breadcupbspath constant is an array of objects representing the navigation path for the breadcrumbs.
+ * The overallStatsItem constant is a React element representing the overall stats of the player.
+ * The formattedData constant is an array of objects representing the player's market values in a more readable format.
+ *
+ * The component returns a div element with the following children:
+ * - A MyBreadcrumbs component displaying the navigation path.
+ * - A header with the player's name, club name, position, and image.
+ * - An Accordion component displaying the player's stats for each competition.
+ * - A LineChart component displaying the player's market values history.
+ * - A Button component for opening a discussion about the player.
+ */
 
 export const PlayerInfo: FC<PlayerInfoProps> = ({ id }: PlayerInfoProps) => {
   const [player, setPlayer] = useState<Player | null>(null);

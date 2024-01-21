@@ -19,6 +19,30 @@ const inputTypes: { [key: string]: string } = {
     "confirmPassword": "password",
 }
 
+/**
+ * AuthForm is a functional component in React that renders a form for user authentication.
+ * It uses the forwardRef function to get a reference to the div element that wraps the form.
+ *
+ * @param {object} props - The properties passed to the component.
+ * @param {function} props.onSwitch - A function to be executed when the user switches between the login and signup forms.
+ * @param {boolean} props.isLogin - A boolean indicating whether the login form is displayed.
+ * @param {object} props.loginState - The state of the login form.
+ * @param {object} props.signupState - The state of the signup form.
+ * @param {function} props.onSubmit - A function to be executed when the form is submitted.
+ * @param {object} props.style - The CSS properties to be applied to the div element that wraps the form.
+ * @param {object} ref - A reference to the div element that wraps the form.
+ *
+ * @returns {ReactElement} The rendered form.
+ *
+ * The component uses the useForm custom hook twice to manage the state of the login and signup forms.
+ * It determines the current form state, input change handler, form reset function, and form validity based on the isLogin prop.
+ *
+ * The handleSubmit function is a callback that handles the form submission event. It prevents the default form submission behavior, resets the form, and calls the onSubmit prop with the current form state.
+ *
+ * The inputs constant is a memoized value that maps over the form state and creates an Input component for each form field.
+ *
+ * The component returns a div element that wraps a form. The form includes the Input components for the form fields, a submit button, a button for switching between the login and signup forms, and a link to the forgot password page.
+ */
 const AuthForm = forwardRef<HTMLDivElement, FormProps>(({ onSwitch, isLogin, loginState, signupState, onSubmit, style }, ref) => {
     const { reset: resetSignUp, formState: formStateSignUp, handleInputChange: handleInputChangeSignUp, isValid: isValidSignUp } = useForm(signupState);
     const { reset: resetSignIn, formState: formStateSignIn, handleInputChange: handleInputChangeSignIn, isValid: isValidSignIn } = useForm(loginState);
@@ -73,5 +97,4 @@ const AuthForm = forwardRef<HTMLDivElement, FormProps>(({ onSwitch, isLogin, log
         </div>
     )
 });
-
 export default AuthForm;

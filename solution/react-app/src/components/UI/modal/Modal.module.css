@@ -20,7 +20,7 @@
 .modal__header {
   display: flex;
 
-  align-items: start;
+  align-items: flex-start;
   gap: 30px;
   width: 100%;
 }

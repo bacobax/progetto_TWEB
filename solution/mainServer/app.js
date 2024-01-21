@@ -38,40 +38,38 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * Express.js route handler for fetching player data by ID.
+ * If the ID is "clubsMarketValue" or "nationalities", it passes control to the next middleware.
+ * Otherwise, it fetches the player data from the Node server and the club data from the Java server.
+ * It also fetches the competition names for the player's stats and adds them to the stats.
+ * Finally, it sends a response with the player data and the club name.
+ *
+ * @param {Object} req - The Express.js request object.
+ * @param {Object} res - The Express.js response object.
+ * @param {Function} next - The next middleware function in the Express.js request-response cycle.
+ */
 app.route("/api/player/:id").get(catchAsync(async (req,res,next)=>{
     if(["clubsMarketValue", "nationalities"].includes(req.params.id)){
         return next();
     }
     const expressResponse = await axios.get(getNodeServerUrl(`/api/player/${req.params.id}`));
 
-
-
-
     const {current_club_id, ...otherPlayerData} = expressResponse.data.data;
-
-    console.log({otherPlayerData})
 
     const javaResponse = await axios.get(getJavaServerUrl(`/api/club/${current_club_id}`));
     const clubName = javaResponse.data.name;
 
-
-
     const competitionsIDS = Object.keys(otherPlayerData.stats);
-
-
 
     const competitionNamesMappingRes = await axios.post(getJavaServerUrl("/api/competitions/names"),competitionsIDS);
     const competitionNamesMapping = competitionNamesMappingRes.data;
     competitionsIDS.forEach(competitionID=>{
-
-
-
         otherPlayerData.stats[competitionID] = {
             ...otherPlayerData.stats[competitionID],
             competitionName: competitionNamesMapping.find(c => c.competition_id === competitionID).name
         };
     })
-
 
     res.status(200).json({
         status: "success",
@@ -81,6 +79,16 @@ app.route("/api/player/:id").get(catchAsync(async (req,res,next)=>{
         }
     })
 }));
+
+/**
+ * Express.js route handler for fetching club data by ID.
+ * It fetches the club data from the Java server and the players data from the Node server.
+ * It adds the players data to the club data and sends a response with the club data.
+ *
+ * @param {Object} req - The Express.js request object.
+ * @param {Object} res - The Express.js response object.
+ * @param {Function} next - The next middleware function in the Express.js request-response cycle.
+ */
 app.route("/api/club/:id").get(catchAsync(async (req,res,next)=>{
 
     const javaResponse = (await axios.get(getJavaServerUrl(`/api/club/${req.params.id}`))).data;
@@ -95,7 +103,6 @@ app.route("/api/club/:id").get(catchAsync(async (req,res,next)=>{
 }));
 
 
-
 app.use("/api/player", getNodeRESTRedirectRouter());
 app.use("/api/appearence", getNodeRESTRedirectRouter());
 app.use("/api/club", getJavaRESTRedirectRouter());
@@ -104,6 +111,8 @@ app.use("/api/competitions", getJavaRESTRedirectRouter());
 app.use("/api/game", getNodeRESTRedirectRouter());
 app.use("/api/gameEvent"    , getNodeRESTRedirectRouter());
 app.use("/api/users"    , getNodeRESTRedirectRouter());
+app.use("/api/playerValuation"    , getNodeRESTRedirectRouter());
+app.use("/api/gameLineup"    , getNodeRESTRedirectRouter());
 app.get("/api/search/:text",search);
 
 app.use(globalErrorMiddleware);

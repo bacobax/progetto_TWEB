@@ -1,20 +1,38 @@
 import {FC, FormEvent, useEffect, useState} from "react";
 import {useAsyncList} from "@react-stately/data";
 import {
-    competitionTypes, MilionFormat,
-    URL_COMPETITIONS_NAME,
+     MilionFormat,
     URL_MIN_MAX_MARKET_VALUE,
     URL_NATIONALITIES
 } from "../../constants/constants";
 import useFetch from "../../hooks/useFetch";
-import {Autocomplete, AutocompleteItem, Button, Input, Select, SelectItem, Slider} from "@nextui-org/react";
+import {Autocomplete, AutocompleteItem, Button, Select, SelectItem, Slider} from "@nextui-org/react";
 import {FaSearch} from "react-icons/fa";
 import {useForm} from "../../hooks/useForm";
-import NeuromorphismDiv from "../UI/NeuromorphismDiv";
 import {PlayerSearchFilters, positions, subPositions} from "./types";
 interface PlayerFilterFormProps {
     onApplyFilters: (filters: PlayerSearchFilters) => void;
 }
+/**
+ * PlayerFilterForm is a functional component in React.
+ * It accepts props of type PlayerFilterFormProps which includes:
+ * - onApplyFilters: A function to be executed when the filters are applied.
+ *
+ * The component uses the useAsyncList hook to fetch a list of nationalities.
+ * The useFetch hook is used to manage the fetching of the minimum and maximum market values.
+ * The useForm hook is used to manage the state of the form, which includes the nationality, marketValueRange, position, and subPosition fields.
+ *
+ * The useEffect hook is used to fetch the minimum and maximum market values when the component mounts. The fetchData function from the useFetch hook is called with the URL of the market values.
+ * If the fetch is successful, the marketValueRange field in the form state is updated with the retrieved values. If the fetch fails, the error state is updated with the error message.
+ *
+ * The handleSubmit function is a callback that handles the form submission event. It prevents the default form submission behavior, calls the onApplyFilters prop with the current form state, and resets the form.
+ *
+ * The component returns a form element with the following children:
+ * - An Autocomplete component for the nationality field.
+ * - A Slider component for the marketValueRange field.
+ * - Two Select components for the position and subPosition fields.
+ * - A Button component for submitting the form.
+ */
 export const PlayerFilterForm:FC<PlayerFilterFormProps> = ({onApplyFilters}) => {
 
 
@@ -37,7 +55,7 @@ export const PlayerFilterForm:FC<PlayerFilterFormProps> = ({onApplyFilters}) => 
 
 
 
-    const {formState, handleInputChange, reset, isValid} = useForm({
+    const {formState, handleInputChange,} = useForm({
         nationality: {
             value: "",
             error: true,

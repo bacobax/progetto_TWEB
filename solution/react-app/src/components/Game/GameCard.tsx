@@ -26,6 +26,28 @@ interface classNameProps {
     className?:string
 }
 
+/**
+ * GameCard is a functional component in React.
+ * It accepts props of type Player & classNameProps which includes:
+ * - Player: An object representing the player's data.
+ * - className: A string representing the CSS classes to be applied to the component.
+ *
+ * The component maintains several state variables:
+ * - homeClubGoals, awayClubGoals: The goals scored by the home and away clubs, retrieved by splitting the aggregate prop.
+ * - navigate: A function for navigating to different routes, retrieved from the useNavigate hook.
+ * - setQueryParam, removeQueryParam, getQueryParam: The functions for managing query parameters, retrieved from the useQueryParams hook.
+ * - isSelected: A boolean indicating whether the game is selected, determined by comparing the game_id query parameter with the _id prop.
+ *
+ * The component defines several callback functions:
+ * - setIsSelectedToTrue: This function sets the game_id query parameter to the _id prop.
+ * - setIsSelectedToFalse: This function removes the game_id query parameter.
+ * - navigateToClubPage: This function navigates to the club page with the given club ID.
+ * - toggleStatisticsSelected: This function toggles the isSelected state.
+ *
+ * The component returns a fragment containing a div element and a Modal component.
+ * - The div is styled with CSS classes and contains the game details and an Accordion component for displaying the game statistics.
+ * - The Modal component is displayed when the game is selected and contains the game statistics.
+ */
 export const GameCard:FC<Player & classNameProps> = (props) => {
 
     const [homeClubGoals, awayClubGoals] = props.aggregate.split(":");

@@ -41,6 +41,12 @@ const roomSchema = new mongoose.Schema({
     }
 });
 
+/**
+ * @function pre-save
+ * @description This is a mongoose middleware that runs before saving a room document. It checks if the admin of the room is already in the members array. If not, it adds the admin to the members array.
+ * @param {Function} next - The mongoose next function.
+ * @returns {void}
+ */
 roomSchema.pre('save', async function(next) {
     // Check if the admin is not already in the members array
     if (!this.members.includes(this.admin)) {
@@ -48,7 +54,6 @@ roomSchema.pre('save', async function(next) {
     }
     next();
 });
-
 const Room = mongoose.model('Room', roomSchema);
 
 module.exports = Room;

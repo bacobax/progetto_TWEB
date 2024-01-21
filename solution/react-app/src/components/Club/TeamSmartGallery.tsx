@@ -1,7 +1,5 @@
 import React, {FC, useState} from "react";
 import useFilter from "../../hooks/useFilter";
-import styles from "./SmartGallery.module.css";
-import IconButton from "../UI/button/IconButton";
 import {FaAngleDown, FaAngleUp} from "react-icons/fa";
 import {Card, Skeleton, Button} from "@nextui-org/react";
 import useLoadTeams from "../../hooks/useLoadTeams";
@@ -10,7 +8,28 @@ import TeamFilterForm from "./TeamFilterForm";
 import {FetchError} from "../common/errors/FetchError";
 import {ShortClub} from "./types";
 
-
+/**
+ * ClubInfo is a functional component in React.
+ * It accepts props of type ClubInfoProps which includes:
+ * - id: A string representing the ID of the club.
+ *
+ * The component maintains a state variable club, which is the club object retrieved from the server.
+ * The useFetch custom hook is used to manage the fetching of the club data.
+ *
+ * The useEffect hook is used to fetch the club data when the component mounts. The fetchData function from the useFetch hook is called with the URL of the club data.
+ * If the fetch is successful, the club state is updated with the retrieved data. If the fetch fails, the error state is updated with the error message.
+ *
+ * If the club data is still loading, a Loading component is returned.
+ * If there is an error fetching the club data, a FetchError component is returned.
+ *
+ * The component calculates the total value and average age of the club's players using the reduce method.
+ *
+ * The component returns a div element with the club information. The div includes:
+ * - A MyBreadcrumbs component displaying the navigation path.
+ * - A header with the club name and total market value.
+ * - A section with various club details.
+ * - A ClubInfoTable component displaying the club's players.
+ */
 export const TeamSmartGallery: FC = () => {
   const [showForm, setShowForm] = useState(false);
 

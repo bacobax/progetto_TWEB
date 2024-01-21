@@ -494,7 +494,7 @@ export const URL_SHORT_PLAYERS_QUERIED = (pageNumber:number,pageSize:number,filt
 }
 export const URL_SHORT_TEAMS = (pageNumber:number,pageSize:number)  => getMainServerPath(`/club?page=${pageNumber}&pagesize=${pageSize}`);
 
-export const URL_ROOM_FROM_USER = (userId:string) => getMainServerPath(`/room/user/${userId}`);
+export const URL_ROOM_FROM_USER = getMainServerPath(`/room/user`);
 
 export const URL_NEW_MESSAGE = (roomId:string) => getMainServerPath(`/room/newMessage/${roomId}`);
 

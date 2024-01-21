@@ -21,6 +21,26 @@ interface ChatListProps {
     onOpenSearchChatForm: () => void
 }
 
+/**
+ * ChatList is a functional component in React.
+ * It accepts props of type ChatListProps which includes:
+ * - rooms: An array of Room objects representing the chat rooms.
+ * - onSelectRoom: A function to be executed when a chat room is selected.
+ * - loading: A boolean indicating whether the chat rooms are being loaded.
+ * - user: An object representing the current user.
+ * - selectedRoomIdx: The index of the currently selected chat room.
+ * - isPhone: A boolean indicating whether the user is on a phone.
+ * - onOpenNewChatForm: A function to be executed when the new chat form is opened.
+ * - onOpenSearchChatForm: A function to be executed when the search chat form is opened.
+ *
+ * The component defines two functions using the useCallback hook:
+ * - renderChats: This function returns a list of ChatItem components if there are chat rooms, or a div with a button to start a new conversation if there are no chat rooms.
+ * - renderSkeletons: This function returns a list of skeleton components to be displayed while the chat rooms are being loaded.
+ *
+ * The component returns a div element styled with Tailwind CSS classes. The div includes:
+ * - A header with the user's email and buttons to create a new chat and search chats.
+ * - A div that displays the chat rooms using the renderChats function if they are not being loaded, or the skeleton components using the renderSkeletons function if they are being loaded.
+ */
 const   ChatList: FC<ChatListProps> = ({ rooms, onSelectRoom, loading, user, selectedRoomIdx, isPhone, onOpenNewChatForm , onOpenSearchChatForm}) => {
 
 

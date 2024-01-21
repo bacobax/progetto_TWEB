@@ -14,6 +14,25 @@ interface TeamSectionProps {
 }
 
 
+/**
+ * TeamSection is a functional component in React.
+ * It accepts props of type TeamSectionProps which includes:
+ * - name: A string representing the name of the section.
+ *
+ * The component maintains several state variables:
+ * - clubs, loading, error: The state and functions returned from the useLoadTeams custom hook.
+ * - isPhone: A boolean indicating whether the user is on a phone, retrieved from the useWindowSize hook.
+ * - navigate: A function for navigating to different routes, retrieved from the useNavigate hook.
+ * - current, setIndex, matrixLength: The state and functions returned from the useSlice hook.
+ *
+ * The component returns a Section component with the following children:
+ * - A h1 element displaying the name of the section.
+ * - A div element displaying the market value label and an arrow icon.
+ * - A div element displaying a list of TeamCard components for the clubs. If the clubs are still loading, a loading message is displayed. If there is an error fetching the clubs, an error message is displayed.
+ * - A Pagination component for navigating between pages of clubs.
+ * - A Divider component.
+ * - A Button component for navigating to the clubs page.
+ */
 const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
 
     const {clubs, loading, error} = useLoadTeams(30)
@@ -50,5 +69,4 @@ const TeamSection: React.FC<TeamSectionProps> = ({name}) => {
     );
 
 }
-
 export default TeamSection;

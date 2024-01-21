@@ -18,8 +18,26 @@ export interface QueryFilters extends StringKeys{
 }
 
 
+/**
+ * Players is a functional component in React.
+ * It does not accept any props.
+ *
+ * The component maintains several state variables:
+ * - players: An array of Player objects representing the players.
+ * - loading, setError, error, fetchData: The functions and state returned from the useFetch custom hook.
+ *
+ * The handleApplyFilters function is a callback that handles the application of filters. It fetches the players data with the applied filters and updates the players state.
+ *
+ * The useEffect hook is used to fetch the player data when the component mounts. The fetchData function from the useFetch hook is called with the URL of the player data.
+ * If the fetch is successful, the player state is updated with the retrieved data. If the fetch fails, the error state is updated with the error message.
+ *
+ * If there is an error fetching the player data, a FetchError component is returned.
+ *
+ * The component returns a div element with the following children:
+ * - A NeuromorphismDiv component containing a title and a PlayerFilterForm component for filtering the players.
+ * - A MemoizedMap component containing a list of PlayerCard components for the players. The PlayerCard components are only displayed if the player data is not being loaded.
+ */
 export const Players:FC = () => {
-
 
     const [players, setPlayers] = useState<Player[]>([]);
     const {loading, setError, error, fetchData} = useFetch();

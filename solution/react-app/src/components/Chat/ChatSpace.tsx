@@ -25,6 +25,29 @@ type Popup = {
     type: "JOIN" | "LEAVE",
     content: string
 } | null;
+/**
+ * ChatSpace is a functional component in React.
+ * It accepts props of type ChatSpaceProps which includes:
+ * - user: An object representing the current user.
+ * - room: An object of type Room representing the current chat room.
+ * - loadingRooms: A boolean indicating whether the chat rooms are being loaded.
+ * - onNewMessage: A function to be executed when a new message is sent.
+ * - loadingMessage: A boolean indicating whether a new message is being sent.
+ * - errorNewMessage: A string representing any error that occurred while sending a new message.
+ * - onLeaveRoom: A function to be executed when the user leaves the room.
+ * - onBack: A function to be executed when the user navigates back.
+ * - width: The width of the chat space.
+ *
+ * The component maintains a state variable popup, which is used to display notifications when a user joins or leaves the room.
+ *
+ * The useEffect hook is used to listen for "leave" and "firstJoin" events from the socket. When these events occur, the popup state is updated with the relevant information.
+ *
+ * The handleNewMessage function is a wrapper around the onNewMessage prop. It is used to send a new message.
+ *
+ * The component returns a Loading component if the chat rooms are being loaded.
+ * If a room is selected, it returns a div element with the chat space, including a header with the room name and leave button, a MessageList component displaying the messages, and a NewMessage component for sending new messages.
+ * If no room is selected, it returns a div element with a welcome message.
+ */
 const ChatSpace:FC<ChatSpaceProps> = ({
                                           user,
                                           room,

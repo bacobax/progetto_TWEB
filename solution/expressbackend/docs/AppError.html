@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: AppError</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: AppError</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>AppError<span class="signature">(message, statusCode)</span><span class="type-signature"> &rarr; {Object}</span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+
+    
+    <h4 class="name" id="AppError"><span class="type-signature"></span>new AppError<span class="signature">(message, statusCode)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Error message</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>statusCode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Error status code</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_appError.js.html">utils/appError.js</a>, <a href="utils_appError.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    AppError
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>throw new AppError('This is an error message', 404);</code></pre>
+
+    <pre class="prettyprint"><code>next(new AppError('This is an error message', 404));</code></pre>
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>Error</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="APIFeatures.html">APIFeatures</a></li><li><a href="AppError.html">AppError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#aggregateValidation">aggregateValidation</a></li><li><a href="global.html#allKeysExcept">allKeysExcept</a></li><li><a href="global.html#changePasswordAfter">changePasswordAfter</a></li><li><a href="global.html#cleaningGameDatasets">cleaningGameDatasets</a></li><li><a href="global.html#cleaningOnlyGameDataset">cleaningOnlyGameDataset</a></li><li><a href="global.html#cleaningOnlyPlayerDataset">cleaningOnlyPlayerDataset</a></li><li><a href="global.html#cleaningPlayersDataset">cleaningPlayersDataset</a></li><li><a href="global.html#clubsTotalMarketValue">clubsTotalMarketValue</a></li><li><a href="global.html#correctPassword">correctPassword</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#createPasswordResetToken">createPasswordResetToken</a></li><li><a href="global.html#createRoom">createRoom</a></li><li><a href="global.html#deleteAll">deleteAll</a></li><li><a href="global.html#deleteOne">deleteOne</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#gameEventFilterPlayer_assist_id">gameEventFilterPlayer_assist_id</a></li><li><a href="global.html#gameEventFilterPlayer_in_id">gameEventFilterPlayer_in_id</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllNationalities">getAllNationalities</a></li><li><a href="global.html#getAllUserRoom">getAllUserRoom</a></li><li><a href="global.html#getByName">getByName</a></li><li><a href="global.html#getDateWeek">getDateWeek</a></li><li><a href="global.html#getEvents">getEvents</a></li><li><a href="global.html#getMinMaxMarketValue">getMinMaxMarketValue</a></li><li><a href="global.html#getOne">getOne</a></li><li><a href="global.html#getOneGame">getOneGame</a></li><li><a href="global.html#getOnePlayer">getOnePlayer</a></li><li><a href="global.html#joinRoom">joinRoom</a></li><li><a href="global.html#leaveRoom">leaveRoom</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#newMessage">newMessage</a></li><li><a href="global.html#populateGames">populateGames</a></li><li><a href="global.html#populatePlayers">populatePlayers</a></li><li><a href="global.html#pre">pre</a></li><li><a href="global.html#pre-save">pre-save</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizeGameId">sanitizeGameId</a></li><li><a href="global.html#sanitizePlayerId">sanitizePlayerId</a></li><li><a href="global.html#sanitizePlayer_inID">sanitizePlayer_inID</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#signToken">signToken</a></li><li><a href="global.html#signup">signup</a></li><li><a href="global.html#statsFromAppearances">statsFromAppearances</a></li><li><a href="global.html#statsFromAppearancesForeachCompetition">statsFromAppearancesForeachCompetition</a></li><li><a href="global.html#updateOne">updateOne</a></li><li><a href="global.html#verifyModelSelectedFields">verifyModelSelectedFields</a></li><li><a href="global.html#verifyQueryFields">verifyQueryFields</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jan 21 2024 09:06:21 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

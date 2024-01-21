@@ -56,9 +56,7 @@ exports.signup = catchAsync(async (req, res, next) => {
  * @param {Function} next - The next middleware function in the stack.
  */
 exports.login = catchAsync(async (req, res, next) => {
-  console.log({body: req.body});
   const { email, password } = req.body;
-  console.log({ email, password });
   if (!email || !password) {
     throw new AppError('please insert the password and the email', 400);
   }
@@ -101,7 +99,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
-  console.log({ token });
 
   if (!token) {
     return next(
@@ -112,7 +109,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   //2) Verification token
 
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
   //3) Controllare se l'utente c'è ancora
 
   const freshUser = await User.findById(decoded.id);
@@ -199,7 +195,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   } catch (err) {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
-    console.log({ err });
     await user.save({ validateBeforeSave: false });
     return next(new AppError("We couldn't send the email", 500));
   }

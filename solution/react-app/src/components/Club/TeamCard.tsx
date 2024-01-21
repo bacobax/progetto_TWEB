@@ -16,7 +16,6 @@ const onlyHostFromLink = (url: string) => {
 
 }
 
-const AnimatedCard = motion(Card);
 /**
  * TeamCard component
  *

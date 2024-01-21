@@ -54,7 +54,24 @@ const separateEventsByGameID = (events: GameEvent[]) => {
 const getEntriesWithNoSubstitutions = (eventsByGameID: { [key: string]: GameEvent[] }) => Object.entries(eventsByGameID)
     .filter(([gameID, events]) => events.filter(GE => GE.type !== "Substitutions").length > 0);
 
-
+/**
+ * PlayerInfoStats is a functional component in React.
+ * It accepts props of type PlayerInfoStatsProps which includes:
+ * - stats: An object of type PlayerStats containing the player's statistics.
+ * - events: An array of GameEvent objects representing the events of the player's games.
+ * - permitGameEventsShow: A boolean indicating whether the game events are allowed to be shown.
+ *
+ * The component maintains a state variable showEvents, which is a boolean indicating whether the game events are currently shown.
+ *
+ * The toggleShowEvents function is a callback that toggles the showEvents state.
+ *
+ * The eventsByGamesIDS constant is an object mapping game IDs to arrays of game events. It is calculated using the separateEventsByGameID function if the events prop is provided.
+ *
+ * The component returns a div element styled with CSS classes. The div includes:
+ * - A div element displaying the player's statistics.
+ * - A Button component for toggling the display of the game events. The button is only shown if the permitGameEventsShow prop is true and there are game events to show.
+ * - A div element displaying the game events. The game events are grouped by game and displayed in a Table component. Each game event group is preceded by a link to the game page. The game events are only shown if the showEvents state is true.
+ */
 export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({ stats, events, permitGameEventsShow }) => {
 
     const {competitionName, ...effectiveStats} = stats;
@@ -89,8 +106,8 @@ export const PlayerInfoStats:FC<PlayerInfoStatsProps> = ({ stats, events, permit
                         .map(([key, events], idx) => (
                             <div key={idx}>
                                 <h1 className="w-full text-center text-green-400 font-bold">
-                                    <Link to={`/games?game_id=${key}`}>
-                                        Game: {events[0].game?.home_club_name} v/s {events[0].game?.away_club_name}
+                                    <Link to={`/games?game_id=${key}`} className={"underline"}>
+                                        {events[0].game?.home_club_name} v/s {events[0].game?.away_club_name}
                                     </Link>
                                 </h1>
                                 <Table className="dark text-white font-anonymousPro" aria-label="player game events">

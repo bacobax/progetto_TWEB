@@ -5,8 +5,6 @@ import App from "../App";
 import MainSection from "../pages/home/sections/MainSection";
 import {HOME_SECTIONS} from "../constants/constants";
 import FancyHeader from "../pages/home/sections/FancyHeader";
-import IconButton from "../components/UI/button/IconButton";
-import TeamFilterForm from "../components/Club/TeamFilterForm";
 
 const ComponentPreviews = () => {
     return (

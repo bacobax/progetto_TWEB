@@ -22,7 +22,6 @@ const uri = process.env.URI.replace('<dbname>', process.env.DBNAME);
 
 mongoose.set('strictQuery', false);
 
-console.log({ uri });
 mongoose
   .connect(uri)
   .then(() => {

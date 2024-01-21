@@ -7,8 +7,16 @@ const AppError = require("../utils/appError");
 
 exports.createPlayer = createOne(Player);
 
+/**
+ * @function getEvents
+ * @description This function is an express middleware that retrieves a paginated list of game events for a specific game from the database. It also provides a URL for the next page of results.
+ * @param {Object} req - The express request object. The game ID should be provided as a parameter, and the page and limit for pagination should be provided as query parameters.
+ * @param {Object} res - The express response object. The response will include the status, the data (an array of game events), the URL for the next page of results, and a boolean indicating whether there are more results to fetch.
+ * @param {Function} next - The express next function.
+ * @throws {Error} Throws an error if the page or limit parameters are less than or equal to 0.
+ * @returns {void}
+ */
 exports.getAllPlayer = catchAsync(async (req, res) => {
-    console.log({query: req.query})
     if(req.query.market_value_in_eur){
         let market_value_in_eur;
         try{
@@ -50,7 +58,13 @@ exports.getAllPlayer = catchAsync(async (req, res) => {
 exports.deleteAllPlayer = deleteAll(Player);
 
 exports.deletePlayer = deleteOne(Player);
-
+/**
+ * @function getByName
+ * @description This function is an express middleware that retrieves a list of players from the database whose first name or last name matches the provided name. The name is case-insensitive.
+ * @param {Object} req - The express request object. The name should be provided as a parameter.
+ * @param {Object} res - The express response object. The response will include the status and the data (an array of players with their IDs, first names, and last names).
+ * @returns {void}
+ */
 exports.getByName = catchAsync(async (req, res) => {
     const name = req.params.name;
 
@@ -127,6 +141,15 @@ const statsFromAppearancesForeachCompetition = (obj, appearances) =>{
     }
 }
 
+/**
+ * @function getOnePlayer
+ * @description This function is an express middleware that retrieves a player document from the database by its ID, enriches it with additional statistics derived from its appearances, and sends it as a response. It also populates the player's valuations, lineups, appearances, and game events.
+ * @param {Object} req - The express request object. The player ID should be provided as a parameter.
+ * @param {Object} res - The express response object. The response will include the status and the data (the player document enriched with additional statistics).
+ * @param {Function} next - The express next function.
+ * @throws {AppError} Throws an AppError if no player document is found with the provided ID.
+ * @returns {void}
+ */
 exports.getOnePlayer = catchAsync(async (req, res, next) => {
     const id = req.params.id;
     const doc = await Player.findById(id)
@@ -136,18 +159,9 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
         .populate('gameEvents');
     if (!doc) {
         return next(new AppError('No document found with that ID', 404));
-
     }
 
-    /**
-     * Informations required:
-     * Assists, Goals, Shootouts, Yellow Cards, Red Cards, Minutes played, actual_market_value_in_eur,
-     * List of market values in the past.
-     * Goals, Cards and Minutes played are in every appearences' elements virtual property (appearences.goals, appearences.yellow_cards, appearences.red_cards, appearences.minutes_played)
-     * Market values are in every valuations' elements virtual property (valuations.market_value_in_eur)
-     */
     const {valuations, lineups, appearances,gameEvents, ...playerFields} = doc;
-
 
     const {goals, assists, yellow_cards, red_cards, minutes_played} = statsFromAppearances(appearances);
 
@@ -155,6 +169,7 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
         market_value_in_eur: v.market_value_in_eur,
         date: v.date,
     }))
+
 
     const appearancesCompetitions = new Set(appearances.map(a => a.competition_id));
     const appearancesCompetitionsCount = {};
@@ -201,7 +216,13 @@ exports.getOnePlayer = catchAsync(async (req, res, next) => {
 
 exports.updatePlayer = updateOne(Player);
 
-
+/**
+ * @function clubsTotalMarketValue
+ * @description This function is an express middleware that retrieves the total market value of each club by aggregating the market values of all players in each club. The club ID is used as the grouping key.
+ * @param {Object} req - The express request object.
+ * @param {Object} res - The express response object. The response will include the status and the data (an array of objects, each containing a club ID and the total market value of the club).
+ * @returns {void}
+ */
 exports.clubsTotalMarketValue = catchAsync(async (req, res) => {
     const docs = await Player.aggregate([{
         $group: {
@@ -214,10 +235,15 @@ exports.clubsTotalMarketValue = catchAsync(async (req, res) => {
         data: docs,
     });
 });
-
+/**
+ * @function getAllNationalities
+ * @description This function is an express middleware that retrieves a list of all unique nationalities of players in the database.
+ * @param {Object} req - The express request object.
+ * @param {Object} res - The express response object. The response will include the status and the data (an array of unique nationalities).
+ * @returns {void}
+ */
 exports.getAllNationalities = catchAsync(async (req, res) => {
        const docs = await Player.find().select("country_of_citizenship -_id");
-       console.log(docs)
         res.status(200).json({
             status: 'success',
             data: [... new Set(docs.map(d => d.country_of_citizenship))]
@@ -225,6 +251,13 @@ exports.getAllNationalities = catchAsync(async (req, res) => {
 })
 
 
+/**
+ * @function getMinMaxMarketValue
+ * @description This function is an express middleware that retrieves the minimum and maximum market values of players in the database.
+ * @param {Object} req - The express request object.
+ * @param {Object} res - The express response object. The response will include the status and the data (an object containing the minimum and maximum market values).
+ * @returns {void}
+ */
 exports.getMinMaxMarketValue = catchAsync(async (req, res) => {
     const docs = await Player.aggregate([{
         $group: {

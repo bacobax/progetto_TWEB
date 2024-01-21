@@ -3,10 +3,34 @@ import {Button, CircularProgress, Input, Spinner} from "@nextui-org/react";
 import useFetch from "../../hooks/useFetch";
 import {passwordRegexValidation, URL_FORGOT_PASSWORD, URL_RESET_PASSWORD} from "../../constants/constants";
 import NeuromorphismDiv from "../../components/UI/NeuromorphismDiv";
-import {login} from "../../auth/authFunctions";
-import {useAuth} from "../../hooks/useAuth";
 import {useForm} from "../../hooks/useForm";
-
+/**
+ * ForgotPasswordPage is a functional component in React.
+ * It does not accept any props.
+ *
+ * The component maintains several state variables:
+ * - email: A string representing the email of the user.
+ * - token: A string representing the token for password reset.
+ * - successSentMessage: A string representing the success message after sending the reset password request.
+ * - phase: A number representing the current phase of the password reset process.
+ * - loading, fetchData, error, setError: The functions and state returned from the useFetch custom hook.
+ * - formState, handleInputChange: The state and function returned from the useForm custom hook. The formState includes the password and confirmPassword fields.
+ *
+ * The handleSubmit0 function is a callback that handles the form submission event for the first phase of the password reset process. It sends a request to the server to initiate the password reset process.
+ *
+ * The handleSubmit1 function is a callback that handles the form submission event for the second phase of the password reset process. It sends a request to the server to reset the password.
+ *
+ * The phaseSubmits array includes the handleSubmit0 and handleSubmit1 functions. The function for the current phase is used to handle the form submission event.
+ *
+ * The emailValid constant is a boolean indicating whether the email is valid.
+ *
+ * The phaseRendering array includes the JSX for the first and second phases of the password reset process.
+ *
+ * The component returns a div element with the following children:
+ * - A h1 element displaying the title "Password recovery".
+ * - A NeuromorphismDiv component containing a form for the password reset process. The form includes an Input component for the email in the first phase and Input components for the token, password, and confirmPassword in the second phase. The form also includes a Button component for submitting the form.
+ * - A CircularProgress component displaying the progress of the password reset process.
+ */
 const ForgotPasswordPage: FC = () => {
     const [email, setEmail] = useState('');
     const [token, setToken] = useState('');
@@ -15,7 +39,7 @@ const ForgotPasswordPage: FC = () => {
     const {loading,fetchData,error,setError} = useFetch();
 
 
-    const {formState, handleInputChange, reset  , isValid} = useForm({
+    const {formState, handleInputChange} = useForm({
         password : {
             value: "",
             error: false,

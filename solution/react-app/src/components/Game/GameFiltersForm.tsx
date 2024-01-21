@@ -22,7 +22,28 @@ interface CompetitionItem {
 //verify if is a year and if is in the past
 const yearValidation = (value: string) => value.trim().length===0 || (value.length === 4 && parseInt(value) <= new Date().getFullYear());
 
-
+/**
+ * GameFiltersForm is a functional component in React.
+ * It accepts props of type GameFiltersFormProps which includes:
+ * - onApplyFilters: A function to be executed when the filters are applied.
+ * - idLoading: A boolean indicating whether the ID is being loaded.
+ *
+ * The component uses the useAsyncList hook to fetch a list of competitions.
+ *
+ * The useForm hook is used to manage the state of the form, which includes the competition_id, type, and season fields.
+ *
+ * The handleSubmit function is a callback that handles the form submission event. It prevents the default form submission behavior, calls the onApplyFilters prop with the current form state, and resets the form.
+ *
+ * The isCompetitionValid and isTypeValid constants are booleans indicating whether the competition_id and type fields are valid.
+ *
+ * The formIsValid constant is a boolean indicating whether the form is valid. It is true if either the competition_id or type field is valid, but not both.
+ *
+ * The component returns a form element with the following children:
+ * - An Autocomplete component for the competition_id field.
+ * - A Select component for the type field.
+ * - An Input component for the season field.
+ * - A Button component for submitting the form.
+ */
 export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoading}) => {
 
     const list = useAsyncList<CompetitionItem>({
@@ -35,7 +56,7 @@ export const GameFiltersForm:FC<GameFiltersFormProps> = ({onApplyFilters, idLoad
         }
     })
 
-    const {formState, handleInputChange, reset, isValid} = useForm({
+    const {formState, handleInputChange,} = useForm({
         competition_id: {
             value: "",
             error: true,

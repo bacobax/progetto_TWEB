@@ -3,7 +3,7 @@
  * express middleware that wrap that function, so that any error that occurs in the
  * function is passed to the next middleware
  * @param fn
- * @returns {(function(*, *, *): void)|*}
+ * @returns a function with same shape of an express middleware
  */
 module.exports = (fn) => {
   return (req, res, next) => {

@@ -24,6 +24,28 @@ const transitionForm=  {
     stiffness: 400,
     damping: 30,
 }
+/**
+ * SmartForm is a functional component in React.
+ * It does not accept any props.
+ *
+ * The component maintains several state variables:
+ * - width: The width of the window, retrieved from the useWindowSize custom hook.
+ * - openModal, isModalOpen, closeModal: The functions and state returned from the useModal custom hook.
+ * - loading, login, error, signup, setError: The functions and state returned from the useAuth custom hook.
+ * - searchParams, setSearchParams: The search parameters and setter function returned from the useSearchParams hook.
+ * - mode: The mode of the form, retrieved from the search parameters.
+ * - isSignin: A boolean indicating whether the form is in sign in mode.
+ *
+ * The component defines several callback functions:
+ * - toggleForm: This function toggles the form mode between sign in and sign up.
+ * - onSubmitHandler: This function handles the form submission. It calls the login or signup function from the useAuth hook based on the form mode.
+ *
+ * The component returns a div element with the following children:
+ * - A MyBreadcrumbs component displaying the navigation path.
+ * - An AnimatedForm component displaying the authentication form. The form mode, toggle function, and submit handler are passed as props to the AnimatedForm component.
+ * - A Loading component displayed when the authentication process is loading.
+ * - An AuthError component displayed when there is an authentication error.
+ */
 const SmartForm: React.FC<DualFormProps> = () => {
 
     const {width} = useWindowSize();
@@ -51,11 +73,7 @@ const SmartForm: React.FC<DualFormProps> = () => {
         if(isSignin) {
             const {email,password} = state;
            login({email:email.value, password:password.value, afterSuccess: () => {
-               if(searchParams.has("frompage")) {
-                   navigate(-1);
-               }else{
-                   navigate(-2);
-               }
+               navigate("/");
 
            }});
 
@@ -68,16 +86,14 @@ const SmartForm: React.FC<DualFormProps> = () => {
                 confirmPassword: confirmPassword.value,
                 email: email.value,
                 afterSuccess: () => {
-                    if(searchParams.has("frompage")) {
-                        navigate(-1);
-                    }else{
-                        navigate(-2);
-                    }
+
+                    navigate("/");
+
                 }
             });
 
         }
-    },[isSignin,login,signup,navigate,searchParams]);
+    },[isSignin,login,signup,navigate]);
 
 
     return (

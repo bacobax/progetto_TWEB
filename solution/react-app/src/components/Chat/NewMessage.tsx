@@ -6,6 +6,19 @@ interface NewMessageProps {
     onNewMessage: (text:string) => void;
 
 }
+/**
+ * NewMessage is a functional component in React.
+ * It accepts props of type NewMessageProps which includes:
+ * - onNewMessage: A function to be executed when a new message is sent.
+ *
+ * The component maintains a state variable text, which is the text of the new message.
+ *
+ * The handleSubmit function is a handler for the form submission event. It prevents the default form submission behavior and calls the onNewMessage prop with the text from the state.
+ *
+ * The component returns a form element styled with Tailwind CSS classes. The form includes an Input component from the @nextui-org/react library for entering the new message.
+ * The Input component is a controlled component, with its value and onChange props tied to the text state.
+ * The Input component also includes a submit button with an icon, wrapped in a button element. The button is styled with Tailwind CSS classes and triggers the form submission when clicked.
+ */
 export const NewMessage:FC<NewMessageProps> = ({onNewMessage}) => {
     const [text, setText] = useState("");
 

@@ -78,12 +78,20 @@ const Backdrop = ({ onClick }: { onClick: (e: any) => void }) => {
 };
 
 
+/**
+ * Modal is a functional component in React.
+ * It accepts props of type ModalProps which includes:
+ * - children: The child elements to be rendered within the Modal component.
+ * - onClose: A function to be executed when the modal is closed.
+ * - classNames: An object containing optional CSS classes to be applied to the modal and its content.
+ * - title: A string representing the title of the modal.
+ * - opened: A boolean indicating whether the modal is open.
+ *
+ * The component returns a fragment containing two AnimatePresence components from the framer-motion library.
+ * - The first AnimatePresence wraps the ModalComponent. If the opened prop is true, the ModalComponent is rendered with the props and children passed to the Modal component.
+ * - The second AnimatePresence wraps the Backdrop component. If the opened prop is true, the Backdrop component is rendered with the onClose prop passed to the Modal component.
+ */
 const Modal:FC<ModalProps> = ({children, ...props}) => {
-
-
-
-
-
 
   return (
       <>

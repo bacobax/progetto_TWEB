@@ -14,13 +14,7 @@ const SUB_POSITIONS = ['Attacking Midfield',
   'Second Striker'
 ]
 
-/**
- * Represents an array of lineup positions in a sports game.
- * @type {Array<string>}
- * @example
- * console.log(LINEUP_POSITIONS);
- * //Output: ['Goalkeeper', 'Right-Back', 'Central Midfield', 'Left Winger', 'Attacking Midfield', 'Right Midfield', 'Right Winger', 'Defender', 'Defensive Midfield', 'Left-Back', 'midfield', 'Attack', 'Centre-Back', 'Centre-Forward', 'Second Striker', 'Left Midfield', 'Sweeper']
- */
+
 const LINEUP_POSITIONS = [
   'Goalkeeper',
   'Right-Back',

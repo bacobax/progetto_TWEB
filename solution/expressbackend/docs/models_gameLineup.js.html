@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/gameLineup.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/gameLineup.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * game_lineups(game_lineups_id,game_id,club_id,type,number,player_id,player_name,team_captain,position)
+
+ */
+
+const mongoose = require('mongoose');
+
+const { LINEUP_TYPES, LINEUP_POSITIONS } = require('../utils/constants');
+
+const gameLineupSchema = mongoose.Schema({
+  game_id: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Game',
+    required: true,
+  },
+  club_id: {
+    type: Number,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+    enum: LINEUP_TYPES,
+  },
+  number: {
+    type: String,
+    required: true,
+  },
+  player_id: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Player',
+    required: true,
+  },
+  player_name: {
+    type: String,
+    required: true,
+  },
+  team_captain: {
+    type: Boolean,
+    required: true,
+  },
+  position: {
+    type: String,
+    required: true,
+    enum: LINEUP_POSITIONS,
+  },
+});
+const GameLineup = mongoose.model('GameLineup', gameLineupSchema);
+module.exports = GameLineup;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="APIFeatures.html">APIFeatures</a></li><li><a href="AppError.html">AppError</a></li></ul><h3>Global</h3><ul><li><a href="global.html#aggregateValidation">aggregateValidation</a></li><li><a href="global.html#allKeysExcept">allKeysExcept</a></li><li><a href="global.html#changePasswordAfter">changePasswordAfter</a></li><li><a href="global.html#cleaningGameDatasets">cleaningGameDatasets</a></li><li><a href="global.html#cleaningOnlyGameDataset">cleaningOnlyGameDataset</a></li><li><a href="global.html#cleaningOnlyPlayerDataset">cleaningOnlyPlayerDataset</a></li><li><a href="global.html#cleaningPlayersDataset">cleaningPlayersDataset</a></li><li><a href="global.html#clubsTotalMarketValue">clubsTotalMarketValue</a></li><li><a href="global.html#correctPassword">correctPassword</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#createPasswordResetToken">createPasswordResetToken</a></li><li><a href="global.html#createRoom">createRoom</a></li><li><a href="global.html#deleteAll">deleteAll</a></li><li><a href="global.html#deleteOne">deleteOne</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#gameEventFilterPlayer_assist_id">gameEventFilterPlayer_assist_id</a></li><li><a href="global.html#gameEventFilterPlayer_in_id">gameEventFilterPlayer_in_id</a></li><li><a href="global.html#getAll">getAll</a></li><li><a href="global.html#getAllNationalities">getAllNationalities</a></li><li><a href="global.html#getAllUserRoom">getAllUserRoom</a></li><li><a href="global.html#getByName">getByName</a></li><li><a href="global.html#getDateWeek">getDateWeek</a></li><li><a href="global.html#getEvents">getEvents</a></li><li><a href="global.html#getMinMaxMarketValue">getMinMaxMarketValue</a></li><li><a href="global.html#getOne">getOne</a></li><li><a href="global.html#getOneGame">getOneGame</a></li><li><a href="global.html#getOnePlayer">getOnePlayer</a></li><li><a href="global.html#joinRoom">joinRoom</a></li><li><a href="global.html#leaveRoom">leaveRoom</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#newMessage">newMessage</a></li><li><a href="global.html#populateGames">populateGames</a></li><li><a href="global.html#populatePlayers">populatePlayers</a></li><li><a href="global.html#pre">pre</a></li><li><a href="global.html#pre-save">pre-save</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#resetPassword">resetPassword</a></li><li><a href="global.html#restrictTo">restrictTo</a></li><li><a href="global.html#sanitizeGameId">sanitizeGameId</a></li><li><a href="global.html#sanitizePlayerId">sanitizePlayerId</a></li><li><a href="global.html#sanitizePlayer_inID">sanitizePlayer_inID</a></li><li><a href="global.html#search">search</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#signToken">signToken</a></li><li><a href="global.html#signup">signup</a></li><li><a href="global.html#statsFromAppearances">statsFromAppearances</a></li><li><a href="global.html#statsFromAppearancesForeachCompetition">statsFromAppearancesForeachCompetition</a></li><li><a href="global.html#updateOne">updateOne</a></li><li><a href="global.html#verifyModelSelectedFields">verifyModelSelectedFields</a></li><li><a href="global.html#verifyQueryFields">verifyQueryFields</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Jan 21 2024 09:06:21 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -11,6 +11,22 @@ interface PlayerCardProps extends ShortPlayer {
   className?: string;
 }
 
+/**
+ * PlayerCard is a functional component in React.
+ * It accepts props of type PlayerCardProps which includes:
+ * - first_name: A string representing the first name of the player.
+ * - last_name: A string representing the last name of the player.
+ * - _id: A string representing the ID of the player.
+ * - image_url: A string representing the URL of the player's image.
+ * - market_value_in_eur: A number representing the market value of the player in euros.
+ * - highest_market_value_in_eur: A number representing the highest market value of the player in euros.
+ *
+ * The component uses the useNavigate hook from the react-router-dom library to get a function for navigating to different routes.
+ *
+ * The component returns a Card component from the @nextui-org/react library. The Card includes:
+ * - A CardBody component with the player's name, market value, and image.
+ * - A CardFooter component with a Button component. The Button navigates to the player's page when clicked.
+ */
 const PlayerCard: React.FC<PlayerCardProps> = ({
   first_name,
     last_name,
@@ -47,5 +63,4 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
       </Card>
   );
 };
-
 export default PlayerCard;

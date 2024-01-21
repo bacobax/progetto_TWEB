@@ -19,7 +19,25 @@ export interface ResponseType {
         name: string,
     }[],
 }
-
+/**
+ * SearchBar is a functional component in React.
+ * It does not accept any props.
+ *
+ * The component maintains several state variables:
+ * - closeModal, isModalOpen, openModal: The functions and state returned from the useModal custom hook.
+ * - searchTerm, setSearchTerm, loading, data, setData: The functions and state returned from the useSearch custom hook.
+ *
+ * The useKeyCombo custom hook is used to listen for the key combo ctrl+k or cmd+k in order to toggle the modal.
+ *
+ * The handleChange function is a callback that handles the change event of the search input. It updates the searchTerm state with the value of the input.
+ *
+ * The handleClear function is a callback that handles the clear event. It resets the searchTerm state and the data state.
+ *
+ * The component returns a fragment containing a FakeSearchBar component and a Modal component.
+ * The FakeSearchBar component is passed the openModal function as the onClick prop.
+ * The Modal component includes an Input component for the search term, a Button component for clearing the search term, and a FoundedList component for displaying the search results.
+ * The Modal component also includes conditional rendering for displaying a message when there are no search results.
+ */
 const SearchBar : React.FC = () => {
 
     const { closeModal, isModalOpen, openModal } = useModal(false);

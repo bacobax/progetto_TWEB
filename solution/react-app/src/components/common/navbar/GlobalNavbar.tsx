@@ -37,7 +37,26 @@ const items = [
     },
 
 ]
-
+/**
+ * GlobalNavbar is a functional component in React.
+ * It does not accept any props.
+ *
+ * The component maintains several state variables:
+ * - loggedIn: A boolean indicating whether the user is logged in, retrieved from the useAuth custom hook.
+ * - isMenuOpen: A boolean indicating whether the navbar menu is open.
+ * - pathname: The current path, retrieved from the useLocation hook from the react-router-dom library.
+ *
+ * The component defines several callback functions:
+ * - navigate: A function for navigating to different routes, retrieved from the useNavigate hook from the react-router-dom library.
+ * - logout: A function for logging out the user, retrieved from the useAuth custom hook.
+ *
+ * The component returns a Navbar component from the @nextui-org/react library. The Navbar includes:
+ * - A NavbarMenuToggle component for toggling the navbar menu on small screens.
+ * - A NavbarBrand component containing a SearchBar component.
+ * - A NavbarContent component containing NavbarMenuItem components for each item in the items array. Each NavbarMenuItem includes a Link component to the item's href.
+ * - A NavbarContent component containing a NavbarItem component with a Button component for logging out the user if the user is logged in, or NavbarItem components with Link and Button components for logging in and signing up if the user is not logged in.
+ * - A NavbarMenu component containing NavbarMenuItem components for each item in the items array. Each NavbarMenuItem includes a Link component to the item's href.
+ */
 export const GlobalNavbar:FC = () => {
 
     const {loggedIn, logout} = useAuth();

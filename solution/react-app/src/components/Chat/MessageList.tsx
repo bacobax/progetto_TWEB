@@ -11,6 +11,23 @@ interface MessageListProps {
 }
 
 
+/**
+ * MessageList is a functional component in React.
+ * It accepts props of type MessageListProps which includes:
+ * - messages: An array of Message objects representing the messages in the chat room.
+ * - userID: A string representing the ID of the current user.
+ * - loadingMessage: A boolean indicating whether a new message is being sent.
+ * - errorNewMessage: A string representing any error that occurred while sending a new message.
+ *
+ * The component returns a ScrollShadow component from the @nextui-org/react library. This component provides a scrollable area with a shadow effect.
+ * The ScrollShadow component is styled with Tailwind CSS classes and contains a list of messages.
+ *
+ * Each message is displayed in a div element. The div is aligned to the end if the message is from the current user, or to the start if the message is from another user.
+ * The div includes two labels displaying the sender's name and the message text. The labels are styled with Tailwind CSS classes and the message text is displayed in a rounded box with a background color depending on the sender.
+ *
+ * If the message is the last one in the list and a new message is being sent, a label with the text "Sending message..." is displayed.
+ * If the message is the last one in the list and there was an error sending a new message, a label with the text "ERROR SENDING MESSAGE" is displayed.
+ */
 export const MessageList: FC<MessageListProps> = ({ messages, userID, loadingMessage, errorNewMessage }) => {
     return (
         <ScrollShadow orientation={"vertical"} className={"h-5/6 w-full flex flex-col p-[30px] gap-[10px] overflow-scroll"}>
