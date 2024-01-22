@@ -39,6 +39,7 @@ postgres_constants = {
 clubs_columns = ["_id", "average_age", "club_code", "coach_name", "domestic_competition_id", "foreigners_number", "foreigners_percentage", "last_season", "name", "national_team_players", "net_transfer_record", "squad_size", "stadium_name", "stadium_seats", "total_market_value", "url"]
 competitions_columns = ["competition_code" , "_id" , "confederation" , "country_id", "country_name", "domestic_league_code", "name", "sub_type", "type", "url"]
 
+
 def read_from_postgre(table, query=None, host=postgres_constants['host'], port=postgres_constants['port'], db=postgres_constants['db']):
 
     if query is None:

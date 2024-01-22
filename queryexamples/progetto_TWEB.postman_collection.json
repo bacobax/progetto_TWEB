@@ -1,0 +1,741 @@
+{
+	"info": {
+		"_postman_id": "4bf78f87-82b0-45a9-bd32-6e854cb89d6a",
+		"name": "progetto_TWEB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24901827"
+	},
+	"item": [
+		{
+			"name": "express",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"name0\",\n    \"surname\" : \"surname0\",\n    \"email\" : \"email@provider.com\",\n    \"role\" : \"user\",\n    \"password\" : \"ciaociao\",\n    \"confirmPassword\" : \"ciaociao\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/users/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"ciao@gmail.com\",\n    \"password\" : \"Prova2023!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/player?limit=30&page=1&fields=first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"player"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "30"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sort",
+									"value": "-market_value_in_eur",
+									"disabled": true
+								},
+								{
+									"key": "fields",
+									"value": "first_name,last_name,image_url,market_value_in_eur,highest_market_value_in_eur"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "player",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/player/6574baf3975bb4cdf6a05aee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"player",
+								"6574baf3975bb4cdf6a05aee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateRoom",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"name0\",\n    \"admin\" : \"655a46321fb0841146189ba1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/room",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"room"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "players_by_name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/player/name/sada",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"player",
+								"name",
+								"sada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRoomsByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/room/user/655a46321fb0841146189ba1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"room",
+								"user",
+								"655a46321fb0841146189ba1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWE1NjQ4YmM5NTAwOTU2MmI5ZDk0NyIsImlhdCI6MTcwMjgxNTQ1OSwiZXhwIjoxNzAyODE4NDU5fQ.9iZPD6YRA2o8gELoP01xWX-3pRYO11PWIdMVyVD61lE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"stai\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/room/newMessage/657c6341c80791c8ada2f708",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"room",
+								"newMessage",
+								"657c6341c80791c8ada2f708"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JoinRoom",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWE1NjQ4YmM5NTAwOTU2MmI5ZDk0NyIsImlhdCI6MTcwMjgxNTQ1OSwiZXhwIjoxNzAyODE4NDU5fQ.9iZPD6YRA2o8gELoP01xWX-3pRYO11PWIdMVyVD61lE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/api/room/join/657c6341c80791c8ada2f708",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"room",
+								"join",
+								"657c6341c80791c8ada2f708"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "roomsbyname",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/room?name=name0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"room"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "name0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game from id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/game/6574bae9291260c74de18e4c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"game",
+								"6574bae9291260c74de18e4c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "games",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/game?sort=-season&competition_id=CIT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "-season"
+								},
+								{
+									"key": "competition_id",
+									"value": "CIT"
+								},
+								{
+									"key": "fields",
+									"value": "away_club_name,home_club_name",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/game/6574bae9291260c74de18e4c/events?limit=100&page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"game",
+								"6574bae9291260c74de18e4c",
+								"events"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "100"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clubsMarketValue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/player/clubsMarketValue",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"player",
+								"clubsMarketValue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gameEventByPlayer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/gameEvent?player_id=6574baf3975bb4cdf6a00864&sort=game_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gameEvent"
+							],
+							"query": [
+								{
+									"key": "player_id",
+									"value": "6574baf3975bb4cdf6a00864"
+								},
+								{
+									"key": "sort",
+									"value": "game_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "playerNationalities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/player/nationalities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"player",
+								"nationalities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "minmaxmarketVAlue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/player/market_value_in_eur/minmax",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"player",
+								"market_value_in_eur",
+								"minmax"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgotPSW",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"bacobas@icloud.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/users/forgotPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"forgotPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RESETPSW",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/resetPassword/7e8708af9dd5641b0bbe2e07e6bc4515e689fbf601e63f503ae264d17c288e7d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"resetPassword",
+								"7e8708af9dd5641b0bbe2e07e6bc4515e689fbf601e63f503ae264d17c288e7d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Java",
+			"item": [
+				{
+					"name": "clubs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/club?page=2&pagesize=30",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"club"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "pagesize",
+									"value": "30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "compeitions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/api/competitions",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"competitions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "club_by_name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/club/name/ma",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"club",
+								"name",
+								"ma"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "club_info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/club/338",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"club",
+								"338"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "competitionNames",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n        \"UKR1\",\n        \"CLQ\"\n    ]\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/competitions/names",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"competitions",
+								"names"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTotalMarketValues",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n        {\n            \"_id\": 3691,\n            \"totalMarketValue\": 2775000\n        },\n        {\n            \"_id\": 232,\n            \"totalMarketValue\": 118250000\n        },\n        {\n            \"_id\": 379,\n            \"totalMarketValue\": 501300000\n        },\n        {\n            \"_id\": 417,\n            \"totalMarketValue\": 262100000\n        },\n        {\n            \"_id\": 6994,\n            \"totalMarketValue\": 675000\n        },\n        {\n            \"_id\": 4171,\n            \"totalMarketValue\": 18470000\n        },\n        {\n            \"_id\": 48726,\n            \"totalMarketValue\": 14550000\n        },\n        {\n            \"_id\": 281,\n            \"totalMarketValue\": 1328575000\n        },\n        {\n            \"_id\": 1269,\n            \"totalMarketValue\": 26900000\n        },\n        {\n            \"_id\": 2995,\n            \"totalMarketValue\": 33850000\n        },\n        {\n            \"_id\": 3426,\n            \"totalMarketValue\": 8075000\n        },\n        {\n            \"_id\": 825,\n            \"totalMarketValue\": 5975000\n        },\n        {\n            \"_id\": 39,\n            \"totalMarketValue\": 141800000\n        },\n        {\n            \"_id\": 42,\n            \"totalMarketValue\": 8300000\n        },\n        {\n            \"_id\": 148,\n            \"totalMarketValue\": 786650000\n        },\n        {\n            \"_id\": 403,\n            \"totalMarketValue\": 21350000\n        },\n        {\n            \"_id\": 1082,\n            \"totalMarketValue\": 250325000\n        },\n        {\n            \"_id\": 1090,\n            \"totalMarketValue\": 87575000\n        },\n        {\n            \"_id\": 1237,\n            \"totalMarketValue\": 510525000\n        },\n        {\n            \"_id\": 1110,\n            \"totalMarketValue\": 20075000\n        },\n        {\n            \"_id\": 5220,\n            \"totalMarketValue\": 2050000\n        },\n        {\n            \"_id\": 22110,\n            \"totalMarketValue\": 1500000\n        },\n        {\n            \"_id\": 121,\n            \"totalMarketValue\": 91700000\n        },\n        {\n            \"_id\": 48332,\n            \"totalMarketValue\": 14250000\n        },\n        {\n            \"_id\": 3216,\n            \"totalMarketValue\": 1150000\n        },\n        {\n            \"_id\": 41,\n            \"totalMarketValue\": 8185000\n        },\n        {\n            \"_id\": 7378,\n            \"totalMarketValue\": 52175000\n        },\n        {\n            \"_id\": 8970,\n            \"totalMarketValue\": 75125000\n        },\n        {\n            \"_id\": 1158,\n            \"totalMarketValue\": 124325000\n        },\n        {\n            \"_id\": 1124,\n            \"totalMarketValue\": 14650000\n        },\n        {\n            \"_id\": 467,\n            \"totalMarketValue\": 38110000\n        },\n        {\n            \"_id\": 192,\n            \"totalMarketValue\": 7400000\n        },\n        {\n            \"_id\": 1627,\n            \"totalMarketValue\": 1685000\n        },\n        {\n            \"_id\": 855,\n            \"totalMarketValue\": 8100000\n        },\n        {\n            \"_id\": 1531,\n            \"totalMarketValue\": 50075000\n        },\n        {\n            \"_id\": 703,\n            \"totalMarketValue\": 428025000\n        },\n        {\n            \"_id\": 968,\n            \"totalMarketValue\": 42750000\n        },\n        {\n            \"_id\": 244,\n            \"totalMarketValue\": 290175000\n        },\n        {\n            \"_id\": 366,\n            \"totalMarketValue\": 55575000\n        },\n        {\n            \"_id\": 3592,\n            \"totalMarketValue\": 10200000\n        },\n        {\n            \"_id\": 1894,\n            \"totalMarketValue\": 6775000\n        },\n        {\n            \"_id\": 3719,\n            \"totalMarketValue\": 22485000\n        },\n        {\n            \"_id\": 6414,\n            \"totalMarketValue\": 1150000\n        },\n        {\n            \"_id\": 1108,\n            \"totalMarketValue\": 85550000\n        },\n        {\n            \"_id\": 7179,\n            \"totalMarketValue\": 20525000\n        },\n        {\n            \"_id\": 172,\n            \"totalMarketValue\": 49275000\n        },\n        {\n            \"_id\": 9007,\n            \"totalMarketValue\": 2100000\n        },\n        {\n            \"_id\": 4795,\n            \"totalMarketValue\": 5425000\n        },\n        {\n            \"_id\": 4,\n            \"totalMarketValue\": 12325000\n        },\n        {\n            \"_id\": 1071,\n            \"totalMarketValue\": 1250000\n        },\n        {\n            \"_id\": 2921,\n            \"totalMarketValue\": 6375000\n        },\n        {\n            \"_id\": 31,\n            \"totalMarketValue\": 968650000\n        },\n        {\n            \"_id\": 350,\n            \"totalMarketValue\": 164400000\n        },\n        {\n            \"_id\": 63007,\n            \"totalMarketValue\": 7050000\n        },\n        {\n            \"_id\": 58,\n            \"totalMarketValue\": 135850000\n        },\n        {\n            \"_id\": 2431,\n            \"totalMarketValue\": 11125000\n        },\n        {\n            \"_id\": 6894,\n            \"totalMarketValue\": 225000\n        },\n        {\n            \"_id\": 3558,\n            \"totalMarketValue\": 900000\n        },\n        {\n            \"_id\": 2423,\n            \"totalMarketValue\": 35950000\n        },\n        {\n            \"_id\": 44,\n            \"totalMarketValue\": 39325000\n        },\n        {\n            \"_id\": 6676,\n            \"totalMarketValue\": 20935000\n        },\n        {\n            \"_id\": 317,\n            \"totalMarketValue\": 70000000\n        },\n        {\n            \"_id\": 1159,\n            \"totalMarketValue\": 1200000\n        },\n        {\n            \"_id\": 449,\n            \"totalMarketValue\": 157650000\n        },\n        {\n            \"_id\": 1148,\n            \"totalMarketValue\": 391450000\n        },\n        {\n            \"_id\": 1426,\n            \"totalMarketValue\": 9525000\n        },\n        {\n            \"_id\": 475,\n            \"totalMarketValue\": 43225000\n        },\n        {\n            \"_id\": 865,\n            \"totalMarketValue\": 79060000\n        },\n        {\n            \"_id\": 41201,\n            \"totalMarketValue\": 8650000\n        },\n        {\n            \"_id\": 621,\n            \"totalMarketValue\": 240775000\n        },\n        {\n            \"_id\": 595,\n            \"totalMarketValue\": 4250000\n        },\n        {\n            \"_id\": 3302,\n            \"totalMarketValue\": 108800000\n        },\n        {\n            \"_id\": 2944,\n            \"totalMarketValue\": 1460000\n        },\n        {\n            \"_id\": 4083,\n            \"totalMarketValue\": 11610000\n        },\n        {\n            \"_id\": 61825,\n            \"totalMarketValue\": 12575000\n        },\n        {\n            \"_id\": 826,\n            \"totalMarketValue\": 262100000\n        },\n        {\n            \"_id\": 1304,\n            \"totalMarketValue\": 25710000\n        },\n        {\n            \"_id\": 43,\n            \"totalMarketValue\": 30475000\n        },\n        {\n            \"_id\": 370,\n            \"totalMarketValue\": 34625000\n        },\n        {\n            \"_id\": 1053,\n            \"totalMarketValue\": 27750000\n        },\n        {\n            \"_id\": 5219,\n            \"totalMarketValue\": 5550000\n        },\n        {\n            \"_id\": 89,\n            \"totalMarketValue\": 211675000\n        },\n        {\n            \"_id\": 2288,\n            \"totalMarketValue\": 12525000\n        },\n        {\n            \"_id\": 678,\n            \"totalMarketValue\": 39250000\n        },\n        {\n            \"_id\": 49702,\n            \"totalMarketValue\": 26025000\n        },\n        {\n            \"_id\": 368,\n            \"totalMarketValue\": 237075000\n        },\n        {\n            \"_id\": 38,\n            \"totalMarketValue\": 17000000\n        },\n        {\n            \"_id\": 1123,\n            \"totalMarketValue\": 54450000\n        },\n        {\n            \"_id\": 16245,\n            \"totalMarketValue\": 425000\n        },\n        {\n            \"_id\": 6574,\n            \"totalMarketValue\": 193150000\n        },\n        {\n            \"_id\": 24245,\n            \"totalMarketValue\": 9175000\n        },\n        {\n            \"_id\": 367,\n            \"totalMarketValue\": 105450000\n        },\n        {\n            \"_id\": 441,\n            \"totalMarketValue\": 11675000\n        },\n        {\n            \"_id\": 3008,\n            \"totalMarketValue\": 4875000\n        },\n        {\n            \"_id\": 1186,\n            \"totalMarketValue\": 16275000\n        },\n        {\n            \"_id\": 1096,\n            \"totalMarketValue\": 113975000\n        },\n        {\n            \"_id\": 660,\n            \"totalMarketValue\": 153025000\n        },\n        {\n            \"_id\": 940,\n            \"totalMarketValue\": 183600000\n        },\n        {\n            \"_id\": 28095,\n            \"totalMarketValue\": 15025000\n        },\n        {\n            \"_id\": 1245,\n            \"totalMarketValue\": 48760000\n        },\n        {\n            \"_id\": 2919,\n            \"totalMarketValue\": 115400000\n        },\n        {\n            \"_id\": 347,\n            \"totalMarketValue\": 68800000\n        },\n        {\n            \"_id\": 2227,\n            \"totalMarketValue\": 635000\n        },\n        {\n            \"_id\": 1032,\n            \"totalMarketValue\": 425000\n        },\n        {\n            \"_id\": 667,\n            \"totalMarketValue\": 162950000\n        },\n        {\n            \"_id\": 8024,\n            \"totalMarketValue\": 33375000\n        },\n        {\n            \"_id\": 2293,\n            \"totalMarketValue\": 47975000\n        },\n        {\n            \"_id\": 2740,\n            \"totalMarketValue\": 23235000\n        },\n        {\n            \"_id\": 24,\n            \"totalMarketValue\": 202585000\n        },\n        {\n            \"_id\": 132,\n            \"totalMarketValue\": 6650000\n        },\n        {\n            \"_id\": 6195,\n            \"totalMarketValue\": 611160000\n        },\n        {\n            \"_id\": 190,\n            \"totalMarketValue\": 87510000\n        },\n        {\n            \"_id\": 338,\n            \"totalMarketValue\": 88725000\n        },\n        {\n            \"_id\": 2703,\n            \"totalMarketValue\": 475000\n        },\n        {\n            \"_id\": 10484,\n            \"totalMarketValue\": 47175000\n        },\n        {\n            \"_id\": 4128,\n            \"totalMarketValue\": 4250000\n        },\n        {\n            \"_id\": 1075,\n            \"totalMarketValue\": 150250000\n        },\n        {\n            \"_id\": 60,\n            \"totalMarketValue\": 180200000\n        },\n        {\n            \"_id\": 989,\n            \"totalMarketValue\": 368750000\n        },\n        {\n            \"_id\": 20698,\n            \"totalMarketValue\": 325000\n        },\n        {\n            \"_id\": 273,\n            \"totalMarketValue\": 319150000\n        },\n        {\n            \"_id\": 631,\n            \"totalMarketValue\": 1077975000\n        },\n        {\n            \"_id\": 2477,\n            \"totalMarketValue\": 7110000\n        },\n        {\n            \"_id\": 11126,\n            \"totalMarketValue\": 1025000\n        },\n        {\n            \"_id\": 3840,\n            \"totalMarketValue\": 69050000\n        },\n        {\n            \"_id\": 4102,\n            \"totalMarketValue\": 575000\n        },\n        {\n            \"_id\": 964,\n            \"totalMarketValue\": 236425000\n        },\n        {\n            \"_id\": 1160,\n            \"totalMarketValue\": 23225000\n        },\n        {\n            \"_id\": 11282,\n            \"totalMarketValue\": 52800000\n        },\n        {\n            \"_id\": 416,\n            \"totalMarketValue\": 211285000\n        },\n        {\n            \"_id\": 458,\n            \"totalMarketValue\": 8950000\n        },\n        {\n            \"_id\": 5358,\n            \"totalMarketValue\": 11600000\n        },\n        {\n            \"_id\": 2457,\n            \"totalMarketValue\": 15300000\n        },\n        {\n            \"_id\": 142,\n            \"totalMarketValue\": 500000\n        },\n        {\n            \"_id\": 46,\n            \"totalMarketValue\": 638810000\n        },\n        {\n            \"_id\": 1132,\n            \"totalMarketValue\": 273125000\n        },\n        {\n            \"_id\": 714,\n            \"totalMarketValue\": 70750000\n        },\n        {\n            \"_id\": 55686,\n            \"totalMarketValue\": 10575000\n        },\n        {\n            \"_id\": 524,\n            \"totalMarketValue\": 2525000\n        },\n        {\n            \"_id\": 2282,\n            \"totalMarketValue\": 135025000\n        },\n        {\n            \"_id\": 65,\n            \"totalMarketValue\": 19275000\n        },\n        {\n            \"_id\": 234,\n            \"totalMarketValue\": 234450000\n        },\n        {\n            \"_id\": 5818,\n            \"totalMarketValue\": 2350000\n        },\n        {\n            \"_id\": 2414,\n            \"totalMarketValue\": 13600000\n        },\n        {\n            \"_id\": 1010,\n            \"totalMarketValue\": 61275000\n        },\n        {\n            \"_id\": 1049,\n            \"totalMarketValue\": 199025000\n        },\n        {\n            \"_id\": 13,\n            \"totalMarketValue\": 519325000\n        },\n        {\n            \"_id\": 133,\n            \"totalMarketValue\": 19225000\n        },\n        {\n            \"_id\": 1268,\n            \"totalMarketValue\": 14850000\n        },\n        {\n            \"_id\": 1416,\n            \"totalMarketValue\": 11975000\n        },\n        {\n            \"_id\": 2036,\n            \"totalMarketValue\": 29000000\n        },\n        {\n            \"_id\": 589,\n            \"totalMarketValue\": 57110000\n        },\n        {\n            \"_id\": 1003,\n            \"totalMarketValue\": 192700000\n        },\n        {\n            \"_id\": 2381,\n            \"totalMarketValue\": 43675000\n        },\n        {\n            \"_id\": 468,\n            \"totalMarketValue\": 41050000\n        },\n        {\n            \"_id\": 762,\n            \"totalMarketValue\": 712925000\n        },\n        {\n            \"_id\": 5724,\n            \"totalMarketValue\": 30225000\n        },\n        {\n            \"_id\": 157,\n            \"totalMarketValue\": 105825000\n        },\n        {\n            \"_id\": 4750,\n            \"totalMarketValue\": 1500000\n        },\n        {\n            \"_id\": 2420,\n            \"totalMarketValue\": 76025000\n        },\n        {\n            \"_id\": 23,\n            \"totalMarketValue\": 1300000\n        },\n        {\n            \"_id\": 6890,\n            \"totalMarketValue\": 72750000\n        },\n        {\n            \"_id\": 124,\n            \"totalMarketValue\": 151225000\n        },\n        {\n            \"_id\": 2439,\n            \"totalMarketValue\": 4075000\n        },\n        {\n            \"_id\": 2722,\n            \"totalMarketValue\": 13575000\n        },\n        {\n            \"_id\": 903,\n            \"totalMarketValue\": 35800000\n        },\n        {\n            \"_id\": 618,\n            \"totalMarketValue\": 51975000\n        },\n        {\n            \"_id\": 398,\n            \"totalMarketValue\": 344420000\n        },\n        {\n            \"_id\": 3709,\n            \"totalMarketValue\": 129500000\n        },\n        {\n            \"_id\": 724,\n            \"totalMarketValue\": 16575000\n        },\n        {\n            \"_id\": 1301,\n            \"totalMarketValue\": 33150000\n        },\n        {\n            \"_id\": 60949,\n            \"totalMarketValue\": 30425000\n        },\n        {\n            \"_id\": 20,\n            \"totalMarketValue\": 4050000\n        },\n        {\n            \"_id\": 3508,\n            \"totalMarketValue\": 32435000\n        },\n        {\n            \"_id\": 1063,\n            \"totalMarketValue\": 20525000\n        },\n        {\n            \"_id\": 2727,\n            \"totalMarketValue\": 51425000\n        },\n        {\n            \"_id\": 1210,\n            \"totalMarketValue\": 6725000\n        },\n        {\n            \"_id\": 336,\n            \"totalMarketValue\": 315125000\n        },\n        {\n            \"_id\": 40426,\n            \"totalMarketValue\": 1800000\n        },\n        {\n            \"_id\": 10690,\n            \"totalMarketValue\": 35025000\n        },\n        {\n            \"_id\": 2969,\n            \"totalMarketValue\": 22950000\n        },\n        {\n            \"_id\": 2410,\n            \"totalMarketValue\": 96625000\n        },\n        {\n            \"_id\": 12,\n            \"totalMarketValue\": 418155000\n        },\n        {\n            \"_id\": 306,\n            \"totalMarketValue\": 54400000\n        },\n        {\n            \"_id\": 235,\n            \"totalMarketValue\": 21450000\n        },\n        {\n            \"_id\": 3524,\n            \"totalMarketValue\": 67500000\n        },\n        {\n            \"_id\": 173,\n            \"totalMarketValue\": 25375000\n        },\n        {\n            \"_id\": 33,\n            \"totalMarketValue\": 30125000\n        },\n        {\n            \"_id\": 79,\n            \"totalMarketValue\": 134175000\n        },\n        {\n            \"_id\": 1244,\n            \"totalMarketValue\": 10650000\n        },\n        {\n            \"_id\": 3948,\n            \"totalMarketValue\": 42725000\n        },\n        {\n            \"_id\": 512,\n            \"totalMarketValue\": 6875000\n        },\n        {\n            \"_id\": 3,\n            \"totalMarketValue\": 120175000\n        },\n        {\n            \"_id\": 979,\n            \"totalMarketValue\": 35625000\n        },\n        {\n            \"_id\": 418,\n            \"totalMarketValue\": 1080375000\n        },\n        {\n            \"_id\": 3205,\n            \"totalMarketValue\": 44260000\n        },\n        {\n            \"_id\": 543,\n            \"totalMarketValue\": 386475000\n        },\n        {\n            \"_id\": 5817,\n            \"totalMarketValue\": 11100000\n        },\n        {\n            \"_id\": 862,\n            \"totalMarketValue\": 10935000\n        },\n        {\n            \"_id\": 6996,\n            \"totalMarketValue\": 1425000\n        },\n        {\n            \"_id\": 369,\n            \"totalMarketValue\": 16725000\n        },\n        {\n            \"_id\": 3522,\n            \"totalMarketValue\": 59660000\n        },\n        {\n            \"_id\": 130,\n            \"totalMarketValue\": 38235000\n        },\n        {\n            \"_id\": 2783,\n            \"totalMarketValue\": 200000\n        },\n        {\n            \"_id\": 5,\n            \"totalMarketValue\": 559825000\n        },\n        {\n            \"_id\": 18105,\n            \"totalMarketValue\": 11400000\n        },\n        {\n            \"_id\": 6912,\n            \"totalMarketValue\": 28125000\n        },\n        {\n            \"_id\": 131,\n            \"totalMarketValue\": 929500000\n        },\n        {\n            \"_id\": 29228,\n            \"totalMarketValue\": 18775000\n        },\n        {\n            \"_id\": 60551,\n            \"totalMarketValue\": 36050000\n        },\n        {\n            \"_id\": 1436,\n            \"totalMarketValue\": 850000\n        },\n        {\n            \"_id\": 399,\n            \"totalMarketValue\": 181700000\n        },\n        {\n            \"_id\": 127,\n            \"totalMarketValue\": 11875000\n        },\n        {\n            \"_id\": 8838,\n            \"totalMarketValue\": 3275000\n        },\n        {\n            \"_id\": 16795,\n            \"totalMarketValue\": 102300000\n        },\n        {\n            \"_id\": 1429,\n            \"totalMarketValue\": 750000\n        },\n        {\n            \"_id\": 3209,\n            \"totalMarketValue\": 24850000\n        },\n        {\n            \"_id\": 290,\n            \"totalMarketValue\": 25400000\n        },\n        {\n            \"_id\": 83678,\n            \"totalMarketValue\": 4625000\n        },\n        {\n            \"_id\": 41231,\n            \"totalMarketValue\": 36725000\n        },\n        {\n            \"_id\": 1455,\n            \"totalMarketValue\": 825000\n        },\n        {\n            \"_id\": 987,\n            \"totalMarketValue\": 25935000\n        },\n        {\n            \"_id\": 1411,\n            \"totalMarketValue\": 200000\n        },\n        {\n            \"_id\": 21957,\n            \"totalMarketValue\": 3185000\n        },\n        {\n            \"_id\": 4482,\n            \"totalMarketValue\": 1100000\n        },\n        {\n            \"_id\": 16704,\n            \"totalMarketValue\": 122700000\n        },\n        {\n            \"_id\": 641,\n            \"totalMarketValue\": 10300000\n        },\n        {\n            \"_id\": 1420,\n            \"totalMarketValue\": 49675000\n        },\n        {\n            \"_id\": 206,\n            \"totalMarketValue\": 72475000\n        },\n        {\n            \"_id\": 16239,\n            \"totalMarketValue\": 3810000\n        },\n        {\n            \"_id\": 23611,\n            \"totalMarketValue\": 3825000\n        },\n        {\n            \"_id\": 1083,\n            \"totalMarketValue\": 68550000\n        },\n        {\n            \"_id\": 2990,\n            \"totalMarketValue\": 2375000\n        },\n        {\n            \"_id\": 3385,\n            \"totalMarketValue\": 10300000\n        },\n        {\n            \"_id\": 354,\n            \"totalMarketValue\": 39775000\n        },\n        {\n            \"_id\": 3725,\n            \"totalMarketValue\": 40725000\n        },\n        {\n            \"_id\": 1038,\n            \"totalMarketValue\": 66995000\n        },\n        {\n            \"_id\": 39722,\n            \"totalMarketValue\": 11675000\n        },\n        {\n            \"_id\": 723,\n            \"totalMarketValue\": 14575000\n        },\n        {\n            \"_id\": 2700,\n            \"totalMarketValue\": 9375000\n        },\n        {\n            \"_id\": 1533,\n            \"totalMarketValue\": 21300000\n        },\n        {\n            \"_id\": 200,\n            \"totalMarketValue\": 69325000\n        },\n        {\n            \"_id\": 1031,\n            \"totalMarketValue\": 87200000\n        },\n        {\n            \"_id\": 1095,\n            \"totalMarketValue\": 32900000\n        },\n        {\n            \"_id\": 202,\n            \"totalMarketValue\": 33850000\n        },\n        {\n            \"_id\": 2292,\n            \"totalMarketValue\": 125000\n        },\n        {\n            \"_id\": 2671,\n            \"totalMarketValue\": 19975000\n        },\n        {\n            \"_id\": 19771,\n            \"totalMarketValue\": 4130000\n        },\n        {\n            \"_id\": 720,\n            \"totalMarketValue\": 360000000\n        },\n        {\n            \"_id\": 443,\n            \"totalMarketValue\": 19950000\n        },\n        {\n            \"_id\": 2999,\n            \"totalMarketValue\": 8300000\n        },\n        {\n            \"_id\": 237,\n            \"totalMarketValue\": 110900000\n        },\n        {\n            \"_id\": 976,\n            \"totalMarketValue\": 1800000\n        },\n        {\n            \"_id\": 993,\n            \"totalMarketValue\": 1300000\n        },\n        {\n            \"_id\": 995,\n            \"totalMarketValue\": 150300000\n        },\n        {\n            \"_id\": 506,\n            \"totalMarketValue\": 450625000\n        },\n        {\n            \"_id\": 114,\n            \"totalMarketValue\": 161460000\n        },\n        {\n            \"_id\": 2503,\n            \"totalMarketValue\": 56210000\n        },\n        {\n            \"_id\": 1085,\n            \"totalMarketValue\": 11300000\n        },\n        {\n            \"_id\": 520,\n            \"totalMarketValue\": 45225000\n        },\n        {\n            \"_id\": 800,\n            \"totalMarketValue\": 385365000\n        },\n        {\n            \"_id\": 12438,\n            \"totalMarketValue\": 1650000\n        },\n        {\n            \"_id\": 19789,\n            \"totalMarketValue\": 28160000\n        },\n        {\n            \"_id\": 16,\n            \"totalMarketValue\": 482250000\n        },\n        {\n            \"_id\": 1025,\n            \"totalMarketValue\": 205690000\n        },\n        {\n            \"_id\": 11688,\n            \"totalMarketValue\": 23275000\n        },\n        {\n            \"_id\": 603,\n            \"totalMarketValue\": 14675000\n        },\n        {\n            \"_id\": 14171,\n            \"totalMarketValue\": 2625000\n        },\n        {\n            \"_id\": 54189,\n            \"totalMarketValue\": 21600000\n        },\n        {\n            \"_id\": 339,\n            \"totalMarketValue\": 1575000\n        },\n        {\n            \"_id\": 3336,\n            \"totalMarketValue\": 12500000\n        },\n        {\n            \"_id\": 410,\n            \"totalMarketValue\": 186960000\n        },\n        {\n            \"_id\": 3368,\n            \"totalMarketValue\": 31375000\n        },\n        {\n            \"_id\": 2079,\n            \"totalMarketValue\": 1225000\n        },\n        {\n            \"_id\": 385,\n            \"totalMarketValue\": 39375000\n        },\n        {\n            \"_id\": 2553,\n            \"totalMarketValue\": 20000000\n        },\n        {\n            \"_id\": 41274,\n            \"totalMarketValue\": 9450000\n        },\n        {\n            \"_id\": 610,\n            \"totalMarketValue\": 186050000\n        },\n        {\n            \"_id\": 3714,\n            \"totalMarketValue\": 4110000\n        },\n        {\n            \"_id\": 2696,\n            \"totalMarketValue\": 48900000\n        },\n        {\n            \"_id\": 105,\n            \"totalMarketValue\": 36875000\n        },\n        {\n            \"_id\": 167,\n            \"totalMarketValue\": 139625000\n        },\n        {\n            \"_id\": 1162,\n            \"totalMarketValue\": 5325000\n        },\n        {\n            \"_id\": 1467,\n            \"totalMarketValue\": 15660000\n        },\n        {\n            \"_id\": 1435,\n            \"totalMarketValue\": 23125000\n        },\n        {\n            \"_id\": 653,\n            \"totalMarketValue\": 24450000\n        },\n        {\n            \"_id\": 6993,\n            \"totalMarketValue\": 4640000\n        },\n        {\n            \"_id\": 1387,\n            \"totalMarketValue\": 45000\n        },\n        {\n            \"_id\": 1465,\n            \"totalMarketValue\": 39850000\n        },\n        {\n            \"_id\": 681,\n            \"totalMarketValue\": 459925000\n        },\n        {\n            \"_id\": 6646,\n            \"totalMarketValue\": 46050000\n        },\n        {\n            \"_id\": 2760,\n            \"totalMarketValue\": 4075000\n        },\n        {\n            \"_id\": 82,\n            \"totalMarketValue\": 258225000\n        },\n        {\n            \"_id\": 820,\n            \"totalMarketValue\": 13375000\n        },\n        {\n            \"_id\": 607,\n            \"totalMarketValue\": 29525000\n        },\n        {\n            \"_id\": 23826,\n            \"totalMarketValue\": 424050000\n        },\n        {\n            \"_id\": 2448,\n            \"totalMarketValue\": 3650000\n        },\n        {\n            \"_id\": 583,\n            \"totalMarketValue\": 1221900000\n        },\n        {\n            \"_id\": 20100,\n            \"totalMarketValue\": 300000\n        },\n        {\n            \"_id\": 984,\n            \"totalMarketValue\": 61185000\n        },\n        {\n            \"_id\": 86,\n            \"totalMarketValue\": 113475000\n        },\n        {\n            \"_id\": 750,\n            \"totalMarketValue\": 2600000\n        },\n        {\n            \"_id\": 380,\n            \"totalMarketValue\": 114300000\n        },\n        {\n            \"_id\": 1506,\n            \"totalMarketValue\": 2475000\n        },\n        {\n            \"_id\": 1005,\n            \"totalMarketValue\": 105905000\n        },\n        {\n            \"_id\": 68608,\n            \"totalMarketValue\": 4450000\n        },\n        {\n            \"_id\": 553,\n            \"totalMarketValue\": 9350000\n        },\n        {\n            \"_id\": 39097,\n            \"totalMarketValue\": 5300000\n        },\n        {\n            \"_id\": 924,\n            \"totalMarketValue\": 17950000\n        },\n        {\n            \"_id\": 499,\n            \"totalMarketValue\": 48550000\n        },\n        {\n            \"_id\": 1039,\n            \"totalMarketValue\": 525000\n        },\n        {\n            \"_id\": 1091,\n            \"totalMarketValue\": 98875000\n        },\n        {\n            \"_id\": 2698,\n            \"totalMarketValue\": 38650000\n        },\n        {\n            \"_id\": 2424,\n            \"totalMarketValue\": 44375000\n        },\n        {\n            \"_id\": 12321,\n            \"totalMarketValue\": 177100000\n        },\n        {\n            \"_id\": 30120,\n            \"totalMarketValue\": 9125000\n        },\n        {\n            \"_id\": 180,\n            \"totalMarketValue\": 178300000\n        },\n        {\n            \"_id\": 29,\n            \"totalMarketValue\": 431725000\n        },\n        {\n            \"_id\": 1241,\n            \"totalMarketValue\": 20825000\n        },\n        {\n            \"_id\": 3729,\n            \"totalMarketValue\": 16275000\n        },\n        {\n            \"_id\": 601,\n            \"totalMarketValue\": 41850000\n        },\n        {\n            \"_id\": 4603,\n            \"totalMarketValue\": 14025000\n        },\n        {\n            \"_id\": 2832,\n            \"totalMarketValue\": 31200000\n        },\n        {\n            \"_id\": 27,\n            \"totalMarketValue\": 944625000\n        },\n        {\n            \"_id\": 3911,\n            \"totalMarketValue\": 96475000\n        },\n        {\n            \"_id\": 3999,\n            \"totalMarketValue\": 22010000\n        },\n        {\n            \"_id\": 1423,\n            \"totalMarketValue\": 750000\n        },\n        {\n            \"_id\": 465,\n            \"totalMarketValue\": 19090000\n        },\n        {\n            \"_id\": 1390,\n            \"totalMarketValue\": 94510000\n        },\n        {\n            \"_id\": 749,\n            \"totalMarketValue\": 123685000\n        },\n        {\n            \"_id\": 28643,\n            \"totalMarketValue\": 13635000\n        },\n        {\n            \"_id\": 289,\n            \"totalMarketValue\": 13575000\n        },\n        {\n            \"_id\": 642,\n            \"totalMarketValue\": 5325000\n        },\n        {\n            \"_id\": 126,\n            \"totalMarketValue\": 47295000\n        },\n        {\n            \"_id\": 3057,\n            \"totalMarketValue\": 86700000\n        },\n        {\n            \"_id\": 430,\n            \"totalMarketValue\": 299400000\n        },\n        {\n            \"_id\": 1283,\n            \"totalMarketValue\": 21475000\n        },\n        {\n            \"_id\": 7775,\n            \"totalMarketValue\": 50350000\n        },\n        {\n            \"_id\": 2375,\n            \"totalMarketValue\": 8975000\n        },\n        {\n            \"_id\": 985,\n            \"totalMarketValue\": 939675000\n        },\n        {\n            \"_id\": 2715,\n            \"totalMarketValue\": 10000000\n        },\n        {\n            \"_id\": 169,\n            \"totalMarketValue\": 9100000\n        },\n        {\n            \"_id\": 80,\n            \"totalMarketValue\": 67900000\n        },\n        {\n            \"_id\": 371,\n            \"totalMarketValue\": 169400000\n        },\n        {\n            \"_id\": 472,\n            \"totalMarketValue\": 59950000\n        },\n        {\n            \"_id\": 14589,\n            \"totalMarketValue\": 31750000\n        },\n        {\n            \"_id\": 150,\n            \"totalMarketValue\": 264050000\n        },\n        {\n            \"_id\": 6992,\n            \"totalMarketValue\": 13960000\n        },\n        {\n            \"_id\": 2672,\n            \"totalMarketValue\": 14375000\n        },\n        {\n            \"_id\": 19,\n            \"totalMarketValue\": 20875000\n        },\n        {\n            \"_id\": 11,\n            \"totalMarketValue\": 1127100000\n        },\n        {\n            \"_id\": 932,\n            \"totalMarketValue\": 112650000\n        },\n        {\n            \"_id\": 3690,\n            \"totalMarketValue\": 1350000\n        },\n        {\n            \"_id\": 383,\n            \"totalMarketValue\": 213750000\n        },\n        {\n            \"_id\": 18,\n            \"totalMarketValue\": 204075000\n        },\n        {\n            \"_id\": 2441,\n            \"totalMarketValue\": 91600000\n        },\n        {\n            \"_id\": 141,\n            \"totalMarketValue\": 263450000\n        },\n        {\n            \"_id\": 2323,\n            \"totalMarketValue\": 0\n        },\n        {\n            \"_id\": 16247,\n            \"totalMarketValue\": 2375000\n        },\n        {\n            \"_id\": 28956,\n            \"totalMarketValue\": 500000\n        },\n        {\n            \"_id\": 1519,\n            \"totalMarketValue\": 17400000\n        },\n        {\n            \"_id\": 7185,\n            \"totalMarketValue\": 1350000\n        },\n        {\n            \"_id\": 405,\n            \"totalMarketValue\": 681525000\n        },\n        {\n            \"_id\": 511,\n            \"totalMarketValue\": 18700000\n        },\n        {\n            \"_id\": 873,\n            \"totalMarketValue\": 385450000\n        },\n        {\n            \"_id\": 4294,\n            \"totalMarketValue\": 22250000\n        },\n        {\n            \"_id\": 897,\n            \"totalMarketValue\": 10800000\n        },\n        {\n            \"_id\": 53646,\n            \"totalMarketValue\": 10050000\n        },\n        {\n            \"_id\": 40,\n            \"totalMarketValue\": 30025000\n        },\n        {\n            \"_id\": 1147,\n            \"totalMarketValue\": 24000000\n        },\n        {\n            \"_id\": 3329,\n            \"totalMarketValue\": 78550000\n        },\n        {\n            \"_id\": 566,\n            \"totalMarketValue\": 200000\n        },\n        {\n            \"_id\": 15,\n            \"totalMarketValue\": 475985000\n        },\n        {\n            \"_id\": 26459,\n            \"totalMarketValue\": 8925000\n        },\n        {\n            \"_id\": 6,\n            \"totalMarketValue\": 1310000\n        },\n        {\n            \"_id\": 1177,\n            \"totalMarketValue\": 24375000\n        },\n        {\n            \"_id\": 1184,\n            \"totalMarketValue\": 128100000\n        },\n        {\n            \"_id\": 969,\n            \"totalMarketValue\": 120125000\n        },\n        {\n            \"_id\": 47,\n            \"totalMarketValue\": 1450000\n        },\n        {\n            \"_id\": 1084,\n            \"totalMarketValue\": 3800000\n        },\n        {\n            \"_id\": 1421,\n            \"totalMarketValue\": 139850000\n        },\n        {\n            \"_id\": 10,\n            \"totalMarketValue\": 20175000\n        },\n        {\n            \"_id\": 2759,\n            \"totalMarketValue\": 26100000\n        },\n        {\n            \"_id\": 2578,\n            \"totalMarketValue\": 24250000\n        },\n        {\n            \"_id\": 204,\n            \"totalMarketValue\": 3125000\n        },\n        {\n            \"_id\": 498,\n            \"totalMarketValue\": 9325000\n        },\n        {\n            \"_id\": 49364,\n            \"totalMarketValue\": 6235000\n        },\n        {\n            \"_id\": 162,\n            \"totalMarketValue\": 377345000\n        },\n        {\n            \"_id\": 3325,\n            \"totalMarketValue\": 25025000\n        },\n        {\n            \"_id\": 2778,\n            \"totalMarketValue\": 54675000\n        },\n        {\n            \"_id\": 605,\n            \"totalMarketValue\": 50825000\n        },\n        {\n            \"_id\": 152,\n            \"totalMarketValue\": 34500000\n        },\n        {\n            \"_id\": 683,\n            \"totalMarketValue\": 176425000\n        },\n        {\n            \"_id\": 533,\n            \"totalMarketValue\": 171450000\n        },\n        {\n            \"_id\": 3268,\n            \"totalMarketValue\": 20425000\n        },\n        {\n            \"_id\": 3060,\n            \"totalMarketValue\": 30800000\n        },\n        {\n            \"_id\": 738,\n            \"totalMarketValue\": 55400000\n        },\n        {\n            \"_id\": 798,\n            \"totalMarketValue\": 24175000\n        },\n        {\n            \"_id\": 252,\n            \"totalMarketValue\": 138760000\n        },\n        {\n            \"_id\": 294,\n            \"totalMarketValue\": 422500000\n        },\n        {\n            \"_id\": 3609,\n            \"totalMarketValue\": 6525000\n        },\n        {\n            \"_id\": 265,\n            \"totalMarketValue\": 76825000\n        },\n        {\n            \"_id\": 331,\n            \"totalMarketValue\": 137560000\n        },\n        {\n            \"_id\": 931,\n            \"totalMarketValue\": 352500000\n        },\n        {\n            \"_id\": 18303,\n            \"totalMarketValue\": 12075000\n        },\n        {\n            \"_id\": 6418,\n            \"totalMarketValue\": 27825000\n        },\n        {\n            \"_id\": 1041,\n            \"totalMarketValue\": 248250000\n        },\n        {\n            \"_id\": 2425,\n            \"totalMarketValue\": 28725000\n        },\n        {\n            \"_id\": 2239,\n            \"totalMarketValue\": 46175000\n        },\n        {\n            \"_id\": 982,\n            \"totalMarketValue\": 14950000\n        },\n        {\n            \"_id\": 276,\n            \"totalMarketValue\": 131620000\n        },\n        {\n            \"_id\": 415,\n            \"totalMarketValue\": 104375000\n        },\n        {\n            \"_id\": 2687,\n            \"totalMarketValue\": 77650000\n        },\n        {\n            \"_id\": 2861,\n            \"totalMarketValue\": 25550000\n        },\n        {\n            \"_id\": 11127,\n            \"totalMarketValue\": 37150000\n        },\n        {\n            \"_id\": 833,\n            \"totalMarketValue\": 5650000\n        },\n        {\n            \"_id\": 3349,\n            \"totalMarketValue\": 4625000\n        },\n        {\n            \"_id\": 2451,\n            \"totalMarketValue\": 2175000\n        },\n        {\n            \"_id\": 19657,\n            \"totalMarketValue\": 2150000\n        },\n        {\n            \"_id\": 128,\n            \"totalMarketValue\": 4975000\n        },\n        {\n            \"_id\": 868,\n            \"totalMarketValue\": 49700000\n        },\n        {\n            \"_id\": 36,\n            \"totalMarketValue\": 240625000\n        },\n        {\n            \"_id\": 1050,\n            \"totalMarketValue\": 230675000\n        },\n        {\n            \"_id\": 2741,\n            \"totalMarketValue\": 16450000\n        }\n    ]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/clubs/totalMarketValue",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"clubs",
+								"totalMarketValue"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "main",
+			"item": [
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/search/neym",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"search",
+								"neym"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
