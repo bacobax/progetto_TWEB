@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 /**
- * This is the controller class for Club.
- * It contains methods for handling HTTP requests related to Club objects.
+ * ClubController is a REST controller that handles HTTP requests related to clubs.
  */
+@RestController
 public class ClubController {
 
     // The service for Club objects

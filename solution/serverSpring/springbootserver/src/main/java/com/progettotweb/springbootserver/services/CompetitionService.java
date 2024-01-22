@@ -6,12 +6,11 @@ import com.progettotweb.springbootserver.repositories.CompetitionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-@Service
 /**
  * This is the service class for Competition.
  * It contains methods for CRUD operations on Competition objects.
  */
+@Service
 public class CompetitionService {
 
     // The repository for Competition objects

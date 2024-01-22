@@ -19,7 +19,7 @@ const Chat: FC = () => {
         <>
             <GlobalNavbar />
 
-            <div className={"flex flex-col w-full h-[100vh]"}>
+            <div className={"flex flex-col w-full h-[100vh] font-sansDM"}>
                 <StatefulChat />
             </div>
         </>

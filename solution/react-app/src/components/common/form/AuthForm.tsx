@@ -81,7 +81,7 @@ const AuthForm = forwardRef<HTMLDivElement, FormProps>(({ onSwitch, isLogin, log
 
     return (
         <div className={"w-full md:w-1/2 h-full flex flex-col py-[30px] md:py-[70px] px-[20px] md:px-[50px] box-border gap-[30px] items-center justify-center text-white"} style={style} ref={ref}>
-            <h1 className={"font-['Impact'] text-5xl text-corvette font-extrabold"}>{isLogin ? "Sign In" : "Sign Up"}</h1>
+            <h1 className={"font-sansDM text-5xl text-white font-extrabold"}>{isLogin ? "Sign In" : "Sign Up"}</h1>
             <form className={"w-full flex flex-col py-0 gap-[40px] items-center justify-center"} onSubmit={handleSubmit} aria-labelledby="form-heading">
                 {inputs}
                 <div className={"w-4/5 flex justify-around"}>

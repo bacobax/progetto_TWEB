@@ -4,6 +4,14 @@ import useFetch from "../../hooks/useFetch";
 import {passwordRegexValidation, URL_FORGOT_PASSWORD, URL_RESET_PASSWORD} from "../../constants/constants";
 import NeuromorphismDiv from "../../components/UI/NeuromorphismDiv";
 import {useForm} from "../../hooks/useForm";
+import {useNavigate} from "react-router-dom";
+
+const buttonPhaseMap:{[phase:number] : string} = {
+    0: "Send reset email",
+    1: "Reset password",
+    2: "Go back to home"
+}
+
 /**
  * ForgotPasswordPage is a functional component in React.
  * It does not accept any props.
@@ -37,7 +45,7 @@ const ForgotPasswordPage: FC = () => {
     const [successSentMessage, setSuccessSentMessage] = useState('');
     const [phase, setPhase] = useState(0);
     const {loading,fetchData,error,setError} = useFetch();
-
+    const navigate = useNavigate();
 
     const {formState, handleInputChange} = useForm({
         password : {
@@ -76,6 +84,7 @@ const ForgotPasswordPage: FC = () => {
 
     const handleSubmit1 = (event: FormEvent) => {
         event.preventDefault();
+        setSuccessSentMessage("");
         fetchData<{status: string, message:string, token:string}>({
             url: URL_RESET_PASSWORD(token),
             method: "POST",
@@ -87,7 +96,7 @@ const ForgotPasswordPage: FC = () => {
             console.log({res})
             if(res.status === "success") {
                 setSuccessSentMessage("Succesfully restored password");
-                setPhase(1);
+                setPhase(2);
                 setError("");
             }else{
                 console.log({res})
@@ -96,9 +105,15 @@ const ForgotPasswordPage: FC = () => {
         })
     };
 
+    const handleSubmit2 = (event: FormEvent) => {
+        event.preventDefault();
+        navigate("/");
+    }
+
     const phaseSubmits = [
         handleSubmit0,
-        handleSubmit1
+        handleSubmit1,
+        handleSubmit2
     ]
 
     const emailValid = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/) !== null;
@@ -158,7 +173,11 @@ const ForgotPasswordPage: FC = () => {
                 errorMessage={formState.confirmPassword.error && formState.confirmPassword.errorText}
             />
 
+        </>,
+        <>
+            <h1 className={"text-white text-4xl font-bold font-sansDM w-1/2 text-center w-full"}>Password restored!</h1>
         </>
+
 
     ]
 
@@ -170,7 +189,7 @@ const ForgotPasswordPage: FC = () => {
             <h1 className={"text-white text-5xl font-bold font-sansDM w-1/2 text-center"}>Password recovery</h1>
 
             <NeuromorphismDiv clickable={false} className="w-full max-w-xs rounded-medium">
-                <form onSubmit={phaseSubmits[phase]} className="bg-transparent shadow-md rounded p-10 mb-4 flex flex-col gap-[20px]">
+                <form onSubmit={phaseSubmits[phase]} className="bg-transparent shadow-md rounded p-10 mb-4 flex flex-col gap-[20px] items-center">
 
                         {loading ? <Spinner /> : phaseRendering[phase]}
                         {!! error && <p className="text-red-500 text-xs italic">{error}</p>}
@@ -184,7 +203,7 @@ const ForgotPasswordPage: FC = () => {
                             color={"secondary"}
                             isDisabled={((phase === 0 && !emailValid)||(phase === 1 && (formState.password.error || formState.confirmPassword.error)))}
                         >
-                            Reset Password
+                            {buttonPhaseMap[phase]}
                         </Button>
                     </div>
                 </form>

@@ -11,12 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-@Service
 /**
  * This is the service class for Club.
  * It contains methods for CRUD operations on Club objects and additional operations.
  */
+@Service
 public class ClubService {
 
     // The repository for Club objects

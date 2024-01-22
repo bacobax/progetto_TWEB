@@ -50,7 +50,7 @@ export const useAuth = () => {
   const loginCallback = useCallback(
 (afterFailure: (()=>void)|undefined, afterSuccess:(()=>void)|undefined) => {
       return (data: LoginResponse | SignUpResponse) => {
-        if (data.status === "fail") {
+        if (data.status === "fail" || data.status === "error") {
           setError(data.message ? data.message : "Error");
           return;
         }
