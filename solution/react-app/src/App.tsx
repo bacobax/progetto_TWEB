@@ -7,6 +7,7 @@ import Gallery from "./pages/clubs/Gallery";
 import {ROUTES} from "./constants/constants";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import PlayersPage from "./pages/players/PlayersPage";
+import {Contacts} from "./pages/Contacts";
 
 const GamesPage = lazy(() => import("./pages/games/GamesPage"));
 const PlayerInfoPage = lazy(() => import("./pages/playerinfo/PlayerInfoPage"));
@@ -35,6 +36,7 @@ function App() {
                 <Route path={ROUTES.GAMES} element={<GamesPage />} />
                 <Route path={ROUTES.PLAYER_INFO} element={<PlayerInfoPage />}/>
                 <Route path={ROUTES.CLUB_INFO} element={<ClubInfoPage />} />
+                <Route path={"/help"} element={<Contacts />} />
                 <Route path={ROUTES.DEFAULT} element={<h1 style={{color:"white"}}>Not Found</h1>} />
             </Routes>
         </Suspense>

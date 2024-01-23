@@ -35,7 +35,10 @@ const items = [
         label: "Chat",
         href: ROUTES.CHAT
     },
-
+    {
+        label: "Help",
+        href: "/help"
+    },
 ]
 /**
  * GlobalNavbar is a functional component in React.
@@ -128,7 +131,7 @@ export const GlobalNavbar:FC = () => {
             </NavbarContent>
             <NavbarMenu className={"dark flex flex-col items-center justify-center gap-5"}>
                 {items.map((item, index) => (
-                    <NavbarMenuItem key={`${item}-${index}`} isActive={item.href === pathname} className={"h-fit"}>
+                    <NavbarMenuItem key={`${item}-${index}`} isActive={item.href === pathname} className={"h-fit" + (item.href === pathname ? " underline" : "")}>
                         <Link
                             className="w-full text-2xl text-white"
                             to={item.href}
