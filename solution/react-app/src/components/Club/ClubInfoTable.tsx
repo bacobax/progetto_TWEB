@@ -104,7 +104,7 @@ export const ClubInfoTable:FC<ClubInfoTableProps> = ({players}) => {
             <TableHeader columns={tableColumns}>
                 {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
             </TableHeader>
-            <TableBody items={items}>
+            <TableBody items={items} >
                 {(player) => (
                     <TableRow key={player.id}>
                         {(columnKey) => {

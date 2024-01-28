@@ -124,3 +124,4 @@ export const GameCard:FC<Player & classNameProps> = (props) => {
 
     );
 };
+
